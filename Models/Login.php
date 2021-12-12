@@ -17,7 +17,7 @@ class Login
     {
         try {
             $pass=sha1($data['pwd']);
-            $sql="SELECT * FROM bgl_user WHERE identyUser = '{$data['username']}' && passwordUser = '{$pass}'";
+            $sql="SELECT * FROM admin WHERE identyUser = '{$data['username']}' && passwordUser = '{$pass}'";
             $query = $this->pdo->select($sql);
             if (isset($query[0]->idUser)) {
                $_SESSION['user'] = $query[0];
@@ -36,7 +36,7 @@ class Login
             // $pass=sha1($data['password']);
             // $strSql = "SELECT * from dtm_administrador
             // WHERE usuario = '{$data['correo']}' AND password = '{$pass}'";
-            $sql="SELECT * FROM bgl_user WHERE identyUser = '{$data['username']}' && passwordUser = '{$data['pwdd']}'";
+            $sql="SELECT * FROM admin WHERE identyUser = '{$data['username']}' && passwordUser = '{$data['pwdd']}'";
             $query = $this->pdo->select($sql);
             if (isset($query[0]->id)) {
                 $_SESSION['user'] = $query[0];

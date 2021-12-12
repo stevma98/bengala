@@ -40,7 +40,7 @@ class PersonController
 				// $dataPersons = $this->model->getAll();
 				// $limitPersons = $this->model->getAllFive();
 				// $totalPersons = count($dataPersons);
-				require 'Views/Home.php';
+				require 'Views/Person/list.php';
 	}
 
 }

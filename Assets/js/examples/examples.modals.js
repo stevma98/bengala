@@ -72,18 +72,188 @@ Theme Version: 	3.0.0
 	});
 
 	/*
-	Modal Confirm
+	Modal Create Owner
 	*/
-	$(document).on('click', '.modal-confirm', function (e) {
+	$(document).on('click', '#createOwner', function (e) {
+		var confirmer;
 		e.preventDefault();
-		$.magnificPopup.close();
-
-		new PNotify({
-			title: 'Success!',
-			text: 'Modal Confirm Message.',
-			type: 'success'
-		});
+        e.stopImmediatePropagation();
+			if($("#idOwner").val().length < 1) {
+				$('#idOwner').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#idOwner').css('border','1px solid green');
+			}		
+			if($("#firstName").val().length < 1) {
+				$('#firstName').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#firstName').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#secondName").val().length < 1) {
+				$('#secondName').css('border','1px solid red');
+				$('#alertif').css('display','display');
+			}else{
+				$('#secondName').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#firstLn").val().length < 1) {
+				$('#firstLn').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#firstLn').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#secondLn").val().length < 1) {
+				$('#secondLn').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#secondLn').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#addres").val().length < 1) {
+				$('#addres').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#addres').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#phone").val().length < 1) {
+				$('#phone').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#phone').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#email").val().length < 1) {
+				$('#email').css('border','1px solid red');
+				$('#alertif').css('display','display');
+			}else{
+				$('#email').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+		
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=owner&method=newOwner',
+					data: 'ID_PROP='+$('#idOwner').val()+'&ST_NOM='+$('#firstName').val()+'&ND_NOM='+$('#secondName').val()+'&ST_APE='+$('#firstLn').val()+'&ND_APE='+$('#secondLn').val()+'&DIRECCION='+$('#addres').val()+'&TELEFONO='+$('#phone').val()+'&EMAIL='+$('#email').val()+'&DEPARTAMENTO='+$('#department').val()+'&CIUDAD='+$('#city').val()+'&TIPO_DOC='+$('#document').val()+'&TELEFONO2='+$('#phone2').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Propietario Creado Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 3000);
+						// reloadTable();
+						
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear el propietario',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+			
 	});
+
+	/*
+	Edit Owner
+	*/
+	$(document).on('click', '#editOwner', function (e) {
+		var confirmer;
+		e.preventDefault();
+			if($("#ST_NOM").val().length < 1) {
+				$('#ST_NOM').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ST_NOM').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#ND_NOM").val().length < 1) {
+				$('#ND_NOM').css('border','1px solid red');
+				$('#alertif').css('display','display');
+			}else{
+				$('#ND_NOM').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#ST_APE").val().length < 1) {
+				$('#ST_APE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ST_APE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ND_APE").val().length < 1) {
+				$('#ND_APE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ND_APE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#DIRECCION").val().length < 1) {
+				$('#DIRECCION').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#DIRECCION').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#TELEFONO").val().length < 1) {
+				$('#TELEFONO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#TELEFONO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#EMAIL").val().length < 1) {
+				$('#EMAIL').css('border','1px solid red');
+				$('#alertif').css('display','display');
+			}else{
+				$('#EMAIL').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+		
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=owner&method=editOwner',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&TIPO_DOC='+$('#TIPO_DOC').val()+'&ST_NOM='+$('#ST_NOM').val()+'&ND_NOM='+$('#ND_NOM').val()+'&ST_APE='+$('#ST_APE').val()+'&ND_APE='+$('#ND_APE').val()+'&DIRECCION='+$('#DIRECCION').val()+'&TELEFONO='+$('#TELEFONO').val()+'&EMAIL='+$('#EMAIL').val()+'&DEPARTAMENTO='+$('#DEPARTAMENTO').val()+'&CIUDAD='+$('#CIUDAD').val()+'&TIPO_DOC='+$('#TIPO_DOC').val()+'&TELEFONO2='+$('#TELEFONO2').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Propietario Editado Exitosamente.',
+							type: 'success'
+						});
+						data= JSON.parse(data);
+						console.log();
+						$('#name').html(data['ST_NOM']+" "+data['ST_APE']);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al editar el propietario',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+			
+	});
+	
 
 	/*
 	Form

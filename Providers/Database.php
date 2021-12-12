@@ -39,6 +39,7 @@ class Conexion extends PDO
 			//Eliminar indices de un array
 			unset($data['controller'], $data['method']);
 
+			
 			$fieldNames = implode('`, `', array_keys($data));
 			$fieldValues = ':' . implode(', :', array_keys($data));
 			$strSql = $this->prepare("INSERT INTO $table (`$fieldNames`) VALUES ($fieldValues)");
