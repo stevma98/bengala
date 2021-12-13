@@ -1,6 +1,6 @@
 <?php 
 
-class Owner {
+class Patient {
  
     private $pdo ; 
 
@@ -16,7 +16,7 @@ class Owner {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * from propietarios";
+            $strSql = "SELECT * from mascotas";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -24,19 +24,20 @@ class Owner {
         }
     }
 
-    public function createOwner($data)
+    public function createPatient($data)
     {
         try {
-            $this->pdo->insert('propietarios' , $data);
+            $this->pdo->insert('mascotas' , $data);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
     }
 
+
     public function getAllFive()
     {
         try {
-            $strSql = "SELECT * from propietarios LIMIT 5";
+            $strSql = "SELECT * from mascotas LIMIT 5";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -46,7 +47,7 @@ class Owner {
 
     public function getById($id){
         try { 
-            $strSql = 'SELECT *,m.nombre city,d.nombre depart FROM propietarios p INNER JOIN departamentos d ON p.DEPARTAMENTO=d.id INNER JOIN municipios m ON p.CIUDAD=m.id WHERE ID_PROP = :id';
+            $strSql = 'SELECT * FROM mascotas WHERE ID_PROP = :id';
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             return $query;
@@ -62,7 +63,7 @@ class Owner {
 			//Eliminar indices de un array
 			unset($data['controller'], $data['method']);
             $strWhere = 'ID_PROP='.$data['ID_PROP'];
-            $this->pdo->update('propietarios', $data, $strWhere); 
+            $this->pdo->update('mascotas', $data, $strWhere); 
             $data = json_encode($data);
             echo $data;
         } catch ( PDOException $e) {

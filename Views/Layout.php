@@ -30,6 +30,8 @@
 		<link rel="stylesheet" href="Assets/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="Assets/vendor/morris/morris.css" />
 		<link rel="stylesheet" href="Assets/vendor/pnotify/pnotify.custom.css" />
+		<link rel="stylesheet" href="Assets/vendor/boxicons/css/boxicons.min.css" />
+		<link rel="stylesheet" href="Assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css" />
 		
 
 		<!--(remove-empty-lines-end)-->
@@ -306,7 +308,7 @@
 				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
-				                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+				                            <i class="fas fa-address-book" aria-hidden="true"></i>
 				                            <span>Propietarios</span>
 				                        </a>
 				                        <ul class="nav nav-children">
@@ -319,7 +321,7 @@
 				                    </li>
 									<li class="nav-parent">
 				                        <a class="nav-link" href="#">
-				                            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+				                            <i class="fas fa-paw" aria-hidden="true"></i>
 				                            <span>Pacientes</span>
 				                        </a>
 				                        <ul class="nav nav-children">

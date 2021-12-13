@@ -1,11 +1,13 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+        .modal-block{text-align:center}
     </style>
+    
 				<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Propietarios</h2>
+					<h2>Lista Pacientes</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -25,7 +27,7 @@
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
                                         <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right">Agregar</a>
-										<h2 class="card-title">Propietarios</h2>
+										<h2 class="card-title">Pacientes</h2>
                                     </header>
                                     
 								<div class="card-body">									
@@ -35,19 +37,21 @@
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
 												<tr>
-													<th>Identificacion</th>
+													<th>Id Interno</th>
 													<th>Nombre</th>
+                                                    <th>Nombre Propietario</th>
 													<th>Telefono</th>
 													<th>Opciones</th>
 												</tr>
 											</thead>
 											<tbody>
-                                                    <?php foreach($owners as $owner){ ?>
+                                                    <?php foreach($patients as $patient){ ?>
                                                     <tr>
-													<td><?php echo $owner->ID_PROP; ?></td>
-													<td><?php echo $owner->ST_NOM." ".$owner->ST_APE; ?></td>
-													<td><?php echo $owner->TELEFONO;?></td>
-													<td><a href="?controller=owner&method=layoutOwner&id=<?php echo $owner->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
+													<td><?php echo $patient->ID_MASCOTA; ?></td>
+													<td><?php echo $patient->NOMBRE?></td>
+                                                    <td><?php echo $patient->DUENO?></td>
+													<td><?php echo $patient->TEL_DUENO;?></td>
+													<td><a href="?controller=owner&method=layoutOwner&id=<?php echo $patient->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>
@@ -76,86 +80,82 @@
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 														<div class="form-group col-md-6">
-															<label for="idOwner">Identificacion</label>
-															<input type="text" class="form-control" id="idOwner" name="idOwner" placeholder="Identificacion" required>
+															<label for="NOMBRE">Nombre:</label>
+															<input type="text" class="form-control" id="NOMBRE" name="NOMBRE" placeholder="Nombre" required>
 														</div>
 														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="document">Tipo Documento:</label>
-                                                            <select name="document" id="document" class="form-control" placeholder="tipo Documento" required>
-                                                                <option value="CC" Selected>Cedula de Ciudadania</option>
-                                                                <option value="TI">Tarjeta de Identidad</option>
-                                                                <option value="PSPT">Pasaporte</option>
+															<label for="SEXO">Sexo:</label>
+                                                            <select name="SEXO" id="SEXO" class="form-control" placeholder="Sexo" required>
+                                                                <option Selected value="Seleccione...">Seleccione...</option>
+                                                                <option value="Hembra">Hembra</option>
+                                                                <option value="Macho">Macho</option>
                                                             </select>
 														</div>
 													</div>
 													<div class="form-row">
                                                         <div class="form-group col-md-6">
-                                                            <label for="firstName">Primer Nombre:</label>
-                                                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Primer Nombre" required>
+                                                            <label for="TIPO">Tipo:</label>
+                                                            <select name="TIPO" id="TIPO" class="form-control" placeholder="Tipo" required>
+                                                                <option Selected value="Seleccione...">Seleccione...</option>
+                                                                <option value="Gato">Gato</option>
+                                                                <option value="Perro">Perro</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group col-md-6 mb-3 mb-lg-0">
-                                                            <label for="secondName">Segundo Nombre</label>
-                                                            <input type="text" class="form-control" id="secondName" placeholder="Segundo Nombre" name="secondName">
+                                                            <label for="RAZA">Raza:</label>
+                                                            <select name="RAZA" id="RAZA" class="form-control" placeholder="Raza" required>
+                                                                <option Selected value="Seleccione...">Seleccione...</option>
+                                                                <option value="Criollo">Criollo</option>
+                                                                <option value="Otro">Otro..</option>
+                                                            </select>
                                                         </div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-6">
-															<label for="firstLn">Primer Apellido</label>
-															<input type="text" class="form-control" id="firstLn" name="firstLn" required placeholder="Primer Apellido">
-														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="secondLn">Segundo Apellido</label>
-															<input type="text" class="form-control" id="secondLn" name="secondLn" placeholder="Segundo Apellido">
-														</div>
-													</div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-															<label for="department">Departamento</label>
-															<select name="department" id="department" class="form-control" placeholder="Departamento" required>
-																<option selected value="seleccione">Seleccione...</option>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="DUENO">Dueño:</label>
+                                                            <select name="DUENO" id="DUENO" class="form-control" placeholder="Dueño" required>
+                                                                <option Selected value="Seleccione...">Seleccione...</option>
                                                                 <?php 
-																	foreach ($departament as $departament) {
+																	foreach ($owners as $owner) {
 																		?>
-																	<option value="<?php echo $departament->id ?>"><?php echo $departament->nombre ?></option>
+																			<option value="<?php echo $owner->ID_PROP ?>"><?php echo $owner->ST_NOM." ".$owner->ND_NOM." ".$owner->ST_APE." ".$owner->ND_APE ?></option>
 																		<?php
 																	}
 																?>
                                                             </select>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="city">Ciudad</label>
-															<select name="city" id="city" class="form-control">
-                                                                
-                                                            </select>
+													</div>
+													<br>
+                                                <div id="ver" class="center" style="margin:0 auto">
+
+                                                </div>
+                                                    <div class="form-group row">
+												<label class="col-lg-6 center control-label text-lg-right pt-2 ">Cargar Foto Paciente</label>
+												<div class="col-lg-12 center">
+													<div class="fileupload fileupload-new" data-provides="fileupload">
+														<div class="input-append">
+															<div class="uneditable-input">
+																<i class="fas fa-file fileupload-exists"></i>
+																<span class="fileupload-preview"></span>
+															</div>
+															<span class="btn btn-default btn-file">
+																<span class="fileupload-exists">Cambiar</span>
+																<span class="fileupload-new">Seleccione Imagen</span>
+																<input type="file" id="file" />
+															</span>
 														</div>
 													</div>
-                                                    <div class="form-row">
-                                                    <div class="form-group col-md-6">
-															<label for="addres">Direccion</label>
-															<input type="text" class="form-control" id="addres" name="addres" required placeholder="Direccion">
-														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="phone">Telefono</label>
-															<input type="text" class="form-control" id="phone" name="phone" required placeholder="Telefono">
-														</div>
-													</div>
-                                                    <div class="form-row">
-                                                    <div class="form-group col-md-6">
-															<label for="phone2">Telefono Alternativo</label>
-															<input type="text" class="form-control" id="phone2" name="phone2" placeholder="Telefono Alternativo">
-														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="email">Correo Electronico</label>
-															<input type="text" class="form-control" id="email" name="email" required placeholder="Correo Electronico">
-															<input type="hidden" id="confirmer" value="0">
-														</div>
-													</div>
+												</div>
+												<input type="hidden" id="confirmer" value="0">
+                                                
+                                        
+											</div>
 												</form>
 											</div>
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createOwner" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createPatient">Crear</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -276,6 +276,7 @@
 				});
 	}
 		</script> -->
+        
 		<script>
 
 			$('#department').on('change',function(){
@@ -283,14 +284,28 @@
 				getCity(id);
 			});
 
-			function getCity(id) {				
+            $('#file').change(function(){
+              filePreview(this);
+            });
+
+            function filePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(input.files[0]);
+                    reader.onload = function (e) {
+                        $('#ver + img').remove();
+                        $('#ver').after('<img src="'+e.target.result+'" width="150" height="150"/>');
+                    }					
+                }
+            }
+
+			function getCity(id) {
+				console.log(id);
 				$.ajax({
-					url:'?controller=city&method=getList&id='+id,
+					url:'?controller=owner&method=getCities&id='+id,
 					type:'GET',
 					success:function(response){
-						console.log(response);
 						let datas = JSON.parse(response);
-						
 						let template = '<option value="seleccione">Seleccione...</option>';
 						datas.forEach(data=>{
 							template += `
@@ -300,5 +315,5 @@
 						$('#city').html(template);
 					}
 				});
-	}
+	        }
 		</script>

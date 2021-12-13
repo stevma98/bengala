@@ -1,14 +1,15 @@
 <?php
 
 require 'Models/Owner.php';
-// require 'Models/User.php';
-// require 'Models/Garanty.php';
-// require 'Models/Rol.php';
+require 'Models/Departament.php';
+require 'Models/City.php';
 
 require 'vendor/autoload.php';
+
 /**
- * controlador personal
+ * controlador propietarios
  */
+
 class OwnerController
 {
 	private $model;
@@ -17,6 +18,8 @@ class OwnerController
 	public function __construct()
 	{
 		$this->model = new Owner;
+		$this->departament = new Departament;
+		$this->city = new City;
 		
 	}
     public function newOwner()
@@ -34,6 +37,7 @@ class OwnerController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
+		$departament=$this->departament->getAll();
 		$data=$this->model->getById($_GET['id']);
 		require 'Views/Owner/profileOwner.php';
 	}
@@ -42,10 +46,10 @@ class OwnerController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
+		$departament=$this->departament->getAll();
         $owners=$this->model->getAll();
 		require 'Views/Owner/list.php';
 	}
-
 }
 
 ?>

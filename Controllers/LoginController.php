@@ -23,7 +23,7 @@ class LoginController
     public function loginIn()
 	{    
 		
-			$validateUserEmp = $this->model->validateUserEmp($_POST);
+			// $validateUserEmp = $this->model->validateUserEmp($_POST);
 			$validateAdmin = $this->model->validateAdmin($_POST);
 			if ($validateUserEmp === true || $validateAdmin === true) {
                 echo $_SESSION['user']->identyUser;

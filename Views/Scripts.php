@@ -41,6 +41,8 @@
 		<script src="Assets/js/examples/examples.datatables.tabletools.js"></script>
 		<script src="Assets/vendor/pnotify/pnotify.custom.js"></script>
 		<script src="Assets/vendor/autosize/autosize.js"></script>
+		<script src="Assets/vendor/autosize/autosize.js"></script>
+		<script src="Assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
 
 		<!--(remove-empty-lines-end)-->
 		

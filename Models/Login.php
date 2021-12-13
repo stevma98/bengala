@@ -33,10 +33,10 @@ class Login
     public function validateAdmin($data)
     {
         try {
-            // $pass=sha1($data['password']);
+            $pass=sha1($data['pwd']);
             // $strSql = "SELECT * from dtm_administrador
             // WHERE usuario = '{$data['correo']}' AND password = '{$pass}'";
-            $sql="SELECT * FROM admin WHERE identyUser = '{$data['username']}' && passwordUser = '{$data['pwdd']}'";
+            $sql="SELECT * FROM admin WHERE identyUser = '{$data['username']}' && passwordUser = '{$pass}'";
             $query = $this->pdo->select($sql);
             if (isset($query[0]->id)) {
                 $_SESSION['user'] = $query[0];

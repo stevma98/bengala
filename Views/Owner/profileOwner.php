@@ -252,19 +252,19 @@
 												<input type="hidden" id="ID_PROP" value="<?php echo $data->ID_PROP ?>">
 												<input type="hidden" id="TIPO_DOC" value="<?php echo $data->TIPO_DOC ?>">
 												<label for="ST_NOM">Primer Nombre</label>
-												<input type="text" class="form-control" id="ST_NOM" placeholder="Direccion" value="<?php echo $data->ST_NOM ?>" required="">
+												<input type="text" class="form-control" id="ST_NOM" placeholder="Primer Nombre" value="<?php echo $data->ST_NOM ?>" required="">
 												</div>
 												<div class="col-lg-3">
 												<label for="ND_NOM">Segundo Nombre</label>
-												<input type="text" class="form-control" id="ND_NOM" placeholder="Direccion" value="<?php echo $data->ND_NOM ?>">
+												<input type="text" class="form-control" id="ND_NOM" placeholder="Segundo Nombre" value="<?php echo $data->ND_NOM ?>">
 												</div>
 												<div class="col-lg-3">
 												<label for="ST_APE">Primer Apellido</label>
-												<input type="text" class="form-control" id="ST_APE" placeholder="Direccion" value="<?php echo $data->ST_APE ?>" required="">
+												<input type="text" class="form-control" id="ST_APE" placeholder="Primier Apellido" value="<?php echo $data->ST_APE ?>" required="">
 												</div>
 												<div class="col-lg-3">
 												<label for="ND_APE">Segundo Apellido</label>
-												<input type="text" class="form-control" id="ND_APE" placeholder="Direccion" value="<?php echo $data->ND_APE ?>" >
+												<input type="text" class="form-control" id="ND_APE" placeholder="Segundo Apellido" value="<?php echo $data->ND_APE ?>" >
 												</div>
 											</div>
 											<br>
@@ -272,14 +272,20 @@
 												<div class="form-group col-md-6">
 													<label for="DEPARTAMENTO">Departamento</label>
 													<select id="DEPARTAMENTO" class="form-control" required="">
-														<option selected><?php echo $data->DEPARTAMENTO; ?></option>
-														<option>...</option>
+														<option selected value="<?php echo $data->DEPARTAMENTO; ?>"><?php echo $data->depart; ?></option>
+														<?php 
+															foreach ($departament as $departament) {
+																?>
+																<option value="<?php echo $departament->id ?>"><?php echo $departament->nombre ?></option>
+																<?php
+															}
+														?>	
 													</select>
 												</div>
 												<div class="form-group col-md-6">
 													<label for="CIUDAD">CIUDAD</label>
 													<select id="CIUDAD" class="form-control" required="">
-														<option selected><?php echo $data->CIUDAD ?></option>
+														<option selected value="<?php echo $data->CIUDAD ?>"><?php echo $data->city ?></option>
 														<option>...</option>
 													</select>
 												</div>
@@ -324,3 +330,29 @@
 							
 					<!-- end: page -->
 				</section>
+				<script>
+
+			$('#DEPARTAMENTO').on('change',function(){
+				id = $('#DEPARTAMENTO').val();
+				getCity(id);
+			});
+
+			function getCity(id) {
+				console.log(id);
+				$.ajax({
+					url:'?controller=owner&method=getCities&id='+id,
+					type:'GET',
+					success:function(response){
+						let datas = JSON.parse(response);
+						
+						let template = '<option value="seleccione">Seleccione...</option>';
+						datas.forEach(data=>{
+							template += `
+						<option value='${data.id}'>${data.nombre}</option>
+						`
+						})
+						$('#CIUDAD').html(template);
+					}
+				});
+	}
+		</script>
