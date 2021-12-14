@@ -19,10 +19,33 @@ class PatientController
         $this->owner = new Owner;
 		
 	}
+
+	public function uploadPhoto()
+	{
+		$last=$this->model->getLastId();
+		$lastId=$last[0]->ID_MASCOTA;
+		$name=$last[0]->NOMBRE;
+		if ($_FILES['file']['type']=='image/jpeg' || $_FILES['file']['type']=='image/png') {
+			$root='./Pets/'.$lastId."/";
+			if(!file_exists($root)){
+				mkdir($root,0777,true);
+			}
+			$rootc=$root.$name.".jpeg";
+			if (copy($_FILES['file']['tmp_name'],$rootc)or die("noah")) {
+				echo $name;
+			}
+		}
+	}
+
     public function newPatient()
 	{
-        var_dump($_REQUEST);
-	    // $this->model->createPatient($_REQUEST);
+		$data=$this->model->searchOwnerToCreate($_REQUEST['DUENO']);
+		$replace=array('DUENO' => $data[0]->ST_NOM." ".$data[0]->ND_NOM." ".$data[0]->ST_APE." ".$data[0]->ND_APE);
+		$va=array_replace($_REQUEST,$replace);
+		$va += ['TEL_DUENO' => $data[0]->TELEFONO];
+		$va += ['ID_PROP' => $data[0]->ID_PROP];
+		$va += ['FEC_REG' => date('Y-m-d')];
+	    $this->model->createPatient($va);
 	}
 	
 	public function editPatient()

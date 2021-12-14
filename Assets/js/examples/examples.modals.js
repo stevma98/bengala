@@ -291,6 +291,20 @@ Theme Version: 	3.0.0
 				$('#RAZA').css('border','1px solid green');
 				$('#alertif').css('display','none');
 			}
+			if($("#FEC_NAC").val() == '') {
+				$('#FEC_NAC').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FEC_NAC').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#COLOR").val().length < 1) {
+				$('#COLOR').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#COLOR').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
 			if($("#DUENO").val() == 'Seleccione...') {
 				$('#DUENO').css('border','1px solid red');
 				$('#alertif').css('display','block');
@@ -304,36 +318,34 @@ Theme Version: 	3.0.0
 			var filess = $('#file')[0].files[0];
 			formData.append('file',filess);
 			confirmer=$('#confirmer').val();
-		
+
 			if (confirmer=='1') {
 				$.ajax({
 					type: 'POST',
 					url: '?controller=patient&method=newPatient',
-					data: 'NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val(),
+					data: 'NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val(),
 					success: function(data){
 						console.log(data);
-						// $.ajax({
-						// 	url:'?controller=patient&method=newPatient',
-						// 	type:'POST',
-						// 	data: formData,
-						// 	contentType: false,
-						// 	cache: false,
-						// 	processData: false,
-						// 	success: function(response){
-						// 		console.log(response);
-						// 	}
-						// });
-						new PNotify({
-							title: 'Confirmado!',
-							text: 'Propietario Creado Exitosamente.',
-							type: 'success'
+						$.ajax({
+							url:'?controller=patient&method=uploadPhoto',
+							type:'POST',
+							data: formData,
+							contentType: false,
+							cache: false,
+							processData: false,
+							success: function(response){
+								var name1 = response;
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Mascota '+name1+' Creado Exitosamente.',
+									type: 'success'
+								});
+							}
 						});
-						// $.magnificPopup.close();
-						// setTimeout(() => {
-						// location.reload();	
-						// }, 3000);
-						// reloadTable();
-						
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 3000);
 					},
 					error: function(data){
 						new PNotify({

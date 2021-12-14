@@ -3,8 +3,7 @@
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
         .modal-block{text-align:center}
     </style>
-    
-				<div class="inner-wrapper">
+				<div class="inner-wrapper" style="padding:0px !important">	
 				<section role="main" class="content-body">
 					<header class="page-header">
 					<h2>Lista Pacientes</h2>
@@ -51,7 +50,7 @@
 													<td><?php echo $patient->NOMBRE?></td>
                                                     <td><?php echo $patient->DUENO?></td>
 													<td><?php echo $patient->TEL_DUENO;?></td>
-													<td><a href="?controller=owner&method=layoutOwner&id=<?php echo $patient->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
+													<td><a href="?controller=patient&method=profilePatient&id=<?php echo $patient->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>
@@ -64,7 +63,6 @@
 						</div>
 						</div>
 					</div>
-                    <div class="card-body">
 									<a class="modal-with-form btn btn-default" href="#modalForm">Open Form</a>
 
 									<!-- Modal Form -->
@@ -74,7 +72,7 @@
 												<h2 class="card-title">Formulario de Registro</h2>
 											</header>
 											<div class="card-body">
-												<form>
+												<form id="form" enctype="multipart/form-data" method="POST" onsubmit="upload(this);return false">
 													<div class="form-row">
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
@@ -111,7 +109,17 @@
                                                         </div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-12">
+														<div class="form-group col-md-6">
+															<label for="COLOR">Color:</label>
+															<input type="text" class="form-control" id="COLOR" name="COLOR" placeholder="Color" required>
+														</div>
+                                                        <div class="form-group col-md-6">
+															<label for="FEC_NAC">Fecha Nacimiento:</label>
+															<input type="date" class="form-control" id="FEC_NAC" name="FEC_NAC" placeholder="Fecha Nacimiento" required>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="form-group col-md-12">
                                                             <label for="DUENO">Dueño:</label>
                                                             <select name="DUENO" id="DUENO" class="form-control" placeholder="Dueño" required>
                                                                 <option Selected value="Seleccione...">Seleccione...</option>
@@ -135,7 +143,6 @@
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<div class="input-append">
 															<div class="uneditable-input">
-																<i class="fas fa-file fileupload-exists"></i>
 																<span class="fileupload-preview"></span>
 															</div>
 															<span class="btn btn-default btn-file">
@@ -162,7 +169,8 @@
 											</footer>
 										</section>
 									</div>
-
+																
+									<iframe src="?controller=patient&method=uploadImage" frameborder="0" height="100" width="400" name="iframe"></iframe>
 								</div>
 					<!-- end: page -->
 				</section>
@@ -278,6 +286,11 @@
 		</script> -->
         
 		<script>
+			function upload(objeto)
+			{
+			objeto.target = "iframe";     //le agregamos el nombre del iframe, por donde enviara el form
+			objeto.submit();    //enviamos el form con totod los contenidos
+			}
 
 			$('#department').on('change',function(){
 				id = $('#department').val();

@@ -2,7 +2,7 @@
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
     </style>
-				<div class="inner-wrapper">
+				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
 					<header class="page-header">
 					<h2>Lista Propietarios</h2>
@@ -47,7 +47,7 @@
 													<td><?php echo $owner->ID_PROP; ?></td>
 													<td><?php echo $owner->ST_NOM." ".$owner->ST_APE; ?></td>
 													<td><?php echo $owner->TELEFONO;?></td>
-													<td><a href="?controller=owner&method=layoutOwner&id=<?php echo $owner->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
+													<td><a href="?controller=owner&method=profileOwner&id=<?php echo $owner->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>

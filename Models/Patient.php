@@ -24,6 +24,18 @@ class Patient {
         }
     }
 
+    public function searchOwnerToCreate($id)
+    {
+        try { 
+            $strSql = 'SELECT * FROM propietarios WHERE ID_PROP = :id';
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function createPatient($data)
     {
         try {
@@ -45,9 +57,20 @@ class Patient {
         }
     }
 
+    public function getLastId()
+    {
+        try {
+            $strSql = "SELECT ID_MASCOTA,NOMBRE from mascotas ORDER BY ID_MASCOTA DESC LIMIT 1";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getById($id){
         try { 
-            $strSql = 'SELECT * FROM mascotas WHERE ID_PROP = :id';
+            $strSql = 'SELECT * FROM mascotas WHERE ID_MASCOTA = :id';
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             return $query;

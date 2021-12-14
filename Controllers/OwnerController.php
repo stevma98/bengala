@@ -33,7 +33,7 @@ class OwnerController
 		// var_dump($_REQUEST);
 	}
 	
-	public function layoutOwner()
+	public function profileOwner()
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
