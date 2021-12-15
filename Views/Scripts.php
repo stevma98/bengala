@@ -1,10 +1,11 @@
 
 		<!--  Assets/vendor -->
-		<script src=" Assets/vendor/jquery/jquery.js"></script>
-		<script src=" Assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="Assets/vendor/jquery/jquery.js"></script>
+		<script src="Assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="Assets/vendor/popper/umd/popper.min.js"></script>
 		<script src="Assets/vendor/bootstrap/js/bootstrap.js"></script>
 		<script src="Assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="Assets/vendor/common/common.js"></script>
 		<script src="Assets/vendor/common/common.js"></script>
 		<script src="Assets/vendor/nanoscroller/nanoscroller.js"></script>
 		<script src="Assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
@@ -43,6 +44,7 @@
 		<script src="Assets/vendor/autosize/autosize.js"></script>
 		<script src="Assets/vendor/autosize/autosize.js"></script>
 		<script src="Assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+		
 
 		<!--(remove-empty-lines-end)-->
 		

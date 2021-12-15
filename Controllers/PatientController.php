@@ -30,7 +30,7 @@ class PatientController
 			if(!file_exists($root)){
 				mkdir($root,0777,true);
 			}
-			$rootc=$root.$name.".jpeg";
+			$rootc=$root.$name.".jpg";
 			if (copy($_FILES['file']['tmp_name'],$rootc)or die("noah")) {
 				echo $name;
 			}
@@ -59,7 +59,8 @@ class PatientController
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
 		$data=$this->model->getById($_GET['id']);
-		require 'Views/Owner/profilePatient.php';
+		$owners=$this->owner->getAll();
+		require 'Views/Patient/profilePatient.php';
 	}
 
 	public function template()

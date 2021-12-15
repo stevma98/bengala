@@ -38,6 +38,8 @@
 												<tr>
 													<th>Id Interno</th>
 													<th>Nombre</th>
+													<th>Raza</th>
+													<th>Color</th>
                                                     <th>Nombre Propietario</th>
 													<th>Telefono</th>
 													<th>Opciones</th>
@@ -48,6 +50,8 @@
                                                     <tr>
 													<td><?php echo $patient->ID_MASCOTA; ?></td>
 													<td><?php echo $patient->NOMBRE?></td>
+													<td><?php echo $patient->RAZA?></td>
+													<td><?php echo $patient->COLOR?></td>
                                                     <td><?php echo $patient->DUENO?></td>
 													<td><?php echo $patient->TEL_DUENO;?></td>
 													<td><a href="?controller=patient&method=profilePatient&id=<?php echo $patient->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>

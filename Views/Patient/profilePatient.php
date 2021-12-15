@@ -1,6 +1,9 @@
+<style>
+    li{padding:0px !important}
+</style>
 <section role="main" class="content-body">
 					<header class="page-header">
-						<h2>Perfil del Propietario</h2>
+						<h2>Perfil del Paciente</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -25,13 +28,23 @@
 							<section class="card">
 								<div class="card-body">
 									<div class="thumb-info mb-3">
-										<img src="Assets/img/!logged-user.jpg" class="rounded img-fluid" alt="John Doe">
+                                    <?php foreach($data as $data){?>
+                                    <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" height="200" width="200" class="rounded">
 										<div class="thumb-info-title">
-											<?php foreach($data as $data){?>
-												<span class="thumb-info-inner" id="name"><?php echo $data->ST_NOM." ".$data->ST_APE ?></span>																						
-												<span class="thumb-info-type"><?php echo $data->TIPO_DOC." ".$data->ID_PROP ?></span>
+												<span class="thumb-info-inner" id="name"><?php echo $data->NOMBRE ?></span>																						
+												<span class="thumb-info-type"><?php echo $data->TIPO ?></span>
 										</div>
 									</div>
+                                    <hr class="dotted short">
+
+									<div class="widget-content-expanded">
+											<ul class="simple-todo-list mt-3">
+												<li class="far fa-heart"> Estado:</li> <?php echo $data->ESTADO_MASCOTA ?>
+												<li class="">Change Personal Information</li>
+												<li>Update Social Media</li>
+												<li>Follow Someone</li>
+											</ul>
+										</div>
 								</div>
 							</section>
 							<section class="card">
@@ -247,75 +260,94 @@
 											<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 													<strong>Oh que mal!</strong> Aun hay espacios por completar.
 											</div>
+                                            
 											<div class="form-row">
-												<div class="col-lg-3">
-												<input type="hidden" id="ID_PROP" value="<?php echo $data->ID_PROP ?>">
-												<input type="hidden" id="TIPO_DOC" value="<?php echo $data->TIPO_DOC ?>">
-												<label for="ST_NOM">Primer Nombre</label>
-												<input type="text" class="form-control" id="ST_NOM" placeholder="Primer Nombre" value="<?php echo $data->ST_NOM ?>" required="">
+												<input type="hidden" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
+                                                <div class="col-lg-12 center">
+                                                <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" height="150" width="150">
+                                                <br><br>
+													<div class="fileupload fileupload-new" data-provides="fileupload">
+														<div class="input-append">
+															<div class="uneditable-input">
+																<span class="fileupload-preview"></span>
+															</div>
+															<span class="btn btn-default btn-file">
+																<span class="fileupload-exists">Cambiar</span>
+																<span class="fileupload-new">Seleccione Imagen</span>
+																<input type="file" id="file" />
+															</span>
+														</div>
+													</div>
 												</div>
-												<div class="col-lg-3">
-												<label for="ND_NOM">Segundo Nombre</label>
-												<input type="text" class="form-control" id="ND_NOM" placeholder="Segundo Nombre" value="<?php echo $data->ND_NOM ?>">
-												</div>
-												<div class="col-lg-3">
-												<label for="ST_APE">Primer Apellido</label>
-												<input type="text" class="form-control" id="ST_APE" placeholder="Primier Apellido" value="<?php echo $data->ST_APE ?>" required="">
-												</div>
-												<div class="col-lg-3">
-												<label for="ND_APE">Segundo Apellido</label>
-												<input type="text" class="form-control" id="ND_APE" placeholder="Segundo Apellido" value="<?php echo $data->ND_APE ?>" >
+												<div class="col-lg-12">
+												<label for="NOMBRE">Nombre</label>
+												<input type="text" class="form-control" id="NOMBRE" placeholder="Nombre" value="<?php echo $data->NOMBRE ?>">
 												</div>
 											</div>
 											<br>
 											<div class="form-row">
-												<div class="form-group col-md-6">
-													<label for="DEPARTAMENTO">Departamento</label>
-													<select id="DEPARTAMENTO" class="form-control" required="">
-														<option selected value="<?php echo $data->DEPARTAMENTO; ?>"><?php echo $data->depart; ?></option>
-														<?php 
-															foreach ($departament as $departament) {
+												<div class="col-md-6">
+													<label for="SEXO">Sexo</label>
+													<select id="SEXO" class="form-control" required="">
+                                                        <option value="<?php echo $data->SEXO ?>"><?php echo $data->SEXO ?></option>
+                                                        <option value="Macho">Macho</option>
+                                                        <option value="Hembra">Hembra</option>
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label for="TIPO">Tipo</label>
+													<select id="TIPO" class="form-control" required="">
+														<option selected value="<?php echo $data->TIPO ?>"><?php echo $data->TIPO ?></option>
+														<option value="Perro">Perro</option>
+                                                        <option value="Gato">Gato</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="col-md-6">
+                                                    <label for="RAZA">Raza</label>
+													<select id="RAZA" class="form-control" required="">
+														<option selected value="<?php echo $data->RAZA ?>"><?php echo $data->RAZA ?></option>
+														<option value="Criollo">Criollo</option>
+                                                        <option value="Otro">Otro...</option>
+													</select>
+												</div>
+												<div class="col-md-6">
+                                                    <label for="Color">Color</label>
+                                                    <input type="text" class="form-control" id="COLOR" placeholder="Color" value="<?php echo $data->COLOR ?>" required="">
+												</div>
+											</div>
+											<div class="form-row">
+												<div class="col-md-12">
+                                                    <label for="DUENO">Dueño:</label>
+                                                        <select name="DUENO" id="DUENO" class="form-control" placeholder="Dueño" required>
+                                                            <option Selected value="<?php echo $data->DUENO?>"><?php echo $data->DUENO?></option>
+                                                            <?php 
+													        	foreach ($owners as $owner) {
 																?>
-																<option value="<?php echo $departament->id ?>"><?php echo $departament->nombre ?></option>
+																	<option value="<?php echo $owner->ID_PROP ?>"><?php echo $owner->ST_NOM." ".$owner->ND_NOM." ".$owner->ST_APE." ".$owner->ND_APE ?></option>
 																<?php
-															}
-														?>	
-													</select>
-												</div>
-												<div class="form-group col-md-6">
-													<label for="CIUDAD">CIUDAD</label>
-													<select id="CIUDAD" class="form-control" required="">
-														<option selected value="<?php echo $data->CIUDAD ?>"><?php echo $data->city ?></option>
-														<option>...</option>
-													</select>
+																}
+															?>
+                                                        </select>
 												</div>
 											</div>
-											<div class="form-group">
-												<label for="DIRECCION">Direccion</label>
-												<input type="text" class="form-control" id="DIRECCION" placeholder="Direccion" value="<?php echo $data->DIRECCION ?>" required="">
-											</div>
-											<hr class="dotted tall">
-											<div class="form-row">
-												<div class="col-md-6">
-													<label for="TELEFONO">Telefono</label>
-													<input type="text" class="form-control" id="TELEFONO" placeholder="Telefono" required="" value="<?php echo $data->TELEFONO ?>">
-												</div>
-												<div class="col-md-6">
-													<label for="TELEFONO2">Telefono Alternativo</label>
-													<input type="text" class="form-control" id="TELEFONO2" placeholder="Telefono Alternativo" value="<?php echo $data->TELEFONO2 ?>">
+                                            <hr class="dotted tall">
+                                            <h4 class="mb-3">Datos Medicos</h4>
+                                            <div class="form-row">
+												<div class="col-md-12">
+                                                    <label for="ESTADO">Estado:</label>
+                                                        <select name="ESTADO" id="ESTADO" class="form-control" placeholder="Estado" required>
+                                                            <option Selected value="<?php echo $data->ESTADO_MASCOTA?>"><?php echo $data->ESTADO_MASCOTA?></option>
+                                                            <option value="Vivo">Vivo</option>
+                                                            <option value="Muerto">Muerto</option>
+                                                            <option value="Otro">Otro</option>
+                                                        </select>
 												</div>
 											</div>
-											<div class="form-row">
-												<div class="col-md-6">
-													<label for="EMAIL">Email</label>
-													<input type="text" class="form-control" id="EMAIL" placeholder="EMAIL" required="" value="<?php echo $data->EMAIL ?>">
-													<input type="hidden" id="confirmer" value="0">
-												</div>
-											</div>
-
 											<div class="form-row">
 												<div class="col-md-12 text-right mt-3">
-													<button class="btn btn-primary modal-confirm" id="editOwner">Guardar</button>
+													<button class="btn btn-primary modal-confirm" id="editPatient">Guardar</button>
 												</div>
 											</div>
 
@@ -325,12 +357,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3">
-
-							
+						<div class="col-xl-3">                        
 					<!-- end: page -->
 				</section>
-				<script src="Assets/vendor/common/common.js"></script>
+                <script src="Assets/vendor/common/common.js"></script>
 				<script>
 
 			$('#DEPARTAMENTO').on('change',function(){

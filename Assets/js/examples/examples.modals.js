@@ -323,7 +323,112 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=patient&method=newPatient',
-					data: 'NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val(),
+					data: 'ID_MASCOTA='+$('#ID_MASCOTA').val()+'&NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val()+'&ESTADO='+$('#ESTADO').val(),
+					success: function(data){
+						console.log(data);
+						$.ajax({
+							url:'?controller=patient&method=uploadPhoto',
+							type:'POST',
+							data: formData,
+							contentType: false,
+							cache: false,
+							processData: false,
+							success: function(response){
+								var name1 = response;
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Mascota '+name1+' Creado Exitosamente.',
+									type: 'success'
+								});
+							}
+						});
+						// $.magnificPopup.close();
+						// setTimeout(() => {
+						// location.reload();	
+						// }, 3000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear el propietario',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+			
+	});
+
+		/*
+	Create Patient
+	*/
+
+	$(document).on('click', '#editPatient', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOMBRE").val().length < 1) {
+				$('#NOMBRE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOMBRE').css('border','1px solid green');
+			}		
+			if($("#SEXO").val() == 'Seleccione...') {
+				$('#SEXO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#SEXO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#TIPO").val() == 'Seleccione...') {
+				$('#TIPO').css('border','1px solid red');
+				$('#alertif').css('display','display');
+			}else{
+				$('#TIPO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#RAZA").val() == 'Seleccione...') {
+				$('#RAZA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#RAZA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#FEC_NAC").val() == '') {
+				$('#FEC_NAC').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FEC_NAC').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#COLOR").val().length < 1) {
+				$('#COLOR').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#COLOR').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#DUENO").val() == 'Seleccione...') {
+				$('#DUENO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#DUENO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			
+			var formData = new FormData();
+			var filess = $('#file')[0].files[0];
+			formData.append('file',filess);
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=patient&method=editPatient',
+					data: 'NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val()+'&ESTADO=Vivo',
 					success: function(data){
 						console.log(data);
 						$.ajax({
