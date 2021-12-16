@@ -1,27 +1,21 @@
 <?php
 
-require 'Models/Owner.php';
-require 'Models/Departament.php';
-require 'Models/City.php';
-require 'Models/Patient.php';
-
+require 'Models/Vaccine.php';
 require 'vendor/autoload.php';
 
 /**
  * controlador propietarios
  */
 
-class OwnerController
+class VaccineController
 {
 	private $model;
 	
 
 	public function __construct()
 	{
-		$this->model = new Owner;
-		$this->departament = new Departament;
-		$this->city = new City;
-		$this->patient = new Patient;	
+		$this->model = new Vaccine;
+		
 	}
     public function newOwner()
 	{
@@ -50,9 +44,8 @@ class OwnerController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
-		$departament=$this->departament->getAll();
         $owners=$this->model->getAll();
-		require 'Views/Owner/list.php';
+		require 'Views/Vaccine/list.php';
 	}
 }
 

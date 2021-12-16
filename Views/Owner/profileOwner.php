@@ -1,3 +1,6 @@
+<style>
+	#profile_data > li {padding:0px !important}
+</style>
 <section role="main" class="content-body">
 					<header class="page-header">
 						<h2>Perfil del Propietario</h2>
@@ -32,6 +35,15 @@
 												<span class="thumb-info-type"><?php echo $data->TIPO_DOC." ".$data->ID_PROP ?></span>
 										</div>
 									</div>
+                                    <hr class="dotted short">
+
+									<div class="widget-content-expanded">
+											<ul class="simple-todo-list mt-3" id="profile_data">
+												<li class="fa fa-mobile-alt"></li> <?php echo $data->TELEFONO ?><br>
+												<li class="fa fa-home"></li> <?php echo $data->DIRECCION ?><br>
+												<li class="fa fa-envelope"></li> <?php echo $data->EMAIL ?><br>
+											</ul>
+										</div>									
 								</div>
 							</section>
 							<section class="card">
@@ -41,55 +53,24 @@
 									</div>
 
 									<h2 class="card-title">
-										<span class="badge badge-primary label-sm font-weight-normal va-middle mr-3">298</span>
-										<span class="va-middle">Friends</span>
+										<span class="badge badge-primary label-sm font-weight-normal va-middle mr-3"><?php echo $cpets ?></span>
+										<span class="va-middle">Mascotas</span>
 									</h2>
 								</header>
 								<div class="card-body">
 									<div class="content">
 										<ul class="simple-user-list">
-											<li>
+											<?php foreach ($pets as $pet) {?>
+												<a href="?controller=patient&method=profilePatient&id=<?php echo $pet->ID_MASCOTA ?>" style="color:grey;text-decoration:none"><li>
 												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
+													<img src="Pets/<?php echo $pet->ID_MASCOTA ?>/<?php echo $pet->NOMBRE ?>.jpg" alt="Joseph Doe Junior" class="rounded-circle" height="50" width="50">
 												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joseph Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joseph Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joe Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
+												<span class="title"><?php echo $pet->NOMBRE ?></span>
+												<span class="message truncate"><?php echo $pet->TIPO ?></span>
+											</li>	</a>
+											<?php } ?>
+											
 										</ul>
-										<hr class="dotted short">
-										<div class="text-right">
-											<a class="text-uppercase text-muted" href="#">(View All)</a>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="input-group">
-										<input type="text" class="form-control" name="s" id="s" placeholder="Search...">
-										<span class="input-group-append">
-											<button class="btn btn-default" type="submit"><i class="fas fa-search"></i>
-											</button>
-										</span>
 									</div>
 								</div>
 							</section>

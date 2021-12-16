@@ -1,5 +1,5 @@
 <style>
-    li{padding:0px !important}
+	#profile_data > li {padding:0px !important}
 </style>
 <section role="main" class="content-body">
 					<header class="page-header">
@@ -29,7 +29,7 @@
 								<div class="card-body">
 									<div class="thumb-info mb-3">
                                     <?php foreach($data as $data){?>
-                                    <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" height="200" width="200" class="rounded">
+                                    <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" class="rounded img-fluid">
 										<div class="thumb-info-title">
 												<span class="thumb-info-inner" id="name"><?php echo $data->NOMBRE ?></span>																						
 												<span class="thumb-info-type"><?php echo $data->TIPO ?></span>
@@ -38,11 +38,13 @@
                                     <hr class="dotted short">
 
 									<div class="widget-content-expanded">
-											<ul class="simple-todo-list mt-3">
-												<li class="far fa-heart"> Estado:</li> <?php echo $data->ESTADO_MASCOTA ?>
-												<li class="">Change Personal Information</li>
-												<li>Update Social Media</li>
-												<li>Follow Someone</li>
+											<ul class="simple-todo-list mt-3" id="profile_data">
+												<li class="fa fa-heart"> Estado:</li> <?php echo $data->ESTADO_MASCOTA ?><br>
+												<li class="fa fa-info-circle" style="color:red"> Edad:</li> <?php echo ($age->y == 0) ? $age->m." Meses" : $age->y." Años"; ?><br>
+												<li class="fa fa-info-circle" style="color:blue"> Raza:</li> <?php echo $data->RAZA?><br>
+												<li class="fa fa-info-circle" style="color:green"> Sexo:</li> <?php echo $data->SEXO?><br>
+												<li class="fa fa-info-circle" style="color:orange"> Color:</li> <?php echo $data->COLOR?><br>
+												<li class="fa fa-info-circle" style="color:pink"> Nacimiento:</li> <?php echo $data->FEC_NAC?>
 											</ul>
 										</div>
 								</div>
@@ -264,7 +266,7 @@
 											<div class="form-row">
 												<input type="hidden" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
                                                 <div class="col-lg-12 center">
-                                                <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" height="150" width="150">
+                                                <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" height="150" width="150" id="ver">
                                                 <br><br>
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<div class="input-append">
@@ -278,6 +280,7 @@
 															</span>
 														</div>
 													</div>
+													<input type="hidden" id="confirmerPhoto" value="0">
 												</div>
 												<div class="col-lg-12">
 												<label for="NOMBRE">Nombre</label>
@@ -318,7 +321,12 @@
 												</div>
 											</div>
 											<div class="form-row">
-												<div class="col-md-12">
+												<div class="col-md-6">
+													<label for="FEC_NAC">Fecha Nacimiento</label>
+                                                    <input type="Date" class="form-control" id="FEC_NAC" placeholder="Color" value="<?php echo $data->FEC_NAC ?>" required="">
+													<input type="hidden" name="confirmer" id="confirmer" value="0">
+												</div>
+												<div class="col-md-6">
                                                     <label for="DUENO">Dueño:</label>
                                                         <select name="DUENO" id="DUENO" class="form-control" placeholder="Dueño" required>
                                                             <option Selected value="<?php echo $data->DUENO?>"><?php echo $data->DUENO?></option>
@@ -336,8 +344,8 @@
                                             <h4 class="mb-3">Datos Medicos</h4>
                                             <div class="form-row">
 												<div class="col-md-12">
-                                                    <label for="ESTADO">Estado:</label>
-                                                        <select name="ESTADO" id="ESTADO" class="form-control" placeholder="Estado" required>
+                                                    <label for="ESTADO_MASCOTA">Estado:</label>
+                                                        <select name="ESTADO_MASCOTA" id="ESTADO_MASCOTA" class="form-control" placeholder="Estado" required>
                                                             <option Selected value="<?php echo $data->ESTADO_MASCOTA?>"><?php echo $data->ESTADO_MASCOTA?></option>
                                                             <option value="Vivo">Vivo</option>
                                                             <option value="Muerto">Muerto</option>
@@ -362,28 +370,18 @@
 				</section>
                 <script src="Assets/vendor/common/common.js"></script>
 				<script>
+					$('#file').change(function(){
+					filePreview(this);
+					});
 
-			$('#DEPARTAMENTO').on('change',function(){
-				id = $('#DEPARTAMENTO').val();
-				getCity(id);
-			});
-
-			function getCity(id) {
-				console.log(id);
-				$.ajax({
-					url:'?controller=owner&method=getCities&id='+id,
-					type:'GET',
-					success:function(response){
-						let datas = JSON.parse(response);
-						
-						let template = '<option value="seleccione">Seleccione...</option>';
-						datas.forEach(data=>{
-							template += `
-						<option value='${data.id}'>${data.nombre}</option>
-						`
-						})
-						$('#CIUDAD').html(template);
+					function filePreview(input) {
+						if (input.files && input.files[0]) {
+							var reader = new FileReader();
+							reader.readAsDataURL(input.files[0]);
+							reader.onload = function (e) {
+								$('#ver + img').remove();
+								$('#ver').after('<li class="fa fa-long-arrow-alt-right" style="padding:0 10px 0 10px">  </li> <img src="'+e.target.result+'" width="150" height="150"/>');
+							}					
+						}
 					}
-				});
-	}
-		</script>
+				</script>

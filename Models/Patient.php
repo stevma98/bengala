@@ -79,19 +79,31 @@ class Patient {
             die($e->getMessage());
         }
     }
-    public function updateOwner($data){
+
+    public function updatePatient($data){
         try { 
             //Ordena un array por su indice
 			ksort($data);
 			//Eliminar indices de un array
 			unset($data['controller'], $data['method']);
-            $strWhere = 'ID_PROP='.$data['ID_PROP'];
+            $strWhere = 'ID_MASCOTA='.$data['ID_MASCOTA'];
             $this->pdo->update('mascotas', $data, $strWhere); 
-            $data = json_encode($data);
-            echo $data;
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
     }
+
+    public function getByOwner($id)
+    {
+        try {
+            $strSql = "SELECT * from mascotas WHERE ID_PROP = :id";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     
 }

@@ -360,7 +360,32 @@
 				                            </li>
 				                        </ul>
 				                    </li>
-				                   
+									<li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fas fa-syringe" aria-hidden="true"></i>
+				                            <span>Vacunas</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="?controller=vaccine&method=template">
+				                                    Listar
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
+									<li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fas fa-cut" aria-hidden="true"></i>
+				                            <span>Peluqueria</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="?controller=vaccine&method=template">
+				                                    Listar
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fas fa-align-left" aria-hidden="true"></i>

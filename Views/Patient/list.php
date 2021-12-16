@@ -290,12 +290,7 @@
 		</script> -->
         
 		<script>
-			function upload(objeto)
-			{
-			objeto.target = "iframe";     //le agregamos el nombre del iframe, por donde enviara el form
-			objeto.submit();    //enviamos el form con totod los contenidos
-			}
-
+			
 			$('#department').on('change',function(){
 				id = $('#department').val();
 				getCity(id);

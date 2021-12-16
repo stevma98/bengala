@@ -6,12 +6,9 @@
 		<script src="Assets/vendor/bootstrap/js/bootstrap.js"></script>
 		<script src="Assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 		<script src="Assets/vendor/common/common.js"></script>
-		<script src="Assets/vendor/common/common.js"></script>
 		<script src="Assets/vendor/nanoscroller/nanoscroller.js"></script>
 		<script src="Assets/vendor/magnific-popup/jquery.magnific-popup.js"></script>
 		<script src="Assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
-		
-		<!-- Specific Page Assets/vendor -->
 		<script src="Assets/vendor/jquery-ui/jquery-ui.js"></script>
 		<script src="Assets/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
 		<script src="Assets/vendor/jquery-appear/jquery.appear.js"></script>
