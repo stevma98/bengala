@@ -5,7 +5,7 @@ require 'Models/City.php';
 require 'vendor/autoload.php';
 
 /**
- * controlador propietarios
+ * controlador Ciudad
  */
 
 class CityController

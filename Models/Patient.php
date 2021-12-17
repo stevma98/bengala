@@ -105,5 +105,18 @@ class Patient {
         }
     }
 
+    public function getPatients($id)
+    {
+        try {
+            $strSql = "SELECT * from mascotas WHERE ID_PROP = :id";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            $query = json_encode($query);
+            echo $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     
 }

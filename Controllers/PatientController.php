@@ -70,6 +70,11 @@ class PatientController
 	    $this->model->updatePatient($_REQUEST);
 	}
 	
+	public function getPatient()
+	{
+		$this->model->getPatients($_GET['id']);
+	}
+
 	public function profilePatient()
 	{
 		require 'Views/Layout.php';

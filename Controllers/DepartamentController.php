@@ -5,7 +5,7 @@ require 'Models/Departament.php';
 require 'vendor/autoload.php';
 
 /**
- * controlador propietarios
+ * controlador Departamento
  */
 
 class DepartamentController

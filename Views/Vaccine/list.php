@@ -5,7 +5,7 @@
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Vacunas</h2>
+					<h2>Lista Citas Vacunas</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -26,7 +26,7 @@
                                     <header class="card-header" style="padding:30px !important">
 										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Programar</a>
                                         <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right">Agregar</a>
-										<h2 class="card-title">Vacunas</h2>
+										<h2 class="card-title">Citas Vacunas</h2>
                                     </header>
                                     
 								<div class="card-body">									
@@ -37,19 +37,22 @@
 											<thead>
 												<tr>
 													<th>ID</th>
-													<th>Nombre</th>
+													<th>Paciente</th>
 													<th>Dueño</th>
+													<th>Nombre Vacuna</th>
 													<th>Fecha Aplicada</th>
 													<th>Opciones</th>
 												</tr>
 											</thead>
 											<tbody>
-                                                    <?php foreach($owners as $owner){ ?>
+                                                    <?php foreach($Vaccines as $Vaccine){ ?>
                                                     <tr>
-													<td><?php echo $owner->ID_PROP; ?></td>
-													<td><?php echo $owner->ST_NOM." ".$owner->ST_APE; ?></td>
-													<td><?php echo $owner->TELEFONO;?></td>
-													<td><a href="?controller=owner&method=profileOwner&id=<?php echo $owner->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver Perfil</a></td>
+													<td><?php echo $Vaccine->ID_VACUNA_PRO; ?></td>
+													<td><?php echo $Vaccine->NOMBRE; ?></td>
+													<td><?php echo $Vaccine->DUENO;?></td>
+													<td><?php echo $Vaccine->NOMBRE_VACUNA;?></td>
+													<td><?php echo $Vaccine->FEC_VACUNA;?></td>
+													<td><a href="?controller=owner&method=profileOwner&id=<?php echo $owner->ID_PROP; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>
@@ -63,13 +66,13 @@
 						</div>
 					</div>
                     <div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalForm">Open Form</a>
+									<a class="modal-with-form btn btn-default" href="#modalForm1">Open Form</a>
 
 									<!-- Modal Form -->
-									<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
+									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro</h2>
+												<h2 class="card-title">Formulario de Registro Cita</h2>
 											</header>
 											<div class="card-body">
 												<form>
@@ -77,87 +80,84 @@
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-														<div class="form-group col-md-6">
-															<label for="idOwner">Identificacion</label>
-															<input type="text" class="form-control" id="idOwner" name="idOwner" placeholder="Identificacion" required>
+														<div class="form-group col-md-6 mb-3 mb-lg-0">
+															<label for="ID_PROP">Propietario:</label>
+                                                            <select name="ID_PROP" id="ID_PROP" class="form-control" placeholder="Propietario" required>
+                                                                <option value="Seleccione..." Selected>Seleccione...</option>
+																<?php foreach ($owners as $owner) {?>
+																	<option value="<?php echo $owner->ID_PROP ?>"><?php echo $owner->ST_NOM." ".$owner->ND_NOM." ".$owner->ST_APE." ".$owner->ND_APE ?></option>
+																<?php } ?>
+                                                            </select>
 														</div>
 														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="document">Tipo Documento:</label>
-                                                            <select name="document" id="document" class="form-control" placeholder="tipo Documento" required>
-                                                                <option value="CC" Selected>Cedula de Ciudadania</option>
-                                                                <option value="TI">Tarjeta de Identidad</option>
-                                                                <option value="PSPT">Pasaporte</option>
+															<label for="ID_MASCOTA">Paciente:</label>
+                                                            <select name="ID_MASCOTA" id="ID_MASCOTA" class="form-control" placeholder="Paciente" required>
                                                             </select>
 														</div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="firstName">Primer Nombre:</label>
-                                                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Primer Nombre" required>
-                                                        </div>
-                                                        <div class="form-group col-md-6 mb-3 mb-lg-0">
-                                                            <label for="secondName">Segundo Nombre</label>
-                                                            <input type="text" class="form-control" id="secondName" placeholder="Segundo Nombre" name="secondName">
-                                                        </div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_VACUNA">Vacuna</label>
+															<select name="ID_VACUNA" id="ID_VACUNA" class="form-control">
+																<option value="Seleccione...">Seleccione...</option>
+																<?php foreach ($vaccinesI as $vaccineI) {?>
+																	<option value="<?php echo $vaccineI->ID_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
+																<?php } ?>
+															</select>
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="LOTE">Lote</label>
+															<input type="text" id="LOTE" name="LOTE" class="form-control" required>															
+														</div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-6">
-															<label for="firstLn">Primer Apellido</label>
-															<input type="text" class="form-control" id="firstLn" name="firstLn" required placeholder="Primer Apellido">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="PRESENTACION">Presentacion</label>
+															<input type="text" id="PRESENTACION" name="PRESENTACION" class="form-control" value="0" disabled>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="secondLn">Segundo Apellido</label>
-															<input type="text" class="form-control" id="secondLn" name="secondLn" placeholder="Segundo Apellido">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="DOSIS">Dosis</label>
+															<input type="text" id="DOSIS" name="DOSIS" class="form-control" required>
+														</div>														
+													</div>
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="VENCIMIENTO">Vencimiento</label>
+															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="FEC_VACUNA">Fecha Vacuna</label>
+															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
 														</div>
 													</div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-															<label for="department">Departamento</label>
-															<select name="department" id="department" class="form-control" placeholder="Departamento" required>
-																<option selected value="seleccione">Seleccione...</option>
-                                                                <?php 
-																	foreach ($departament as $departament) {
-																		?>
-																	<option value="<?php echo $departament->id ?>"><?php echo $departament->nombre ?></option>
-																		<?php
-																	}
-																?>
-                                                            </select>
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
+															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="city">Ciudad</label>
-															<select name="city" id="city" class="form-control">
-                                                                
-                                                            </select>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="PROXIMA_VACUNA">Vacuna</label>
+															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
+																<option value="Seleccione...">Seleccione...</option>
+																<?php foreach ($vaccinesI as $vaccineI) {?>
+																	<option value="<?php echo $vaccineI->ID_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
+																<?php } ?>
+															</select>
 														</div>
 													</div>
-                                                    <div class="form-row">
-                                                    <div class="form-group col-md-6">
-															<label for="addres">Direccion</label>
-															<input type="text" class="form-control" id="addres" name="addres" required placeholder="Direccion">
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DETALLE">Observaciones</label>
+															<textarea class="form-control" rows="2" id="DETALLE" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="phone">Telefono</label>
-															<input type="text" class="form-control" id="phone" name="phone" required placeholder="Telefono">
-														</div>
-													</div>
-                                                    <div class="form-row">
-                                                    <div class="form-group col-md-6">
-															<label for="phone2">Telefono Alternativo</label>
-															<input type="text" class="form-control" id="phone2" name="phone2" placeholder="Telefono Alternativo">
-														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="email">Correo Electronico</label>
-															<input type="text" class="form-control" id="email" name="email" required placeholder="Correo Electronico">
-															<input type="hidden" id="confirmer" value="0">
-														</div>
-													</div>
+																</div>													
 												</form>
 											</div>
+											<input type="hidden" id="confirmer" value="0">
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createOwner" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createVaccineAppointment" >Crear</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -168,10 +168,10 @@
 								</div>
 
 								<div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalForm1">Open Form</a>
+									<a class="modal-with-form btn btn-default" href="#modalForm">Open Form</a>
 
 									<!-- Modal Form -->
-									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
+									<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
 												<h2 class="card-title">Programar Vacuna</h2>
@@ -219,7 +219,7 @@
                                                         <div class="form-group col-md-6">
 															<label for="department">Departamento</label>
 															<select name="department" id="department" class="form-control" placeholder="Departamento" required>
-																<option selected value="seleccione">Seleccione...</option>
+																<option selected value="seleccione...">Seleccione...</option>
                                                                 <?php 
 																	foreach ($departament as $departament) {
 																		?>
@@ -254,7 +254,7 @@
 														<div class="form-group col-md-6 mb-3 mb-lg-0">
 															<label for="email">Correo Electronico</label>
 															<input type="text" class="form-control" id="email" name="email" required placeholder="Correo Electronico">
-															<input type="hidden" id="confirmer" value="0">
+															<!-- <input type="hidden" id="confirmer" value="0"> -->
 														</div>
 													</div>
 												</form>
@@ -385,27 +385,41 @@
 		</script> -->
 		<script>
 
-			$('#department').on('change',function(){
-				id = $('#department').val();
-				getCity(id);
+			$('#ID_VACUNA').on('change',function(){
+				id = $('#ID_VACUNA').val();
+				getPresentation(id);
 			});
 
-			function getCity(id) {				
+			function getPresentation(id) {				
 				$.ajax({
-					url:'?controller=city&method=getList&id='+id,
+					url:'?controller=vaccine&method=getPresentation&id='+id,
 					type:'GET',
 					success:function(response){
-						console.log(response);
-						let datas = JSON.parse(response);
-						
-						let template = '<option value="seleccione">Seleccione...</option>';
-						datas.forEach(data=>{
-							template += `
-						<option value='${data.id}'>${data.nombre}</option>
-						`
-						})
-						$('#city').html(template);
+						$('#PRESENTACION').val(response);
 					}
 				});
-	}
+			}
+
+			$('#ID_PROP').on('change',function(){
+				id = $('#ID_PROP').val();
+				getPatient(id);
+			});
+
+			function getPatient(id) {				
+				$.ajax({
+					url:'?controller=patient&method=getPatient&id='+id,
+					type:'GET',
+					success:function(response){
+						let datas = JSON.parse(response);
+						
+						let template = '<option value="Seleccione...">Seleccione...</option>';
+						datas.forEach(data=>{
+							template += `
+						<option value='${data.ID_MASCOTA}'>${data.NOMBRE}</option>
+						`
+						})
+						$('#ID_MASCOTA').html(template);
+					}
+				});
+			}
 		</script>

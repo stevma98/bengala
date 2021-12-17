@@ -485,6 +485,240 @@ Theme Version: 	3.0.0
 	});
 
 	/*
+	Create Vaccine
+	*/
+
+	$(document).on('click', '#createVaccine', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOMBRE_VACUNA").val().length < 1) {
+				$('#NOMBRE_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOMBRE_VACUNA').css('border','1px solid green');
+			}		
+			if($("#PRESENTACION").val() == 'Seleccione...') {
+				$('#PRESENTACION').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PRESENTACION').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=vaccine&method=newVaccine',
+					data: 'NOMBRE_VACUNA='+$('#NOMBRE_VACUNA').val()+'&PRESENTACION='+$('#PRESENTACION').val(),
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Vacuna Creada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 3000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la vacuna',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
+
+	/*
+	Edit Vaccine
+	*/
+
+	$(document).on('click', '#editVaccine', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOMBRE_VACUNA_EDIT").val().length < 1) {
+				$('#NOMBRE_VACUNA_EDIT').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOMBRE_VACUNA_EDIT').css('border','1px solid green');
+			}		
+			if($("#PRESENTACION_EDIT").val() == 'Seleccione...') {
+				$('#PRESENTACION_EDIT').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PRESENTACION_EDIT').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=vaccine&method=editVaccine',
+					data: 'ID_VACUNA='+$('#ID_VACUNA_EDIT').val()+'&NOMBRE_VACUNA='+$('#NOMBRE_VACUNA_EDIT').val()+'&PRESENTACION='+$('#PRESENTACION_EDIT').val(),
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Vacuna Editada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 3000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al editar la vacuna',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
+	/* 
+	function to call data for edit
+	*/
+
+	$(document).on('click','.idEdit',function(){
+		let element = $(this)[0].parentElement.parentElement;
+		let id = $(element).attr('Id');
+		$.post('?controller=vaccine&method=getById',{id},function(response){
+			const task = JSON.parse(response);
+			$('#NOMBRE_VACUNA_EDIT').val(task[0].NOMBRE_VACUNA);
+			$('#PRESENTACION_EDIT').val(task[0].PRESENTACION);
+			$('#ID_VACUNA_EDIT').val(task[0].ID_VACUNA);
+		})
+		});
+
+
+	
+	/*
+	create Vaccine Appointment 
+	*/
+
+	$(document).on('click', '#createVaccineAppointment ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#ID_PROP").val() == 'Seleccione...') {
+				$('#ID_PROP').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_PROP').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#ID_MASCOTA").val() == 'Seleccione...') {
+				$('#ID_MASCOTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_MASCOTA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#ID_VACUNA").val() == 'Seleccione...') {
+				$('#ID_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_VACUNA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#LOTE").val().length < 1) {
+				$('#LOTE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#LOTE').css('border','1px solid green');
+			}	
+			if($("#PRESENTACION").val().length < 1) {
+				$('#PRESENTACION').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRESENTACION').css('border','1px solid green');
+			}		
+			if($("#DOSIS").val().length < 1) {
+				$('#DOSIS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#DOSIS').css('border','1px solid green');
+			}
+			if($("#VENCIMIENTO").val().length < 1) {
+				$('#VENCIMIENTO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#VENCIMIENTO').css('border','1px solid green');
+			}
+			if($("#FEC_VACUNA").val().length < 1) {
+				$('#FEC_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#FEC_VACUNA').css('border','1px solid green');
+			}
+			if($("#FECHA_SIG_VACUNA").val().length < 1) {
+				$('#FECHA_SIG_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#FECHA_SIG_VACUNA').css('border','1px solid green');
+			}			
+			if($("#PROXIMA_VACUNA").val() == 'Seleccione...') {
+				$('#PROXIMA_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PROXIMA_VACUNA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=vaccine&method=createVaccineAppoinment',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val(),
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Cita de Vacuna Creada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 3000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea la cita de vacuna',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
+
+	/*
 	Form
 	*/
 	$('.modal-with-form').magnificPopup({

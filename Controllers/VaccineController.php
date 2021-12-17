@@ -1,6 +1,7 @@
 <?php
 
 require 'Models/Vaccine.php';
+require 'Models/Owner.php';
 require 'vendor/autoload.php';
 
 /**
@@ -10,42 +11,57 @@ require 'vendor/autoload.php';
 class VaccineController
 {
 	private $model;
+	private $owner;
 	
 
 	public function __construct()
 	{
 		$this->model = new Vaccine;
+		$this->owner = new Owner;
 		
 	}
-    public function newOwner()
+    public function newVaccine()
 	{
-	    $this->model->createOwner($_REQUEST);
+	    $this->model->createVaccine($_REQUEST);
 	}
 	
-	public function editOwner()
+	public function createVaccineAppoinment()
 	{
-	    $this->model->updateOwner($_REQUEST);
-		// var_dump($_REQUEST);
+		$this->model->createVaccineAppoinment($_REQUEST);
 	}
-	
-	public function profileOwner()
-	{
-		require 'Views/Layout.php';
-		require 'Views/Scripts.php';
-		$pets=$this->patient->getByOwner($_GET['id']);
-		$cpets=count($pets);
-		$departament=$this->departament->getAll();
-		$data=$this->model->getById($_GET['id']);
 
-		require 'Views/Owner/profileOwner.php';
+	public function editVaccine()
+	{
+	    $this->model->updateVaccine($_REQUEST);
+		// var_dump($_REQUEST);
 	}
 
 	public function template()
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
-        $owners=$this->model->getAll();
+		$owners=$this->owner->getAll();
+        $Vaccines=$this->model->getAll();
+		$vaccinesI=$this->model->getAllInventory();
 		require 'Views/Vaccine/list.php';
+	}
+
+	public function getPresentation()
+	{
+		$this->model->getPresentationById($_GET['id']);
+	}
+
+	public function getById()
+	{
+		$this->model->getByIdInventory($_POST['id']);
+	}
+
+	public function inventory()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+		$vaccines=$this->model->getAllInventory();
+		require 'Views/Vaccine/inventory.php';
 	}
 }
 

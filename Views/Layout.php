@@ -368,7 +368,12 @@
 				                        <ul class="nav nav-children">
 				                            <li>
 				                                <a class="nav-link" href="?controller=vaccine&method=template">
-				                                    Listar
+				                                    Citas
+				                                </a>
+				                            </li>
+											<li>
+				                                <a class="nav-link" href="?controller=vaccine&method=inventory">
+				                                    Inventario
 				                                </a>
 				                            </li>
 				                        </ul>
