@@ -41,7 +41,7 @@
 													<th>Opciones</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="prueba">
                                                     <?php foreach($owners as $owner){ ?>
                                                     <tr>
 													<td><?php echo $owner->ID_PROP; ?></td>
@@ -270,7 +270,7 @@
 						</tr>
 						`
 						})
-						$('#datatable-tabletools').html(template);
+						$('#prueba').html(template);
 						console.log(response);
 					}
 				});

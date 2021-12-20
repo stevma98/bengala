@@ -368,7 +368,7 @@
 				                        <ul class="nav nav-children">
 				                            <li>
 				                                <a class="nav-link" href="?controller=vaccine&method=template">
-				                                    Citas
+				                                    Listar
 				                                </a>
 				                            </li>
 											<li>
@@ -385,7 +385,7 @@
 				                        </a>
 				                        <ul class="nav nav-children">
 				                            <li>
-				                                <a class="nav-link" href="?controller=vaccine&method=template">
+				                                <a class="nav-link" href="?controller=barber&method=template">
 				                                    Listar
 				                                </a>
 				                            </li>

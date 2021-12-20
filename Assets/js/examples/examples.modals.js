@@ -717,6 +717,101 @@ Theme Version: 	3.0.0
 				}
 	});
 
+	/*
+	create Barber Appointment 
+	*/
+
+	$(document).on('click', '#createBarberAppointment ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#ID_PROP").val() == 'Seleccione...') {
+				$('#ID_PROP').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_PROP').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#ID_MASCOTA").val() == 'Seleccione...') {
+				$('#ID_MASCOTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_MASCOTA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#FEC_PELUQUERIA").val().length < 1) {
+				$('#FEC_PELUQUERIA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#FEC_PELUQUERIA').css('border','1px solid green');
+			}
+			if($("#ACCESORIOS").val() == 'Seleccione...') {
+				$('#ACCESORIOS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ACCESORIOS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#CORTE_UNAS").val() == 'Seleccione...') {
+				$('#CORTE_UNAS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#CORTE_UNAS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#BANO_MEDICADO").val() == 'Seleccione...') {
+				$('#BANO_MEDICADO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#BANO_MEDICADO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 	
+			if($("#PRECIO_PELUQUERIA").val().length < 1) {
+				$('#PRECIO_PELUQUERIA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRECIO_PELUQUERIA').css('border','1px solid green');
+			}		
+			if($("#DETALLE").val().length < 1) {
+				$('#DETALLE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#DETALLE').css('border','1px solid green');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=barber&method=createBarberAppointment',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&FEC_PELUQUERIA='+$('#FEC_PELUQUERIA').val()+'&TIPO_CORTE='+$('#TIPO_CORTE').val()+'&ACCESORIOS='+$('#ACCESORIOS').val()+'&CORTE_UNAS='+$('#CORTE_UNAS').val()+'&BANO_MEDICADO='+$('#BANO_MEDICADO').val()+'&PRECIO_PELUQUERIA='+$('#PRECIO_PELUQUERIA').val()+'&DETALLE='+$('#DETALLE').val()+'&ESTADO_PELUQUERIA=Por Realizar',
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Registro de peluqueria Creada Exitosamente.',
+							type: 'success'
+						});
+						// $.magnificPopup.close();
+						// setTimeout(() => {
+						// location.reload();	
+						// }, 3000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea la cita de peluqueria',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
 
 	/*
 	Form

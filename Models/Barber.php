@@ -1,6 +1,6 @@
 <?php 
 
-class Owner {
+class Barber {
  
     private $pdo ; 
 
@@ -16,7 +16,7 @@ class Owner {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * from propietarios";
+            $strSql = "SELECT * FROM `peluqueria` p inner join mascotas m on m.ID_MASCOTA=p.ID_MASCOTA INNER JOIN inventario_vacunas iv on iv.ID_VACUNA=p.ID_VACUNA";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -24,22 +24,30 @@ class Owner {
         }
     }
 
-    public function getList()
+    public function getAllInventory()
     {
         try {
-            $strSql = "SELECT * from propietarios";
+            $strSql = "SELECT * from peluqueria";
             $query = $this->pdo->select($strSql);
-            $query = json_encode($query);
-            echo $query;
+            return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
     }
 
-    public function createOwner($data)
+    public function createBarber($data)
     {
         try {
-            $this->pdo->insert('propietarios' , $data);
+            $this->pdo->insert('peluqueria', $data);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function createBarberAppointment($data)
+    {
+        try {
+            $this->pdo->insert('peluqueria', $data);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -48,7 +56,7 @@ class Owner {
     public function getAllFive()
     {
         try {
-            $strSql = "SELECT * from propietarios LIMIT 5";
+            $strSql = "SELECT * from peluqueria LIMIT 5";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -56,25 +64,38 @@ class Owner {
         }
     }
 
-    public function getById($id){
+    public function getByIdInventory($id){
         try { 
-            $strSql = 'SELECT *,m.nombre city,d.nombre depart FROM propietarios p INNER JOIN departamentos d ON p.DEPARTAMENTO=d.id INNER JOIN municipios m ON p.CIUDAD=m.id WHERE ID_PROP = :id';
+            $strSql = 'SELECT * FROM peluqueria WHERE ID_VACUNA = :id';
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
-            return $query;
-            
+            $query = json_encode($query);
+            echo $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
     }
-    public function updateOwner($data){
+
+    public function getPresentationById($id)
+    {
+        try { 
+            $strSql = 'SELECT * FROM peluqueria WHERE ID_VACUNA = :id';
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            echo $query[0]->PRESENTACION;            
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function updateBarber($data){
         try { 
             //Ordena un array por su indice
 			ksort($data);
 			//Eliminar indices de un array
 			unset($data['controller'], $data['method']);
-            $strWhere = 'ID_PROP='.$data['ID_PROP'];
-            $this->pdo->update('propietarios', $data, $strWhere); 
+            $strWhere = 'ID_VACUNA='.$data['ID_VACUNA'];
+            $this->pdo->update('peluqueria', $data, $strWhere); 
             $data = json_encode($data);
             echo $data;
         } catch ( PDOException $e) {

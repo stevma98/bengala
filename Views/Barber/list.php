@@ -5,7 +5,7 @@
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Registro Vacunas</h2>
+					<h2>Lista Registro Cortes</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -25,7 +25,7 @@
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
 										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
-										<h2 class="card-title">Registro Vacunas</h2>
+										<h2 class="card-title">Registro Cortes</h2>
                                     </header>
                                     
 								<div class="card-body">									
@@ -49,24 +49,19 @@
 												</tr>
 											</thead>
 											<tbody>
-                                                    <?php foreach($Vaccines as $Vaccine){ ?>
+                                                    <?php foreach($Barbers as $Barber){ ?>
                                                     <tr>
-													<td><?php echo $Vaccine->ID_VACUNA_PRO; ?></td>
-													<td><?php echo $Vaccine->NOMBRE; ?></td>
-													<td><?php echo $Vaccine->FEC_VACUNA; ?></td>
-													<td><?php echo $Vaccine->NOMBRE_VACUNA; ?></td>
-													<td><?php echo $Vaccine->DOSIS." ".$Vaccine->PRESENTACION; ?></td>
-													<td><?php echo $Vaccine->LOTE; ?></td>
-													<td><?php echo $Vaccine->FECHA_SIG_VACUNA; ?></td>
-													<td><?php echo $Vaccine->PROXIMA_VACUNA; ?></td>
-													<td><?php echo $Vaccine->VENCIMIENTO; ?></td>
-													<td><?php echo $Vaccine->DETALLE; ?></td>
-													<?php if ($Vaccine->ESTADO_VACUNA=='No Aplicada') { ?>
-														<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a> <a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-warning"><i class="fas fa-dollar-sign"></i> Pagar</a></td>
-													<?php } else { ?>
-														<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a> <a href="#" class="btn btn-success"><i class="fas fa-check"></i> Pagado</a></td>
-													<?php } ?>
-													
+													<td><?php echo $Barber->ID_VACUNA_PRO; ?></td>
+													<td><?php echo $Barber->NOMBRE; ?></td>
+													<td><?php echo $Barber->FEC_VACUNA; ?></td>
+													<td><?php echo $Barber->NOMBRE_VACUNA; ?></td>
+													<td><?php echo $Barber->DOSIS." ".$Vaccine->PRESENTACION; ?></td>
+													<td><?php echo $Barber->LOTE; ?></td>
+													<td><?php echo $Barber->FECHA_SIG_VACUNA; ?></td>
+													<td><?php echo $Barber->PROXIMA_VACUNA; ?></td>
+													<td><?php echo $Barber->VENCIMIENTO; ?></td>
+													<td><?php echo $Barber->DETALLE; ?></td>
+													<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>
@@ -85,7 +80,7 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Vacuna</h2>
+												<h2 class="card-title">Formulario de Registro Peluqueria</h2>
 											</header>
 											<div class="card-body">
 												<form>
@@ -110,53 +105,52 @@
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ID_VACUNA">Vacuna</label>
-															<select name="ID_VACUNA" id="ID_VACUNA" class="form-control">
-																<option value="Seleccione...">Seleccione...</option>
-																<?php foreach ($vaccinesI as $vaccineI) {?>
-																	<option value="<?php echo $vaccineI->ID_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
-																<?php } ?>
-															</select>
+                                                            <label for="FEC_PELUQUERIA">Fecha Corte </label>
+															<input type="date" id="FEC_PELUQUERIA" name="FEC_PELUQUERIA" class="form-control" required>															
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="LOTE">Lote</label>
-															<input type="text" id="LOTE" name="LOTE" class="form-control" required>															
+															<label for="TIPO_CORTE">Tipo Corte</label>
+															<select name="TIPO_CORTE" id="TIPO_CORTE" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Largo">Largo</option>
+                                                                <option value="Medio">Medio</option>
+                                                                <option value="Bajo">bajo</option>
+                                                            </select>
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRESENTACION">Presentacion</label>
-															<input type="text" id="PRESENTACION" name="PRESENTACION" class="form-control" value="0" disabled>
+															<label for="ACCESORIOS">Accesorios</label>
+															<select name="ACCESORIOS" id="ACCESORIOS" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Pañoleta">Pañoleta</option>
+                                                                <option value="Camiseta">Camiseta</option>
+                                                                <option value="Moño">Moño</option>
+                                                                <option value="Corbatin">Corbatin</option>
+                                                            </select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="DOSIS">Dosis</label>
-															<input type="text" id="DOSIS" name="DOSIS" class="form-control" required>
+															<label for="CORTE_UNAS">Corte de Uñas</label>
+															<select name="CORTE_UNAS" id="CORTE_UNAS" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Si">Si</option>
+                                                                <option value="NO">NO</option>
+                                                            </select>
 														</div>														
 													</div>
-													<div class="form-row">
+                                                    <div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="VENCIMIENTO">Vencimiento</label>
-															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
+															<label for="BANO_MEDICADO">Baño Medicado</label>
+															<select name="BANO_MEDICADO" id="BANO_MEDICADO" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Si">Si</option>
+                                                                <option value="NO">NO</option>
+                                                            </select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="FEC_VACUNA">Fecha Vacuna</label>
-															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
-														</div>
-													</div>
-													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
-															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
-														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PROXIMA_VACUNA">Vacuna</label>
-															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
-																<option value="Seleccione...">Seleccione...</option>
-																<?php foreach ($vaccinesI as $vaccineI) {?>
-																	<option value="<?php echo $vaccineI->NOMBRE_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
-																<?php } ?>
-															</select>
-														</div>
+															<label for="PRECIO_PELUQUERIA">Precio</label>
+															<input type="text" name="PRECIO_PELUQUERIA" id="PRECIO_PELUQUERIA" class="form-control" required>
+														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
@@ -170,7 +164,7 @@
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createVaccineAppointment" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createBarberAppointment" >Crear</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -291,7 +285,15 @@
 				});
 	}
 		</script> -->
-		<script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script>
+
+
+        $('#PRECIO_PELUQUERIA').mask('#.##0', {reverse: true});
+        $('#PRECIO_PELUQUERIA').change(function () {
+			    var valor = $(this).val();  
+			    $(this).val(valor);
+			});	
 
 			$('#ID_VACUNA').on('change',function(){
 				id = $('#ID_VACUNA').val();

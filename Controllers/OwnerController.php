@@ -34,6 +34,11 @@ class OwnerController
 		// var_dump($_REQUEST);
 	}
 	
+	public function getList()
+	{
+		$list=$this->model->getList();
+	}
+
 	public function profileOwner()
 	{
 		require 'Views/Layout.php';
