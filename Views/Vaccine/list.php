@@ -108,6 +108,7 @@
                                                             </select>
 														</div>
 													</div>
+													<input type="text">
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="ID_VACUNA">Vacuna</label>
@@ -149,7 +150,7 @@
 															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PROXIMA_VACUNA">Vacuna</label>
+															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
 															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($vaccinesI as $vaccineI) {?>

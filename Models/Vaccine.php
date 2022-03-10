@@ -27,7 +27,7 @@ class Vaccine {
     public function getAllInventory()
     {
         try {
-            $strSql = "SELECT * from inventario_vacunas";
+            $strSql = "SELECT * from inventario_vacunas WHERE ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA}'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {

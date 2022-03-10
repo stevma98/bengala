@@ -90,7 +90,9 @@
                                                             <select name="SEXO" id="SEXO" class="form-control" placeholder="Sexo" required>
                                                                 <option Selected value="Seleccione...">Seleccione...</option>
                                                                 <option value="Hembra">Hembra</option>
+																<option value="Hembra Esterilizada">Hembra Esterelizada</option>
                                                                 <option value="Macho">Macho</option>
+																<option value="Macho Castrado">Macho Castrado</option>
                                                             </select>
 														</div>
 													</div>
@@ -99,17 +101,15 @@
                                                             <label for="TIPO">Tipo:</label>
                                                             <select name="TIPO" id="TIPO" class="form-control" placeholder="Tipo" required>
                                                                 <option Selected value="Seleccione...">Seleccione...</option>
-                                                                <option value="Gato">Gato</option>
-                                                                <option value="Perro">Perro</option>
+																<option value="Canino">Canino</option>
+                                                                <option value="Felino">Felino</option>
+                                                                <option value="Silvestre">Silvestre</option>
+																<option value="Otros">Otros</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-md-6 mb-3 mb-lg-0">
                                                             <label for="RAZA">Raza:</label>
-                                                            <select name="RAZA" id="RAZA" class="form-control" placeholder="Raza" required>
-                                                                <option Selected value="Seleccione...">Seleccione...</option>
-                                                                <option value="Criollo">Criollo</option>
-                                                                <option value="Otro">Otro..</option>
-                                                            </select>
+															<input type="text" name="RAZA" id="RAZA" class="form-control" placeholder="Raza" required>
                                                         </div>
 													</div>
 													<div class="form-row">
@@ -122,6 +122,7 @@
 															<input type="date" class="form-control" id="FEC_NAC" name="FEC_NAC" placeholder="Fecha Nacimiento" required>
 														</div>
 													</div>
+													<input type="hidden" value="<?php echo $_SESSION['user']->ID_EMPRESA; ?>" id="idEmp">
 													<div class="form-row">
 														<div class="form-group col-md-12">
                                                             <label for="DUENO">Dueño:</label>

@@ -2,6 +2,7 @@
 
 require 'Models/Patient.php';
 require 'Models/Owner.php';
+require 'Models/Vaccine.php';
 require 'vendor/autoload.php';
 
 /**
@@ -17,6 +18,7 @@ class PatientController
 	{
 		$this->model = new Patient;
         $this->owner = new Owner;
+		$this->vaccine = new Vaccine;
 	}
 	
 	public function uploadPhoto()
@@ -81,6 +83,7 @@ class PatientController
 		require 'Views/Scripts.php';
 		$data=$this->model->getById($_GET['id']);
 		$owners=$this->owner->getAll();
+		$vaccinesI=$this->vaccine->getAllInventory();
 		$birthday= new DateTime($data[0]->FEC_NAC);
 		$today=new DateTime();
 		$age = $today->diff($birthday);

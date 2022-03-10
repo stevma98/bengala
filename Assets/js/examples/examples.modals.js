@@ -151,7 +151,7 @@ Theme Version: 	3.0.0
 						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
-						}, 3000);
+						}, 2000);
 						// reloadTable();
 						
 					},
@@ -323,7 +323,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=patient&method=newPatient',
-					data: 'ID_MASCOTA='+$('#ID_MASCOTA').val()+'&NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val()+'&ESTADO_MASCOTA=Vivo',
+					data: 'ID_MASCOTA='+$('#ID_MASCOTA').val()+'&NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val()+'&ESTADO_MASCOTA=Vivo&ID_EMPRESA='+$('#idEmp').val(),
 					success: function(data){
 						console.log(data);
 						$.ajax({
@@ -345,7 +345,7 @@ Theme Version: 	3.0.0
 						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
-						}, 3000);
+						}, 2000);
 					},
 					error: function(data){
 						new PNotify({
@@ -428,7 +428,6 @@ Theme Version: 	3.0.0
 			}
 			if($("#file").val().length < 1) {
 				$('#file').css('border','1px solid red');
-				$('#alertif').css('display','block');
 			}else{
 				$('#file').css('border','1px solid green');
 				$('#alertif').css('display','none');
@@ -456,7 +455,7 @@ Theme Version: 	3.0.0
 						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
-						}, 3000);
+						}, 2000);
 					},
 					error: function(data){
 						new PNotify({
@@ -523,7 +522,7 @@ Theme Version: 	3.0.0
 						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
-						}, 3000);
+						}, 2000);
 					},
 					error: function(data){
 						new PNotify({
@@ -577,7 +576,7 @@ Theme Version: 	3.0.0
 						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
-						}, 3000);
+						}, 2000);
 					},
 					error: function(data){
 						new PNotify({
@@ -703,7 +702,7 @@ Theme Version: 	3.0.0
 						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
-						}, 3000);
+						}, 2000);
 					},
 					error: function(data){
 						new PNotify({
@@ -798,7 +797,7 @@ Theme Version: 	3.0.0
 						// $.magnificPopup.close();
 						// setTimeout(() => {
 						// location.reload();	
-						// }, 3000);
+						// }, 2000);
 					},
 					error: function(data){
 						new PNotify({
