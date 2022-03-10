@@ -16,7 +16,7 @@ class Owner {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * from propietarios";
+            $strSql = "SELECT * from propietarios WHERE ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA}'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -73,7 +73,8 @@ class Owner {
 			ksort($data);
 			//Eliminar indices de un array
 			unset($data['controller'], $data['method']);
-            $strWhere = 'ID_PROP='.$data['ID_PROP'];
+            $idEmp=$_SESSION['user']->ID_EMPRESA;
+            $strWhere = 'ID_PROP='.$data['ID_PROP'].' AND ID_EMPRESA='.$idEmp.'' ;
             $this->pdo->update('propietarios', $data, $strWhere); 
             $data = json_encode($data);
             echo $data;

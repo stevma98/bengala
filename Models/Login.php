@@ -22,9 +22,7 @@ class Login
             if (isset($query[0]->idUser)) {
                $_SESSION['user'] = $query[0];
                 return true;
-            } else {
-                return 'Correo y Contraseña incorrectas';
-            }
+            } 
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -38,11 +36,9 @@ class Login
             // WHERE usuario = '{$data['correo']}' AND password = '{$pass}'";
             $sql="SELECT * FROM admin WHERE identyUser = '{$data['username']}' && passwordUser = '{$pass}'";
             $query = $this->pdo->select($sql);
-            if (isset($query[0]->id)) {
+            if (isset($query[0]->identyUser)) {
                 $_SESSION['user'] = $query[0];
                 return true;
-            } else {
-                return 'Correo y Contraseña incorrectas';
             }
         } catch ( PDOException $e) {
             die($e->getMessage());

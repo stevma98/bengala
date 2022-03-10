@@ -26,7 +26,7 @@ class LoginController
 			// $validateUserEmp = $this->model->validateUserEmp($_POST);
 			$validateAdmin = $this->model->validateAdmin($_POST);
 			if ($validateUserEmp === true || $validateAdmin === true) {
-                echo $_SESSION['user']->identyUser;
+                $_SESSION['user']->identyUser;
 				header('Location: ?controller=person&method=template');
 		    }else {
 				?>
@@ -41,16 +41,11 @@ class LoginController
 			
 	}
 
-	public function logout()
+	public function logOut()
 	{
 		if ($_SESSION['user']) {
 			session_destroy();
-			?>
-          <script type="text/javascript">
-            alert("Su sesion se ha vencido, ingrese nuevamente por favor");
-            location.href="index.php";
-          </script>
-          <?php
+			header('Location:index.php');
 		} else {
 			?>
           <script type="text/javascript">

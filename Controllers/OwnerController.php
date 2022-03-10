@@ -47,7 +47,6 @@ class OwnerController
 		$cpets=count($pets);
 		$departament=$this->departament->getAll();
 		$data=$this->model->getById($_GET['id']);
-
 		require 'Views/Owner/profileOwner.php';
 	}
 

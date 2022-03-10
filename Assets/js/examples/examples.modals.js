@@ -141,7 +141,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=owner&method=newOwner',
-					data: 'ID_PROP='+$('#idOwner').val()+'&ST_NOM='+$('#firstName').val()+'&ND_NOM='+$('#secondName').val()+'&ST_APE='+$('#firstLn').val()+'&ND_APE='+$('#secondLn').val()+'&DIRECCION='+$('#addres').val()+'&TELEFONO='+$('#phone').val()+'&EMAIL='+$('#email').val()+'&DEPARTAMENTO='+$('#department').val()+'&CIUDAD='+$('#city').val()+'&TIPO_DOC='+$('#document').val()+'&TELEFONO2='+$('#phone2').val(),
+					data: 'ID_PROP='+$('#idOwner').val()+'&ST_NOM='+$('#firstName').val()+'&ND_NOM='+$('#secondName').val()+'&ST_APE='+$('#firstLn').val()+'&ND_APE='+$('#secondLn').val()+'&DIRECCION='+$('#addres').val()+'&TELEFONO='+$('#phone').val()+'&EMAIL='+$('#email').val()+'&DEPARTAMENTO='+$('#department').val()+'&CIUDAD='+$('#city').val()+'&TIPO_DOC='+$('#document').val()+'&TELEFONO2='+$('#phone2').val()+'&ID_EMPRESA='+$('#idEmp').val(),
 					success: function(data){
 						new PNotify({
 							title: 'Confirmado!',

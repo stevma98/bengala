@@ -27,6 +27,8 @@ class PersonController
 		// $this->garanty = new Garanty;
 	}
 
+
+
 	public function template()
 	{
 		require 'Views/Layout.php';

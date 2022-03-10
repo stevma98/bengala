@@ -150,6 +150,7 @@
 															<input type="hidden" id="confirmer" value="0">
 														</div>
 													</div>
+													<input type="hidden" value="<?php echo $_SESSION['user']->ID_EMPRESA; ?>" id="idEmp">
 												</form>
 											</div>
 											<footer class="card-footer">

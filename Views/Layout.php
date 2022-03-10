@@ -300,7 +300,7 @@
 									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fas fa-lock"></i> Lock Screen</a>
 								</li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="pages-signin.html"><i class="fas fa-power-off"></i> Logout</a>
+									<a role="menuitem" tabindex="-1" href="?controller=login&method=logOut"><i class="fas fa-power-off"></i> Logout</a>
 								</li>
 							</ul>
 						</div>
@@ -329,7 +329,7 @@
 				            
 				                <ul class="nav nav-main">
 				                    <li>
-				                        <a class="nav-link" href="layouts-default.html">
+				                        <a class="nav-link" href="?controller=person&method=template">
 				                            <i class="fas fa-home" aria-hidden="true"></i>
 				                            <span>Dashboard</span>
 				                        </a>                        
