@@ -197,9 +197,10 @@
 															</h4>
 														</div>
 														<div id="collapse1One" class="collapse" data-parent="#accordion" style="">
-															<div class="card-body">
+															<div class="card-body" style="padding:0px !important">
 																<header class="panel-heading tab-bg-dark-navy-blueee row">
-																	<ul class="nav nav-tabs col-md-12">
+																	<div class="col-md-2"></div>
+																	<ul class="nav nav-tabs col-md-10">
 																		<li class="active">
 																			<a class="btn btn-default" data-toggle="tab" href="#all">Todas</a>
 																		</li>
@@ -218,197 +219,181 @@
 																	</ul>
 																</header>
 																<a target="_blank" hidden="true" class="btn btn-success" href="https://web.whatsapp.com/send?phone='+573222390807'&amp;text=Hola%20cordial%20saludo%20de%20Demo Veterinaria '%20,%20para%20nosotros%20nuestros%20pacientes%20son%20importantes%20por%20eso%20te%20enviamos%20la%20formula%20de%20'Miel'%20cita%20a%20la%20cual%20asistio%20el%20'19-12-2021'%20FORMULA:%20'<p>prueba de redadcccion de formual</p>'">Whatsapp</a>
-																<div class="tab-content">
-                    <!--pendientes-->
-                        <div id="pending" class="tab-pane">
-                            <div class="adv-table editable-table ">
-                                <table class="table table-striped table-hover table-bordered" id="">                                     
-                                    <tbody>
-                                                                                    <tr>
-                          <td style="width:125px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank"><i style="font-size:16px" class="fa fa-print"></i> Formula</a>
-                           <button type="button" title="editar 
-                          " class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar </button>   </td>
-                                                <td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
-                                                <b>Fecha de consulta: </b>19-12-2021<br><br>
-                                                <b>Atendido por:</b>doctor  
-                                                
-                                            </td>  
-                          						<td class="visible-print">
-                                                <div style="border-top:1px dashed #000;"></div>
-                                                <div class="col-xs-8">
-                                                <h5>Consulta n° <b>19063 del dia 19-12-2021</b></h5>
-                         						<br><b>Atendido por:</b> doctor 
-                                                <br><b>Sintomas:</b> <p>prueba sintomas</p>
-                                                <br><b>Diagnostico:</b> <p>prueba diagnostico</p>
-                                                <hr>
-                                                <b style="border-bottom:1px solid #000;width:100%;">Formula medica: </b>
-                          				consulta  - Dosis:10cm3- Dias:x 8 dias - Uso:despues de comer- Frecuencia:1 al dia<br> Notas:<p>prueba de redadcccion de formual</p>
- 
-                                                                           </div>
-                                        <div class="visible-print text-right col-xs-4">Observaciones: <p>F.C:<br>
-FR:<br>
-Peso (Kg):<br>
-C.C:<br>
-Temperatura:<br>
-Mucosas:<br>
-Sistema Digestivo:<br>
-Sistema Respiratorio:<br>
-Sistema Circulatorio:<br>
-Sistema Urinario:<br>
-Sistema Genital:<br>
-Sistema Nervioso:<br>
-Sistema Locomotor:<br>
-Sistema Tegumentario:<br>
-Muestras remitidas:</p>
-</div>
-                                    </td>
-                                                <td class="hidden-print"><h6>Sintomas:</h6> <p>prueba sintomas</p>
-                                                <br>
-                                                <h6>Antecedentes:</h6> <p>prueba antecedentes</p>
-                                                <br>
-                                                <h6>Diagnostico:</h6> <p>prueba diagnostico</p>
-</td>
-                                                <td class="hidden-print">Observaciones: <p>F.C:<br>
-FR:<br>
-Peso (Kg):<br>
-C.C:<br>
-Temperatura:<br>
-Mucosas:<br>
-Sistema Digestivo:<br>
-Sistema Respiratorio:<br>
-Sistema Circulatorio:<br>
-Sistema Urinario:<br>
-Sistema Genital:<br>
-Sistema Nervioso:<br>
-Sistema Locomotor:<br>
-Sistema Tegumentario:<br>
-Muestras remitidas:</p>
-</td>
-                                                
-                                                <td class="hidden-print">consulta  - Dosis:10cm3- Dias:x 8 dias - Uso:despues de comer- Frecuencia:1 al dia<br> Notas:<p>prueba de redadcccion de formual</p>
- 
-                                        
-                                         
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><!--termina-->
-                     
+																<div class="tab-content" style="padding:0px !important">
+																<!--pendientes-->
+																	<div id="pending" class="tab-pane">
+																		<div class="adv-table editable-table ">
+																			<table class="table table-striped table-hover table-bordered" id="">                                     
+																				<tbody>
+																					<tr>
+																						<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																							<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																							<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																						</td>
+																						<td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
+																							<b>Fecha de consulta: </b>19-12-2021<br><br>
+																							<b>Atendido por:</b>doctor  
+																						</td>  
+																						<td class="hidden-print">
+																							<h5><b>Sintomas:</b></h5> prueba sintomas
+																							<br>
+																							<h5><b>Antecedentes:</b></h5> prueba antecedentes
+																							<br>
+																							<h5><b>Diagnostico:</b></h5> prueba diagnostico 
+																							</td>
+																							<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																							<b>F.C:</b><br>
+																							<b>FR:</b><br>
+																							<b>Peso (Kg):</b><br>
+																							<b>C.C:</b><br>
+																							<b>Temperatura:</b><br>
+																							<b>Mucosas:</b><br>
+																							<b>Sistema Digestivo:</b> prueba prueba<br>
+																							<b>Sistema Respiratorio:</b> prueba prueba<br>
+																							<b>Sistema Circulatorio:</b> prueba prueba<br>
+																							<b>Sistema Urinario:</b> prueba prueba<br>
+																							<b>Sistema Genital:</b> prueba prueba<br>
+																							<b>Sistema Nervioso:</b> prueba prueba<br>
+																							<b>Sistema Locomotor:</b> prueba prueba<br>
+																							<b>Sistema Tegumentario:</b><br>
+																							<b>Muestras remitidas:</b>
+																						</td>
+																						<td class="hidden-print"><b>consulta</b><br> <b>Dosis:</b> 10cm3 <br><b>Dias:</b> x 8 dias <br><b> Uso:</b> despues de comer <br><b> Frecuencia:</b> 1 al dia<br><b> Notas:</b> prueba de redadcccion de formua
+																						</td>
+																					</tr>
+																					</tbody>
+																				</table>
+																			</div>
+																		</div><!--termina-->
+								
 
-                    <!--pendientes hoy-->
-                    <div id="confirmed" class="tab-pane">
-                            <div class="adv-table editable-table ">
-                                <table class="table table-striped table-hover table-bordered" id="">                                     
-                                    <tbody>
-                                         
-                                        
-                                        
-                                         
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><!--termina-->
+															<!--pendientes hoy-->
+																<div id="confirmed" class="tab-pane">
+																	<div class="adv-table editable-table ">
+																		<table class="table table-striped table-hover table-bordered" id="">                                     
+																			<tbody>
+																				
+																				
+																				
+																				
+																				</tbody>
+																			</table>
+																		</div>
+																	</div><!--termina-->
 
-                        <!--atendidas-->
-                        <div id="treated" class="tab-pane">
-                            <div class="adv-table editable-table ">
-                                <table class="table table-striped table-hover table-bordered" id="">                                     
-                                    <tbody>
-                                         
-                                        
-                                        
-                                         
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><!--termina-->
+																<!--atendidas-->
+																<div id="treated" class="tab-pane">
+																	<div class="adv-table editable-table ">
+																		<table class="table table-striped table-hover table-bordered" id="">                                     
+																			<tbody>
+																				
+																				
+																				
+																				
+																				</tbody>
+																			</table>
+																		</div>
+																	</div><!--termina-->
 
 
-                        <!--canceladas-->
-                        <div id="cancelled" class="tab-pane">
-                            <div class="adv-table editable-table ">
-                                <table class="table table-striped table-hover table-bordered" id="">                                     
-                                    <tbody>
-                                         
-                                        
-                                        
-                                         
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div><!--termina-->
+																<!--canceladas-->
+																<div id="cancelled" class="tab-pane">
+																	<div class="adv-table editable-table ">
+																		<table class="table table-striped table-hover table-bordered" id="">                                     
+																			<tbody>
+																				
+																				
+																				
+																				
+																				</tbody>
+																			</table>
+																		</div>
+																	</div><!--termina-->
 
-                        <!--todas-->
-                        <div id="all" class="tab-pane active">
-                            <div class="adv-table editable-table ">
-                                <table class="table table-striped table-hover table-bordered" id="">                                     
-                                    <tbody>
-                                    	<tr>
-                          					<td style="width:125px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank"><i style="font-size:16px" class="fa fa-print"></i> Formula</a>
-                          					<a style="margin:6px 0 6px 8px;float:left;width:auto;padding:0" target="_blank" class="btn btn-xs whats" href="https://web.whatsapp.com/send?phone='+573222390807'&amp;text=Hola%20cordial%20saludo%20de%20Demo Veterinaria '%20,%20para%20nosotros%20nuestros%20pacientes%20son%20importantes%20por%20eso%20te%20enviamos%20la%20formula%20de%20'Miel'%20cita%20a%20la%20cual%20asistio%20el%20'19-12-2021'%20FORMULA:%20'<p>prueba de redadcccion de formual</p>'"></a> <button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar </button></td>
-                                                <td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
-                                                <b>Fecha de consulta: </b>19-12-2021<br><br>
-                                                <b>Atendido por:</b>doctor  
-                                                    <br>
-                                                    Estado de consulta: 
-                                                    <b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;">Cita asignada</b>                                                                                                                                                         </td>  
-                          			<td class="visible-print">
-                                                <div style="border-top:1px dashed #000;"></div>
-                                                <div class="col-xs-8">
-                                                <h5>Consulta n° <b>19063 del dia 19-12-2021</b></h5>
-                         						<br><b>Atendido por:</b> doctor 
-                                                <br><b>Sintomas:</b> <p>prueba sintomas</p>
-                                                <br><b>Diagnostico:</b> <p>prueba diagnostico</p>
-                                                <hr>
-                                                <b style="border-bottom:1px solid #000;width:100%;">Formula medica: </b>
-                          				consulta  - Dosis:10cm3- Dias:x 8 dias - Uso:despues de comer- Frecuencia:1 al dia<br> Notas:<p>prueba de redadcccion de formual</p>
- 
-                                                                          </div>
-                                        <div class="visible-print text-right col-xs-4">Observaciones: <p>F.C:<br>
-											FR:<br>
-											Peso (Kg):<br>
-											C.C:<br>
-											Temperatura:<br>
-											Mucosas:<br>
-											Sistema Digestivo:<br>
-											Sistema Respiratorio:<br>
-											Sistema Circulatorio:<br>
-											Sistema Urinario:<br>
-											Sistema Genital:<br>
-											Sistema Nervioso:<br>
-											Sistema Locomotor:<br>
-											Sistema Tegumentario:<br>
-											Muestras remitidas:</p>
-											</div>
-                                    	</td>                                               
-                                                <td class=""><h6>Sintomas:</h6> <p>prueba sintomas</p>
-                                                <br>
-                                                <h6>Antecedentes:</h6> <p>prueba antecedentes</p>
-                                                <br>
-                                                <h6>Diagnostico:</h6> <p>prueba diagnostico</p>
-										</td>
-                                                <td class="">Observaciones: <p>F.C:<br>
-											FR:<br>
-											Peso (Kg):<br>
-											C.C:<br>
-											Temperatura:<br>
-											Mucosas:<br>
-											Sistema Digestivo:<br>
-											Sistema Respiratorio:<br>
-											Sistema Circulatorio:<br>
-											Sistema Urinario:<br>
-											Sistema Genital:<br>
-											Sistema Nervioso:<br>
-											Sistema Locomotor:<br>
-											Sistema Tegumentario:<br>
-											Muestras remitidas:</p>
-											</td>
-                                                <td class="">consulta  - Dosis:10cm3- Dias:x 8 dias - Uso:despues de comer- Frecuencia:1 al dia<br> Notas:<p>prueba de redadcccion de formual</p></td></tr>
-                                       </tbody>
-                                    </table>
-                                </div>
-                            </div><!--termina-->
-                        </div><!--termina contenido tabs-->
+																<!--todas-->
+																<div id="all" class="tab-pane active">
+																	<div class="adv-table editable-table ">
+																	<table class="table table-striped table-hover table-bordered" id="">                                     
+																			<tbody>
+																				<tr>
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																					</td>
+																					<td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
+																						<b>Fecha de consulta: </b>19-12-2021<br><br>
+																						<b>Atendido por:</b>doctor  
+																						<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;">Asignada</b>
+																					</td>  
+																					<td class="hidden-print">
+																						<h5><b>Sintomas:</b></h5> prueba sintomas
+																						<br>
+																						<h5><b>Antecedentes:</b></h5> prueba antecedentes
+																						<br>
+																						<h5><b>Diagnostico:</b></h5> prueba diagnostico 
+																						</td>
+																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																						<b>F.C:</b><br>
+																						<b>FR:</b><br>
+																						<b>Peso (Kg):</b><br>
+																						<b>C.C:</b><br>
+																						<b>Temperatura:</b><br>
+																						<b>Mucosas:</b><br>
+																						<b>Sistema Digestivo:</b> prueba prueba<br>
+																						<b>Sistema Respiratorio:</b> prueba prueba<br>
+																						<b>Sistema Circulatorio:</b> prueba prueba<br>
+																						<b>Sistema Urinario:</b> prueba prueba<br>
+																						<b>Sistema Genital:</b> prueba prueba<br>
+																						<b>Sistema Nervioso:</b> prueba prueba<br>
+																						<b>Sistema Locomotor:</b> prueba prueba<br>
+																						<b>Sistema Tegumentario:</b><br>
+																						<b>Muestras remitidas:</b>
+																					</td>
+																					<td class="hidden-print"><b>consulta</b><br> <b>Dosis:</b> 10cm3 <br><b>Dias:</b> x 8 dias <br><b> Uso:</b> despues de comer <br><b> Frecuencia:</b> 1 al dia<br><b> Notas:</b> prueba de redadcccion de formua
+																					</td>
+																				</tr>
+																				<tr>
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																					</td>
+																					<td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
+																						<b>Fecha de consulta: </b>19-12-2021<br><br>
+																						<b>Atendido por:</b>doctor  
+																						<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;">Asignada</b>
+																					</td>  
+																					<td class="hidden-print">
+																						<h5><b>Sintomas:</b></h5> prueba sintomas
+																						<br>
+																						<h5><b>Antecedentes:</b></h5> prueba antecedentes
+																						<br>
+																						<h5><b>Diagnostico:</b></h5> prueba diagnostico 
+																						</td>
+																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																						<b>F.C:</b><br>
+																						<b>FR:</b><br>
+																						<b>Peso (Kg):</b><br>
+																						<b>C.C:</b><br>
+																						<b>Temperatura:</b><br>
+																						<b>Mucosas:</b><br>
+																						<b>Sistema Digestivo:</b> prueba prueba<br>
+																						<b>Sistema Respiratorio:</b> prueba prueba<br>
+																						<b>Sistema Circulatorio:</b> prueba prueba<br>
+																						<b>Sistema Urinario:</b> prueba prueba<br>
+																						<b>Sistema Genital:</b> prueba prueba<br>
+																						<b>Sistema Nervioso:</b> prueba prueba<br>
+																						<b>Sistema Locomotor:</b> prueba prueba<br>
+																						<b>Sistema Tegumentario:</b><br>
+																						<b>Muestras remitidas:</b>
+																					</td>
+																					<td class="hidden-print"><b>consulta</b><br> <b>Dosis:</b> 10cm3 <br><b>Dias:</b> x 8 dias <br><b> Uso:</b> despues de comer <br><b> Frecuencia:</b> 1 al dia<br><b> Notas:</b> prueba de redadcccion de formua
+																					</td>
+																				</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div><!--termina-->
+																</div><!--termina contenido tabs-->
 															</div>
 														</div>
 													</div>
@@ -416,13 +401,51 @@ Muestras remitidas:</p>
 														<div class="card-header">
 															<h4 class="card-title m-0">
 																<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1Two" aria-expanded="false">
+																<i class="fa fa-plus"></i>
 																	Peluqueria
 																</a>
 															</h4>
 														</div>
 														<div id="collapse1Two" class="collapse" data-parent="#accordion" style="">
-															<div class="card-body">
-																<p>Donec tellus massa, tristique sit amet condimentum vel, facilisis quis sapien.</p>
+														<div class="card-body">
+															<table class="table table-responsive-md mb-0">
+															<thead>
+																<tr style="font-size:10px">
+																	<th>Fecha Corte</th>
+																	<th>Detalles Corte</th>
+																	<th>Estado</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php foreach ($barbery as $barber) { ?>
+																	<tr style="font-size:11px">
+																		<td><?php echo $barber->FEC_PELUQUERIA?></td>
+																		<td><?php echo "<b>Tipo de corte:</b> ".$barber->TIPO_CORTE;?>
+																			<br>
+																			<?php echo "<b>Medicado:</b> ".$barber->BANO_MEDICADO;?>
+																			<br>
+																			<?php echo "<b>Corte Uñas:</b> ".$barber->CORTE_UNAS;?>
+																			<br>
+																			<?php echo "<b>Accesorios:</b> ".$barber->ACCESORIOS;?>
+																			<br>
+																			<?php echo "<b>Observaciones:</b> ".$barber->DETALLE;?>
+																		</td>
+																		<td>
+																			<?php echo $barber->ESTADO_PELUQUERIA;?>
+																		</td>
+																		<td class="actions">
+																			<?php if($barber->ESTADO_PELUQUERIA=='Pendiente'){?>
+																				<a href="#"><i class="fas fa-check" style="color:green"></i></a>
+																				<a href="#" class="delete-row"><i class="fas fa-times" style="color:red"></i></a>
+																			<?php }else{?>
+																				<i class="fa fa-hand-peace" style="color:green"></i>
+																			<?php } ?>																			
+																		</td>
+																	</tr>
+																<?php } ?>
+															</tbody>
+														</table>
 															</div>
 														</div>
 													</div>
@@ -430,15 +453,93 @@ Muestras remitidas:</p>
 														<div class="card-header">
 															<h4 class="card-title m-0">
 																<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1Three" aria-expanded="false">
+																<i class="fa fa-plus"></i>
 																Vacunas
 																</a>
 															</h4>
 														</div>
 														<div id="collapse1Three" class="collapse" data-parent="#accordion" style="">
 															<div class="card-body">
-																<p>Donec tellus massa, tristique sit amet condimentum vel, facilisis quis sapien.</p>
+															<table class="table table-responsive-md mb-0">
+															<thead>
+																<tr style="font-size:10px">
+																	<th>Vacuna</th>
+																	<th>Fecha Vacuna</th>
+																	<th>Dosis</th>
+																	<th>Fecha Ult Vacuna</th>
+																	<th>Fecha Prox Vacuna</th>
+																	<th>Proxima Vacuna</th>
+																	<th>Lote</th>
+																	<th>Estado</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php foreach ($vaccinesH as $vaccineh) { ?>
+																	<tr style="font-size:12px">
+																		<td><?php echo $vaccineh->NOMBRE_VACUNA?></td>
+																		<td><?php echo $vaccineh->FEC_VACUNA?></td>
+																		<td><?php echo $vaccineh->DOSIS?></td>
+																		<td><?php echo $vaccineh->ULTIMA_VACUNA?></td>
+																		<td><?php echo $vaccineh->FECHA_SIG_VACUNA?></td>
+																		<td><?php echo $vaccineh->LOTE?></td>
+																		<td><?php echo $vaccineh->PROXIMA_VACUNA?></td>
+																		<td><?php echo $vaccineh->ESTADO_VACUNA?></td>
+																		<td class="actions">
+																		<?php if($vaccineh->ESTADO_VACUNA=='Pendiente'){?>
+																				<a href="#"><i class="fas fa-check" style="color:green"></i></a>
+																				<a href="#" class="delete-row"><i class="fas fa-times" style="color:red"></i></a>
+																			<?php }else{?>
+																				<i class="fa fa-hand-peace" style="color:green"></i>
+																			<?php } ?>
+																		</td>
+																	</tr>
+																<?php } ?>
+															</tbody>
+														</table>
 															</div>
 														</div>
+														<div class="card card-default">
+														<div class="card-header">
+															<h4 class="card-title m-0">
+																<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1Four" aria-expanded="false">
+																<i class="fa fa-plus"></i>
+																	Consentimientos
+																</a>
+															</h4>
+														</div>
+														<div id="collapse1Four" class="collapse" data-parent="#accordion" style="">
+														<div class="card-body">
+															<table class="table table-responsive-md mb-0">
+															<thead>
+																<tr style="font-size:10px">
+																	<th>N° Documento</th>
+																	<th>Fecha Creado</th>
+																	<th>Doctor</th>
+																	<th>Acciones</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php foreach ($vaccinesH as $vaccineh) { ?>
+																	<tr style="font-size:12px">
+																		<td><?php echo $vaccineh->NOMBRE_VACUNA?></td>
+																		<td><?php echo $vaccineh->FEC_VACUNA?></td>
+																		<td><?php echo $vaccineh->DOSIS?></td>
+																		<td class="actions">
+																		<?php if($vaccineh->ESTADO_VACUNA=='Pendiente'){?>
+																				<a href="#"><i class="fas fa-check" style="color:green"></i></a>
+																				<a href="#" class="delete-row"><i class="fas fa-times" style="color:red"></i></a>
+																			<?php }else{?>
+																				<i class="fa fa-hand-peace" style="color:green"></i>
+																			<?php } ?>
+																		</td>
+																	</tr>
+																<?php } ?>
+															</tbody>
+														</table>
+															</div>
+														</div>
+													</div>
 													</div>
 												</div>
 											</div>
@@ -632,10 +733,10 @@ Muestras remitidas:</p>
 								<div class="card-body">
 								<button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown">Nuevo </button>
 									<div class="dropdown-menu" role="menu" style="min-width:90% !important">
-										<a class="modal-with-form dropdown-item text-1" href="#modalForm1">Consentimiento</a>
-										<a class="dropdown-item text-1" href="#">Consulta</a>
-										<a class="dropdown-item text-1" href="#">Peluqueria</a>
-										<a class="dropdown-item text-1" href="#">Vacuna</a>
+										<a class="dropdown-item text-1">Consentimiento</a>
+										<a class="modal-with-form dropdown-item text-1" href="#modalForm3">Consulta</a>
+										<a class="modal-with-form dropdown-item text-1" href="#modalForm2">Peluqueria</a>
+										<a class="modal-with-form dropdown-item text-1" href="#modalForm1">Vacuna</a>
 									</div>
 								</div>																
 							</div>
@@ -670,7 +771,7 @@ Muestras remitidas:</p>
 							</div>	
 						</div>   
 						
-						<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
+									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
 												<h2 class="card-title">Formulario de Registro Vacuna</h2>
@@ -682,8 +783,9 @@ Muestras remitidas:</p>
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
-													<input type="text" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
-													<input type="text" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
+													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
+													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="ID_VACUNA">Vacuna</label>
@@ -710,13 +812,17 @@ Muestras remitidas:</p>
 														</div>														
 													</div>
 													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="VENCIMIENTO">Vencimiento</label>
 															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
 														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="FEC_VACUNA">Fecha Vacuna</label>
 															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna</label>
+															<input type="date" id="FECHA_ULT_VACUNA" name="FECHA_ULT_VACUNA" class="form-control" required>
 														</div>
 													</div>
 													<div class="form-row">
@@ -739,7 +845,7 @@ Muestras remitidas:</p>
 															<label for="DETALLE">Observaciones</label>
 															<textarea class="form-control" rows="2" id="DETALLE" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
-																</div>													
+																</div>	
 												</form>
 											</div>
 											<input type="hidden" id="confirmer" value="0">
@@ -753,9 +859,189 @@ Muestras remitidas:</p>
 											</footer>
 										</section>
 									</div>
+
+									<div id="modalForm2" class="modal-block modal-block-primary mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Formulario de Registro Peluqueria</h2>
+											</header>
+											<div class="card-body">
+												<form>
+													<div class="form-row">
+													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+														<strong>Oh que mal!</strong> Aun hay espacios por completar.
+													</div>
+													</div>
+													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
+													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+                                                            <label for="FEC_PELUQUERIA">Fecha Corte </label>
+															<input type="date" id="FEC_PELUQUERIA" name="FEC_PELUQUERIA" class="form-control" required>															
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="TIPO_CORTE">Tipo Corte</label>
+															<select name="TIPO_CORTE" id="TIPO_CORTE" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Largo">Largo</option>
+                                                                <option value="Medio">Medio</option>
+                                                                <option value="Bajo">bajo</option>
+                                                            </select>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ACCESORIOS">Accesorios</label>
+															<select name="ACCESORIOS" id="ACCESORIOS" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Pañoleta">Pañoleta</option>
+                                                                <option value="Camiseta">Camiseta</option>
+                                                                <option value="Moño">Moño</option>
+                                                                <option value="Corbatin">Corbatin</option>
+                                                            </select>
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="CORTE_UNAS">Corte de Uñas</label>
+															<select name="CORTE_UNAS" id="CORTE_UNAS" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Si">Si</option>
+                                                                <option value="NO">NO</option>
+                                                            </select>
+														</div>														
+													</div>
+                                                    <div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="BANO_MEDICADO">Baño Medicado</label>
+															<select name="BANO_MEDICADO" id="BANO_MEDICADO" class="form-control" required>
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <option value="Si">Si</option>
+                                                                <option value="NO">NO</option>
+                                                            </select>
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="PRECIO_PELUQUERIA">Precio</label>
+															<input type="text" name="PRECIO_PELUQUERIA" id="PRECIO_PELUQUERIA" class="form-control" required>
+														</div>														
+													</div>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DETALLE">Observaciones</label>
+															<textarea class="form-control" rows="2" id="DETALLE" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														</div>
+																</div>													
+												</form>
+											</div>
+											<input type="hidden" id="confirmer" value="0">
+											<footer class="card-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm" id="createBarberAppointment" >Crear</button>
+														<button class="btn btn-default modal-dismiss" >Cancelar</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+									<div id="modalForm3" class="modal-block modal-block-primary mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Formulario de Registro Consulta</h2>
+											</header>
+											<div class="card-body">
+												<form>
+													<div class="form-row">
+													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+														<strong>Oh que mal!</strong> Aun hay espacios por completar.
+													</div>
+													</div>
+													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
+													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
+													<div class="form-row">
+														<div class="col-md-12">
+															<label for="TIPO_CONSULTA">Tipo Consulta</label>
+															<select name="TIPO_CONSULTA" id="TIPO_CONSULTA" class="form-control" required>
+																<option value="Seleccione">Seleccione...</option>
+																<option value="immediately">Inmediata</option>
+																<option value="schedule">Programar</option>
+															</select>
+														</div>
+													</div>
+													<div style="display:none" id="schedule">
+														<form action="index.php" >
+														<div class="form-row" >
+															<div class="col-md-6 mb-3 mb-lg-0">
+																<label for="FECHA_CONSULTA">Fecha Consulta </label>
+																<input type="date" id="FECHA_CONSULTA" name="FECHA_CONSULTA" class="form-control" required>															
+															</div>												
+															<div class="col-md-6 mb-3 mb-lg-0">
+																<label for="HORA_CONSULTA">Hora Consulta </label>
+																<input type="time" id="HORA_CONSULTA" name="HORA_CONSULTA" class="form-control" required>															
+															</div>												
+														</div>
+														<div class="form-row">
+															<div class="col-md-12 mb-6 mb-lg-0">
+																<label for="OBSERVACIONES">Observaciones</label>
+																<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+															</div>
+														</div>	
+														<br>
+														<footer class="card-footer">
+															<div class="row">
+																<div class="col-md-12 text-right">
+																	<button class="btn btn-primary modal-confirm" id="scheduleQuery">Agendar</button>
+																	<button class="btn btn-default modal-dismiss" >Cancelar</button>
+																</div>
+															</div>
+														</footer>
+														</form>
+													</div>
+											<div style="display:none" id="immediately">
+													<form action="index.php1" >
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="OBSERVACIONES">Observaciones</label>
+															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														</div>
+													</div>	
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="OBSERVACIONES">Observaciones</label>
+															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														</div>
+													</div>	
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="OBSERVACIONES">Observaciones</label>
+															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														</div>
+													</div>	
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="OBSERVACIONES">Observaciones</label>
+															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														</div>
+													</div>	
+
+													</form>			
+												</form>
+											
+												<footer class="card-footer">
+													<div class="row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary modal-confirm" id="createQuery" >Crear</button>
+															<button class="btn btn-default modal-dismiss" >Cancelar</button>
+														</div>
+													</div>
+												</footer>
+											</div>
+										</section>
+									</div>
 					<!-- end: page -->
 				</section>
-                <!-- <script src="Assets/vendor/common/common.js"></script> -->
+                <script src="Assets/vendor/common/common.js"></script>
 				<script src="Assets/js/examples/examples.modals.js"></script>
 				<script>
 					
@@ -776,7 +1062,6 @@ Muestras remitidas:</p>
 				</script>
 				<script>
 					$('#ID_VACUNA').on('change',function(){
-						console.log("working");
 						id = $('#ID_VACUNA').val();
 						getPresentation(id);
 					});
@@ -790,4 +1075,16 @@ Muestras remitidas:</p>
 							}
 						});
 					}	
+				</script>
+				<script>
+					$('#TIPO_CONSULTA').on('change',function(){
+						var x = $('#TIPO_CONSULTA').val();
+						if(x=='schedule'){
+							$('#schedule').css('display','block');
+							$('#immediately').css('display','none');
+						}else if(x=='immediately'){
+							$('#immediately').css('display','block');
+							$('#schedule').css('display','none');
+						}
+					});
 				</script>

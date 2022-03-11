@@ -678,6 +678,13 @@ Theme Version: 	3.0.0
 				$('#alertif').css('display','none');
 				$('#FECHA_SIG_VACUNA').css('border','1px solid green');
 			}			
+			if($("#FECHA_ULT_VACUNA").val().length < 1) {
+				$('#FECHA_ULT_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#FECHA_ULT_VACUNA').css('border','1px solid green');
+			}			
 			if($("#PROXIMA_VACUNA").val() == 'Seleccione...') {
 				$('#PROXIMA_VACUNA').css('border','1px solid red');
 				$('#alertif').css('display','block');
@@ -691,7 +698,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=vaccine&method=createVaccineAppoinment',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val(),
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&ULTIMA_VACUNA='+$('#FECHA_ULT_VACUNA').val()+'&ESTADO_VACUNA=Pendiente',
 					success: function(data){
 						console.log(data);			
 						new PNotify({
@@ -786,7 +793,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=barber&method=createBarberAppointment',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&FEC_PELUQUERIA='+$('#FEC_PELUQUERIA').val()+'&TIPO_CORTE='+$('#TIPO_CORTE').val()+'&ACCESORIOS='+$('#ACCESORIOS').val()+'&CORTE_UNAS='+$('#CORTE_UNAS').val()+'&BANO_MEDICADO='+$('#BANO_MEDICADO').val()+'&PRECIO_PELUQUERIA='+$('#PRECIO_PELUQUERIA').val()+'&DETALLE='+$('#DETALLE').val()+'&ESTADO_PELUQUERIA=Por Realizar',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&FEC_PELUQUERIA='+$('#FEC_PELUQUERIA').val()+'&TIPO_CORTE='+$('#TIPO_CORTE').val()+'&ACCESORIOS='+$('#ACCESORIOS').val()+'&CORTE_UNAS='+$('#CORTE_UNAS').val()+'&BANO_MEDICADO='+$('#BANO_MEDICADO').val()+'&PRECIO_PELUQUERIA='+$('#PRECIO_PELUQUERIA').val()+'&DETALLE='+$('#DETALLE').val()+'&ESTADO_PELUQUERIA=Pendiente&ID_EMPRESA='+$('#ID_EMPRESA').val(),
 					success: function(data){
 						console.log(data);			
 						new PNotify({
@@ -794,10 +801,10 @@ Theme Version: 	3.0.0
 							text: 'Registro de peluqueria Creada Exitosamente.',
 							type: 'success'
 						});
-						// $.magnificPopup.close();
-						// setTimeout(() => {
-						// location.reload();	
-						// }, 2000);
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
 					},
 					error: function(data){
 						new PNotify({

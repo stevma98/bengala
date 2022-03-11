@@ -57,6 +57,11 @@ class BarberController
 		$Barbers=$this->model->getAllInventory();
 		require 'Views/Barber/inventory.php';
 	}
+
+	public function getBarberByPatient()
+	{
+		$this->model->getBarberByPatient($_REQUEST);
+	}
 }
 
 ?>

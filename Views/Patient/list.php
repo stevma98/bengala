@@ -15,8 +15,8 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Layouts</span></li>
-								<li><span>Default</span></li>
+								<li><span>Pacientes</span></li>
+								<li><span>Lista</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>

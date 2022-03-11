@@ -76,13 +76,13 @@ class Barber {
         }
     }
 
-    public function getPresentationById($id)
+    public function getBarberByPatient($id)
     {
         try { 
-            $strSql = 'SELECT * FROM peluqueria WHERE ID_VACUNA = :id';
+            $strSql = "SELECT * FROM peluqueria WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
-            echo $query[0]->PRESENTACION;            
+            return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

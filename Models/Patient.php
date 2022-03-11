@@ -16,7 +16,7 @@ class Patient {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * from mascotas";
+            $strSql = "SELECT * from mascotas WHERE ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA}'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -27,7 +27,7 @@ class Patient {
     public function searchOwnerToCreate($id)
     {
         try { 
-            $strSql = 'SELECT * FROM propietarios WHERE ID_PROP = :id';
+            $strSql = "SELECT * FROM propietarios WHERE ID_PROP = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             return $query;
@@ -70,7 +70,7 @@ class Patient {
 
     public function getById($id){
         try { 
-            $strSql = 'SELECT * FROM mascotas WHERE ID_MASCOTA = :id';
+            $strSql = "SELECT * FROM mascotas WHERE ID_MASCOTA = :id AND ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA }'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             return $query;
@@ -96,7 +96,7 @@ class Patient {
     public function getByOwner($id)
     {
         try {
-            $strSql = "SELECT * from mascotas WHERE ID_PROP = :id";
+            $strSql = "SELECT * from mascotas WHERE ID_PROP = :id AND ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA }'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             return $query;
@@ -108,7 +108,7 @@ class Patient {
     public function getPatients($id)
     {
         try {
-            $strSql = "SELECT * from mascotas WHERE ID_PROP = :id";
+            $strSql = "SELECT * from mascotas WHERE ID_PROP = :id AND ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA }'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             $query = json_encode($query);

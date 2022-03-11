@@ -63,6 +63,11 @@ class VaccineController
 		$vaccines=$this->model->getAllInventory();
 		require 'Views/Vaccine/inventory.php';
 	}
+
+	public function getVaccinesByPatient()
+	{
+		$this->model->getVaccinesByPatient($_REQUEST);
+	}
 }
 
 ?>

@@ -102,5 +102,17 @@ class Vaccine {
             die($e->getMessage());
         }
     }
+
+    public function getVaccinesByPatient($id)
+    {
+        try { 
+            $strSql = "SELECT * FROM vacunas v INNER JOIN inventario_vacunas iv on v.ID_VACUNA=iv.ID_VACUNA WHERE v.ID_MASCOTA='$id' AND v.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
     
 }
