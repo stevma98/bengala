@@ -944,7 +944,7 @@
 										</section>
 									</div>
 
-									<div id="modalForm3" class="modal-block modal-block-primary mfp-hide">
+									<div id="modalForm3" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
 										<section class="card">
 											<header class="card-header">
 												<h2 class="card-title">Formulario de Registro Consulta</h2>
@@ -1002,29 +1002,80 @@
 													<form action="index.php1" >
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
-															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+															<input type="hidden" value="<?php echo date("Y-m-d"); ?>" id="FECHA_CONSULTA1" name="FECHA_CONSULTA1">
+															<label for="ANTECEDENTES">Antecedentes</label>
+															<textarea class="form-control" rows="3" id="ANTECEDENTES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
+													<br>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="SINTOMAS">Sintomas</label>
+															<textarea class="form-control" rows="3" id="SINTOMAS" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
+														</div>
+													</div>	
+													<br>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DIAGNOSTICO">Diagnostico</label>
+															<textarea class="form-control" rows="3" id="DIAGNOSTICO" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
+														</div>
+													</div>
+													<br>	
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
 															<label for="OBSERVACIONES">Observaciones</label>
-															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+															<textarea class="form-control" rows="3" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 120px;">
+FC:
+FR:
+Peso (Kg):
+C.C:
+Temperatura:
+Mucosas:
+Sistema Digestivo:
+Sistema Respiratorio:
+Sistema Circulatorio:
+Sistema Urinario:
+Sistema Genital:
+Sistema Nervioso:
+Sistema Locomotor:
+Sistema Tegumentario:
+Muestras remitidas:</textarea>
 														</div>
-													</div>	
+													</div>
+													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
-															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+															<label for="FORMULA">Redaccion de Formula/Notas</label>
+															<textarea class="form-control" rows="3" id="FORMULA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
-													</div>	
+													</div>
+													<br>
 													<div class="form-row">
-														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
-															<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos</label>
+														<div class="form-group">
+														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
+														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
+														<input type="hidden" value="0" id="num">
+													</div>
+													</div>
+													<br>
+													<div class="row">
+														<div class="col-lg-12 pull-right">
+															<table id="tableMedicines" style="width:100%">
+																<tbody>
+																	<tr>
+																		<td><label for="medicineName">Medicina</label><select name="medicineName" id="medicineName" class="form-control"></select></td>
+																		<td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis" id="medicineDosis" class="form-control" placeholder="Dosis"></td>
+																		<td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency" id="medicineFrequency" class="form-control" placeholder="Frecuencia"></td>
+																		<td><label for="medicineDays">Dias</label><input type="text" name="medicineDays" id="medicineDays" class="form-control" placeholder="Dias"></td>
+																		<td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction" id="medicineInstruction" class="form-control" placeholder="Instruccion"></td>
+																	</tr>
+																</tbody>
+															</table>
 														</div>
-													</div>	
-
+													</div>
+												<br><br>
 													</form>			
 												</form>
 											
@@ -1061,6 +1112,58 @@
 					}
 				</script>
 				<script>
+					(function($) {
+
+							'use strict';
+
+							if ( $.isFunction($.fn[ 'select2' ]) ) {
+
+								$(function() {
+									$('[data-plugin-selectTwo]').each(function() {
+										var $this = $( this ),
+											opts = {};
+
+										var pluginOptions = $this.data('plugin-options');
+										if (pluginOptions)
+											opts = pluginOptions;
+
+										$this.themePluginSelect2(opts);
+									});
+								});
+
+							}
+
+							}).apply(this, [jQuery]);
+				</script>
+				<script>
+					var count = "0";
+					function agregarFila(){
+						
+						if (count == 10) {
+							alert("Maximo de artículos alcanzados en una orden!");
+						}else{
+
+					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="Dosis"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="Frecuencia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="Dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Instruccion"></td></tr>';
+						count= parseInt(count)+1;
+					document.getElementById('num').value=count;   
+					}
+
+						
+					}
+
+					function eliminarFila(){
+					var table = document.getElementById("tableMedicines");
+					var rowCount = table.rows.length;
+					count= parseInt(count)-1;
+					document.getElementById('num').value=count;  
+					//console.log(rowCount);
+					
+					if(rowCount <= 1)
+						alert('No se puede eliminar el encabezado');
+					else
+						table.deleteRow(rowCount -1);																			
+					}
+							
 					$('#ID_VACUNA').on('change',function(){
 						id = $('#ID_VACUNA').val();
 						getPresentation(id);

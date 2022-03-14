@@ -138,7 +138,7 @@
 								</div>
 							</div>
                             <div class="clearfix center" style="padding-top:25px">
-									<a href="pages-recover-password.html">¿Olvidate tu contraseña?</a>
+									<a href="pages-recover-password.html">¿Olvidaste tu contraseña?</a>
 								</div>
 						</form>
 

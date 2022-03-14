@@ -1,5 +1,6 @@
 
 		<!--  Assets/vendor -->
+		
 		<script src="Assets/vendor/jquery/jquery.js"></script>
 		<script src="Assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="Assets/vendor/popper/umd/popper.min.js"></script>
@@ -47,13 +48,13 @@
 		
 		<!-- Theme Base, Components and Settings -->
 		<script src="Assets/js/theme.js"></script>
-		<script src="Assets/js/theme.js"></script>
-		<!-- Theme Custom -->
-		<script src="Assets/js/custom.js"></script>
-		
 		
 		<!-- Theme Initialization Files -->
 		<script src="Assets/js/theme.init.js"></script>
+
+		<!-- Theme Custom -->
+		<script src="Assets/js/custom.js"></script>
+		
 
 		<!-- Examples -->
 		<script src="Assets/js/examples/examples.header.menu.js"></script>

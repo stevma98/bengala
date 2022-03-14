@@ -1765,7 +1765,6 @@ S2.define('select2/selection/multiple',[
         '</span>' +
       '</li>'
     );
-
     return $container;
   };
 
