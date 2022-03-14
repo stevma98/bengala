@@ -118,5 +118,15 @@ class Patient {
         }
     }
 
-    
+    public function getProducts()
+    {
+        try {
+            $strSql = "SELECT * from productos WHERE ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA }'";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }

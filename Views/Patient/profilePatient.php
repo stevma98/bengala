@@ -1065,7 +1065,9 @@ Muestras remitidas:</textarea>
 															<table id="tableMedicines" style="width:100%">
 																<tbody>
 																	<tr>
-																		<td><label for="medicineName">Medicina</label><select name="medicineName" id="medicineName" class="form-control"></select></td>
+																		<td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName" id="medicineName" class="form-control"><?php foreach ($products as $product) {?>
+																			<option value="0"><?php echo $product->NOM_PRO ?></option>
+																		<?php } ?></select></td>
 																		<td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis" id="medicineDosis" class="form-control" placeholder="Dosis"></td>
 																		<td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency" id="medicineFrequency" class="form-control" placeholder="Frecuencia"></td>
 																		<td><label for="medicineDays">Dias</label><input type="text" name="medicineDays" id="medicineDays" class="form-control" placeholder="Dias"></td>
@@ -1143,7 +1145,7 @@ Muestras remitidas:</textarea>
 							alert("Maximo de artículos alcanzados en una orden!");
 						}else{
 
-					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="Dosis"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="Frecuencia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="Dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Instruccion"></td></tr>';
+					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"><?php foreach ($products as $product) {?><option value="0"><?php echo $product->NOM_PRO ?></option><?php } ?></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="Dosis"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="Frecuencia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="Dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Instruccion"></td></tr>';
 						count= parseInt(count)+1;
 					document.getElementById('num').value=count;   
 					}

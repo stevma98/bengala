@@ -88,6 +88,7 @@ class PatientController
 		$vaccinesI=$this->vaccine->getAllInventory();
 		$vaccinesH=$this->vaccine->getVaccinesByPatient($_GET['id']);
 		$barbery=$this->barber->getBarberByPatient($_GET['id']);
+		$products=$this->model->getProducts();
 		$birthday= new DateTime($data[0]->FEC_NAC);
 		$today=new DateTime();
 		$age = $today->diff($birthday);
