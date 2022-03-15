@@ -723,6 +723,173 @@ Theme Version: 	3.0.0
 				}
 	});
 
+	/* 
+	Create schedule query
+	*/
+	$(document).on('click', '#scheduleQuery ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#FECHA_CONSULTA").val().length < 1) {
+				$('#FECHA_CONSULTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FECHA_CONSULTA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#HORA_CONSULTA").val().length < 1) {
+				$('#HORA_CONSULTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#HORA_CONSULTA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=query&method=createQueryAppointment',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA').val()+'&HORA_CONSULTA='+$('#HORA_CONSULTA').val()+'&OBSERVACIONES='+$('#OBSERVACIONES1').val(),
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Cita de consulta Creada Exitosamente.', 
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea la cita de consulta',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+	
+	/* 
+	Create immediately query
+	*/
+
+	$(document).on('click', '#createQuery ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#FECHA_CONSULTA1").val().length < 1) {
+				$('#FECHA_CONSULTA1').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FECHA_CONSULTA1').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ANTECEDENTES").val().length < 1) {
+				$('#ANTECEDENTES').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ANTECEDENTES').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#SINTOMAS").val().length < 1) {
+				$('#SINTOMAS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#SINTOMAS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#DIAGNOSTICO").val().length < 1) {
+				$('#DIAGNOSTICO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#DIAGNOSTICO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#FORMULA").val().length < 1) {
+				$('#FORMULA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FORMULA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineName").val()=='Ninguno') {
+				$('#medicineName').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineName').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineDosis").val().length < 1) {
+				$('#medicineDosis').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineDosis').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineFrequency").val().length < 1) {
+				$('#medicineFrequency').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineFrequency').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineDays").val().length < 1) {
+				$('#medicineDays').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineDays').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineInstruction").val().length < 1) {
+				$('#medicineInstruction').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineInstruction').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			var receta = $('#medicineName').val()+'-'+$('#medicineDosis').val()+'-'+$('#medicineFrequency').val()+'-'+$('#medicineDays').val()+'-'+$('#medicineInstruction').val();
+			var num = $('#NUM').val();
+			for (let index = 0; index < num ; index++) {
+				
+			}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				console.log(receta);
+				// $.ajax({
+				// 	type: 'POST',
+				// 	url: '?controller=query&method=createImmediatelyQuery',
+				// 	data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').val()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&NUM='+$('#num').val(),
+				// 	success: function(data){
+				// 		console.log(data);			
+				// 		new PNotify({
+				// 			title: 'Confirmado!',
+				// 			text: 'Consulta Creada Exitosamente.', 
+				// 			type: 'success'
+				// 		});
+				// 		// $.magnificPopup.close();
+				// 		// setTimeout(() => {
+				// 		// location.reload();	
+				// 		// }, 2000);
+				// 	},
+				// 	error: function(data){
+				// 		new PNotify({
+				// 			title: 'Rechazado!',
+				// 			text: 'Hubo un error al crea la consulta',
+				// 			type: 'error',
+				// 			shadow: true
+				// 		});
+				// 	}
+				// 	});	
+				}
+	});
+
 	/*
 	create Barber Appointment 
 	*/

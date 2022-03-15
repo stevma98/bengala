@@ -828,7 +828,7 @@
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
-															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
+															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required min=<?php echo date('Y-m-d'); ?>>															
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
@@ -969,12 +969,13 @@
 															</select>
 														</div>
 													</div>
+													<input type="hidden" id="confirmer" value="0">
 													<div style="display:none" id="schedule">
 														<form action="index.php" >
 														<div class="form-row" >
 															<div class="col-md-6 mb-3 mb-lg-0">
 																<label for="FECHA_CONSULTA">Fecha Consulta </label>
-																<input type="date" id="FECHA_CONSULTA" name="FECHA_CONSULTA" class="form-control" required>															
+																<input type="date" id="FECHA_CONSULTA" name="FECHA_CONSULTA" class="form-control" required min=<?php echo date('Y-m-d'); ?>>															
 															</div>												
 															<div class="col-md-6 mb-3 mb-lg-0">
 																<label for="HORA_CONSULTA">Hora Consulta </label>
@@ -983,8 +984,8 @@
 														</div>
 														<div class="form-row">
 															<div class="col-md-12 mb-6 mb-lg-0">
-																<label for="OBSERVACIONES">Observaciones</label>
-																<textarea class="form-control" rows="2" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+																<label for="OBSERVACIONES1">Observaciones</label>
+																<textarea class="form-control" rows="2" id="OBSERVACIONES1" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 															</div>
 														</div>	
 														<br>
@@ -1056,7 +1057,7 @@ Muestras remitidas:</textarea>
 														<div class="form-group">
 														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
 														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
-														<input type="hidden" value="0" id="num">
+														<input type="hidden" value="1" id="num">
 													</div>
 													</div>
 													<br>
@@ -1065,13 +1066,13 @@ Muestras remitidas:</textarea>
 															<table id="tableMedicines" style="width:100%">
 																<tbody>
 																	<tr>
-																		<td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName" id="medicineName" class="form-control"><?php foreach ($products as $product) {?>
-																			<option value="0"><?php echo $product->NOM_PRO ?></option>
+																		<td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName" id="medicineName" class="form-control"><option value="Ninguno">Ninguno</option><?php foreach ($products as $product) {?>
+																			<option value="<?php echo $product->NOM_PRO ?>"><?php echo $product->NOM_PRO ?></option>
 																		<?php } ?></select></td>
-																		<td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis" id="medicineDosis" class="form-control" placeholder="Dosis"></td>
-																		<td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency" id="medicineFrequency" class="form-control" placeholder="Frecuencia"></td>
-																		<td><label for="medicineDays">Dias</label><input type="text" name="medicineDays" id="medicineDays" class="form-control" placeholder="Dias"></td>
-																		<td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction" id="medicineInstruction" class="form-control" placeholder="Instruccion"></td>
+																		<td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis" id="medicineDosis" class="form-control" placeholder="1cm3"></td>
+																		<td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency" id="medicineFrequency" class="form-control" placeholder="1xdia"></td>
+																		<td><label for="medicineDays">Dias</label><input type="text" name="medicineDays" id="medicineDays" class="form-control" placeholder="x8dias"></td>
+																		<td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction" id="medicineInstruction" class="form-control" placeholder=	"Despues de Comer"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -1138,14 +1139,14 @@ Muestras remitidas:</textarea>
 							}).apply(this, [jQuery]);
 				</script>
 				<script>
-					var count = "0";
+					var count = "1";
 					function agregarFila(){
 						
 						if (count == 10) {
 							alert("Maximo de artículos alcanzados en una orden!");
 						}else{
 
-					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"><?php foreach ($products as $product) {?><option value="0"><?php echo $product->NOM_PRO ?></option><?php } ?></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="Dosis"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="Frecuencia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="Dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Instruccion"></td></tr>';
+					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"><?php foreach ($products as $product) {?><option value="0"><?php echo $product->NOM_PRO ?></option><?php } ?></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="1cm3"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="1xdia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="x8dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Despues de Comer"></td></tr>';
 						count= parseInt(count)+1;
 					document.getElementById('num').value=count;   
 					}
@@ -1157,13 +1158,16 @@ Muestras remitidas:</textarea>
 					var table = document.getElementById("tableMedicines");
 					var rowCount = table.rows.length;
 					count= parseInt(count)-1;
-					document.getElementById('num').value=count;  
+					
 					//console.log(rowCount);
 					
-					if(rowCount <= 1)
-						alert('No se puede eliminar el encabezado');
-					else
-						table.deleteRow(rowCount -1);																			
+						if(rowCount <= 1){
+							alert('No se puede eliminar el encabezado');
+							count= parseInt(count)+1;
+						}else{
+							table.deleteRow(rowCount -1);																			
+							document.getElementById('num').value=count;  
+						}
 					}
 							
 					$('#ID_VACUNA').on('change',function(){
