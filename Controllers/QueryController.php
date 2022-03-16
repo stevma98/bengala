@@ -42,13 +42,7 @@ class QueryController
         $count+=1;
         $_REQUEST += ['CONSECUTIVO_CONSULTA' => $count];
         $_REQUEST += ['USUARIO_CONSULTA' => $_SESSION['user']->identyUser];
-        $num=$_REQUEST['NUM'];
-        
-        for ($i=0; $i < $num; $i++) { 
-
-        }
-
-        // $this->model->createQueryAppointment($_REQUEST);
+        $this->model->createQueryAppointment($_REQUEST);
 	}
 
 	public function editQuery()

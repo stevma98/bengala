@@ -750,7 +750,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=query&method=createQueryAppointment',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA').val()+'&HORA_CONSULTA='+$('#HORA_CONSULTA').val()+'&OBSERVACIONES='+$('#OBSERVACIONES1').val(),
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA').val()+'&HORA_CONSULTA='+$('#HORA_CONSULTA').val()+'&OBSERVACIONES='+$('#OBSERVACIONES1').val()+'&ESTADO_CONSULTA=Pendiente',
 					success: function(data){
 						console.log(data);			
 						new PNotify({
@@ -854,39 +854,39 @@ Theme Version: 	3.0.0
 				$('#alertif').css('display','none');
 				$('#confirmer').val("1");
 			}
-			var receta = $('#medicineName').val()+'-'+$('#medicineDosis').val()+'-'+$('#medicineFrequency').val()+'-'+$('#medicineDays').val()+'-'+$('#medicineInstruction').val();
-			var num = $('#NUM').val();
-			for (let index = 0; index < num ; index++) {
-				
-			}
+			var receta = $('#medicineName').val()+'<br> <b>Dosis:</b> '+$('#medicineDosis').val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency').val()+'<br> <b>Dias:</b> '+$('#medicineDays').val()+'<br> <b>Uso:</b> '+$('#medicineInstruction').val();
+			var num = $('#num').val();
+				for (let index = 1; index < num ; index++) {
+					var restrecet=$('#medicineName'+index).val()+'<br> <b>Dosis:</b> '+$('#medicineDosis'+index).val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency'+index).val()+'<br> <b>Dias:</b> '+$('#medicineDays'+index).val()+'<br> <b>Uso:</b> '+$('#medicineInstruction'+index).val();
+					receta+="-"+restrecet;
+				}
 			confirmer=$('#confirmer').val();
 			if (confirmer=='1') {
-				console.log(receta);
-				// $.ajax({
-				// 	type: 'POST',
-				// 	url: '?controller=query&method=createImmediatelyQuery',
-				// 	data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').val()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&NUM='+$('#num').val(),
-				// 	success: function(data){
-				// 		console.log(data);			
-				// 		new PNotify({
-				// 			title: 'Confirmado!',
-				// 			text: 'Consulta Creada Exitosamente.', 
-				// 			type: 'success'
-				// 		});
-				// 		// $.magnificPopup.close();
-				// 		// setTimeout(() => {
-				// 		// location.reload();	
-				// 		// }, 2000);
-				// 	},
-				// 	error: function(data){
-				// 		new PNotify({
-				// 			title: 'Rechazado!',
-				// 			text: 'Hubo un error al crea la consulta',
-				// 			type: 'error',
-				// 			shadow: true
-				// 		});
-				// 	}
-				// 	});	
+				$.ajax({
+					type: 'POST',
+					url: '?controller=query&method=createImmediatelyQuery',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado',
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Consulta Creada Exitosamente.', 
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea la consulta',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
 				}
 	});
 

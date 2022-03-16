@@ -1,6 +1,7 @@
 <style>
 	#profile_data > li {padding:0px !important}
 </style>
+<link rel="stylesheet" href="Assets/vendor/summernote/summernote-bs4.css" />
 <section role="main" class="content-body">
 					<header class="page-header">
 						<h2>Perfil del Paciente</h2>
@@ -220,59 +221,115 @@
 																</header>
 																<a target="_blank" hidden="true" class="btn btn-success" href="https://web.whatsapp.com/send?phone='+573222390807'&amp;text=Hola%20cordial%20saludo%20de%20Demo Veterinaria '%20,%20para%20nosotros%20nuestros%20pacientes%20son%20importantes%20por%20eso%20te%20enviamos%20la%20formula%20de%20'Miel'%20cita%20a%20la%20cual%20asistio%20el%20'19-12-2021'%20FORMULA:%20'<p>prueba de redadcccion de formual</p>'">Whatsapp</a>
 																<div class="tab-content" style="padding:0px !important">
+																
 																<!--pendientes-->
-																	<div id="pending" class="tab-pane">
+																<div id="pending" class="tab-pane">
 																		<div class="adv-table editable-table ">
 																			<table class="table table-striped table-hover table-bordered" id="">                                     
 																				<tbody>
-																					<tr>
-																						<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
-																							<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																							<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																				<?php foreach ($queries as $query) {
+																					if ($query->ESTADO_CONSULTA=='Pendiente') {
+																				?>																					
+																				<tr>
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																					</td>
+																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
+																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
+																						<b>Hora Programada: </b><?php echo $query->HORA_CONSULTA ?>
+																						<br><br>
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } else if($query->ESTADO_CONSULTA=='Realizado') {?>
+																							<b style="background: #1fa134;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php }else if($query->ESTADO_CONSULTA=='Cancelado'){?>
+																							<b style="background: #eb4b4b;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } ?>
+																						
+																					</td>  
+																					<td class="hidden-print">
+																						<h5><b>Sintomas:</b></h5> <?php echo $query->SINTOMAS ?>
+																						<br>
+																						<h5><b>Antecedentes:</b></h5> <?php echo $query->ANTECEDENTES ?>
+																						<br>
+																						<h5><b>Diagnostico:</b></h5> <?php echo $query->DIAGNOSTICO ?>
 																						</td>
-																						<td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
-																							<b>Fecha de consulta: </b>19-12-2021<br><br>
-																							<b>Atendido por:</b>doctor  
-																						</td>  
-																						<td class="hidden-print">
-																							<h5><b>Sintomas:</b></h5> prueba sintomas
-																							<br>
-																							<h5><b>Antecedentes:</b></h5> prueba antecedentes
-																							<br>
-																							<h5><b>Diagnostico:</b></h5> prueba diagnostico 
-																							</td>
-																							<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
-																							<b>F.C:</b><br>
-																							<b>FR:</b><br>
-																							<b>Peso (Kg):</b><br>
-																							<b>C.C:</b><br>
-																							<b>Temperatura:</b><br>
-																							<b>Mucosas:</b><br>
-																							<b>Sistema Digestivo:</b> prueba prueba<br>
-																							<b>Sistema Respiratorio:</b> prueba prueba<br>
-																							<b>Sistema Circulatorio:</b> prueba prueba<br>
-																							<b>Sistema Urinario:</b> prueba prueba<br>
-																							<b>Sistema Genital:</b> prueba prueba<br>
-																							<b>Sistema Nervioso:</b> prueba prueba<br>
-																							<b>Sistema Locomotor:</b> prueba prueba<br>
-																							<b>Sistema Tegumentario:</b><br>
-																							<b>Muestras remitidas:</b>
-																						</td>
-																						<td class="hidden-print"><b>consulta</b><br> <b>Dosis:</b> 10cm3 <br><b>Dias:</b> x 8 dias <br><b> Uso:</b> despues de comer <br><b> Frecuencia:</b> 1 al dia<br><b> Notas:</b> prueba de redadcccion de formua
-																						</td>
-																					</tr>
+																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																						<?php echo $query->OBSERVACIONES ?>
+																					</td>
+																					<td class="hidden-print">
+																					<?php 
+																					$consulta=explode('-',$query->RECETA);
+																					$count=count($consulta);
+																					for ($j=0; $j < $count ; $j++) { ?>
+																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br>"?>
+																					<?php } ?>
+																					<br>
+																						<b>Notas:</b> <?php echo $query->FORMULA ?>
+																					</td>
+																				</tr>
+																				<?php 
+																				}
+																					} ?>
 																					</tbody>
 																				</table>
 																			</div>
 																		</div><!--termina-->
 								
 
-															<!--pendientes hoy-->
+																<!--pendientes hoy-->
 																<div id="confirmed" class="tab-pane">
 																	<div class="adv-table editable-table ">
 																		<table class="table table-striped table-hover table-bordered" id="">                                     
 																			<tbody>
-																				
+																				<?php 
+																				$datec=date('Y-m-d');
+																				foreach ($queries as $query) {
+																					if ($query->ESTADO_CONSULTA=='Pendiente' AND $query->FECHA_CONSULTA==$datec) {
+																				?>																					
+																				<tr>
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																					</td>
+																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
+																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
+																						<b>Hora Programada: </b><?php echo $query->HORA_CONSULTA ?>
+																						<br><br>
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } else if($query->ESTADO_CONSULTA=='Realizado') {?>
+																							<b style="background: #1fa134;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php }else if($query->ESTADO_CONSULTA=='Cancelado'){?>
+																							<b style="background: #eb4b4b;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } ?>
+																						
+																					</td>  
+																					<td class="hidden-print">
+																						<h5><b>Sintomas:</b></h5> <?php echo $query->SINTOMAS ?>
+																						<br>
+																						<h5><b>Antecedentes:</b></h5> <?php echo $query->ANTECEDENTES ?>
+																						<br>
+																						<h5><b>Diagnostico:</b></h5> <?php echo $query->DIAGNOSTICO ?>
+																						</td>
+																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																						<?php echo $query->OBSERVACIONES ?>
+																					</td>
+																					<td class="hidden-print">
+																					<?php 
+																					$consulta=explode('-',$query->RECETA);
+																					$count=count($consulta);
+																					for ($j=0; $j < $count ; $j++) { ?>
+																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br>"?>
+																					<?php } ?>
+																					<br>
+																						<b>Notas:</b> <?php echo $query->FORMULA ?>
+																					</td>
+																				</tr>
+																				<?php 
+																				}
+																					} ?>
 																				
 																				
 																				
@@ -286,7 +343,51 @@
 																	<div class="adv-table editable-table ">
 																		<table class="table table-striped table-hover table-bordered" id="">                                     
 																			<tbody>
-																				
+																			<?php foreach ($queries as $query) {
+																					if ($query->ESTADO_CONSULTA=='Realizado') {
+																				?>																					
+																				<tr>
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																					</td>
+																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
+																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
+																						<b>Hora Programada: </b><?php echo $query->HORA_CONSULTA ?>
+																						<br><br>
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } else if($query->ESTADO_CONSULTA=='Realizado') {?>
+																							<b style="background: #1fa134;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php }else if($query->ESTADO_CONSULTA=='Cancelado'){?>
+																							<b style="background: #eb4b4b;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } ?>
+																						
+																					</td>  
+																					<td class="hidden-print">
+																						<h5><b>Sintomas:</b></h5> <?php echo $query->SINTOMAS ?>
+																						<br>
+																						<h5><b>Antecedentes:</b></h5> <?php echo $query->ANTECEDENTES ?>
+																						<br>
+																						<h5><b>Diagnostico:</b></h5> <?php echo $query->DIAGNOSTICO ?>
+																						</td>
+																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																						<?php echo $query->OBSERVACIONES ?>
+																					</td>
+																					<td class="hidden-print">
+																					<?php 
+																					$consulta=explode('-',$query->RECETA);
+																					$count=count($consulta);
+																					for ($j=0; $j < $count ; $j++) { ?>
+																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br>"?>
+																					<?php } ?>
+																					<br>
+																						<b>Notas:</b> <?php echo $query->FORMULA ?>
+																					</td>
+																				</tr>
+																				<?php 
+																				}
+																					} ?>
 																				
 																				
 																				
@@ -301,7 +402,51 @@
 																	<div class="adv-table editable-table ">
 																		<table class="table table-striped table-hover table-bordered" id="">                                     
 																			<tbody>
-																				
+																			<?php foreach ($queries as $query) {
+																					if ($query->ESTADO_CONSULTA=='Cancelado') {
+																				?>																					
+																				<tr>
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																					</td>
+																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
+																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
+																						<b>Hora Programada: </b><?php echo $query->HORA_CONSULTA ?>
+																						<br><br>
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } else if($query->ESTADO_CONSULTA=='Realizado') {?>
+																							<b style="background: #1fa134;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php }else if($query->ESTADO_CONSULTA=='Cancelado'){?>
+																							<b style="background: #eb4b4b;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } ?>
+																						
+																					</td>  
+																					<td class="hidden-print">
+																						<h5><b>Sintomas:</b></h5> <?php echo $query->SINTOMAS ?>
+																						<br>
+																						<h5><b>Antecedentes:</b></h5> <?php echo $query->ANTECEDENTES ?>
+																						<br>
+																						<h5><b>Diagnostico:</b></h5> <?php echo $query->DIAGNOSTICO ?>
+																						</td>
+																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
+																						<?php echo $query->OBSERVACIONES ?>
+																					</td>
+																					<td class="hidden-print">
+																					<?php 
+																					$consulta=explode('-',$query->RECETA);
+																					$count=count($consulta);
+																					for ($j=0; $j < $count ; $j++) { ?>
+																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br>"?>
+																					<?php } ?>
+																					<br>
+																						<b>Notas:</b> <?php echo $query->FORMULA ?>
+																					</td>
+																				</tr>
+																				<?php 
+																				}
+																					} ?>
 																				
 																				
 																				
@@ -315,80 +460,50 @@
 																	<div class="adv-table editable-table ">
 																	<table class="table table-striped table-hover table-bordered" id="">                                     
 																			<tbody>
+																				<?php foreach ($queries as $query) {?>																					
 																				<tr>
 																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
 																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
 																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
 																					</td>
-																					<td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
-																						<b>Fecha de consulta: </b>19-12-2021<br><br>
-																						<b>Atendido por:</b>doctor  
-																						<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;">Asignada</b>
+																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
+																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
+																						<?php 
+																							if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																								<b>Hora programada: </b><?php echo $query->HORA_CONSULTA ?>
+																							<?php }	?>
+																							<br><br>
+																							<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } else if($query->ESTADO_CONSULTA=='Realizado') {?>
+																							<b style="background: #1fa134;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php }else if($query->ESTADO_CONSULTA=='Cancelado'){?>
+																							<b style="background: #eb4b4b;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
+																						<?php } ?>
+																						
 																					</td>  
 																					<td class="hidden-print">
-																						<h5><b>Sintomas:</b></h5> prueba sintomas
+																						<h5><b>Sintomas:</b></h5> <?php echo $query->SINTOMAS ?>
 																						<br>
-																						<h5><b>Antecedentes:</b></h5> prueba antecedentes
+																						<h5><b>Antecedentes:</b></h5> <?php echo $query->ANTECEDENTES ?>
 																						<br>
-																						<h5><b>Diagnostico:</b></h5> prueba diagnostico 
+																						<h5><b>Diagnostico:</b></h5> <?php echo $query->DIAGNOSTICO ?>
 																						</td>
 																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
-																						<b>F.C:</b><br>
-																						<b>FR:</b><br>
-																						<b>Peso (Kg):</b><br>
-																						<b>C.C:</b><br>
-																						<b>Temperatura:</b><br>
-																						<b>Mucosas:</b><br>
-																						<b>Sistema Digestivo:</b> prueba prueba<br>
-																						<b>Sistema Respiratorio:</b> prueba prueba<br>
-																						<b>Sistema Circulatorio:</b> prueba prueba<br>
-																						<b>Sistema Urinario:</b> prueba prueba<br>
-																						<b>Sistema Genital:</b> prueba prueba<br>
-																						<b>Sistema Nervioso:</b> prueba prueba<br>
-																						<b>Sistema Locomotor:</b> prueba prueba<br>
-																						<b>Sistema Tegumentario:</b><br>
-																						<b>Muestras remitidas:</b>
+																						<?php echo $query->OBSERVACIONES ?>
 																					</td>
-																					<td class="hidden-print"><b>consulta</b><br> <b>Dosis:</b> 10cm3 <br><b>Dias:</b> x 8 dias <br><b> Uso:</b> despues de comer <br><b> Frecuencia:</b> 1 al dia<br><b> Notas:</b> prueba de redadcccion de formua
-																					</td>
-																				</tr>
-																				<tr>
-																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
-																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
-																					</td>
-																					<td class="hidden-print"><b>N° de consulta:</b> 19063<br><br>
-																						<b>Fecha de consulta: </b>19-12-2021<br><br>
-																						<b>Atendido por:</b>doctor  
-																						<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;">Asignada</b>
-																					</td>  
 																					<td class="hidden-print">
-																						<h5><b>Sintomas:</b></h5> prueba sintomas
-																						<br>
-																						<h5><b>Antecedentes:</b></h5> prueba antecedentes
-																						<br>
-																						<h5><b>Diagnostico:</b></h5> prueba diagnostico 
-																						</td>
-																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
-																						<b>F.C:</b><br>
-																						<b>FR:</b><br>
-																						<b>Peso (Kg):</b><br>
-																						<b>C.C:</b><br>
-																						<b>Temperatura:</b><br>
-																						<b>Mucosas:</b><br>
-																						<b>Sistema Digestivo:</b> prueba prueba<br>
-																						<b>Sistema Respiratorio:</b> prueba prueba<br>
-																						<b>Sistema Circulatorio:</b> prueba prueba<br>
-																						<b>Sistema Urinario:</b> prueba prueba<br>
-																						<b>Sistema Genital:</b> prueba prueba<br>
-																						<b>Sistema Nervioso:</b> prueba prueba<br>
-																						<b>Sistema Locomotor:</b> prueba prueba<br>
-																						<b>Sistema Tegumentario:</b><br>
-																						<b>Muestras remitidas:</b>
-																					</td>
-																					<td class="hidden-print"><b>consulta</b><br> <b>Dosis:</b> 10cm3 <br><b>Dias:</b> x 8 dias <br><b> Uso:</b> despues de comer <br><b> Frecuencia:</b> 1 al dia<br><b> Notas:</b> prueba de redadcccion de formua
+																					<?php 
+																					$consulta=explode('-',$query->RECETA);
+																					$count=count($consulta);
+																					for ($j=0; $j < $count ; $j++) { ?>
+																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br>"?>
+																					<?php } ?>
+																					<br>
+																						<b>Notas:</b> <?php echo $query->FORMULA ?>
 																					</td>
 																				</tr>
+																				<?php } ?>
 																				</tbody>
 																			</table>
 																		</div>
@@ -959,6 +1074,7 @@
 													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
 													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
+													<input type="hidden" name="HOURC" id="HOURC" value="<?php echo date('H:s'); ?>">
 													<div class="form-row">
 														<div class="col-md-12">
 															<label for="TIPO_CONSULTA">Tipo Consulta</label>
@@ -1026,7 +1142,7 @@
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
 															<label for="OBSERVACIONES">Observaciones</label>
-															<textarea class="form-control" rows="3" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 120px;">
+															<!-- <textarea class="form-control" rows="3" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 120px;">
 FC:
 FR:
 Peso (Kg):
@@ -1041,7 +1157,26 @@ Sistema Genital:
 Sistema Nervioso:
 Sistema Locomotor:
 Sistema Tegumentario:
-Muestras remitidas:</textarea>
+Muestras remitidas:</textarea> -->
+												<div class="col-lg-12">
+													<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'>
+														<p>FC: <br>
+														FR: <br>
+														Peso (Kg): <br>
+														C.C: <br>
+														Temperatura: <br>
+														Mucosas: <br>
+														Sistema Digestivo: <br>
+														Sistema Respiratorio: <br>
+														Sistema Circulatorio: <br>
+														Sistema Urinario: <br>
+														Sistema Genital: <br>
+														Sistema Nervioso: <br>
+														Sistema Locomotor: <br>
+														Sistema Tegumentario: <br>
+														Muestras remitidas:</p>
+													</div>
+												</div>
 														</div>
 													</div>
 													<br>
@@ -1097,6 +1232,7 @@ Muestras remitidas:</textarea>
 				</section>
                 <script src="Assets/vendor/common/common.js"></script>
 				<script src="Assets/js/examples/examples.modals.js"></script>
+				<script src="Assets/vendor/summernote/summernote-bs4.js"></script>
 				<script>
 					
 					$('#file').change(function(){
@@ -1117,26 +1253,26 @@ Muestras remitidas:</textarea>
 				<script>
 					(function($) {
 
-							'use strict';
+						'use strict';
 
-							if ( $.isFunction($.fn[ 'select2' ]) ) {
+						if ( $.isFunction($.fn[ 'summernote' ]) ) {
 
-								$(function() {
-									$('[data-plugin-selectTwo]').each(function() {
-										var $this = $( this ),
-											opts = {};
+							$(function() {
+								$('[data-plugin-summernote]').each(function() {
+									var $this = $( this ),
+										opts = {};
 
-										var pluginOptions = $this.data('plugin-options');
-										if (pluginOptions)
-											opts = pluginOptions;
+									var pluginOptions = $this.data('plugin-options');
+									if (pluginOptions)
+										opts = pluginOptions;
 
-										$this.themePluginSelect2(opts);
-									});
+									$this.themePluginSummerNote(opts);
 								});
+							});
 
-							}
+						}
 
-							}).apply(this, [jQuery]);
+						}).apply(this, [jQuery]);
 				</script>
 				<script>
 					var count = "1";
@@ -1146,7 +1282,7 @@ Muestras remitidas:</textarea>
 							alert("Maximo de artículos alcanzados en una orden!");
 						}else{
 
-					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"><?php foreach ($products as $product) {?><option value="0"><?php echo $product->NOM_PRO ?></option><?php } ?></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="1cm3"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="1xdia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="x8dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Despues de Comer"></td></tr>';
+					document.getElementById("tableMedicines").insertRow(-1).innerHTML = '<tr><td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName'+count+'" id="medicineName'+count+'" class="form-control"><?php foreach ($products as $product) {?><option value="<?php echo $product->NOM_PRO ?>"><?php echo $product->NOM_PRO ?></option><?php } ?></select></td><td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis'+count+'" id="medicineDosis'+count+'" class="form-control" placeholder="1cm3"></td><td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency'+count+'" id="medicineFrequency'+count+'" class="form-control" placeholder="1xdia"></td><td><label for="medicineDays">Dias</label><input type="text" name="medicineDays'+count+'" id="medicineDays'+count+'" class="form-control" placeholder="x8dias"></td><td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction'+count+'" id="medicineInstruction'+count+'" class="form-control" placeholder="Despues de Comer"></td></tr>';
 						count= parseInt(count)+1;
 					document.getElementById('num').value=count;   
 					}

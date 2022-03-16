@@ -43,4 +43,15 @@ class Query {
             die($e->getMessage());
         }
     }
+
+    public function searchQuerysById($id)
+    {
+        try {
+            $strSql = "SELECT * from consultas WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_MASCOTA='$id'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }
