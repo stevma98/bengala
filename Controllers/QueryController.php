@@ -50,7 +50,7 @@ class QueryController
 	    $this->model->updateQuery($_REQUEST);
 		// var_dump($_REQUEST);
 	}
-
+	
 	public function template()
 	{
 		require 'Views/Layout.php';
@@ -75,8 +75,16 @@ class QueryController
 
 	public function getQueryByPatient()
 	{
-		$this->model->getQueryByPatient($_REQUEST);
+		$this->model->searchQuerysById($_REQUEST);
 	}
+
+	public function editQuery1()
+	{
+		$this->model->editQuery1($_REQUEST);
+	}
+	
+
+
 }
 
 ?>

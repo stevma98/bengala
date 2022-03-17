@@ -92,6 +92,7 @@ class PatientController
 		$barbery=$this->barber->getBarberByPatient($_GET['id']);
 		$products=$this->model->getProducts();
 		$queries=$this->query->searchQuerysById($_GET['id']);
+		$notes=$this->model->getNotesById($_GET['id']);
 		$birthday= new DateTime($data[0]->FEC_NAC);
 		$today=new DateTime();
 		$age = $today->diff($birthday);
@@ -107,6 +108,16 @@ class PatientController
 		require 'Views/Patient/list.php';
 	}
 
+	public function saveNote()
+	{
+		$this->model->saveNote($_REQUEST);
+	}
+
+	public function deleteNote()
+	{	
+		$this->model->deleteNote($_GET['id']);
+		header("Location:?controller=patient&method=profilePatient&id=".$_GET['idm']);
+	}
 }
 
 ?>

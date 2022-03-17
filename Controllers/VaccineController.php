@@ -68,6 +68,18 @@ class VaccineController
 	{
 		$this->model->getVaccinesByPatient($_REQUEST);
 	}
+
+	public function checkVaccine()
+	{
+		$data=['ESTADO_VACUNA'=>'Realizado','ID_VACUNA_PRO'=>$_GET['id'],'ID_EMPRESA'=>$_GET['ide']];
+		$this->model->checkVaccine($data);
+	}
+
+	public function cancelVaccine()
+	{
+		$data=['ESTADO_VACUNA'=>'Cancelado','ID_VACUNA_PRO'=>$_GET['id'],'ID_EMPRESA'=>$_GET['ide']];
+		$this->model->cancelVaccine($data);
+	}
 }
 
 ?>

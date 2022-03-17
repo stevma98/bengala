@@ -53,6 +53,29 @@ class Barber {
         }
     }
 
+    public function checkBarber($data)
+    {
+        try {
+            $dato=$data['ESTADO_PELUQUERIA'];
+            $strWhere = 'ID_PELUQUERIA='.$data['ID_PELUQUERIA'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
+            $query=$this->pdo->update('peluqueria', $data , $strWhere); 
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function cancelBarber($data)
+    {
+        try {
+            $dato=$data['ESTADO_PELUQUERIA'];
+            $strWhere = 'ID_PELUQUERIA='.$data['ID_PELUQUERIA'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
+            $query=$this->pdo->update('peluqueria', $data , $strWhere); 
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
     public function getAllFive()
     {
         try {

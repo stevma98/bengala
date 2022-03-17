@@ -103,6 +103,30 @@ class Vaccine {
         }
     }
 
+    public function checkVaccine($data)
+    {
+        try {
+            $dato=$data['ESTADO_VACUNA'];
+            $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
+            $query=$this->pdo->update('vacunas', $data , $strWhere); 
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function cancelVaccine($data)
+    {
+        try {
+            $dato=$data['ESTADO_VACUNA'];
+            $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
+            $query=$this->pdo->update('vacunas', $data , $strWhere); 
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getVaccinesByPatient($id)
     {
         try { 

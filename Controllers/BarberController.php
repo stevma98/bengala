@@ -62,6 +62,18 @@ class BarberController
 	{
 		$this->model->getBarberByPatient($_REQUEST);
 	}
+
+	public function checkBarber()
+	{
+		$data=['ESTADO_PELUQUERIA'=>'Realizado','ID_PELUQUERIA'=>$_GET['id'],'ID_EMPRESA'=>$_GET['ide']];
+		$this->model->checkBarber($data);
+	}
+
+	public function cancelBarber()
+	{
+		$data=['ESTADO_PELUQUERIA'=>'Cancelado','ID_PELUQUERIA'=>$_GET['id'],'ID_EMPRESA'=>$_GET['ide']];
+		$this->model->cancelBarber($data);
+	}
 }
 
 ?>

@@ -54,4 +54,21 @@ class Query {
             die($e->getMessage());
         }
     }
+
+    public function editQuery1($data){
+        try { 
+            $id=$data['id'];
+            //Ordena un array por su indice
+			ksort($data);
+			// //Eliminar indices de un array
+			unset($data['controller'], $data['method'],$data['id']);
+            
+            $strWhere = 'ID_EMPRESA='.$data['ID_EMPRESA']." AND CONSECUTIVO_CONSULTA=".$id;
+            $query=$this->pdo->update('consultas', $data, $strWhere); 
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+    
 }

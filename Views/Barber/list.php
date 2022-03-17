@@ -250,41 +250,6 @@
 		<!-- Examples -->
 		<!-- <script src="Assets/js/examples/examples.notifications.js"></script> -->
 		<script src="Assets/js/examples/examples.modals.js"></script>
-		
-		<!-- Listado con ajax -->
-
-		<!-- <script>
-			$(document).ready(function(){
-				reloadTable();
-			});
-			function reloadTable() {
-				$.ajax({
-					url:'?controller=owner&method=getList',
-					type:'GET',
-					success:function(response){
-						console.log(response);
-						let datas = JSON.parse(response);
-						let template = '';
-						datas.forEach(data=>{
-							template += `
-						<tr >
-							<td>${data.ID_PROP}</td>
-							<td><a href="#" class="task-item">${data.ST_NOMBRE}</a></td>
-							<td>${data.ND_NOMBRE}</td>
-							<td>
-								<button class="task-delete btn btn-danger">
-									Delete
-								</button>
-							</td>
-						</tr>
-						`
-						})
-						$('#datatable-tabletools').html(template);
-						console.log(response);
-					}
-				});
-	}
-		</script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <script>
 

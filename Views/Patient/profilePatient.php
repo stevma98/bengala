@@ -230,10 +230,12 @@
 																				<?php foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Pendiente') {
 																				?>																					
-																				<tr>
-																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																				<tr id="<?php echo $query->CONSECUTIVO_CONSULTA; ?>" ide="<?php echo $query->ID_EMPRESA; ?>">
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" target="_blank">
 																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																						<a class="modal-with-form dropdown-item text-1 modal-edit-query" href="#modalForm4" style="background-color:#00b9ff;padding:1px 10px;border-radius:10px"><i class="fa fa-edit"></i>Atender</a>   
+																					<?php } ?>
 																					</td>
 																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
 																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
@@ -288,10 +290,12 @@
 																				foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Pendiente' AND $query->FECHA_CONSULTA==$datec) {
 																				?>																					
-																				<tr>
-																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																				<tr id="<?php echo $query->CONSECUTIVO_CONSULTA; ?>" ide="<?php echo $query->ID_EMPRESA; ?>">
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" target="_blank">
 																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																						<a class="modal-with-form dropdown-item text-1 modal-edit-query" href="#modalForm4" style="background-color:#00b9ff;padding:1px 10px;border-radius:10px"><i class="fa fa-edit"></i>Atender</a>   
+																					<?php } ?>
 																					</td>
 																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
 																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
@@ -346,14 +350,16 @@
 																			<?php foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Realizado') {
 																				?>																					
-																				<tr>
-																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																				<tr id="<?php echo $query->CONSECUTIVO_CONSULTA; ?>" ide="<?php echo $query->ID_EMPRESA; ?>">
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" target="_blank">
 																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																						<a class="modal-with-form dropdown-item text-1 modal-edit-query" href="#modalForm4" style="background-color:#00b9ff;padding:1px 10px;border-radius:10px"><i class="fa fa-edit"></i>Atender</a>   
+																					<?php } ?>
 																					</td>
 																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
 																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
-																						<b>Hora Programada: </b><?php echo $query->HORA_CONSULTA ?>
+																						<b>Hora Realizado: </b><?php echo $query->HORA_CONSULTA ?>
 																						<br><br>
 																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
 																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
@@ -405,10 +411,12 @@
 																			<?php foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Cancelado') {
 																				?>																					
-																				<tr>
-																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
+																				<tr id="<?php echo $query->CONSECUTIVO_CONSULTA; ?>" ide="<?php echo $query->ID_EMPRESA; ?>">
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" target="_blank">
 																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																						<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																						<a class="modal-with-form dropdown-item text-1 modal-edit-query" href="#modalForm4" style="background-color:#00b9ff;padding:1px 10px;border-radius:10px"><i class="fa fa-edit"></i>Atender</a>   
+																					<?php } ?>
 																					</td>
 																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
 																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
@@ -458,20 +466,18 @@
 																<!--todas-->
 																<div id="all" class="tab-pane active">
 																	<div class="adv-table editable-table ">
-																	<table class="table table-striped table-hover table-bordered" id="">                                     
+																	<table class="table table-striped table-hover table-bordered">                                     
 																			<tbody>
 																				<?php foreach ($queries as $query) {?>																					
-																				<tr>
-																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" href="bed/editAllotment?id=19063" target="_blank">
-																						<i style="font-size:12px" class="fa fa-print"></i>Formula</a>
-																						<button type="button" title="editar" class="btn btn-info btn-xs btn_width editbuttonallot" data-toggle="modal" data-id="19063"><i class="fa fa-edit"></i>Editar</button>   
+																				<tr id="<?php echo $query->CONSECUTIVO_CONSULTA; ?>" ide="<?php echo $query->ID_EMPRESA; ?>">
+																					<td style="width:90px" class="hidden-print"> <a class="col-xs-12" target="_blank"><i style="font-size:12px" class="fa fa-print"></i>Formula</a>
+																					<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
+																						<a class="modal-with-form dropdown-item text-1 modal-edit-query" href="#modalForm4" style="background-color:#00b9ff;padding:1px 10px;border-radius:10px"><i class="fa fa-edit"></i>Atender</a>   
+																					<?php } ?>
 																					</td>
 																					<td class="hidden-print"><b>N° de consulta:</b> <?php echo $query->CONSECUTIVO_CONSULTA; ?><br><br>
 																						<b>Fecha de consulta: </b><?php echo $query->FECHA_CONSULTA ?><br>
-																						<?php 
-																							if ($query->ESTADO_CONSULTA=='Pendiente') {?>
-																								<b>Hora programada: </b><?php echo $query->HORA_CONSULTA ?>
-																							<?php }	?>
+																						<b>Hora Realizado: </b><?php echo $query->HORA_CONSULTA ?>
 																							<br><br>
 																							<?php if ($query->ESTADO_CONSULTA=='Pendiente') {?>
 																							<b style="background: #00b9ff;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
@@ -480,7 +486,6 @@
 																						<?php }else if($query->ESTADO_CONSULTA=='Cancelado'){?>
 																							<b style="background: #eb4b4b;padding: 3px 8px;border-radius: 12px;color: #fff;font-weight: 100;"><?php echo $query->ESTADO_CONSULTA ?>
 																						<?php } ?>
-																						
 																					</td>  
 																					<td class="hidden-print">
 																						<h5><b>Sintomas:</b></h5> <?php echo $query->SINTOMAS ?>
@@ -492,14 +497,13 @@
 																						<td class="hidden-print" style="width:200px;font-size:12px"><h5><b>Observaciones:</b> </h5>
 																						<?php echo $query->OBSERVACIONES ?>
 																					</td>
-																					<td class="hidden-print">
+																					<td class="hidden-print" style="width:200px;font-size:12px">
 																					<?php 
 																					$consulta=explode('-',$query->RECETA);
 																					$count=count($consulta);
 																					for ($j=0; $j < $count ; $j++) { ?>
-																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br>"?>
+																						<?php echo "<b>Nombre:</b> ".$consulta[$j]."<br><br>"?>
 																					<?php } ?>
-																					<br>
 																						<b>Notas:</b> <?php echo $query->FORMULA ?>
 																					</td>
 																				</tr>
@@ -522,7 +526,7 @@
 															</h4>
 														</div>
 														<div id="collapse1Two" class="collapse" data-parent="#accordion" style="">
-														<div class="card-body">
+														<div class="card-body" style="padding:0px !important">
 															<table class="table table-responsive-md mb-0">
 															<thead>
 																<tr style="font-size:10px">
@@ -534,7 +538,7 @@
 															</thead>
 															<tbody>
 																<?php foreach ($barbery as $barber) { ?>
-																	<tr style="font-size:11px">
+																	<tr style="font-size:11px" id=<?php echo $barber->ID_PELUQUERIA; ?> ide=<?php echo $barber->ID_EMPRESA ?>>
 																		<td><?php echo $barber->FEC_PELUQUERIA?></td>
 																		<td><?php echo "<b>Tipo de corte:</b> ".$barber->TIPO_CORTE;?>
 																			<br>
@@ -551,11 +555,13 @@
 																		</td>
 																		<td class="actions">
 																			<?php if($barber->ESTADO_PELUQUERIA=='Pendiente'){?>
-																				<a href="#"><i class="fas fa-check" style="color:green"></i></a>
-																				<a href="#" class="delete-row"><i class="fas fa-times" style="color:red"></i></a>
-																			<?php }else{?>
+																			 <a href="#" class="update-barber"> <i class="fas fa-check" style="color:green"></i></a>
+																				<a href="#" class="delete-row-barber"><i class="fas fa-times" style="color:red"></i></a>
+																			<?php }else if($barber->ESTADO_PELUQUERIA=='Realizado'){?>
 																				<i class="fa fa-hand-peace" style="color:green"></i>
-																			<?php } ?>																			
+																			<?php }else if($barber->ESTADO_PELUQUERIA=='Cancelado'){?>
+																				<i class="fa fa-thumbs-down" style="color:red"></i>	
+																			<?php } ?>
 																		</td>
 																	</tr>
 																<?php } ?>
@@ -574,15 +580,15 @@
 															</h4>
 														</div>
 														<div id="collapse1Three" class="collapse" data-parent="#accordion" style="">
-															<div class="card-body">
+															<div class="card-body" style="padding:0px !important">
 															<table class="table table-responsive-md mb-0">
 															<thead>
 																<tr style="font-size:10px">
 																	<th>Vacuna</th>
-																	<th>Fecha Vacuna</th>
+																	<th style="width:90px">Fecha Vacuna</th>
 																	<th>Dosis</th>
-																	<th>Fecha Ult Vacuna</th>
-																	<th>Fecha Prox Vacuna</th>
+																	<th style="width:90px">Fecha Ult Vacuna</th>
+																	<th style="width: 90px">Fecha Prox Vacuna</th>
 																	<th>Proxima Vacuna</th>
 																	<th>Lote</th>
 																	<th>Estado</th>
@@ -591,21 +597,23 @@
 															</thead>
 															<tbody>
 																<?php foreach ($vaccinesH as $vaccineh) { ?>
-																	<tr style="font-size:12px">
+																	<tr style="font-size:12px" id="<?php echo $vaccineh->ID_VACUNA_PRO ?>" ide="<?php echo $barber->ID_EMPRESA ?>">
 																		<td><?php echo $vaccineh->NOMBRE_VACUNA?></td>
-																		<td><?php echo $vaccineh->FEC_VACUNA?></td>
+																		<td ><?php echo $vaccineh->FEC_VACUNA?></td>
 																		<td><?php echo $vaccineh->DOSIS?></td>
-																		<td><?php echo $vaccineh->ULTIMA_VACUNA?></td>
-																		<td><?php echo $vaccineh->FECHA_SIG_VACUNA?></td>
+																		<td ><?php echo $vaccineh->ULTIMA_VACUNA?></td>
+																		<td ><?php echo $vaccineh->FECHA_SIG_VACUNA?></td>
 																		<td><?php echo $vaccineh->LOTE?></td>
 																		<td><?php echo $vaccineh->PROXIMA_VACUNA?></td>
 																		<td><?php echo $vaccineh->ESTADO_VACUNA?></td>
 																		<td class="actions">
 																		<?php if($vaccineh->ESTADO_VACUNA=='Pendiente'){?>
-																				<a href="#"><i class="fas fa-check" style="color:green"></i></a>
-																				<a href="#" class="delete-row"><i class="fas fa-times" style="color:red"></i></a>
-																			<?php }else{?>
+																				<a href="#" class="update-vaccine"><i class="fas fa-check" style="color:green"></i></a>
+																				<a href="#" class="delete-row-vaccine"><i class="fas fa-times" style="color:red"></i></a>
+																			<?php }else if($vaccineh->ESTADO_VACUNA=='Realizado'){?>
 																				<i class="fa fa-hand-peace" style="color:green"></i>
+																			<?php }else if($vaccineh->ESTADO_VACUNA=='Cancelado'){?>
+																				<i class="fa fa-thumbs-down" style="color:red"></i>	
 																			<?php } ?>
 																		</td>
 																	</tr>
@@ -624,7 +632,7 @@
 															</h4>
 														</div>
 														<div id="collapse1Four" class="collapse" data-parent="#accordion" style="">
-														<div class="card-body">
+														<div class="card-body" style="padding:0px !important">
 															<table class="table table-responsive-md mb-0">
 															<thead>
 																<tr style="font-size:10px">
@@ -662,24 +670,17 @@
 
 										<div class="p-3">
 
-											<h4 class="mb-3">Update Status</h4>
+											<h4 class="mb-3">Agregar Notas</h4>
 
 											<section class="simple-compose-box mb-3">
 												<form method="get" action="/">
-													<textarea name="message-text" data-plugin-textarea-autosize placeholder="What's on your mind?" rows="1"></textarea>
+													<textarea name="message-text" data-plugin-textarea-autosize placeholder="Ingresa las notas..." rows="1" id="textNote"></textarea>
+													<input type="hidden" id="FECHA_NOTA" value="<?php echo date('Y-m-d'); ?>">
 												</form>
 												<div class="compose-box-footer">
-													<ul class="compose-toolbar">
-														<li>
-															<a href="#"><i class="fas fa-camera"></i></a>
-														</li>
-														<li>
-															<a href="#"><i class="fas fa-map-marker-alt"></i></a>
-														</li>
-													</ul>
 													<ul class="compose-btn">
 														<li>
-															<a href="#" class="btn btn-primary btn-xs">Post</a>
+															<a href="#" id="saveNote" class="btn btn-primary btn-xs">Guardar</a>
 														</li>
 													</ul>
 												</div>
@@ -860,29 +861,20 @@
 									<h2 class="card-title">Anotaciones</h2>
 								</div>
 								<div class="card-body">
-									<div class="col-sm-12 col-xs-12 col-lg-12">
+									<?php foreach ($notes as $note) {?>
+										<div class="col-sm-12 col-xs-12 col-lg-12">
 										<div class="row">
 											<div class="col-sm-9 col-xs-12 col-lg-9 " style="margin:0px !important;padding-left:0px !important">
-												<small class="cal">Creado por: admin </small><b style="font-size:12px"><small>2021-12-19</small></b>
-													<span style="font-size:14px"><p>prueba de las anotaciones solo pa ver como se ve cuado hay mucho texto</p></span>                                                 
+												<small class="cal">Creado por: <?php echo $note->NOM_USER ?> </small><b style="font-size:12px"><small><?php echo $note->FECHA_NOTA ?></small></b>
+													<span style="font-size:14px"><p><?php echo $note->NOTA ?></p></span>                                                 
 											</div>
 											<div class="col-sm-3 col-xs-12 col-lg-3">                                                         
-												<a class="btn btn-info btn-xs btn_width" style="background-color:white;border-color:red;margin-top:50%" title="Borrar" href="patient/deleteCaseHistory?id=572" onclick="return confirm('La nota se eliminara ¿Desea continuar? ');"><i class="fa fa-trash" style="color:red"></i> </a>
+												<a class="btn btn-info btn-xs btn_width" style="background-color:white;border-color:red;margin-top:50%" title="Borrar" href="?controller=patient&method=deleteNote&id=<?php echo $note->ID_NOTA ?>&idm=<?php echo $note->ID_MASCOTA?>" onclick="return confirm('La nota se eliminara ¿Desea continuar? ');"><i class="fa fa-trash" style="color:red"></i> </a>
 											</div>
 										</div>
 									</div>	
 									<hr>
-									<div class="col-sm-12 col-xs-12 col-lg-12">
-										<div class="row">
-											<div class="col-sm-9 col-xs-12 col-lg-9 " style="margin:0px !important;padding-left:0px !important">
-												<small class="cal">Creado por: admin </small><b style="font-size:12px"><small>2021-12-19</small></b>
-													<span style="font-size:14px"><p>Prueba</p></span>                                                 
-											</div>
-											<div class="col-sm-3 col-xs-12 col-lg-3">                                                         
-												<a class="btn btn-info btn-xs btn_width" style="background-color:white;border-color:red;margin-top:50%" title="Borrar" href="patient/deleteCaseHistory?id=572" onclick="return confirm('La nota se eliminara ¿Desea continuar? ');"><i class="fa fa-trash" style="color:red"></i> </a>
-											</div>
-										</div>
-									</div>														
+									<?php }  ?>
 							</div>	
 						</div>   
 						
@@ -1228,6 +1220,121 @@ Muestras remitidas:</textarea> -->
 											</div>
 										</section>
 									</div>
+
+									
+									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Formulario de Registro Consulta</h2>
+											</header>
+											<div class="card-body">
+													<div class="form-row">
+													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+														<strong>Oh que mal!</strong> Aun hay espacios por completar.
+													</div>
+													</div>
+													<input type="hidden" name="ID_PROP" id="ID_PROPE" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESAE" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
+													<input type="hidden" name="HOURC" id="HOURCE" value="<?php echo date('H:s'); ?>">
+													<input type="hidden" id="confirmer" value="0">
+											<div id="immediately">
+													<form action="index.php1" >
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<input type="hidden" value="<?php echo date("Y-m-d"); ?>" id="FECHA_CONSULTA1" name="FECHA_CONSULTA1">
+															<label for="ANTECEDENTES">Antecedentes</label>
+															<textarea class="form-control" rows="3" id="ANTECEDENTES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
+														</div>
+													</div>	
+													<br>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="SINTOMAS">Sintomas</label>
+															<textarea class="form-control" rows="3" id="SINTOMAS" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
+														</div>
+													</div>	
+													<br>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DIAGNOSTICO">Diagnostico</label>
+															<textarea class="form-control" rows="3" id="DIAGNOSTICO" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
+														</div>
+													</div>
+													<br>	
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="OBSERVACIONES">Observaciones</label>
+												<div class="col-lg-12">
+													<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'>
+														<p>FC: <br>
+														FR: <br>
+														Peso (Kg): <br>
+														C.C: <br>
+														Temperatura: <br>
+														Mucosas: <br>
+														Sistema Digestivo: <br>
+														Sistema Respiratorio: <br>
+														Sistema Circulatorio: <br>
+														Sistema Urinario: <br>
+														Sistema Genital: <br>
+														Sistema Nervioso: <br>
+														Sistema Locomotor: <br>
+														Sistema Tegumentario: <br>
+														Muestras remitidas:</p>
+													</div>
+												</div>
+														</div>
+													</div>
+													<br>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="FORMULA">Redaccion de Formula/Notas</label>
+															<textarea class="form-control" rows="3" id="FORMULA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
+														</div>
+													</div>
+													<br>
+													<div class="form-row">
+														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos</label>
+														<div class="form-group">
+														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
+														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
+														<input type="hidden" value="1" id="num">
+													</div>
+													</div>
+													<br>
+													<div class="row">
+														<div class="col-lg-12 pull-right">
+															<table id="tableMedicines" style="width:100%">
+																<tbody>
+																	<tr>
+																		<td style="width:200px"><label for="medicineName">Medicina</label><select name="medicineName" id="medicineName" class="form-control"><option value="Ninguno">Ninguno</option><?php foreach ($products as $product) {?>
+																			<option value="<?php echo $product->NOM_PRO ?>"><?php echo $product->NOM_PRO ?></option>
+																		<?php } ?></select></td>
+																		<td><label for="medicineDosis">Dosis</label><input type="text" name="medicineDosis" id="medicineDosis" class="form-control" placeholder="1cm3"></td>
+																		<td><label for="medicineFrequency">Frecuencia</label><input type="text" name="medicineFrequency" id="medicineFrequency" class="form-control" placeholder="1xdia"></td>
+																		<td><label for="medicineDays">Dias</label><input type="text" name="medicineDays" id="medicineDays" class="form-control" placeholder="x8dias"></td>
+																		<td><label for="medicineInstruction">Instrucción</label><input type="text" name="medicineInstruction" id="medicineInstruction" class="form-control" placeholder=	"Despues de Comer"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												<br><br>
+													</form>			
+											
+												<footer class="card-footer">
+													<div class="row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary modal-confirm" id="editQuery" >Crear</button>
+															<button class="btn btn-default modal-dismiss" >Cancelar</button>
+														</div>
+													</div>
+												</footer>
+											</div>
+										</section>
+									</div>
+
+									
 					<!-- end: page -->
 				</section>
                 <script src="Assets/vendor/common/common.js"></script>
@@ -1273,6 +1380,89 @@ Muestras remitidas:</textarea> -->
 						}
 
 						}).apply(this, [jQuery]);
+				</script>
+				<script>
+					$(document).on('click','.update-barber',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+						let ide= $(element).attr('ide');
+						$.ajax({
+							url:'?controller=barber&method=checkBarber&id='+id+'&ide='+ide,
+							type:'GET',
+							success:function(response){
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Peluqueria Realizada con exito.',
+									type: 'success'
+								});
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);														
+							}
+						});
+					});
+
+					$(document).on('click','.delete-row-barber',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+						let ide= $(element).attr('ide');
+						$.ajax({
+							url:'?controller=barber&method=cancelBarber&id='+id+'&ide='+ide,
+							type:'GET',
+							success:function(response){
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Peluqueria Cancelada con exito.',
+									type: 'success'
+								});
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);														
+							}
+						});
+					});
+
+					$(document).on('click','.delete-row-vaccine',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+						let ide= $(element).attr('ide');
+						$.ajax({
+							url:'?controller=vaccine&method=cancelVaccine&id='+id+'&ide='+ide,
+							type:'GET',
+							success:function(response){
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Vacuna Cancelada con exito.',
+									type: 'success'
+								});
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);														
+							}
+						});
+					});
+
+					$(document).on('click','.update-vaccine',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+						let ide= $(element).attr('ide');
+						$.ajax({
+							url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
+							type:'GET',
+							success:function(response){
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Vacuna Realizada con exito.',
+									type: 'success'
+								});
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);														
+							}
+						});
+					});
+
+					
 				</script>
 				<script>
 					var count = "1";
@@ -1332,4 +1522,146 @@ Muestras remitidas:</textarea> -->
 							$('#schedule').css('display','none');
 						}
 					});
+				</script>
+				<script>
+					$(document).on('click','.modal-edit-query',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+						let ide= $(element).attr('ide');
+						$('#editQuery').click(function(){
+							editQuery(id);
+						}) ;
+
+						
+						// $.ajax({
+						// 	url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
+						// 	type:'GET',
+						// 	success:function(response){
+						// 		new PNotify({
+						// 			title: 'Confirmado!',
+						// 			text: 'Vacuna Realizada con exito.',
+						// 			type: 'success'
+						// 		});
+						// 		setTimeout(() => {
+						// 		location.reload();	
+						// 		}, 2000);														
+						// 	}
+						// });
+					});
+					
+					/* 
+	Edit query
+	*/
+
+	function editQuery(id) {
+		var confirmer;
+			if($("#FECHA_CONSULTA1").val().length < 1) {
+				$('#FECHA_CONSULTA1').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FECHA_CONSULTA1').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ANTECEDENTES").val().length < 1) {
+				$('#ANTECEDENTES').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ANTECEDENTES').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#SINTOMAS").val().length < 1) {
+				$('#SINTOMAS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#SINTOMAS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#DIAGNOSTICO").val().length < 1) {
+				$('#DIAGNOSTICO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#DIAGNOSTICO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#FORMULA").val().length < 1) {
+				$('#FORMULA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FORMULA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineName").val()=='Ninguno') {
+				$('#medicineName').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineName').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineDosis").val().length < 1) {
+				$('#medicineDosis').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineDosis').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineFrequency").val().length < 1) {
+				$('#medicineFrequency').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineFrequency').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineDays").val().length < 1) {
+				$('#medicineDays').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineDays').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#medicineInstruction").val().length < 1) {
+				$('#medicineInstruction').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#medicineInstruction').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			var receta = $('#medicineName').val()+'<br> <b>Dosis:</b> '+$('#medicineDosis').val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency').val()+'<br> <b>Dias:</b> '+$('#medicineDays').val()+'<br> <b>Uso:</b> '+$('#medicineInstruction').val();
+			var num = $('#num').val();
+				for (let index = 1; index < num ; index++) {
+					var restrecet=$('#medicineName'+index).val()+'<br> <b>Dosis:</b> '+$('#medicineDosis'+index).val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency'+index).val()+'<br> <b>Dias:</b> '+$('#medicineDays'+index).val()+'<br> <b>Uso:</b> '+$('#medicineInstruction'+index).val();
+					receta+="-"+restrecet;
+				}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				
+				$.ajax({
+					type: 'POST',
+					url: '?controller=query&method=editQuery1',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id,
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Consulta Editada Exitosamente.', 
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();	
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al Editar la consulta',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+				};
+				
 				</script>

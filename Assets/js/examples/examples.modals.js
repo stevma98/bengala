@@ -156,6 +156,7 @@ Theme Version: 	3.0.0
 						
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crear el propietario',
@@ -242,6 +243,7 @@ Theme Version: 	3.0.0
 						$('#name').html(data['ST_NOM']+" "+data['ST_APE']);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al editar el propietario',
@@ -348,6 +350,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crear el propietario',
@@ -458,6 +461,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crear el propietario',
@@ -525,6 +529,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crear la vacuna',
@@ -579,6 +584,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al editar la vacuna',
@@ -700,7 +706,6 @@ Theme Version: 	3.0.0
 					url: '?controller=vaccine&method=createVaccineAppoinment',
 					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&ULTIMA_VACUNA='+$('#FECHA_ULT_VACUNA').val()+'&ESTADO_VACUNA=Pendiente',
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Cita de Vacuna Creada Exitosamente.',
@@ -712,6 +717,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crea la cita de vacuna',
@@ -764,6 +770,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crea la cita de consulta',
@@ -774,7 +781,54 @@ Theme Version: 	3.0.0
 					});	
 				}
 	});
-	
+
+	/* 
+	Save Note
+	*/
+
+	$(document).on('click', '#saveNote ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			
+			if($("#textNote").val().length < 1) {
+				$('#textNote').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#textNote').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=patient&method=saveNote',
+					data: 'ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_NOTA='+$('#FECHA_NOTA').val()+'&NOTA='+$('#textNote').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Nota Creada Exitosamente.', 
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea la Nota',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
 	/* 
 	Create immediately query
 	*/
@@ -879,6 +933,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crea la consulta',
@@ -889,6 +944,8 @@ Theme Version: 	3.0.0
 					});	
 				}
 	});
+
+	
 
 	/*
 	create Barber Appointment 
@@ -974,6 +1031,7 @@ Theme Version: 	3.0.0
 						}, 2000);
 					},
 					error: function(data){
+						$.magnificPopup.close();
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crea la cita de peluqueria',
