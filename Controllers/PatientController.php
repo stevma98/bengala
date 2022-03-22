@@ -60,6 +60,18 @@ class PatientController
 		}
 	}
 
+	public function uploadArchive()
+	{
+		$ide=$_GET['ide'];
+		$idm=$_GET['idm'];
+		if ($_FILES['file']['type']=='application/pdf') {
+			$root='./Pets/'.$idm."/";
+			$date=date('Y-m-d');
+			$rootc=$root.$date."@".$_FILES['file']['name'];
+			copy($_FILES['file']['tmp_name'],$rootc);
+		}
+	}
+
     public function newPatient()
 	{
 		$data=$this->model->searchOwnerToCreate($_REQUEST['DUENO']);
@@ -87,6 +99,8 @@ class PatientController
 		require 'Views/Scripts.php';
 		$data=$this->model->getById($_GET['id']);
 		$owners=$this->owner->getAll();
+		$ownerss=$this->owner->getAllById($_GET['id']);
+		$ownersc=count($ownerss);
 		$vaccinesI=$this->vaccine->getAllInventory();
 		$vaccinesH=$this->vaccine->getVaccinesByPatient($_GET['id']);
 		$barbery=$this->barber->getBarberByPatient($_GET['id']);
@@ -118,6 +132,7 @@ class PatientController
 		$this->model->deleteNote($_GET['id']);
 		header("Location:?controller=patient&method=profilePatient&id=".$_GET['idm']);
 	}
+
 }
 
 ?>

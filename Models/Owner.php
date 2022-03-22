@@ -24,6 +24,17 @@ class Owner {
         }
     }
 
+    public function getAllById($id)
+    {
+        try {
+            $strSql = "SELECT * from prop_masc pm INNER JOIN propietarios p on pm.ID_PROP=p.ID_PROP WHERE pm.ID_MASCOTA='$id' AND pm.ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA}'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getList()
     {
         try {

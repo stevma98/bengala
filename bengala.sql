@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2022 at 11:51 AM
+-- Generation Time: Mar 22, 2022 at 10:52 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -184,7 +185,7 @@ CREATE TABLE `historial` (
   `ID_HISTORIAL` bigint(20) NOT NULL,
   `FECHA_HISTORIAL` timestamp NOT NULL,
   `USUARIO_HISTORIAL` bigint(20) NOT NULL,
-  `ACCION_HISTORIAL` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `ACCION_HISTORIAL` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `ID_EMPRESA` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -205,7 +206,41 @@ INSERT INTO `historial` (`ID_HISTORIAL`, `FECHA_HISTORIAL`, `USUARIO_HISTORIAL`,
 (10, '2022-03-18 07:02:30', 1110588476, 'Ha programado una consulta consecutivo=6', 900221406),
 (11, '2022-03-18 07:23:30', 1110588476, 'Ha atendido la consulta consecutivo=', 900221406),
 (12, '2022-03-18 07:51:30', 1110588476, 'Ha actualizado la mascota con id=1', 900221406),
-(13, '2022-03-18 07:59:30', 1110588476, 'Ha actualizado la mascota con id=1', 900221406);
+(13, '2022-03-18 07:59:30', 1110588476, 'Ha actualizado la mascota con id=1', 900221406),
+(14, '2022-03-22 20:56:15', 1110588476, 'Ha insertado el propietario con id=15978654', 900221406),
+(15, '2022-03-22 21:39:34', 1110588476, 'Ha Creado la mascota con id=undefined', 900221406),
+(16, '2022-03-22 21:09:39', 1110588476, 'Ha Creado la mascota con id=undefined', 900221406),
+(17, '2022-03-22 22:07:04', 1110588476, 'Ha Creado la mascota con id=undefined', 900221406),
+(18, '2022-03-22 22:04:34', 1110588476, 'Ha actualizado la mascota con id=3', 900221406),
+(19, '2022-03-22 22:32:37', 1110588476, 'Ha actualizado la mascota con id=3', 900221406),
+(20, '2022-03-22 23:00:13', 1110588476, 'Ha Creado la mascota con id=undefined', 900221406),
+(21, '2022-03-22 23:46:14', 1110588476, 'Ha insertado una nota a mascota id=1', 900221406),
+(22, '2022-03-22 23:34:22', 1110588476, 'Ha insertado una nota a mascota id=7', 900221406),
+(23, '2022-03-23 03:24:05', 1110588476, 'Ha creado un consentimiento', 900221406),
+(24, '2022-03-23 03:28:06', 1110588476, 'Ha creado un consentimiento', 900221406);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventario_consentimientos`
+--
+
+CREATE TABLE `inventario_consentimientos` (
+  `ID_CONSEN` int(11) NOT NULL,
+  `NOMBRE_CONSEN` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `TEXTO_CONSEN` longtext COLLATE utf8_spanish_ci NOT NULL,
+  `FECHA_CONSEN` date NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL,
+  `ESTADO_CONSEN` varchar(15) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `inventario_consentimientos`
+--
+
+INSERT INTO `inventario_consentimientos` (`ID_CONSEN`, `NOMBRE_CONSEN`, `TEXTO_CONSEN`, `FECHA_CONSEN`, `ID_EMPRESA`, `ESTADO_CONSEN`) VALUES
+(1, 'asd', 'asd', '2022-03-22', 1110588476, 'Activo'),
+(2, 'prueba', '<p><b>Esto es un aconsentimiento</b></p><p><br></p><ul><li><b>uno dos 3</b></li><li><b>4 5 y seis xd</b></li></ul>', '2022-03-22', 1110588476, 'Activo');
 
 -- --------------------------------------------------------
 
@@ -248,16 +283,22 @@ CREATE TABLE `mascotas` (
   `DUENO` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `TEL_DUENO` bigint(20) NOT NULL,
   `FEC_REG` date NOT NULL,
-  `ESTADO_MASCOTA` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `ESTADO_MASCOTA` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `PESO` int(11) NOT NULL,
+  `DIETA` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `ANORMALIDADES` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `ANAMESIS` varchar(200) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `mascotas`
 --
 
-INSERT INTO `mascotas` (`ID_MASCOTA`, `ID_EMPRESA`, `NOMBRE`, `SEXO`, `FEC_NAC`, `TIPO`, `RAZA`, `COLOR`, `ID_PROP`, `DUENO`, `TEL_DUENO`, `FEC_REG`, `ESTADO_MASCOTA`) VALUES
-(1, 900221406, 'Belle', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Criollo', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo'),
-(2, 830085336, 'Katie', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Siames', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo');
+INSERT INTO `mascotas` (`ID_MASCOTA`, `ID_EMPRESA`, `NOMBRE`, `SEXO`, `FEC_NAC`, `TIPO`, `RAZA`, `COLOR`, `ID_PROP`, `DUENO`, `TEL_DUENO`, `FEC_REG`, `ESTADO_MASCOTA`, `PESO`, `DIETA`, `ANORMALIDADES`, `ANAMESIS`) VALUES
+(1, 900221406, 'Belle', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Criollo', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo', 0, '', '', ''),
+(2, 830085336, 'Katie', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Siames', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo', 0, '', '', ''),
+(3, 900221406, 'Black', 'Macho Castrado', '2021-01-01', 'Canino', 'Criollo', 'Negro', 15978654, 'Laura Alejandra Barragan Cordoba', 3111111111, '2022-03-22', 'Vivo', 2, '12', '', ''),
+(7, 900221406, 'Katie', 'Hembra Esterilizada', '2019-12-30', 'Felino', 'Criollo', 'Blanco', 15978654, 'Laura Alejandra Barragan Cordoba', 3111111111, '2022-03-22', 'Vivo', 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1424,7 +1465,9 @@ CREATE TABLE `notas` (
 --
 
 INSERT INTO `notas` (`ID_NOTA`, `ID_EMPRESA`, `ID_MASCOTA`, `FECHA_NOTA`, `ID_USUARIO`, `NOTA`) VALUES
-(6, 900221406, 1, '2022-03-17', 1110588476, 'si');
+(6, 900221406, 1, '2022-03-17', 1110588476, 'si'),
+(7, 900221406, 1, '2022-03-22', 1110588476, 'que'),
+(8, 900221406, 7, '2022-03-22', 1110588476, '1');
 
 -- --------------------------------------------------------
 
@@ -1529,7 +1572,8 @@ CREATE TABLE `propietarios` (
 INSERT INTO `propietarios` (`ID_PROP`, `ID_EMPRESA`, `TIPO_DOC`, `ST_NOM`, `ND_NOM`, `ST_APE`, `ND_APE`, `DEPARTAMENTO`, `CIUDAD`, `DIRECCION`, `TELEFONO`, `TELEFONO2`, `EMAIL`) VALUES
 (1110588476, 900221406, 'CC', 'Brian', 'Steven', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com'),
 (38254646, 900221406, 'CC', 'Maria', 'Ismelida', 'Martinez', '', '23', '962', 'Calle 103 #100-92', 3138967493, 0, 'maria.isme@hotmail.com'),
-(11105884761, 830085336, 'CC', 'Brianss', 'Stevensss', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com');
+(11105884761, 830085336, 'CC', 'Brianss', 'Stevensss', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com'),
+(15978654, 900221406, 'CC', 'Laura', 'Alejandra', 'Barragan', 'Cordoba', '23', '962', 'Carrera 5 #103-92 Yerbabuena', 3111111111, 0, 'laura@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -1542,8 +1586,17 @@ CREATE TABLE `prop_masc` (
   `ID_MASCOTA` bigint(20) NOT NULL,
   `ID_PROP` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `TIPO_PROP` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `ESTADO_PROP_MASC` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+  `ESTADO_PROP_MASC` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `prop_masc`
+--
+
+INSERT INTO `prop_masc` (`ID_PROP_MASC`, `ID_MASCOTA`, `ID_PROP`, `TIPO_PROP`, `ESTADO_PROP_MASC`, `ID_EMPRESA`) VALUES
+(3, 3, '15978654', '1', 'Activo', 900221406),
+(4, 7, '15978654', '1', 'Activo', 900221406);
 
 -- --------------------------------------------------------
 
@@ -1612,6 +1665,12 @@ ALTER TABLE `empresa`
 --
 ALTER TABLE `historial`
   ADD PRIMARY KEY (`ID_HISTORIAL`);
+
+--
+-- Indexes for table `inventario_consentimientos`
+--
+ALTER TABLE `inventario_consentimientos`
+  ADD PRIMARY KEY (`ID_CONSEN`);
 
 --
 -- Indexes for table `inventario_vacunas`
@@ -1687,7 +1746,13 @@ ALTER TABLE `cronograma`
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `ID_HISTORIAL` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_HISTORIAL` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `inventario_consentimientos`
+--
+ALTER TABLE `inventario_consentimientos`
+  MODIFY `ID_CONSEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `inventario_vacunas`
@@ -1699,13 +1764,13 @@ ALTER TABLE `inventario_vacunas`
 -- AUTO_INCREMENT for table `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `ID_MASCOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_MASCOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `notas`
 --
 ALTER TABLE `notas`
-  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `peluqueria`
@@ -1729,7 +1794,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `prop_masc`
 --
 ALTER TABLE `prop_masc`
-  MODIFY `ID_PROP_MASC` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PROP_MASC` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `vacunas`

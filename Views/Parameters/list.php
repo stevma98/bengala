@@ -25,7 +25,7 @@
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
 										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
-										<h2 class="card-title">Registro Consentimientos</h2>
+										<h2 class="card-title">Registro Cortes</h2>
                                     </header>
                                     
 								<div class="card-body">									
@@ -50,7 +50,7 @@
                                                     <?php foreach($Barbers as $Barber){ ?>
                                                     <tr>
 													<td><?php echo $Barber->NOMBRE; ?></td>
-													<td><?php echo $Barber->FEC_PELUQUERIA; ?></td>
+													<td><?php echo $Barber->FEC_CORTE; ?></td>
 													<td><?php echo $Barber->TIPO_CORTE; ?></td>
 													<td><?php echo $Barber->BANO_MEDICADO; ?></td>
 													<td><?php echo $Barber->CORTE_UNAS; ?></td>

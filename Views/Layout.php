@@ -391,6 +391,37 @@
 				                            </li>
 				                        </ul>
 				                    </li>
+									<li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fas fa-book" aria-hidden="true"></i>
+				                            <span>Consentimientos</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="?controller=consent&method=template">
+				                                    Listar
+				                                </a>
+				                            </li>
+											<li>
+				                                <a class="nav-link" href="?controller=consent&method=models">
+				                                    Modelos
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
+									<li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fas fa-cogs" aria-hidden="true"></i>
+				                            <span>Parametros</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="?controller=barber&method=template">
+				                                    Listar
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fas fa-align-left" aria-hidden="true"></i>

@@ -28,7 +28,7 @@
 							<section class="card">
 								<div class="card-body">
 									<div class="thumb-info mb-3">
-										<img src="Assets/img/!logged-user.jpg" class="rounded img-fluid" alt="John Doe">
+										<img src="Assets/img/hombre.jpg" class="rounded img-fluid" alt="John Doe">
 										<div class="thumb-info-title">
 											<?php foreach($data as $data){?>
 												<span class="thumb-info-inner" id="name"><?php echo $data->ST_NOM." ".$data->ST_APE ?></span>																						
@@ -67,9 +67,9 @@
 												</figure>
 												<span class="title"><?php echo $pet->NOMBRE ?></span>
 												<span class="message truncate"><?php echo $pet->TIPO ?></span>
-											</li>	</a>
+											</li></a>
+											<hr class="dotted short">
 											<?php } ?>
-											
 										</ul>
 									</div>
 								</div>
@@ -136,7 +136,7 @@
 							</section>
 
 						</div>
-						<div class="col-lg-10 col-xl-8">
+						<div class="col-lg-8 col-xl-6">
 
 							<div class="tabs">
 								<ul class="nav nav-tabs tabs-primary">
@@ -174,6 +174,8 @@
 													</ul>
 												</div>
 											</section>
+
+											<!-- Timeline
 
 											<h4 class="mb-3 pt-4">Timeline</h4>
 
@@ -217,7 +219,7 @@
 														</li>
 													</ol>
 												</div>
-											</div>
+											</div> -->
 										</div>
 
 									</div>
@@ -303,21 +305,134 @@
 										</form>
 										<?php } ?>
 									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3">
 
-							
+								</div>
+								
+							</div>   
+						</div>
+						<div class="col-xl-3 col-lg-3">    
+								<div class="card">
+									<div class="card-body">
+									<a class="btn btn-primary btn-block modal-with-form" href="#modalForm">Agregar Mascota </a>
+									</div>																
+								</div>
+						</div>
+					</div>	
+					<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
+											<section class="card">
+												<header class="card-header">
+													<h2 class="card-title">Formulario de Registro</h2>
+												</header>
+												<div class="card-body">
+													<form id="form" enctype="multipart/form-data" method="POST" onsubmit="upload(this);return false">
+														<div class="form-row">
+														<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+															<strong>Oh que mal!</strong> Aun hay espacios por completar.
+														</div>
+															<div class="form-group col-md-6">
+																<label for="NOMBRE">Nombre:</label>
+																<input type="text" class="form-control" id="NOMBRE" name="NOMBRE" placeholder="Nombre" required>
+															</div>
+															<div class="form-group col-md-6 mb-3 mb-lg-0">
+																<label for="SEXO">Sexo:</label>
+																<select name="SEXO" id="SEXO" class="form-control" placeholder="Sexo" required>
+																	<option Selected value="Seleccione...">Seleccione...</option>
+																	<option value="Hembra">Hembra</option>
+																	<option value="Hembra Esterilizada">Hembra Esterelizada</option>
+																	<option value="Macho">Macho</option>
+																	<option value="Macho Castrado">Macho Castrado</option>
+																</select>
+															</div>
+														</div>
+														<div class="form-row">
+															<div class="form-group col-md-6">
+																<label for="TIPO">Tipo:</label>
+																<select name="TIPO" id="TIPO" class="form-control" placeholder="Tipo" required>
+																	<option Selected value="Seleccione...">Seleccione...</option>
+																	<option value="Canino">Canino</option>
+																	<option value="Felino">Felino</option>
+																	<option value="Silvestre">Silvestre</option>
+																	<option value="Otros">Otros</option>
+																</select>
+															</div>
+															<div class="form-group col-md-6 mb-3 mb-lg-0">
+																<label for="RAZA">Raza:</label>
+																<input type="text" name="RAZA" id="RAZA" class="form-control" placeholder="Raza" required>
+															</div>
+														</div>
+														<div class="form-row">
+															<div class="form-group col-md-6">
+																<label for="COLOR">Color:</label>
+																<input type="text" class="form-control" id="COLOR" name="COLOR" placeholder="Color" required>
+															</div>
+															<div class="form-group col-md-6">
+																<label for="FEC_NAC">Fecha Nacimiento:</label>
+																<input type="date" class="form-control" id="FEC_NAC" name="FEC_NAC" placeholder="Fecha Nacimiento" required>
+															</div>
+														</div>
+														<input type="hidden" value="<?php echo $_SESSION['user']->ID_EMPRESA; ?>" id="idEmp">
+														<input type="hidden" value="<?php echo $_GET['id']; ?>" id="DUENO">
+														<br>
+													<div id="ver" class="center" style="margin:0 auto">
+
+													</div>
+														<div class="form-group row">
+													<label class="col-lg-6 center control-label text-lg-right pt-2 ">Cargar Foto Paciente</label>
+													<div class="col-lg-12 center">
+														<div class="fileupload fileupload-new" data-provides="fileupload">
+															<div class="input-append">
+																<div class="uneditable-input">
+																	<span class="fileupload-preview"></span>
+																</div>
+																<span class="btn btn-default btn-file">
+																	<span class="fileupload-exists">Cambiar</span>
+																	<span class="fileupload-new">Seleccione Imagen</span>
+																	<input type="file" id="file" />
+																</span>
+															</div>
+														</div>
+													</div>
+													<input type="hidden" id="confirmer" value="0">
+													
+											
+												</div>
+													</form>
+												</div>
+												<footer class="card-footer">
+													<div class="row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary modal-confirm" id="createPatient">Crear</button>
+															<button class="btn btn-default modal-dismiss" >Cancelar</button>
+														</div>
+													</div>
+												</footer>
+											</section>
+										</div>											
 					<!-- end: page -->
 				</section>
 				<script src="Assets/vendor/common/common.js"></script>
+				<script src="Assets/js/examples/examples.modals.js"></script>
 				<script>
 
 			$('#DEPARTAMENTO').on('change',function(){
 				id = $('#DEPARTAMENTO').val();
 				getCity(id);
 			});
+			
+            $('#file').change(function(){
+              filePreview(this);
+            });
+
+			function filePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(input.files[0]);
+                    reader.onload = function (e) {
+                        $('#ver + img').remove();
+                        $('#ver').after('<img src="'+e.target.result+'" width="150" height="150"/>');
+                    }					
+                }
+            }
 
 			function getCity(id) {
 				console.log(id);

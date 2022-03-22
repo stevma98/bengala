@@ -30,7 +30,7 @@
 								<div class="card-body">
 									<div class="thumb-info mb-3">
                                     <?php foreach($data as $data){?>
-                                    <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" class="rounded img-fluid">
+                                    <img src="Pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $data->NOMBRE ?>.jpg" alt="Foto Paciente" class="rounded img-fluid" >
 										<div class="thumb-info-title">
 												<span class="thumb-info-inner" id="name"><?php echo $data->NOMBRE ?></span>																						
 												<span class="thumb-info-type"><?php echo $data->TIPO ?></span>
@@ -45,128 +45,102 @@
 												<li class="fa fa-info-circle" style="color:blue"> Raza:</li> <?php echo $data->RAZA?><br>
 												<li class="fa fa-info-circle" style="color:green"> Sexo:</li> <?php echo $data->SEXO?><br>
 												<li class="fa fa-info-circle" style="color:orange"> Color:</li> <?php echo $data->COLOR?><br>
-												<li class="fa fa-info-circle" style="color:pink"> Nacimiento:</li> <?php echo $data->FEC_NAC?>
+												<li class="fa fa-info-circle" style="color:pink"> Nacimiento:</li> <?php echo $data->FEC_NAC?><br>
+												<li class="fa fa-info-circle" style="color:purple"> Peso(Kg):</li> <?php echo $data->PESO?><br>
+												<li class="fa fa-info-circle" style="color:#16decd"> Dieta:</li> <?php echo $data->DIETA?><br>
+												<li class="fa fa-info-circle" style="color:#de16de"> Anormalidades:</li> <?php echo $data->ANORMALIDADES?><br>
+												<li class="fa fa-info-circle" style="color:black"> Anamnesis:</li> <?php echo $data->ANAMNESIS?>
 											</ul>
 										</div>
 								</div>
 							</section>
-							<section class="card">
+							<section class="card card-collapsed">
 								<header class="card-header">
 									<div class="card-actions">
 										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
 									</div>
 
 									<h2 class="card-title">
-										<span class="badge badge-primary label-sm font-weight-normal va-middle mr-3">298</span>
-										<span class="va-middle">Friends</span>
+										<span class="badge badge-primary label-sm font-weight-normal va-middle mr-3"><?php echo $ownersc; ?></span>
+										<span class="va-middle">Propietarios</span>
 									</h2>
 								</header>
 								<div class="card-body">
 									<div class="content">
 										<ul class="simple-user-list">
-											<li>
+											<?php foreach ($ownerss as $ownerl) {?>
+												<a href="?controller=owner&method=profileOwner&id=<?php echo $ownerl->ID_PROP ?>" style="color:grey;text-decoration:none">
+												<li>
 												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
+													<img src="Assets/img/hombre.jpg" alt="Joseph Doe Junior" class="rounded-circle" height="50" width="50">
 												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
+												<span class="title"><?php echo $ownerl->ST_NOM." ".$ownerl->ST_APE ?></span>
+												<span class="message truncate">Propietario</span>
+												</a>
 											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joseph Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joseph Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joe Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
-											<li>
-												<figure class="image rounded">
-													<img src="Assets/img/!sample-user.jpg" alt="Joseph Doe Junior" class="rounded-circle">
-												</figure>
-												<span class="title">Joseph Doe Junior</span>
-												<span class="message truncate">Lorem ipsum dolor sit.</span>
-											</li>
+											<hr class="dotted short">
+											<?php } ?>
 										</ul>
-										<hr class="dotted short">
-										<div class="text-right">
-											<a class="text-uppercase text-muted" href="#">(View All)</a>
-										</div>
-									</div>
-								</div>
-								<div class="card-footer">
-									<div class="input-group">
-										<input type="text" class="form-control" name="s" id="s" placeholder="Search...">
-										<span class="input-group-append">
-											<button class="btn btn-default" type="submit"><i class="fas fa-search"></i>
-											</button>
-										</span>
 									</div>
 								</div>
 							</section>
-
-							<section class="card">
+							<?php 
+									$filess= scandir('pets/'.$data->ID_MASCOTA);
+									$countf= count($filess);
+							?>
+							<section class="card card-collapsed">
 								<header class="card-header">
 									<div class="card-actions">
 										<a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-										<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 									</div>
-
-									<h2 class="card-title">Popular Posts</h2>
+									<h2 class="card-title">
+										<span class="badge badge-primary label-sm font-weight-normal va-middle mr-3"><?php echo $countf-3; ?></span>
+										<span class="va-middle">Archivos</span>
+									</h2>
 								</header>
 								<div class="card-body">
-									<ul class="simple-post-list">
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="Assets/img/post-thumb-1.jpg" alt="">
-													</a>
+										<ul class="simple-post-list">
+									<?php
+									for ($i=2; $i < $countf-1 ; $i++) {
+									$name=explode('@',$filess[$i]);
+									?>
+										<a href="pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $filess[$i] ?>" download="pets/<?php echo $data->ID_MASCOTA ?>/<?php echo $filess[$i] ?>" style="color:grey;text-decoration:none">
+											<li>
+												<div class="post-image">
+													<div class="img-thumbnail">
+															<img src="Assets/img/pdf.png" height="50" >
+													</div>
 												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Nullam Vitae Nibh Un Odiosters</a>
-												<div class="post-meta">
-													 Jan 10, 2017
+												<div class="post-info">
+													<?php echo $name[1]; ?>
+													<div class="post-meta">
+														<?php echo "Creado: ".$name[0]; ?>
+													</div>
 												</div>
-											</div>
-										</li>
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="Assets/img/post-thumb-2.jpg" alt="">
-													</a>
+											</li>
+										</a>
+								<?php 
+									}
+								?>
+										</ul>
+									</div>
+								
+
+								<div class="card-footer">
+									Cargar Archivo
+										<div class="fileupload fileupload-new" data-provides="fileupload">
+											<div class="input-append">
+												<div class="uneditable-input">
+													<span class="fileupload-preview"></span>
 												</div>
+												<span class="btn btn-default btn-file">
+												<span class="fileupload-exists">Cambiar</span>
+												<span class="fileupload-new">Seleccionar</span>
+												<input type="file" id="archivetoupload">
+												</span>
+												<a href="#" class="btn btn-default fileupload-exists" id="fileupload">Guardar</a>
 											</div>
-											<div class="post-info">
-												<a href="#">Vitae Nibh Un Odiosters</a>
-												<div class="post-meta">
-													 Jan 10, 2017
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="post-image">
-												<div class="img-thumbnail">
-													<a href="#">
-														<img src="Assets/img/post-thumb-3.jpg" alt="">
-													</a>
-												</div>
-											</div>
-											<div class="post-info">
-												<a href="#">Odiosters Nullam Vitae</a>
-												<div class="post-meta">
-													 Jan 10, 2017
-												</div>
-											</div>
-										</li>
-									</ul>
+										</div>
 								</div>
 							</section>
 
@@ -674,7 +648,7 @@
 
 											<section class="simple-compose-box mb-3">
 												<form method="get" action="/">
-													<textarea name="message-text" data-plugin-textarea-autosize placeholder="Ingresa las notas..." rows="1" id="textNote"></textarea>
+													<textarea name="message-text" data-plugin-textarea-autosize placeholder="Ingresa la nota..." rows="1" id="textNote"></textarea>
 													<input type="hidden" id="FECHA_NOTA" value="<?php echo date('Y-m-d'); ?>">
 												</form>
 												<div class="compose-box-footer">
@@ -685,6 +659,8 @@
 													</ul>
 												</div>
 											</section>
+
+											<!-- Time Line									
 
 											<h4 class="mb-3 pt-4">Timeline</h4>
 
@@ -728,7 +704,8 @@
 														</li>
 													</ol>
 												</div>
-											</div>
+											</div> -->
+											
 										</div>
 
 									</div>
@@ -822,7 +799,7 @@
                                             <hr class="dotted tall">
                                             <h4 class="mb-3">Datos Medicos</h4>
                                             <div class="form-row">
-												<div class="col-md-12">
+												<div class="col-md-6">
                                                     <label for="ESTADO_MASCOTA">Estado:</label>
                                                         <select name="ESTADO_MASCOTA" id="ESTADO_MASCOTA" class="form-control" placeholder="Estado" required>
                                                             <option Selected value="<?php echo $data->ESTADO_MASCOTA?>"><?php echo $data->ESTADO_MASCOTA?></option>
@@ -830,6 +807,28 @@
                                                             <option value="Muerto">Muerto</option>
                                                             <option value="Otro">Otro</option>
                                                         </select>
+												</div>
+												<div class="col-md-6">
+													<label for="PESO">Peso(Kg):</label>
+													<?php $peso=(empty($data->PESO))? '0' : $data->PESO ;?>
+													<input type="number" id="PESO" name="PESO" value="<?php echo $peso ?>" class="form-control">
+												</div>
+											</div>
+											<br>
+											<div class="form-row">
+												<div class="col-md-6">
+													<label for="DIETA">Dieta:</label>
+													<textarea name="DIETA" id="DIETA" rows="3" class="form-control"><?php echo $data->DIETA; ?></textarea>
+												</div>
+												<div class="col-md-6">
+													<label for="ANORMALIDADES">Anormalidades:</label>
+													<textarea name="ANORMALIDADES" id="ANORMALIDADES" rows="3" class="form-control" ><?php echo $data->ANORMALIDADES; ?></textarea>
+												</div>												
+											</div>
+											<div class="form-row">
+												<div class="col-md-12">
+													<label for="ANAMESIS">Anamesis:</label>
+													<textarea name="ANAMESIS" id="ANAMESIS" rows="3" class="form-control"><?php echo $data->ANAMESIS; ?></textarea>
 												</div>
 											</div>
 											<div class="form-row">
@@ -1532,21 +1531,6 @@ Muestras remitidas:</textarea> -->
 							editQuery(id);
 						}) ;
 
-						
-						// $.ajax({
-						// 	url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
-						// 	type:'GET',
-						// 	success:function(response){
-						// 		new PNotify({
-						// 			title: 'Confirmado!',
-						// 			text: 'Vacuna Realizada con exito.',
-						// 			type: 'success'
-						// 		});
-						// 		setTimeout(() => {
-						// 		location.reload();	
-						// 		}, 2000);														
-						// 	}
-						// });
 					});
 					
 					/* 
