@@ -40,6 +40,17 @@ class Owner {
     {
         try {
             $this->pdo->insert('propietarios' , $data);
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha insertado el propietario con id=".$data['ID_PROP'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -76,6 +87,17 @@ class Owner {
             $idEmp=$_SESSION['user']->ID_EMPRESA;
             $strWhere = 'ID_PROP='.$data['ID_PROP'].' AND ID_EMPRESA='.$idEmp.'' ;
             $this->pdo->update('propietarios', $data, $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha actualizado al propietario con id=".$data['ID_PROP'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             $data = json_encode($data);
             echo $data;
         } catch ( PDOException $e) {

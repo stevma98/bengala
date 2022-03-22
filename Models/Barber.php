@@ -16,7 +16,7 @@ class Barber {
     public function getAll()
     {
         try {
-            $strSql = "SELECT * FROM `peluqueria` p inner join mascotas m on m.ID_MASCOTA=p.ID_MASCOTA INNER JOIN inventario_vacunas iv on iv.ID_VACUNA=p.ID_VACUNA";
+            $strSql = "SELECT *,p.ID_MASCOTA as idm FROM `peluqueria` p inner join mascotas m on m.ID_MASCOTA=p.ID_MASCOTA";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -35,19 +35,21 @@ class Barber {
         }
     }
 
-    public function createBarber($data)
-    {
-        try {
-            $this->pdo->insert('peluqueria', $data);
-        } catch ( PDOException $e) {
-            die($e->getMessage());
-        }
-    }
-
     public function createBarberAppointment($data)
     {
         try {
             $this->pdo->insert('peluqueria', $data);
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha creado una peluqueria para mascota id=".$data['ID_MASCOTA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -59,6 +61,17 @@ class Barber {
             $dato=$data['ESTADO_PELUQUERIA'];
             $strWhere = 'ID_PELUQUERIA='.$data['ID_PELUQUERIA'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
             $query=$this->pdo->update('peluqueria', $data , $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha realizado la peluqueria de id=".$data['ID_PELUQUERIA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
@@ -71,6 +84,17 @@ class Barber {
             $dato=$data['ESTADO_PELUQUERIA'];
             $strWhere = 'ID_PELUQUERIA='.$data['ID_PELUQUERIA'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
             $query=$this->pdo->update('peluqueria', $data , $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha Cancelado una peluqueria de id=".$data['ID_PELUQUERIA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
@@ -111,19 +135,4 @@ class Barber {
         }
     }
 
-    public function updateBarber($data){
-        try { 
-            //Ordena un array por su indice
-			ksort($data);
-			//Eliminar indices de un array
-			unset($data['controller'], $data['method']);
-            $strWhere = 'ID_VACUNA='.$data['ID_VACUNA'];
-            $this->pdo->update('peluqueria', $data, $strWhere); 
-            $data = json_encode($data);
-            echo $data;
-        } catch ( PDOException $e) {
-            die($e->getMessage());
-        }
-    }
-    
 }

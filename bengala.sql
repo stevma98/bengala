@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2022 at 11:33 AM
+-- Generation Time: Mar 22, 2022 at 11:51 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -41,8 +41,44 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`identyUser`, `passwordUser`, `NOM_USER`, `ID_EMPRESA`, `PERFIL`, `ESTADO_USER`) VALUES
-('1110588476', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', '', 900221406, 0, '1'),
-('14135258', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', 900221406, 0, '1');
+('1110588476', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', 'Brian', 900221406, 0, '1'),
+('1110588477', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', 'Steven', 830085335, 0, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `consultas`
+--
+
+CREATE TABLE `consultas` (
+  `ID_CONSULTA` int(11) NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL,
+  `ID_MASCOTA` bigint(20) NOT NULL,
+  `ID_PROP` bigint(20) NOT NULL,
+  `CONSECUTIVO_CONSULTA` bigint(20) NOT NULL,
+  `FECHA_CONSULTA` date NOT NULL,
+  `HORA_CONSULTA` varchar(11) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `USUARIO_CONSULTA` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ANTECEDENTES` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `SINTOMAS` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `DIAGNOSTICO` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `OBSERVACIONES` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `FORMULA` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `RECETA` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ESTADO_CONSULTA` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `consultas`
+--
+
+INSERT INTO `consultas` (`ID_CONSULTA`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `CONSECUTIVO_CONSULTA`, `FECHA_CONSULTA`, `HORA_CONSULTA`, `USUARIO_CONSULTA`, `ANTECEDENTES`, `SINTOMAS`, `DIAGNOSTICO`, `OBSERVACIONES`, `FORMULA`, `RECETA`, `ESTADO_CONSULTA`) VALUES
+(18, 900221406, 1, 1110588476, 1, '2022-03-15', '21:38', '1110588476', 'antecedentes', 'sintomas', 'diagnostico', '\n														<p>FC:sd<br>\n														FR:as<br>\n														Peso (Kg):as<br>\n														C.C:asd<br>\n														Temperatura:asd<br>\n														Mucosas:asd<br>\n														Sistema Digestivo:asd<br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'Formula', 'Producto Prueba<br> <b>Dosis:</b> 1cm3<br> <b>Frecuencia:</b> 1xdia<br> <b>Dias:</b> x8dias<br> <b>Uso:</b> despeus de comer-\r\nProducto 2<br> <b>Dosis:</b> 2cm3<br> <b>Frecuencia:</b> 2xdia<br> <b>Dias:</b> x8dias<br> <b>Uso:</b> dormir', 'Realizado'),
+(19, 900221406, 1, 1110588476, 2, '2022-03-16', '20:33', '1110588476', '', '', '', '', '', '', 'Cancelado'),
+(20, 900221406, 1, 1110588476, 3, '2022-03-17', '20:46', '1110588476', 'a', 's', 'd', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 's', 'Producto Prueba<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 'Realizado'),
+(21, 900221406, 1, 1110588476, 4, '2022-03-18', '15:35', '1110588476', '', '', '', 'prueba', '', '', 'Pendiente'),
+(22, 900221406, 1, 1110588476, 5, '2022-03-18', '02:17', '1110588476', 'q', 'w', 'e', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', '2', 'Producto 2<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 'Realizado'),
+(23, 900221406, 1, 1110588476, 6, '2022-03-18', '02:04', '1110588476', 'f', 'd', 'e', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'r', 'Producto Prueba<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4-Producto 2<br> <b>Dosis:</b> 3<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 45<br> <b>Uso:</b> 5', 'Realizado');
 
 -- --------------------------------------------------------
 
@@ -141,6 +177,39 @@ INSERT INTO `empresa` (`ID_EMPRESA`, `DV`, `NOMBRE_EMPRESA`, `DIR_EMPRESA`, `cod
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `historial`
+--
+
+CREATE TABLE `historial` (
+  `ID_HISTORIAL` bigint(20) NOT NULL,
+  `FECHA_HISTORIAL` timestamp NOT NULL,
+  `USUARIO_HISTORIAL` bigint(20) NOT NULL,
+  `ACCION_HISTORIAL` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `historial`
+--
+
+INSERT INTO `historial` (`ID_HISTORIAL`, `FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`, `ID_EMPRESA`) VALUES
+(1, '2022-03-18 06:57:34', 1110588476, 'Ha creado una peluqueria', 0),
+(2, '2022-03-18 06:18:38', 1110588476, 'Ha creado una peluqueria', 900221406),
+(3, '2022-03-18 06:54:40', 1110588476, 'Ha realizado la peluqueria de 6', 900221406),
+(4, '2022-03-18 06:02:41', 1110588476, 'Ha Cancelado una peluqueria de 12', 900221406),
+(5, '2022-03-18 07:26:27', 1110588476, 'Ha programado una vacuna para mascota id=1', 900221406),
+(6, '2022-03-18 07:32:27', 1110588476, 'Ha realizado una vacuna id=', 900221406),
+(7, '2022-03-18 07:09:28', 1110588476, 'Ha creado una peluqueria', 900221406),
+(8, '2022-03-18 07:15:28', 1110588476, 'Ha realizado la peluqueria de id=13', 900221406),
+(9, '2022-03-18 07:08:29', 1110588476, 'Ha programado una consulta con id=5', 900221406),
+(10, '2022-03-18 07:02:30', 1110588476, 'Ha programado una consulta consecutivo=6', 900221406),
+(11, '2022-03-18 07:23:30', 1110588476, 'Ha atendido la consulta consecutivo=', 900221406),
+(12, '2022-03-18 07:51:30', 1110588476, 'Ha actualizado la mascota con id=1', 900221406),
+(13, '2022-03-18 07:59:30', 1110588476, 'Ha actualizado la mascota con id=1', 900221406);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `inventario_vacunas`
 --
 
@@ -156,8 +225,8 @@ CREATE TABLE `inventario_vacunas` (
 --
 
 INSERT INTO `inventario_vacunas` (`ID_VACUNA`, `ID_EMPRESA`, `NOMBRE_VACUNA`, `PRESENTACION`) VALUES
-(5, 0, 'Prueba Vacuna123', 'Gr'),
-(6, 0, 'Funcionando Edit', 'Dosis'),
+(5, 900221406, 'Prueba Vacuna123', 'Gr'),
+(6, 900221406, 'Funcionando Edit', 'Dosis'),
 (7, 0, 'Working', 'Ol');
 
 -- --------------------------------------------------------
@@ -170,7 +239,7 @@ CREATE TABLE `mascotas` (
   `ID_MASCOTA` bigint(20) NOT NULL,
   `ID_EMPRESA` bigint(20) NOT NULL,
   `NOMBRE` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `SEXO` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `SEXO` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `FEC_NAC` date NOT NULL,
   `TIPO` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `RAZA` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -187,13 +256,8 @@ CREATE TABLE `mascotas` (
 --
 
 INSERT INTO `mascotas` (`ID_MASCOTA`, `ID_EMPRESA`, `NOMBRE`, `SEXO`, `FEC_NAC`, `TIPO`, `RAZA`, `COLOR`, `ID_PROP`, `DUENO`, `TEL_DUENO`, `FEC_REG`, `ESTADO_MASCOTA`) VALUES
-(2, 900221406, 'Katie', 'Hembra', '2020-07-13', 'Gato', 'Criollo', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2021-12-14', 'Vivo'),
-(1, 0, 'Belle', 'Hembra', '2021-01-01', 'Gato', 'Criollo', 'Blanco', 38254646, 'Maria Ismelida Martinez ', 3138967493, '2021-12-14', 'Vivo'),
-(3, 0, 'Pelusa', 'Hembra', '2021-01-01', 'Gato', 'Criollo', 'Blanco', 38254646, 'Maria Ismelida Martinez ', 3138967493, '2021-12-14', 'Vivo'),
-(4, 0, 'Juanito', 'Macho', '2021-12-31', 'Gato', 'Criollo', 'Negro', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2021-12-14', 'Vivo'),
-(6, 0, 'Calvo', 'Macho', '2021-01-01', 'Perro', 'Criollo', 'Amarillo', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2021-12-15', 'Vivo'),
-(7, 0, 'Tony', 'Macho', '2019-12-31', 'Perro', 'Criollo', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2021-12-16', 'Vivo'),
-(8, 0, 'Tony1', 'Macho', '2021-04-05', 'Perro', 'Criollo', 'blancooo', 11105884761, 'Brianss Stevensss Beltran Martinez', 3158289950, '2021-12-19', 'Vivo');
+(1, 900221406, 'Belle', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Criollo', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo'),
+(2, 830085336, 'Katie', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Siames', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo');
 
 -- --------------------------------------------------------
 
@@ -1343,6 +1407,28 @@ INSERT INTO `municipios` (`id`, `codigodepartamento_fk`, `codigo`, `nombre`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notas`
+--
+
+CREATE TABLE `notas` (
+  `ID_NOTA` bigint(20) NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL,
+  `ID_MASCOTA` bigint(20) NOT NULL,
+  `FECHA_NOTA` date NOT NULL,
+  `ID_USUARIO` bigint(11) NOT NULL,
+  `NOTA` longtext CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `notas`
+--
+
+INSERT INTO `notas` (`ID_NOTA`, `ID_EMPRESA`, `ID_MASCOTA`, `FECHA_NOTA`, `ID_USUARIO`, `NOTA`) VALUES
+(6, 900221406, 1, '2022-03-17', 1110588476, 'si');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `peluqueria`
 --
 
@@ -1366,7 +1452,12 @@ CREATE TABLE `peluqueria` (
 --
 
 INSERT INTO `peluqueria` (`ID_PELUQUERIA`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `FEC_PELUQUERIA`, `TIPO_CORTE`, `ACCESORIOS`, `CORTE_UNAS`, `BANO_MEDICADO`, `DETALLE`, `PRECIO_PELUQUERIA`, `ESTADO_PELUQUERIA`) VALUES
-(1, 0, 2, '1110588476', '2021-01-31', 'Largo', 'Pañoleta', 'Si', 'Si', 'asd', 40, '');
+(2, 900221406, 1, '1110588476', '2022-03-18', 'Largo', 'Camiseta', 'NO', 'Si', 'prueba\r\n prueba\r\n prueba\r\n prueba\r\n prueba\r\n prueba\r\n prueba\r\n prueba\r\n ', 40000, 'Cancelado'),
+(4, 900221406, 1, '1110588476', '2022-03-23', 'Largo', 'Moño', 'Si', 'Si', 'prueba2\n', 40000, 'Realizado'),
+(5, 900221406, 1, '1110588476', '2022-01-01', 'Largo', 'Moño', 'Si', 'NO', 'pruebas 23', 50000, 'Realizado'),
+(6, 900221406, 1, '1110588476', '2022-03-16', 'Bajo', 'Camiseta', 'Si', 'NO', 'sdasd', 40, 'Realizado'),
+(12, 900221406, 1, '1110588476', '2022-03-17', 'Medio', 'Moño', 'Si', 'Si', 'aas', 1, 'Cancelado'),
+(13, 900221406, 1, '1110588476', '2022-03-10', 'Medio', 'Camiseta', 'Si', 'NO', '12', 40, 'Realizado');
 
 -- --------------------------------------------------------
 
@@ -1376,9 +1467,10 @@ INSERT INTO `peluqueria` (`ID_PELUQUERIA`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`
 
 CREATE TABLE `procedimientos` (
   `ID_PROCED` bigint(20) NOT NULL,
+  `ID_PROC_CVP` bigint(20) NOT NULL,
   `ID_EMPRESA` bigint(20) NOT NULL,
   `ID_MASCOTA` bigint(20) NOT NULL,
-  `ID_PRO` bigint(20) NOT NULL,
+  `ID_PROP` bigint(20) NOT NULL,
   `DETALLE` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `FEC_PROCED` date NOT NULL,
   `TIPO_PROCED` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
@@ -1393,15 +1485,20 @@ CREATE TABLE `procedimientos` (
 CREATE TABLE `productos` (
   `ID_PRO` bigint(20) NOT NULL,
   `ID_EMPRESA` bigint(20) NOT NULL,
+  `ID_PROD_INV` int(11) NOT NULL,
   `NOM_PRO` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `TIPO_PRO` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `PRESENTACION` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `ID_GRUPO` bigint(20) NOT NULL,
-  `PRINCIPIO` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `FORMA` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `FEC_VEN` date NOT NULL,
   `CANTIDAD` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `productos`
+--
+
+INSERT INTO `productos` (`ID_PRO`, `ID_EMPRESA`, `ID_PROD_INV`, `NOM_PRO`, `ID_GRUPO`, `FEC_VEN`, `CANTIDAD`) VALUES
+(1, 900221406, 1, 'Producto Prueba', 1, '2022-03-17', 2),
+(2, 900221406, 2, 'Producto 2', 1, '2022-03-15', 3);
 
 -- --------------------------------------------------------
 
@@ -1430,9 +1527,9 @@ CREATE TABLE `propietarios` (
 --
 
 INSERT INTO `propietarios` (`ID_PROP`, `ID_EMPRESA`, `TIPO_DOC`, `ST_NOM`, `ND_NOM`, `ST_APE`, `ND_APE`, `DEPARTAMENTO`, `CIUDAD`, `DIRECCION`, `TELEFONO`, `TELEFONO2`, `EMAIL`) VALUES
-(1110588476, 0, 'CC', 'Brian', 'Steven', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com'),
-(38254646, 0, 'CC', 'Maria', 'Ismelida', 'Martinez', '', '23', '962', 'Calle 103 #100-92', 3138967493, 0, 'maria.isme@hotmail.com'),
-(11105884761, 0, 'CC', 'Brianss', 'Stevensss', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com');
+(1110588476, 900221406, 'CC', 'Brian', 'Steven', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com'),
+(38254646, 900221406, 'CC', 'Maria', 'Ismelida', 'Martinez', '', '23', '962', 'Calle 103 #100-92', 3138967493, 0, 'maria.isme@hotmail.com'),
+(11105884761, 830085336, 'CC', 'Brianss', 'Stevensss', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -1477,9 +1574,10 @@ CREATE TABLE `vacunas` (
 --
 
 INSERT INTO `vacunas` (`ID_VACUNA_PRO`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `FEC_VACUNA`, `ID_VACUNA`, `PRESENTACION`, `LOTE`, `VENCIMIENTO`, `DOSIS`, `ULTIMA_VACUNA`, `FECHA_SIG_VACUNA`, `PROXIMA_VACUNA`, `DETALLE`, `ESTADO_VACUNA`) VALUES
-(1, 0, 2, 1110588476, '2021-01-01', '5', 'Gr', 123, '2021-12-31', 159, '0000-00-00', '2026-05-04', '7', 'test', 'No Aplicada'),
-(2, 0, 1, 38254646, '2021-12-31', '6', 'Dosis', 59, '2021-01-01', 263, '0000-00-00', '2021-01-01', '7', '123', 'Aplicada'),
-(3, 0, 4, 1110588476, '2021-12-01', '5', 'Gr', 123, '2021-01-01', 32, '0000-00-00', '2021-01-01', 'Working', 'qwe', 'No Aplicada');
+(11, 900221406, 1, 1110588476, '2022-12-31', '6', 'Dosis', 123, '2022-01-01', 11, '2022-01-01', '2022-12-31', 'Prueba Vacuna123', '123', 'Realizado'),
+(13, 900221406, 1, 1110588476, '2022-12-31', '6', 'Dosis', 123, '2022-01-01', 456, '2022-01-01', '2022-12-31', 'Prueba Vacuna123', 'asdasd', 'Cancelado'),
+(12, 900221406, 1, 1110588476, '2022-12-31', '5', 'Gr', 123, '2022-02-01', 456, '2022-01-01', '2022-12-31', 'Prueba Vacuna123', 'prueba21\n', 'Realizado'),
+(14, 900221406, 1, 1110588476, '2022-03-20', '5', 'Gr', 123, '2022-03-07', 5, '2022-03-14', '2022-03-24', 'Funcionando Edit', 'eqewqe', 'Realizado');
 
 --
 -- Indexes for dumped tables
@@ -1490,6 +1588,12 @@ INSERT INTO `vacunas` (`ID_VACUNA_PRO`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`identyUser`);
+
+--
+-- Indexes for table `consultas`
+--
+ALTER TABLE `consultas`
+  ADD PRIMARY KEY (`ID_CONSULTA`);
 
 --
 -- Indexes for table `cronograma`
@@ -1504,6 +1608,12 @@ ALTER TABLE `empresa`
   ADD PRIMARY KEY (`ID_EMPRESA`);
 
 --
+-- Indexes for table `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`ID_HISTORIAL`);
+
+--
 -- Indexes for table `inventario_vacunas`
 --
 ALTER TABLE `inventario_vacunas`
@@ -1514,6 +1624,12 @@ ALTER TABLE `inventario_vacunas`
 --
 ALTER TABLE `mascotas`
   ADD PRIMARY KEY (`ID_MASCOTA`);
+
+--
+-- Indexes for table `notas`
+--
+ALTER TABLE `notas`
+  ADD PRIMARY KEY (`ID_NOTA`);
 
 --
 -- Indexes for table `peluqueria`
@@ -1556,10 +1672,22 @@ ALTER TABLE `vacunas`
 --
 
 --
+-- AUTO_INCREMENT for table `consultas`
+--
+ALTER TABLE `consultas`
+  MODIFY `ID_CONSULTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
 -- AUTO_INCREMENT for table `cronograma`
 --
 ALTER TABLE `cronograma`
   MODIFY `ID_CRONO` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `ID_HISTORIAL` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `inventario_vacunas`
@@ -1571,13 +1699,19 @@ ALTER TABLE `inventario_vacunas`
 -- AUTO_INCREMENT for table `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `ID_MASCOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_MASCOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `notas`
+--
+ALTER TABLE `notas`
+  MODIFY `ID_NOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `peluqueria`
 --
 ALTER TABLE `peluqueria`
-  MODIFY `ID_PELUQUERIA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_PELUQUERIA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `procedimientos`
@@ -1589,7 +1723,7 @@ ALTER TABLE `procedimientos`
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `ID_PRO` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PRO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `prop_masc`
@@ -1601,7 +1735,7 @@ ALTER TABLE `prop_masc`
 -- AUTO_INCREMENT for table `vacunas`
 --
 ALTER TABLE `vacunas`
-  MODIFY `ID_VACUNA_PRO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_VACUNA_PRO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

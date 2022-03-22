@@ -35,33 +35,29 @@
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
 												<tr>
-													<th>No</th>
 													<th>Paciente</th>
-													<th>Fecha Vacuna</th>
-													<th>Vacuna</th>
-													<th>Dosis</th>
-													<th>Lote</th>
-													<th>Proxima</th>
-													<th>Proxima Vacuna</th>
-													<th>Vencimiento</th>
-													<th>Detalle</th>
+													<th>Fecha Corte</th>
+													<th>Largo Corte</th>
+													<th>Medicado</th>
+													<th>Corte de Uñas</th>
+													<th>Accesorios</th>
+													<th>Observaciones</th>
+													<th>Estado</th>
 													<th>Opciones</th>
 												</tr>
 											</thead>
 											<tbody>
                                                     <?php foreach($Barbers as $Barber){ ?>
                                                     <tr>
-													<td><?php echo $Barber->ID_VACUNA_PRO; ?></td>
 													<td><?php echo $Barber->NOMBRE; ?></td>
-													<td><?php echo $Barber->FEC_VACUNA; ?></td>
-													<td><?php echo $Barber->NOMBRE_VACUNA; ?></td>
-													<td><?php echo $Barber->DOSIS." ".$Vaccine->PRESENTACION; ?></td>
-													<td><?php echo $Barber->LOTE; ?></td>
-													<td><?php echo $Barber->FECHA_SIG_VACUNA; ?></td>
-													<td><?php echo $Barber->PROXIMA_VACUNA; ?></td>
-													<td><?php echo $Barber->VENCIMIENTO; ?></td>
+													<td><?php echo $Barber->FEC_CORTE; ?></td>
+													<td><?php echo $Barber->TIPO_CORTE; ?></td>
+													<td><?php echo $Barber->BANO_MEDICADO; ?></td>
+													<td><?php echo $Barber->CORTE_UNAS; ?></td>
+													<td><?php echo $Barber->ACCESORIOS; ?></td>
 													<td><?php echo $Barber->DETALLE; ?></td>
-													<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a></td>
+													<td><?php echo $Barber->ESTADO_PELUQUERIA; ?></td>
+													<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Barber->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>

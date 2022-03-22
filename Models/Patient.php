@@ -88,6 +88,17 @@ class Patient {
 			unset($data['controller'], $data['method']);
             $strWhere = 'ID_MASCOTA='.$data['ID_MASCOTA'];
             $this->pdo->update('mascotas', $data, $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha actualizado la mascota con id=".$data['ID_MASCOTA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -139,6 +150,17 @@ class Patient {
         $_REQUEST += ['ID_USUARIO'=> $_SESSION['user']->identyUser];
         try {
             $this->pdo->insert('notas' , $_REQUEST);
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha insertado una nota a mascota id=".$_REQUEST['ID_MASCOTA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

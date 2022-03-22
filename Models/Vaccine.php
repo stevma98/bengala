@@ -39,6 +39,17 @@ class Vaccine {
     {
         try {
             $this->pdo->insert('inventario_vacunas', $data);
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha creado una vacuna de id=".$data['ID_VACUNA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -48,6 +59,17 @@ class Vaccine {
     {
         try {
             $this->pdo->insert('vacunas', $data);
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha programado una vacuna para mascota id=".$data['ID_MASCOTA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -96,6 +118,17 @@ class Vaccine {
 			unset($data['controller'], $data['method']);
             $strWhere = 'ID_VACUNA='.$data['ID_VACUNA'];
             $this->pdo->update('inventario_vacunas', $data, $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha actualizado una vacuna id=".$data['ID_VACUNA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             $data = json_encode($data);
             echo $data;
         } catch ( PDOException $e) {
@@ -109,6 +142,17 @@ class Vaccine {
             $dato=$data['ESTADO_VACUNA'];
             $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
             $query=$this->pdo->update('vacunas', $data , $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha realizado una vacuna id=".$data['ID_VACUNA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
@@ -121,6 +165,17 @@ class Vaccine {
             $dato=$data['ESTADO_VACUNA'];
             $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
             $query=$this->pdo->update('vacunas', $data , $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha cancelado una vacuna id=".$data['ID_VACUNA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());

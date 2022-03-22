@@ -17,6 +17,17 @@ class Query {
     {
         try {
             $this->pdo->insert('consultas', $data);
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha programado una consulta consecutivo=".$data['CONSECUTIVO_CONSULTA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -65,6 +76,17 @@ class Query {
             
             $strWhere = 'ID_EMPRESA='.$data['ID_EMPRESA']." AND CONSECUTIVO_CONSULTA=".$id;
             $query=$this->pdo->update('consultas', $data, $strWhere); 
+            $date=date('Y-m-d H:s:i');
+            $user=$_SESSION['user']->identyUser;
+            $action="Ha atendido la consulta consecutivo=".$data['CONSECUTIVO_CONSULTA'];
+            $ide=$_SESSION['user']->ID_EMPRESA;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $user,
+                ':actioon' => $action,
+                ':ide' => $ide
+            ]);
             return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
