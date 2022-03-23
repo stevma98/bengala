@@ -14,8 +14,8 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Layouts</span></li>
-								<li><span>Default</span></li>
+								<li><span>Vacunas</span></li>
+								<li><span>Listar</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
@@ -108,7 +108,6 @@
                                                             </select>
 														</div>
 													</div>
-													<input type="text">
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="ID_VACUNA">Vacuna</label>

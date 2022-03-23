@@ -14,8 +14,8 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Layouts</span></li>
-								<li><span>Default</span></li>
+								<li><span>Parametros</span></li>
+								<li><span>Listar</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>

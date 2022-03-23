@@ -140,8 +140,9 @@ class Vaccine {
     {
         try {
             $dato=$data['ESTADO_VACUNA'];
-            $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
-            $query=$this->pdo->update('vacunas', $data , $strWhere); 
+            unset($data['ID_EMPRESA']);
+            $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$_SESSION['user']->ID_EMPRESA;
+            $this->pdo->update('vacunas', $data , $strWhere); 
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
             $action="Ha realizado una vacuna id=".$data['ID_VACUNA'];
@@ -153,7 +154,6 @@ class Vaccine {
                 ':actioon' => $action,
                 ':ide' => $ide
             ]);
-            return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -163,7 +163,8 @@ class Vaccine {
     {
         try {
             $dato=$data['ESTADO_VACUNA'];
-            $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
+            unset($data['ID_EMPRESA']);
+            $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$_SESSION['user']->ID_EMPRESA;
             $query=$this->pdo->update('vacunas', $data , $strWhere); 
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;

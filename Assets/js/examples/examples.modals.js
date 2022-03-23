@@ -389,7 +389,75 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=consent&method=createConsent',
-					data: 'NOMBRE_CONSEN='+$('#NOMBRE_CONSEN').val()+'&TEXTO_CONSEN='+$('#OBSERVACIONES').html()+'&ID_EMPRESA='+$('#ID_EMPRESA').val(),
+					data: 'NOMBRE_CONSEN='+$('#NOMBRE_CONSEN').val()+'&TEXTO_CONSEN='+$('#OBSERVACIONES').html(),
+					success: function(data){
+						console.log(data);
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Consentimiento Creado Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear el consentimiento',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/* 
+	create consent indirect
+	*/
+	$(document).on('click', '#createConsentIndirect', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#ID_MASCOTA").val()=='Seleccione...') {
+				$('#ID_MASCOTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#ID_MASCOTA').css('border','1px solid green');
+			}		
+			if($("#ID_PROP").val()=='Seleccione...') {
+				$('#ID_PROP').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#ID_PROP').css('border','1px solid green');
+			}		
+			if($("#TIPO_CONSEN").val().length < 1) {
+				$('#TIPO_CONSEN').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#TIPO_CONSEN').css('border','1px solid green');
+			}		
+			if($("#OBSERVACIONES").html().length < 1) {
+				$('#OBSERVACIONES').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#OBSERVACIONES').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=consent&method=createConsentIndirect',
+					data: 'TIPO_CONSEN='+$('#TIPO_CONSEN').val()+'&TEXTO_CONSEN='+$('#OBSERVACIONES').html()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_PROP='+$('#ID_PROP').val(),
 					success: function(data){
 						new PNotify({
 							title: 'Confirmado!',

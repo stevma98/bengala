@@ -5,6 +5,7 @@ require 'Models/Owner.php';
 require 'Models/Vaccine.php';
 require 'Models/Barber.php';
 require 'Models/Query.php';
+require 'Models/Consent.php';
 require 'vendor/autoload.php';
 
 /**
@@ -23,6 +24,7 @@ class PatientController
 		$this->vaccine = new Vaccine;
 		$this->barber = new Barber;
 		$this->query = new Query;
+		$this->consent = new Consent;
 	}
 	
 	public function uploadPhoto()
@@ -107,6 +109,8 @@ class PatientController
 		$products=$this->model->getProducts();
 		$queries=$this->query->searchQuerysById($_GET['id']);
 		$notes=$this->model->getNotesById($_GET['id']);
+		$consents1=$this->consent->getAll();
+		$consents=$this->consent->getAllById($_GET['id']);
 		$birthday= new DateTime($data[0]->FEC_NAC);
 		$today=new DateTime();
 		$age = $today->diff($birthday);

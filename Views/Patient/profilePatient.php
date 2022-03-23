@@ -611,24 +611,19 @@
 															<thead>
 																<tr style="font-size:10px">
 																	<th>N° Documento</th>
+																	<th>Nombre</th>
 																	<th>Fecha Creado</th>
-																	<th>Doctor</th>
 																	<th>Acciones</th>
 																</tr>
 															</thead>
 															<tbody>
-																<?php foreach ($vaccinesH as $vaccineh) { ?>
+																<?php foreach ($consents as $consent) { ?>
 																	<tr style="font-size:12px">
-																		<td><?php echo $vaccineh->NOMBRE_VACUNA?></td>
-																		<td><?php echo $vaccineh->FEC_VACUNA?></td>
-																		<td><?php echo $vaccineh->DOSIS?></td>
+																		<td><?php echo $consent->ID_CONSENTIMIENTO?></td>
+																		<td><?php echo $consent->NOMBRE_CONSEN?></td>
+																		<td><?php echo $consent->FECHA_CONSENTIMIENTO?></td>
 																		<td class="actions">
-																		<?php if($vaccineh->ESTADO_VACUNA=='Pendiente'){?>
-																				<a href="#"><i class="fas fa-check" style="color:green"></i></a>
-																				<a href="#" class="delete-row"><i class="fas fa-times" style="color:red"></i></a>
-																			<?php }else{?>
-																				<i class="fa fa-hand-peace" style="color:green"></i>
-																			<?php } ?>
+																		<a class="btn btn-success" style="color:white"><i class="fas fa-print"></i> Imprimir</a>
 																		</td>
 																	</tr>
 																<?php } ?>
@@ -848,7 +843,7 @@
 								<div class="card-body">
 								<button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown">Nuevo </button>
 									<div class="dropdown-menu" role="menu" style="min-width:90% !important">
-										<a class="dropdown-item text-1">Consentimiento</a>
+									<a class="modal-with-form dropdown-item text-1" href="#modalForm6">Consentimiento</a>
 										<a class="modal-with-form dropdown-item text-1" href="#modalForm3">Consulta</a>
 										<a class="modal-with-form dropdown-item text-1" href="#modalForm2">Peluqueria</a>
 										<a class="modal-with-form dropdown-item text-1" href="#modalForm1">Vacuna</a>
@@ -871,10 +866,10 @@
 												<a class="btn btn-info btn-xs btn_width" style="background-color:white;border-color:red;margin-top:50%" title="Borrar" href="?controller=patient&method=deleteNote&id=<?php echo $note->ID_NOTA ?>&idm=<?php echo $note->ID_MASCOTA?>" onclick="return confirm('La nota se eliminara ¿Desea continuar? ');"><i class="fa fa-trash" style="color:red"></i> </a>
 											</div>
 										</div>
-									</div>	
+										</div>	
 									<hr>
 									<?php }  ?>
-							</div>	
+								</div>	
 						</div>   
 						
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
@@ -1333,6 +1328,53 @@ Muestras remitidas:</textarea> -->
 										</section>
 									</div>
 
+									<!-- Modal Form -->
+									<div id="modalForm6" class="modal-block modal-block-primary mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Formulario de asignacion Consentimiento</h2>
+											</header>
+											<div class="card-body">
+												<form>
+													<div class="form-row">
+													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+														<strong>Oh que mal!</strong> Aun hay espacios por completar.
+													</div>
+													</div>
+													<input type="hidden" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA; ?>">
+													<input type="hidden" id="ID_PROP" value="<?php echo $data->ID_PROP; ?>">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12 mb-6 mb-lg-0">
+                                                            <label for="TIPO_CONSEN">Consentimiento:</label>
+                                                            <select name="TIPO_CONSEN" id="TIPO_CONSEN" class="form-control">
+                                                                <option value="Seleccione...">Seleccione...</option>
+                                                                <?php foreach ($consents1 as $consent) {?>
+                                                                    <option value="<?php echo $consent->ID_CONSEN ?>"><?php echo $consent->NOMBRE_CONSEN ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento</label>
+															<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'></div>
+														</div>
+																</div>													
+												</form>
+											</div>
+											<input type="hidden" id="confirmer" value="0">
+											<footer class="card-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm" id="createConsentIndirect" >Crear</button>
+														<button class="btn btn-default modal-dismiss" >Cancelar</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+
 									
 					<!-- end: page -->
 				</section>
@@ -1355,6 +1397,18 @@ Muestras remitidas:</textarea> -->
 							}					
 						}
 					}
+					$(document).on('change','#TIPO_CONSEN',function(){
+						let id = $('#TIPO_CONSEN').val();
+                        $.ajax({
+							type: 'POST',
+							url: '?controller=consent&method=getDataConsentText',
+							data: 'ID_CONSEN='+id,
+							success:function(response){
+                                var data = $.parseJSON(response);
+                                $('#OBSERVACIONES').html(data[0]['TEXTO_CONSEN']);
+							}
+						});
+					});
 				</script>
 				<script>
 					(function($) {
@@ -1449,6 +1503,7 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
+								console.log(response);
 								new PNotify({
 									title: 'Confirmado!',
 									text: 'Vacuna Realizada con exito.',

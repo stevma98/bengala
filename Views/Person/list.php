@@ -25,7 +25,32 @@
 							<section class="card">
 								<div class="card-body">
 									<div class="row">
-										
+										<div class="col-lg-3 mb-3">
+											<h3><b>Comunicados</b></h3>
+											<img src="Assets/img/1.jpg" style="max-width:100%">
+										</div>
+										<div class="col-lg-1 mb-1"></div>
+										<div class="col-lg-7 mb-7">
+											<div class="row">
+												<div class="col-lg-12 mb-12">
+													<label for="FAST_SEARCH"><li class="fas fa-search"></li> Busqueda Rapida</label>
+													<select name="FAST_SEARCH" id="FAST_SEARCH" class="form-control">
+														<option value="">Seleccione...</option>
+													</select>
+												</div>
+											</div>
+												<br><br>
+											<div class="row">
+												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+											</div>
+											<div class="row">
+												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+											</div>
+										</div>
 									</div>
 								</div>
 							</section>

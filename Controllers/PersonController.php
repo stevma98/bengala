@@ -33,15 +33,6 @@ class PersonController
 	{
 		require 'Views/Layout.php';
 				require 'Views/Scripts.php';
-				// $dataClients = $this->client->getAll();
-				// $limitClients = $this->client->getAllFive();
-				// $totalClients = count($dataClients);
-				// $dataGaranties = $this->garanty->getAll();
-				// $limitGaranties = $this->garanty->getAllFive();
-				// $totalGaranties = count($dataGaranties);
-				// $dataPersons = $this->model->getAll();
-				// $limitPersons = $this->model->getAllFive();
-				// $totalPersons = count($dataPersons);
 				require 'Views/Person/list.php';
 	}
 

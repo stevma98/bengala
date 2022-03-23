@@ -6,7 +6,7 @@
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Registro Cortes</h2>
+					<h2>Lista Registro Consentimientos</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -15,8 +15,8 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Layouts</span></li>
-								<li><span>Default</span></li>
+								<li><span>Consentimientos</span></li>
+								<li><span>Modelos</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
@@ -26,14 +26,16 @@
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
 										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
-										<h2 class="card-title">Registro Cortes</h2>
+										<h2 class="card-title">Registro Consentimiento</h2>
                                     </header>
                                     
 								<div class="card-body">									
 									<!-- Modal Form -->
 									
 									<div class="card-body">
-										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
+										<!-- <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
+											 -->
+											 <table class="table table-bordered table-striped mb-0">
 											<thead>
 												<tr>
 													<th style="width:75%">Nombre</th>
@@ -46,7 +48,7 @@
                                                 <tr id="<?php echo $consent->ID_CONSEN ?>" ide="<?php echo $consent->ID_EMPRESA ?>">
                                                     <td><?php echo $consent->NOMBRE_CONSEN ?></td>
                                                     <td><?php echo $consent->FECHA_CONSEN ?></td>
-                                                    <td class="actions"><a class="modal-with-form btn btn-primary modal-edit-consent" href="#modalForm4" style="color:white"><i class="fas fa-pen"></i> Editar</a></td>
+                                                    <td class="actions"><a class="modal-with-form btn btn-primary modal-edit-consent" href="#modalForm4" style="color:white"><i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger inactivate-consent" href="#" style="color:white"><i class="fas fa-times"></i> Eliminar</a></td>
                                                 </tr>
                                             <?php } ?>
 											</tbody>
@@ -114,7 +116,7 @@
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-                                                    <input type="hidden" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->identyUser; ?>">
+													<input type="text" id="ID_CONSEN">
 														<div class="form-group col-md-12 mb-3 mb-lg-0">
 															<label for="NOMBRE_CONSEN">Nombre:</label>
                                                             <input type="text" name="NOMBRE_CONSEN" id="NOMBRE_CONSEN" class="form-control">
@@ -133,7 +135,7 @@
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createConsent" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="editConsent1" >Editar</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -255,110 +257,28 @@
 							data: 'ID_CONSEN='+id,
 							success:function(response){
                                 var data = $.parseJSON(response);
+								$('#ID_CONSEN').val(data[0]['ID_CONSEN']);
                                 $('#NOMBRE_CONSEN').val(data[0]['NOMBRE_CONSEN']);
                                 $('#OBSERVACIONES').html(data[0]['TEXTO_CONSEN']);
 							}
 						});
 					});
-					
-					/* 
-	Edit query
-	*/
-
-	function editQuery(id) {
-		var confirmer;
-			if($("#FECHA_CONSULTA1").val().length < 1) {
-				$('#FECHA_CONSULTA1').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#FECHA_CONSULTA1').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#ANTECEDENTES").val().length < 1) {
-				$('#ANTECEDENTES').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#ANTECEDENTES').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			} 
-			if($("#SINTOMAS").val().length < 1) {
-				$('#SINTOMAS').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#SINTOMAS').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			} 
-			if($("#DIAGNOSTICO").val().length < 1) {
-				$('#DIAGNOSTICO').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#DIAGNOSTICO').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#FORMULA").val().length < 1) {
-				$('#FORMULA').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#FORMULA').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#medicineName").val()=='Ninguno') {
-				$('#medicineName').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#medicineName').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#medicineDosis").val().length < 1) {
-				$('#medicineDosis').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#medicineDosis').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#medicineFrequency").val().length < 1) {
-				$('#medicineFrequency').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#medicineFrequency').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#medicineDays").val().length < 1) {
-				$('#medicineDays').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#medicineDays').css('border','1px solid green');
-				$('#alertif').css('display','none');
-			}
-			if($("#medicineInstruction").val().length < 1) {
-				$('#medicineInstruction').css('border','1px solid red');
-				$('#alertif').css('display','block');
-			}else{
-				$('#medicineInstruction').css('border','1px solid green');
-				$('#alertif').css('display','none');
-				$('#confirmer').val("1");
-			}
-			var receta = $('#medicineName').val()+'<br> <b>Dosis:</b> '+$('#medicineDosis').val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency').val()+'<br> <b>Dias:</b> '+$('#medicineDays').val()+'<br> <b>Uso:</b> '+$('#medicineInstruction').val();
-			var num = $('#num').val();
-				for (let index = 1; index < num ; index++) {
-					var restrecet=$('#medicineName'+index).val()+'<br> <b>Dosis:</b> '+$('#medicineDosis'+index).val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency'+index).val()+'<br> <b>Dias:</b> '+$('#medicineDays'+index).val()+'<br> <b>Uso:</b> '+$('#medicineInstruction'+index).val();
-					receta+="-"+restrecet;
-				}
-			confirmer=$('#confirmer').val();
-			if (confirmer=='1') {
 				
-				$.ajax({
-					type: 'POST',
-					url: '?controller=query&method=editQuery1',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id,
-					success: function(data){
+				$(document).on('click','.inactivate-consent',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+						let ide= $(element).attr('ide');
+                        $.ajax({
+							type: 'POST',
+							url: '?controller=consent&method=inactiveConsent',
+							data: 'ID_CONSEN='+id,
+							success: function(data){
 						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
-							text: 'Consulta Editada Exitosamente.', 
+							text: 'Consentimiento Desactivado Exitosamente.', 
 							type: 'success'
 						});
-						$.magnificPopup.close();
 						setTimeout(() => {
 						location.reload();	
 						}, 2000);
@@ -367,13 +287,58 @@
 						$.magnificPopup.close();	
 						new PNotify({
 							title: 'Rechazado!',
-							text: 'Hubo un error al Editar la consulta',
+							text: 'Hubo un error al desactivar el consentimiento',
+							type: 'error',
+							shadow: true
+						});
+					}
+						});
+					});
+
+					        	/* 
+	create consent indirect
+	*/
+	$(document).on('click', '#editConsent1', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#OBSERVACIONES").html().length < 1) {
+				$('#OBSERVACIONES').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#OBSERVACIONES').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=consent&method=editConsent1',
+					data: 'TEXTO_CONSEN='+$('#OBSERVACIONES').html()+'&ID_CONSEN='+$('#ID_CONSEN').val()+'&NOMBRE_CONSEN='+$('#NOMBRE_CONSEN').val(),
+					success: function(data){
+						console.log(data);
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Consentimiento Editado Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al editar el consentimiento',
 							type: 'error',
 							shadow: true
 						});
 					}
 					});	
-				}
-				};
-				
+			}
+        	});
 				</script>

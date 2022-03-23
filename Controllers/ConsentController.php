@@ -1,6 +1,7 @@
 <?php
 
 require 'Models/Consent.php';
+require 'Models/Owner.php';
 require 'vendor/autoload.php';
 
 /**
@@ -14,6 +15,7 @@ class ConsentController
 	public function __construct()
 	{
 		$this->model = new Consent;
+		$this->owner = new Owner;
 		
 	}
 	
@@ -21,7 +23,9 @@ class ConsentController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
+		$owners=$this->owner->getAll();
         $consents=$this->model->getAll();
+		$consentsm=$this->model->getAllC();
 		require 'Views/Consent/list.php';
 	}
 
@@ -42,6 +46,41 @@ class ConsentController
     {
         $this->model->getDataConsent($_REQUEST);
     }
+
+	public function getDataConsentText()
+    {
+        $this->model->getDataConsentText($_REQUEST);
+    }
+
+	public function inactiveConsent()
+	{
+		$this->model->inactiveConsent($_REQUEST);
+	}
+
+	public function inactiveConsentById()
+	{
+		$this->model->inactiveConsentById($_REQUEST);
+	}
+
+	public function createConsentIndirect()
+	{
+		$this->model->createConsentIndirect($_REQUEST);
+	}
+
+	public function getDataConsentText1()
+    {
+        $this->model->getAllT($_REQUEST);
+    }
+
+	public function editConsent()
+	{
+		$this->model->editConsent($_REQUEST);
+	}
+
+	public function editConsent1()
+	{
+		$this->model->editConsent1($_REQUEST);
+	}
 }
 
 ?>
