@@ -32,8 +32,8 @@ class PersonController
 	public function template()
 	{
 		require 'Views/Layout.php';
-				require 'Views/Scripts.php';
-				require 'Views/Person/list.php';
+		require 'Views/Scripts.php';
+		require 'Views/Person/list.php';
 	}
 
 }

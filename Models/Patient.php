@@ -39,12 +39,12 @@ class Patient {
     public function createPatient($data)
     {
         try {
+		unset($data['PHPSESSID']);
             $this->pdo->insert('mascotas' , $data);
             $strSql = "SELECT * FROM mascotas WHERE ID_PROP = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_MASCOTA DESC LIMIT 1";
             $array = ['id' => $data['ID_PROP']];
             $query = $this->pdo->select($strSql,$array);
-            var_dump($query);
-            echo $idm=$query[0]->ID_MASCOTA;
+            $idm=$query[0]->ID_MASCOTA;
             $idp=$query[0]->ID_PROP;
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
@@ -108,7 +108,7 @@ class Patient {
             //Ordena un array por su indice
 			ksort($data);
 			//Eliminar indices de un array
-			unset($data['controller'], $data['method']);
+			unset($data['controller'], $data['method'],$data['PHPSESSID']);
             $strWhere = 'ID_MASCOTA='.$data['ID_MASCOTA'];
             $this->pdo->update('mascotas', $data, $strWhere); 
             $date=date('Y-m-d H:s:i');
@@ -131,6 +131,18 @@ class Patient {
     {
         try {
             $strSql = "SELECT * from mascotas WHERE ID_PROP = :id AND ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA }'";
+            $array = ['id' => $id];
+            $query = $this->pdo->select($strSql,$array);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getPayments($id)
+    {
+        try {
+            $strSql = "SELECT * from carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA = '{$_SESSION['user']->ID_EMPRESA }' AND ESTADO_CARRITO='Pendiente'";
             $array = ['id' => $id];
             $query = $this->pdo->select($strSql,$array);
             return $query;
@@ -169,7 +181,7 @@ class Patient {
         //Ordena un array por su indice
 			ksort($_REQUEST);
 			//Eliminar indices de un array
-			unset($_REQUEST['controller'], $_REQUEST['method']);
+			unset($_REQUEST['controller'], $_REQUEST['method'],$_REQUEST['PHPSESSID']);
         $_REQUEST += ['ID_USUARIO'=> $_SESSION['user']->identyUser];
         try {
             $this->pdo->insert('notas' , $_REQUEST);

@@ -27,7 +27,7 @@ class Consent {
     public function getAllById($id)
     {
         try {
-            $strSql="SELECT * FROM consentimientos C INNER JOIN inventario_consentimientos ic ON ic.ID_CONSEN=c.TIPO_CONSEN WHERE c.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND c.ESTADO_CONSENTIMIENTO='Activo' AND c.ID_MASCOTA='$id'";
+            $strSql="SELECT * FROM consentimientos c INNER JOIN inventario_consentimientos ic ON ic.ID_CONSEN=c.TIPO_CONSEN WHERE c.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND c.ESTADO_CONSENTIMIENTO='Activo' AND c.ID_MASCOTA='$id'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -65,6 +65,7 @@ class Consent {
             $data += ['ID_EMPRESA' => $_SESSION['user']->ID_EMPRESA];
             $data += ['FECHA_CONSEN' => $date1];
             $data += ['ESTADO_CONSEN' => 'Activo'];
+		unset($data['PHPSESSID']);
             $this->pdo->insert('inventario_consentimientos',$data);
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
@@ -110,8 +111,7 @@ class Consent {
     {
         try {
             ksort($data);
-            unset($data['controller'],$data['method']);
-
+            unset($data['controller'],$data['method'],$data['PHPSESSID']);
             $strWhere = 'ID_CONSENTIMIENTO='.$data['ID_CONSENTIMIENTO'];
             $this->pdo->update('consentimientos', $data, $strWhere); 
             $date=date('Y-m-d H:s:i');
@@ -134,8 +134,7 @@ class Consent {
     {
         try {
             ksort($data);
-            unset($data['controller'],$data['method']);
-
+            unset($data['controller'],$data['method'],$data['PHPSESSID']);
             $strWhere = 'ID_CONSEN='.$data['ID_CONSEN'];
             $this->pdo->update('inventario_consentimientos', $data, $strWhere); 
             $date=date('Y-m-d H:s:i');
@@ -148,7 +147,8 @@ class Consent {
                 ':user' => $user,
                 ':actioon' => $action,
                 ':ide' => $ide
-            ]);
+            ]); 
+
         } catch ( PDOException $e) {
             die($e->getMessage());
         }  
@@ -210,6 +210,7 @@ class Consent {
             $user=$_SESSION['user']->identyUser;
             $data += ['ID_EMPRESA' => $ide];
             $data += ['ID_USUARIO' => $user];
+		unset($data['PHPSESSID']);
             $this->pdo->insert('consentimientos',$data);
             $date=date('Y-m-d H:s:i');
             

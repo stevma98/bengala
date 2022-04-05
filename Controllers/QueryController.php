@@ -1,6 +1,7 @@
 <?php
 
 require 'Models/Query.php';
+require 'Models/Patient.php';
 require 'Models/Owner.php';
 require 'vendor/autoload.php';
 
@@ -12,12 +13,14 @@ class QueryController
 {
 	private $model;
 	private $owner;
+	private $patient;
 	
 
 	public function __construct()
 	{
 		$this->model = new Query;
 		$this->owner = new Owner;
+		$this->patient = new Patient;
 		
 	}
     public function newQuery()
@@ -50,13 +53,14 @@ class QueryController
 	    $this->model->updateQuery($_REQUEST);
 		// var_dump($_REQUEST);
 	}
-	
-	public function template()
+
+	public function controlQuery()
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
+		$queries=$this->model->getAll();
 		$owners=$this->owner->getAll();
-        $Querys=$this->model->getAll();
+		$products=$this->patient->getProducts();
 		require 'Views/Query/list.php';
 	}
 

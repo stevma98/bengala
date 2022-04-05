@@ -5,7 +5,7 @@
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Vacunas</h2>
+					<h2>Lista Categorias</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -14,8 +14,8 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Vacunas</span></li>
 								<li><span>Inventario</span></li>
+								<li><span>Categorias</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
@@ -24,8 +24,8 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right">Agregar</a>
-										<h2 class="card-title">Vacunas</h2>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+										<h2 class="card-title">Registro Categorias</h2>
                                     </header>
                                     
 								<div class="card-body">									
@@ -36,16 +36,16 @@
 											<thead>
 												<tr>
 													<th>Nombre</th>
-													<th>Presentacion</th>
+													<th style="width:50%">Descripcion</th>
 													<th>Opciones</th>
 												</tr>
 											</thead>
 											<tbody>
-                                                    <?php foreach($vaccines as $vaccine){ ?>
-                                                    <tr Id=<?php echo $vaccine->ID_VACUNA ?>>
-													<td><?php echo $vaccine->NOMBRE_VACUNA?></td>
-													<td><?php echo $vaccine->PRESENTACION;?></td>
-													<td><a href="#modalFormEdit" class="modal-with-form btn btn-primary idEdit" ><i class="fas fa-edit"></i> Editar</a></td>
+                                                    <?php foreach($categories as $categorie){ ?>
+                                                    <tr id="<?php echo $categorie->ID_CATEGORIA ?>">
+													<td><?php echo $categorie->NOM_CATEGORIA; ?></td>
+													<td><?php echo $categorie->DETALLE_CATEGORIA; ?></td>
+													<td class="actions" style="width:350px"><a class="modal-with-form btn btn-primary modal-edit-categorie" href="#modalForm4" style="color:white"><i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger inactivate-categorie" href="#" style="color:white"><i class="fas fa-times"></i> Eliminar</a></td>
                                                     </tr>
                                                     <?php 
                                                     } ?>
@@ -59,13 +59,12 @@
 						</div>
 					</div>
                     <div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalForm1">Open Form</a>
 
 									<!-- Modal Form -->
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Vacuna</h2>
+												<h2 class="card-title">Formulario de Registro Categoria</h2>
 											</header>
 											<div class="card-body">
 												<form>
@@ -73,42 +72,26 @@
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-                                                        <div class="col-md-6 mb-3 mb-lg-0">
-															<label for="NOMBRE_VACUNA">Nombre</label>
-															<input type="text" id="NOMBRE_VACUNA" name="NOMBRE_VACUNA" class="form-control" required>
-														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRESENTACION">Dosis</label>
-															<select name="PRESENTACION" id="PRESENTACION" class="form-control">
-                                                                <option value="Seleccione...">Seleccione...</option>
-                                                                <option value="Ol">Ol</option>
-                                                                <option value="Gr">Gr</option>
-                                                                <option value="Dosis">Dosis</option>
-                                                            </select>
-														</div>	
 													</div>
-                                                    <input type="hidden" id="confirmer" value="0">
-													<!-- <div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="FECHA_SIG">Fecha Proxima Vacuna</label>
-															<input type="date" id="FECHA_SIG" name="FECHA_SIG" class="form-control" required>
+                                                    <div class="form-row">
+                                                    <div class="col-md-12 mb-6 mb-lg-0">
+                                                    <label for="NOM_CATEGORIA">Nombre: </label>
+                                                    <input type="text" id="NOM_CATEGORIA" name="NOM_CATEGORIA" class="form-control">
+                                                    </div>
+                                                    </div>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DETALLE_CATEGORIA">Observaciones</label>
+															<textarea class="form-control" rows="2" id="DETALLE_CATEGORIA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
-															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control" required>
-																	<option value="Seleccione">Seleccion...</option>
-																	<option value="11">11</option>
-																	<option value="22">22</option>
-																	<option value="33">33</option>
-															</select>
-														</div>
-													</div> -->
+																</div>													
 												</form>
 											</div>
+											<input type="hidden" id="confirmer" value="0">
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createVaccine" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createCategorie" >Crear</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -119,13 +102,12 @@
 								</div>
 
                                 <div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalFormEdit">Open Form</a>
 
 									<!-- Modal Form -->
-									<div id="modalFormEdit" class="modal-block modal-block-primary mfp-hide">
+									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Editar Vacuna</h2>
+												<h2 class="card-title">Formulario de Registro Categoria</h2>
 											</header>
 											<div class="card-body">
 												<form>
@@ -133,43 +115,27 @@
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-                                                        <div class="col-md-6 mb-3 mb-lg-0">
-															<label for="NOMBRE_VACUNA_EDIT">Nombre</label>
-															<input type="text" id="NOMBRE_VACUNA_EDIT" name="NOMBRE_VACUNA_EDIT" class="form-control" required>
-														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRESENTACION_EDIT">Dosis</label>
-															<select name="PRESENTACION_EDIT" id="PRESENTACION_EDIT" class="form-control">
-                                                                <option value="Seleccione...">Seleccione...</option>
-                                                                <option value="Ol">Ol</option>
-                                                                <option value="Gr">Gr</option>
-                                                                <option value="Dosis">Dosis</option>
-                                                            </select>
-														</div>	
 													</div>
-                                                    <input type="hidden" id="ID_VACUNA_EDIT">
-                                                    <input type="hidden" id="confirmer" value="0">
-													<!-- <div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="FECHA_SIG">Fecha Proxima Vacuna</label>
-															<input type="date" id="FECHA_SIG" name="FECHA_SIG" class="form-control" required>
+                                                    <div class="form-row">
+                                                    <div class="col-md-12 mb-6 mb-lg-0">
+                                                    <label for="NOM_CATEGORIA">Nombre: </label>
+                                                    <input type="hidden" id="ID_CATEGORIA">
+                                                    <input type="text" id="NOM_CATEGORIA" name="NOM_CATEGORIA" class="form-control">
+                                                    </div>
+                                                    </div>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DETALLE_CATEGORIA">Observaciones</label>
+															<textarea class="form-control" rows="2" id="DETALLE_CATEGORIA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
-															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control" required>
-																	<option value="Seleccione">Seleccion...</option>
-																	<option value="11">11</option>
-																	<option value="22">22</option>
-																	<option value="33">33</option>
-															</select>
-														</div>
-													</div> -->
+																</div>													
 												</form>
 											</div>
+											<input type="hidden" id="confirmer" value="0">
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="editVaccine" >Editar</button>
+														<button class="btn btn-primary modal-confirm" id="editCategorie" >Crear</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -178,7 +144,6 @@
 									</div>
 
 								</div>
-
 					<!-- end: page -->
 				</section>
 			</div>
@@ -256,4 +221,54 @@
 		<!-- Examples -->
 		<!-- <script src="Assets/js/examples/examples.notifications.js"></script> -->
 		<script src="Assets/js/examples/examples.modals.js"></script>
-		
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+        <script>
+	            $(document).on('click','.modal-edit-categorie',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+                        $.ajax({
+							type: 'POST',
+							url: '?controller=inventory&method=getDataCategorie',
+							data: 'ID_CATEGORIA='+id,
+							success:function(response){
+                                var data = $.parseJSON(response);
+                                $('#NOM_CATEGORIA').val(data[0]['NOM_CATEGORIA']);
+                                $('#DETALLE_CATEGORIA').val(data[0]['DETALLE_CATEGORIA']);
+                                $('#ID_CATEGORIA').val(data[0]['ID_CATEGORIA']);
+							}
+						});
+					});
+                    
+                    $(document).on('click','.inactivate-categorie',function(){
+						let element = $(this)[0].parentElement.parentElement;
+						let id = $(element).attr('id');
+                        $.ajax({
+							type: 'POST',
+							url: '?controller=inventory&method=inactivateCategorie',
+							data: 'ID_CATEGORIA='+id,
+							success:function(response){
+                                console.log(response);
+                                            new PNotify({
+                                        title: 'Confirmado!',
+                                        text: 'Categoria Creada Exitosamente.',
+                                        type: 'success'
+                                    });
+                                    // setTimeout(() => {
+                                    // location.reload();	
+                                    // }, 2000);
+                                },
+                                error: function(data){
+                                    $.magnificPopup.close();
+                                    new PNotify({
+                                        title: 'Rechazado!',
+                                        text: 'Hubo un error al crear la categoria',
+                                        type: 'error',
+                                        shadow: true
+                                    });
+                                }
+						});
+					});
+
+                    
+        </script>

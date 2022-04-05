@@ -391,9 +391,15 @@
 				                            </li>
 				                        </ul>
 				                    </li>
+									<li class="">
+				                        <a class="nav-link" href="?controller=query&method=controlQuery">
+				                            <i class="fas fa-book" aria-hidden="true"></i>
+				                            <span>Consultas</span>
+				                        </a>
+				                    </li>
 									<li class="nav-parent">
 				                        <a class="nav-link" href="#">
-				                            <i class="fas fa-book" aria-hidden="true"></i>
+				                            <i class="fas fa-file" aria-hidden="true"></i>
 				                            <span>Consentimientos</span>
 				                        </a>
 				                        <ul class="nav nav-children">
@@ -411,6 +417,19 @@
 				                    </li>
 									<li class="nav-parent">
 				                        <a class="nav-link" href="#">
+				                            <i class="fas fa-file" aria-hidden="true"></i>
+				                            <span>Contabilidad</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="?controller=contability&method=template">
+				                                    Listar Recibos
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
+									<li class="nav-parent">
+				                        <a class="nav-link" href="#">
 				                            <i class="fas fa-cogs" aria-hidden="true"></i>
 				                            <span>Parametros</span>
 				                        </a>
@@ -418,6 +437,24 @@
 				                            <li>
 				                                <a class="nav-link" href="?controller=barber&method=template">
 				                                    Listar
+				                                </a>
+				                            </li>
+				                        </ul>
+				                    </li>
+									<li class="nav-parent">
+				                        <a class="nav-link" href="#">
+				                            <i class="fas fa-archive" aria-hidden="true"></i>
+				                            <span>Inventario</span>
+				                        </a>
+				                        <ul class="nav nav-children">
+				                            <li>
+				                                <a class="nav-link" href="?controller=inventory&method=template">
+				                                    Articulo/Servicio
+				                                </a>
+				                            </li>
+											<li>
+				                                <a class="nav-link" href="?controller=inventory&method=categories">
+				                                    Categorias
 				                                </a>
 				                            </li>
 				                        </ul>

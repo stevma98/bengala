@@ -7,3 +7,9 @@
 	define("USER", "root");
 	define("PASSWORD", "steven666");
 
+	// define("DRIVER", "mysql");
+	// define("HOST", "nous-boutique.com");
+	// define("DB_NAME", "nousbout_bengala");
+	// define("CHARSET", "utf8");
+	// define("USER", "nousbout_admin");
+	// define("PASSWORD", "StevenMartinez666");

@@ -50,6 +50,7 @@ class Owner {
     public function createOwner($data)
     {
         try {
+		unset($data['PHPSESSID']);
             $this->pdo->insert('propietarios' , $data);
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
@@ -94,7 +95,7 @@ class Owner {
             //Ordena un array por su indice
 			ksort($data);
 			//Eliminar indices de un array
-			unset($data['controller'], $data['method']);
+			unset($data['controller'], $data['method'],$data['PHPSESSID']);
             $idEmp=$_SESSION['user']->ID_EMPRESA;
             $strWhere = 'ID_PROP='.$data['ID_PROP'].' AND ID_EMPRESA='.$idEmp.'' ;
             $this->pdo->update('propietarios', $data, $strWhere); 

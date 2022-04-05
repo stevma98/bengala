@@ -111,6 +111,8 @@ class PatientController
 		$notes=$this->model->getNotesById($_GET['id']);
 		$consents1=$this->consent->getAll();
 		$consents=$this->consent->getAllById($_GET['id']);
+		$payments=$this->model->getPayments($_GET['id']);
+		$paymentsc=count($payments);
 		$birthday= new DateTime($data[0]->FEC_NAC);
 		$today=new DateTime();
 		$age = $today->diff($birthday);

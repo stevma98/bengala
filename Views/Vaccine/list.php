@@ -134,13 +134,17 @@
 														</div>														
 													</div>
 													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="VENCIMIENTO">Vencimiento</label>
 															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
 														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="FEC_VACUNA">Fecha Vacuna</label>
 															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna</label>
+															<input type="date" id="FECHA_ULT_VACUNA" name="FECHA_ULT_VACUNA" class="form-control" required>
 														</div>
 													</div>
 													<div class="form-row">
@@ -256,6 +260,7 @@
 		<!-- Examples -->
 		<!-- <script src="Assets/js/examples/examples.notifications.js"></script> -->
 		<script src="Assets/js/examples/examples.modals.js"></script>
+		<script src="Assets/vendor/summernote/summernote-bs4.js"></script>
 		
 		<!-- Listado con ajax -->
 

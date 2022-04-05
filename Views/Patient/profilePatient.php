@@ -561,10 +561,10 @@
 																	<th>Vacuna</th>
 																	<th style="width:90px">Fecha Vacuna</th>
 																	<th>Dosis</th>
+																	<th>Lote</th>
 																	<th style="width:90px">Fecha Ult Vacuna</th>
 																	<th style="width: 90px">Fecha Prox Vacuna</th>
 																	<th>Proxima Vacuna</th>
-																	<th>Lote</th>
 																	<th>Estado</th>
 																	<th>Acciones</th>
 																</tr>
@@ -575,9 +575,9 @@
 																		<td><?php echo $vaccineh->NOMBRE_VACUNA?></td>
 																		<td ><?php echo $vaccineh->FEC_VACUNA?></td>
 																		<td><?php echo $vaccineh->DOSIS?></td>
+																		<td><?php echo $vaccineh->LOTE?></td>
 																		<td ><?php echo $vaccineh->ULTIMA_VACUNA?></td>
 																		<td ><?php echo $vaccineh->FECHA_SIG_VACUNA?></td>
-																		<td><?php echo $vaccineh->LOTE?></td>
 																		<td><?php echo $vaccineh->PROXIMA_VACUNA?></td>
 																		<td><?php echo $vaccineh->ESTADO_VACUNA?></td>
 																		<td class="actions">
@@ -631,8 +631,50 @@
 														</table>
 															</div>
 														</div>
+
+														
 													</div>
+													<?php if ($paymentsc>0) {?>																											
+													<div class="card card-default">
+														<div class="card-header">
+															<h4 class="card-title m-0" style="background-color:#0088CC">
+																<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1Five" aria-expanded="false" style="color:white">
+																<i class="fa fa-plus"></i>
+																	Pagos Pendientes
+																</a>
+															</h4>
+														</div>
+														<div id="collapse1Five" class="collapse" data-parent="#accordion" style="">
+														<div class="card-body" style="padding:0px !important">
+															<table class="table table-responsive-md mb-0">
+															<thead>
+																<tr style="font-size:10px">
+																	<th>#</th>
+																	<th>Nombre Servicio</th>
+																	<th>Fecha Realizado</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php 
+																$count=1;
+																foreach ($payments as $payment) { ?>
+																	<tr style="font-size:12px">
+																	<td><?php echo $count; ?></td>
+																		<td><?php echo $payment->TIPO?></td>
+																		<td><?php echo $payment->FECHA_ANADIDO?></td>
+																	</tr>
+																<?php $count+=1; } ?>
+															</tbody>
+														</table>
+																<a href="?controller=contability&method=getDataxBill&id=<?php echo $payments[0]->ID_MASCOTA ?>&idp=<?php echo $payments[0]->ID_PROP ?>" class="btn btn-success pull-right">Cerrar Venta</a>
+															</div>
+														</div>
+
+														
 													</div>
+													<?php } ?>
+													</div>
+													
 												</div>
 											</div>
 										</div>
@@ -1381,8 +1423,10 @@ Muestras remitidas:</textarea> -->
                 <script src="Assets/vendor/common/common.js"></script>
 				<script src="Assets/js/examples/examples.modals.js"></script>
 				<script src="Assets/vendor/summernote/summernote-bs4.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 				<script>
-					
+					$('#PRECIO_PELUQUERIA').mask('#.##0', {reverse: true});
+
 					$('#file').change(function(){
 					filePreview(this);
 					});
@@ -1503,7 +1547,6 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
-								console.log(response);
 								new PNotify({
 									title: 'Confirmado!',
 									text: 'Vacuna Realizada con exito.',
@@ -1685,10 +1728,10 @@ Muestras remitidas:</textarea> -->
 							text: 'Consulta Editada Exitosamente.', 
 							type: 'success'
 						});
-						$.magnificPopup.close();
-						setTimeout(() => {
-						location.reload();	
-						}, 2000);
+						// $.magnificPopup.close();
+						// setTimeout(() => {
+						// location.reload();	
+						// }, 2000);
 					},
 					error: function(data){
 						$.magnificPopup.close();	

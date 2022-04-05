@@ -2,7 +2,7 @@
 			<div class="inner-wrapper">
 				<section role="main" class="content-body">
 					<header class="page-header">
-						<h2><?php echo $_SERVER['PHP_SELF'] ?></h2>
+						<h2>Principal</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -11,8 +11,7 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Layouts</span></li>
-								<li><span>Default</span></li>
+								<li><span>Principal</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
@@ -26,7 +25,7 @@
 								<div class="card-body">
 									<div class="row">
 										<div class="col-lg-3 mb-3">
-											<h3><b>Comunicados</b></h3>
+											<h3><b>Comunicados </b></h3>
 											<img src="Assets/img/1.jpg" style="max-width:100%">
 										</div>
 										<div class="col-lg-1 mb-1"></div>

@@ -483,6 +483,112 @@ Theme Version: 	3.0.0
 	});
 
 	/* 
+	create categorie
+	*/
+	$(document).on('click', '#createCategorie', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOM_CATEGORIA").length < 1) {
+				$('#NOM_CATEGORIA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOM_CATEGORIA').css('border','1px solid green');
+			}		
+			if($("#DETALLE_CATEGORIA").val().length < 1) {
+				$('#DETALLE_CATEGORIA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#DETALLE_CATEGORIA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=createCategorie',
+					data: 'NOM_CATEGORIA='+$('#NOM_CATEGORIA').val()+'&DETALLE_CATEGORIA='+$('#DETALLE_CATEGORIA').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Categoria Creada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la categoria',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+		/* 
+	edit categorie
+	*/
+	$(document).on('click', '#editCategorie', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOM_CATEGORIA").length < 1) {
+				$('#NOM_CATEGORIA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOM_CATEGORIA').css('border','1px solid green');
+			}		
+			if($("#DETALLE_CATEGORIA").val().length < 1) {
+				$('#DETALLE_CATEGORIA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#DETALLE_CATEGORIA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=editCategorie',
+					data: 'NOM_CATEGORIA='+$('#NOM_CATEGORIA').val()+'&DETALLE_CATEGORIA='+$('#DETALLE_CATEGORIA').val()+'&ID_CATEGORIA='+$('#ID_CATEGORIA').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'categoria editada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al editar la categoria',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/* 
 	upload Archive
 	*/
 
@@ -894,7 +1000,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=vaccine&method=createVaccineAppoinment',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&ULTIMA_VACUNA='+$('#FECHA_ULT_VACUNA').val()+'&ESTADO_VACUNA=Pendiente',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val()+'&ULTIMA_VACUNA='+$('#FECHA_ULT_VACUNA').val()+'&ESTADO_VACUNA=Pendiente',
 					success: function(data){
 						new PNotify({
 							title: 'Confirmado!',
@@ -1207,7 +1313,142 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=barber&method=createBarberAppointment',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&FEC_PELUQUERIA='+$('#FEC_PELUQUERIA').val()+'&TIPO_CORTE='+$('#TIPO_CORTE').val()+'&ACCESORIOS='+$('#ACCESORIOS').val()+'&CORTE_UNAS='+$('#CORTE_UNAS').val()+'&BANO_MEDICADO='+$('#BANO_MEDICADO').val()+'&PRECIO_PELUQUERIA='+$('#PRECIO_PELUQUERIA').val()+'&DETALLE='+$('#DETALLE').val()+'&ESTADO_PELUQUERIA=Pendiente&ID_EMPRESA='+$('#ID_EMPRESA').val(),
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&FEC_PELUQUERIA='+$('#FEC_PELUQUERIA').val()+'&TIPO_CORTE='+$('#TIPO_CORTE').val()+'&ACCESORIOS='+$('#ACCESORIOS').val()+'&CORTE_UNAS='+$('#CORTE_UNAS').val()+'&BANO_MEDICADO='+$('#BANO_MEDICADO').val()+'&PRECIO_PELUQUERIA='+$('#PRECIO_PELUQUERIA').val()+'&DETALLE='+$('#DETALLE').val()+'&ESTADO_PELUQUERIA=Pendiente',
+					success: function(data){
+						console.log(data);			
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Registro de peluqueria Creada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea la cita de peluqueria',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
+	/*
+	create Article 
+	*/
+
+	$(document).on('click', '#createArticle ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOM_PRO").val().length < 1) {
+				$('#NOM_PRO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOM_PRO').css('border','1px solid green');
+			}
+			if($("#ID_GRUPO").val() == 'Seleccione...') {
+				$('#ID_GRUPO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_GRUPO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#CANTIDAD").val().length < 1) {
+				$('#CANTIDAD').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#CANTIDAD').css('border','1px solid green');
+			}
+			if($("#PRECIO").val().length < 1) {
+				$('#PRECIO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRECIO').css('border','1px solid green');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=createArticle',
+					data: 'NOM_PRO='+$('#NOM_PRO').val()+'&ID_GRUPO='+$('#ID_GRUPO').val()+'&CANTIDAD='+$('#CANTIDAD').val()+'&PRECIO='+$('#PRECIO').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Producto Creado Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea el producto',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
+	/*
+	edit Article 
+	*/
+
+	$(document).on('click', '#editArticle ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOM_PROE").val().length < 1) {
+				$('#NOM_PROE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOM_PROE').css('border','1px solid green');
+			}
+			if($("#ID_GRUPOE").val() == 'Seleccione...') {
+				$('#ID_GRUPOE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_GRUPOE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			} 
+			if($("#CANTIDADE").val().length < 1) {
+				$('#CANTIDADE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#CANTIDADE').css('border','1px solid green');
+			}
+			if($("#PRECIOE").val().length < 1) {
+				$('#PRECIOE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRECIOE').css('border','1px solid green');
+				$('#confirmer').val("1");
+			} 
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=editArticle',
+					data: 'NOM_PRO='+$('#NOM_PROE').val()+'&ID_GRUPO='+$('#ID_GRUPOE').val()+'&CANTIDAD='+$('#CANTIDADE').val()+'&PRECIO='+$('#PRECIOE').val()+'&ID_PRO='+$('#ID_PROE').val(),
 					success: function(data){
 						console.log(data);			
 						new PNotify({
