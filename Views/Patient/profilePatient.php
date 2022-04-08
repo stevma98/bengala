@@ -969,11 +969,11 @@
 														</div>
 													</div>
 													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
 															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required min=<?php echo date('Y-m-d'); ?>>															
 														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
 															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
@@ -981,6 +981,10 @@
 																	<option value="<?php echo $vaccineI->NOMBRE_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
 																<?php } ?>
 															</select>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="PRECIO_VACUNA">Precio</label>
+															<input type="text" id="PRECIO_VACUNA" name="PRECIO_VACUNA" class="form-control">
 														</div>
 													</div>
 													<div class="form-row">
@@ -1241,6 +1245,12 @@ Muestras remitidas:</textarea> -->
 															</table>
 														</div>
 													</div>
+													<div class="row">
+														<div class="col-lg-4 pull-right">
+															<label for="PRECIO_CONSULTA">Precio</label>
+															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control">
+														</div>
+													</div>
 												<br><br>
 													</form>			
 												</form>
@@ -1355,6 +1365,12 @@ Muestras remitidas:</textarea> -->
 															</table>
 														</div>
 													</div>
+													<div class="row">
+														<div class="col-lg-4 pull-right">
+															<label for="PRECIO_CONSULTAE">Precio</label>
+															<input type="text" id="PRECIO_CONSULTAE" name="PRECIO_CONSULTAE" class="form-control">
+														</div>
+													</div>
 												<br><br>
 													</form>			
 											
@@ -1426,6 +1442,9 @@ Muestras remitidas:</textarea> -->
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 				<script>
 					$('#PRECIO_PELUQUERIA').mask('#.##0', {reverse: true});
+					$('#PRECIO_VACUNA').mask('#.##0', {reverse: true});
+					$('#PRECIO_CONSULTA').mask('#.##0', {reverse: true});
+					$('#PRECIO_CONSULTAE').mask('#.##0', {reverse: true});
 
 					$('#file').change(function(){
 					filePreview(this);
@@ -1487,6 +1506,7 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=barber&method=checkBarber&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
+								console.log(response);
 								new PNotify({
 									title: 'Confirmado!',
 									text: 'Peluqueria Realizada con exito.',
@@ -1547,6 +1567,7 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
+								console.log(response);
 								new PNotify({
 									title: 'Confirmado!',
 									text: 'Vacuna Realizada con exito.',
@@ -1700,6 +1721,13 @@ Muestras remitidas:</textarea> -->
 				$('#medicineDays').css('border','1px solid green');
 				$('#alertif').css('display','none');
 			}
+			if($("#PRECIO_CONSULTAE").val().length < 1) {
+				$('#PRECIO_CONSULTAE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PRECIO_CONSULTAE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
 			if($("#medicineInstruction").val().length < 1) {
 				$('#medicineInstruction').css('border','1px solid red');
 				$('#alertif').css('display','block');
@@ -1720,7 +1748,7 @@ Muestras remitidas:</textarea> -->
 				$.ajax({
 					type: 'POST',
 					url: '?controller=query&method=editQuery1',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id,
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id+'&PRECIO_CONSULTA='+$('#PRECIO_CONSULTAE').val(),
 					success: function(data){
 						console.log(data);			
 						new PNotify({
@@ -1728,10 +1756,10 @@ Muestras remitidas:</textarea> -->
 							text: 'Consulta Editada Exitosamente.', 
 							type: 'success'
 						});
-						// $.magnificPopup.close();
-						// setTimeout(() => {
-						// location.reload();	
-						// }, 2000);
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
 					},
 					error: function(data){
 						$.magnificPopup.close();	

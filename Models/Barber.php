@@ -40,7 +40,9 @@ class Barber {
         try {
             $ide=$_SESSION['user']->ID_EMPRESA;
             $data+=['ID_EMPRESA'=>$ide];
-		unset($data['PHPSESSID']);
+            $price=str_replace('.',"",$data['PRECIO_PELUQUERIA']);
+		    unset($data['PHPSESSID'],$data['PRECIO_PELUQUERIA']);
+            $data+=['PRECIO_PELUQUERIA'=>$price];
             $this->pdo->insert('peluqueria', $data);
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
@@ -70,6 +72,7 @@ class Barber {
             $query = $this->pdo->select($strSql,$array);
             $idmascota=$query[0]->ID_MASCOTA;            
             $idprop=$query[0]->ID_PROP;
+            $price=str_replace(".","",$query[0]->PRECIO_PELUQUERIA);
             $strSql = "SELECT * FROM carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_CARRITO DESC limit 1";
             $array = ['id' => $idmascota];
             $query = $this->pdo->select($strSql,$array);
@@ -81,7 +84,7 @@ class Barber {
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
             $ide=$_SESSION['user']->ID_EMPRESA;
-            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Peluqueria','ID_PRODUCTO'=>$id,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo];
+            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Peluqueria','ID_PRODUCTO'=>$id,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price];
             $this->pdo->insert('carrito',$carrito);
             $action="Ha realizado la peluqueria de id=".$data['ID_PELUQUERIA'];            
             $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";

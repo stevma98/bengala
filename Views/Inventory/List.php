@@ -49,7 +49,7 @@
 													<td><?php echo $article->ID_PROD_INV; ?></td>
 													<td><?php echo $article->NOM_PRO; ?></td>
 													<td><?php echo $article->NOM_CATEGORIA; ?></td>
-													<td><?php echo "$".$article->PRECIO; ?></td>
+													<td><?php echo "$".number_format($article->PRECIO,0,',','.'); ?></td>
 													<td><?php echo $article->CANTIDAD; ?></td>
 													<td class="actions" style="width:200px"><a class="modal-with-form btn btn-primary modal-edit-article" href="#modalForm2" style="color:white"><i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger inactivate-article" href="#" style="color:white"><i class="fas fa-times"></i> Eliminar</a></td>
                                                     </tr>

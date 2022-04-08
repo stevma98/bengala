@@ -993,14 +993,21 @@ Theme Version: 	3.0.0
 			}else{
 				$('#PROXIMA_VACUNA').css('border','1px solid green');
 				$('#alertif').css('display','none');
-				$('#confirmer').val("1");
 			} 
+			if($("#PRECIO_VACUNA").val().length < 1) {
+				$('#PRECIO_VACUNA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRECIO_VACUNA').css('border','1px solid green');
+				$('#confirmer').val("1");
+			}			
 			confirmer=$('#confirmer').val();
 			if (confirmer=='1') {
 				$.ajax({
 					type: 'POST',
 					url: '?controller=vaccine&method=createVaccineAppoinment',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val()+'&ULTIMA_VACUNA='+$('#FECHA_ULT_VACUNA').val()+'&ESTADO_VACUNA=Pendiente',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_VACUNA='+$('#ID_VACUNA').val()+'&LOTE='+$('#LOTE').val()+'&PRESENTACION='+$('#PRESENTACION').val()+'&DOSIS='+$('#DOSIS').val()+'&VENCIMIENTO='+$('#VENCIMIENTO').val()+'&FEC_VACUNA='+$('#FEC_VACUNA').val()+'&FECHA_SIG_VACUNA='+$('#FECHA_SIG_VACUNA').val()+'&PROXIMA_VACUNA='+$('#PROXIMA_VACUNA').val()+'&DETALLE='+$('#DETALLE').val()+'&ULTIMA_VACUNA='+$('#FECHA_ULT_VACUNA').val()+'&ESTADO_VACUNA=Pendiente&PRECIO_VACUNA='+$('#PRECIO_VACUNA').val(),
 					success: function(data){
 						new PNotify({
 							title: 'Confirmado!',
@@ -1196,13 +1203,20 @@ Theme Version: 	3.0.0
 				$('#medicineDays').css('border','1px solid green');
 				$('#alertif').css('display','none');
 			}
+			if($("#PRECIO_CONSULTA").val().length < 1) {
+				$('#PRECIO_CONSULTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PRECIO_CONSULTA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
 			if($("#medicineInstruction").val().length < 1) {
 				$('#medicineInstruction').css('border','1px solid red');
 				$('#alertif').css('display','block');
 			}else{
 				$('#medicineInstruction').css('border','1px solid green');
-				$('#alertif').css('display','none');
-				$('#confirmer').val("1");
+				$('#alertif').css('display','none');				
 			}
 			var receta = $('#medicineName').val()+'<br> <b>Dosis:</b> '+$('#medicineDosis').val()+'<br> <b>Frecuencia:</b> '+$('#medicineFrequency').val()+'<br> <b>Dias:</b> '+$('#medicineDays').val()+'<br> <b>Uso:</b> '+$('#medicineInstruction').val();
 			var num = $('#num').val();
@@ -1215,9 +1229,8 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=query&method=createImmediatelyQuery',
-					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado',
+					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&PRECIO_CONSULTA='+$('#PRECIO_CONSULTA').val(),
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Consulta Creada Exitosamente.', 

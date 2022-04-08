@@ -21,7 +21,7 @@ class Inventory {
     {
         try {
             $data+=['ID_USUARIO'=>$this->user,'ID_EMPRESA'=>$this->ide,'ESTADO_CATEGORIA'=>'Activo'];
-		unset($data['PHPSESSID']);
+		    unset($data['PHPSESSID']);
             $this->pdo->insert('categorias', $data);
             $date=date('Y-m-d H:s:i');
             $action="Ha creado una categoria Nombre=".$data['NOM_CATEGORIA'];
@@ -41,6 +41,17 @@ class Inventory {
     {
         try {
             $strSql = "SELECT * FROM categorias WHERE ID_EMPRESA='$this->ide' AND ESTADO_CATEGORIA='Activo'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getAllArticle()
+    {
+        try {
+            $strSql = "SELECT * FROM productos WHERE ID_EMPRESA='$this->ide' AND ESTADO_PRODUCTO='Activo'";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -70,6 +81,7 @@ class Inventory {
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
+        
     }
 
     public function searchConsecutive()
@@ -169,9 +181,10 @@ class Inventory {
     public function createArticle($data)
     {
         try {
+            $data+=['STOCK'=>$data['CANTIDAD']];
             $this->pdo->insert('productos', $data);
             $date=date('Y-m-d H:s:i');
-            $action="Ha creado un producto Nombre=".$data['NOM_PRO'];
+            $action="Ha Creado un Producto Nombre=".$data['NOM_PRO'];
             $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
             $sentencia=$this->pdo->prepare($sql)->execute([
                 ':fecha' => $date ,

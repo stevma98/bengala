@@ -482,6 +482,12 @@
 															</table>
 														</div>
 													</div>
+													<div class="row">
+														<div class="col-lg-4 pull-right">
+															<label for="PRECIO_CONSULTA">Precio</label>
+															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control">
+														</div>
+													</div>
 												<br><br>
 													</form>			
 												</form>
@@ -591,6 +597,12 @@
 															</table>
 														</div>
 													</div>
+													<div class="row">
+														<div class="col-lg-4 pull-right">
+															<label for="PRECIO_CONSULTA">Precio</label>
+															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control">
+														</div>
+													</div>
 												<br><br>
 													</form>			
 											
@@ -685,6 +697,7 @@
 		<!-- Examples -->
 		<script src="Assets/js/examples/examples.modals.js"></script>
 		<script src="Assets/vendor/summernote/summernote-bs4.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 		<script>
 					(function($) {
 
@@ -711,27 +724,8 @@
 				</script>
     <script>
 
-
-        $('#PRECIO_PELUQUERIA').mask('#.##0', {reverse: true});
-        $('#PRECIO_PELUQUERIA').change(function () {
-			    var valor = $(this).val();  
-			    $(this).val(valor);
-			});	
-
-			$('#ID_VACUNA').on('change',function(){
-				id = $('#ID_VACUNA').val();
-				getPresentation(id);
-			});
-
-			function getPresentation(id) {				
-				$.ajax({
-					url:'?controller=vaccine&method=getPresentation&id='+id,
-					type:'GET',
-					success:function(response){
-						$('#PRESENTACION').val(response);
-					}
-				});
-			}
+			$('#PRECIO_CONSULTA').mask('#.##0', {reverse: true});
+			$('#PRECIO_CONSULTAE').mask('#.##0', {reverse: true});
 
 			$('#ID_PROP').on('change',function(){
 				id = $('#ID_PROP').val();
@@ -868,7 +862,7 @@
 				$.ajax({
 					type: 'POST',
 					url: '?controller=query&method=editQuery1',
-					data: 'ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id,
+					data: 'ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id+'&PRECIO_CONSULTA='+$('#PRECIO_CONSULTAE').val(),
 					success: function(data){
 						console.log(data);			
 						new PNotify({

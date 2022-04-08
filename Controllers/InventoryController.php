@@ -77,10 +77,11 @@ class InventoryController
         //Ordena un array por su indice
 		ksort($_REQUEST);
 		// //Eliminar indices de un array
-		unset($_REQUEST['controller'], $_REQUEST['method'],$_REQUEST['ID_CATEGORIA'],$_REQUEST['PHPSESSID']);
+        $price=str_replace('.','',$_REQUEST['PRECIO']);
+		unset($_REQUEST['controller'], $_REQUEST['method'],$_REQUEST['ID_CATEGORIA'],$_REQUEST['PHPSESSID'],$_REQUEST['PRECIO']);
         $consecutive=$this->model->getConsecutive();
         $consecutive=$consecutive[0]->ID_PROD_INV + 1;
-        $_REQUEST+=['ID_PROD_INV' => $consecutive,'ID_EMPRESA' => $_SESSION['user']->ID_EMPRESA,'ID_USUARIO' => $_SESSION['user']->identyUser,'ESTADO_PRODUCTO'=>'Activo'];
+        $_REQUEST+=['ID_PROD_INV' => $consecutive,'ID_EMPRESA' => $_SESSION['user']->ID_EMPRESA,'ID_USUARIO' => $_SESSION['user']->identyUser,'ESTADO_PRODUCTO'=>'Activo','PRECIO'=>$price];
         $this->model->createArticle($_REQUEST);
     }
 
@@ -89,7 +90,9 @@ class InventoryController
         //Ordena un array por su indice
 		ksort($_REQUEST);
 		// //Eliminar indices de un array
-		unset($_REQUEST['controller'], $_REQUEST['method'],$_REQUEST['PHPSESSID']);
+        $price=str_replace('.','',$_REQUEST['PRECIO']);
+		unset($_REQUEST['controller'], $_REQUEST['method'],$_REQUEST['PHPSESSID'],$_REQUEST['PRECIO']);
+        $_REQUEST+=['PRECIO'=>$price];
         $this->model->editArticle($_REQUEST); 
     }
 

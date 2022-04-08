@@ -417,7 +417,7 @@
 				                    </li>
 									<li class="nav-parent">
 				                        <a class="nav-link" href="#">
-				                            <i class="fas fa-file" aria-hidden="true"></i>
+				                            <i class="fas fa-hand-holding-usd" aria-hidden="true"></i>
 				                            <span>Contabilidad</span>
 				                        </a>
 				                        <ul class="nav nav-children">

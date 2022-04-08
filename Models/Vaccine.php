@@ -60,9 +60,11 @@ class Vaccine {
     public function createVaccineAppoinment($data)
     {
         try {
-		unset($data['PHPSESSID']);
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $data+=['ID_EMPRESA'=>$ide];
+            $price=str_replace(".","",$data['PRECIO_VACUNA']); 
+		    unset($data['PHPSESSID'],$data['PRECIO_VACUNA']);
+            $ide=$_SESSION['user']->ID_EMPRESA;            
+            $data+=['ID_EMPRESA'=>$ide,'PRECIO_VACUNA'=>$price];
+            var_dump($data);
             $this->pdo->insert('vacunas', $data);
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
@@ -154,6 +156,7 @@ class Vaccine {
             $idmascota=$query[0]->ID_MASCOTA;            
             $idprop=$query[0]->ID_PROP;
             $idva=$query[0]->ID_VACUNA;
+            $price=str_replace('.','',$query[0]->PRECIO_VACUNA);
             $strSql = "SELECT * FROM carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_CARRITO DESC limit 1";
             $array = ['id' => $idmascota];
             $query = $this->pdo->select($strSql,$array);
@@ -165,7 +168,7 @@ class Vaccine {
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
             $ide=$_SESSION['user']->ID_EMPRESA;
-            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Vacuna','ID_PRODUCTO'=>$idva,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo];
+            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Vacuna','ID_PRODUCTO'=>$idva,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price];
             $this->pdo->insert('carrito',$carrito);
             $action="Ha realizado una vacuna id=".$data['ID_VACUNA'];
             

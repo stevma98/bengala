@@ -148,11 +148,11 @@
 														</div>
 													</div>
 													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
 															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
 														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-4 mb-3 mb-lg-0">
 															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
 															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
@@ -160,6 +160,10 @@
 																	<option value="<?php echo $vaccineI->NOMBRE_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
 																<?php } ?>
 															</select>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="PRECIO_VACUNA">Precio</label>
+															<input type="text" id="PRECIO_VACUNA" name="PRECIO_VACUNA" class="form-control">
 														</div>
 													</div>
 													<div class="form-row">
@@ -261,6 +265,7 @@
 		<!-- <script src="Assets/js/examples/examples.notifications.js"></script> -->
 		<script src="Assets/js/examples/examples.modals.js"></script>
 		<script src="Assets/vendor/summernote/summernote-bs4.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 		
 		<!-- Listado con ajax -->
 
@@ -297,7 +302,7 @@
 	}
 		</script> -->
 		<script>
-
+		$('#PRECIO_VACUNA').mask('#.##0', {reverse: true});
 			$('#ID_VACUNA').on('change',function(){
 				id = $('#ID_VACUNA').val();
 				getPresentation(id);
