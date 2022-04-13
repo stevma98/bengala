@@ -135,7 +135,7 @@ class Query {
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
             $ide=$_SESSION['user']->ID_EMPRESA;
-            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Consulta','ID_PRODUCTO'=>$id,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price];
+            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Consulta','ID_PRODUCTO'=>$id,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price,'CANTIDAD'=>1];
             $this->pdo->insert('carrito',$carrito);
             $action="Ha atendido la consulta consecutivo=".$data['CONSECUTIVO_CONSULTA'];
             $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";

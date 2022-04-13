@@ -38,8 +38,9 @@
 													<th>Referencia</th>
 													<th>Nombre</th>
 													<th>Categoria</th>
-													<th>Precio</th>
-													<th>Cantidad</th>
+													<th>Precio Compra</th>
+													<th>Precio Venta</th>
+													<th>Stock</th>
 													<th>Opciones</th>
 												</tr>
 											</thead>
@@ -49,8 +50,9 @@
 													<td><?php echo $article->ID_PROD_INV; ?></td>
 													<td><?php echo $article->NOM_PRO; ?></td>
 													<td><?php echo $article->NOM_CATEGORIA; ?></td>
+													<td><?php echo "$".number_format($article->PRECIO_COMPRA,0,',','.'); ?></td>
 													<td><?php echo "$".number_format($article->PRECIO,0,',','.'); ?></td>
-													<td><?php echo $article->CANTIDAD; ?></td>
+													<td><?php echo $article->STOCK; ?></td>
 													<td class="actions" style="width:200px"><a class="modal-with-form btn btn-primary modal-edit-article" href="#modalForm2" style="color:white"><i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger inactivate-article" href="#" style="color:white"><i class="fas fa-times"></i> Eliminar</a></td>
                                                     </tr>
                                                     <?php 
@@ -64,8 +66,6 @@
 						</div>
 						</div>
 					</div>
-                    <div class="card-body">
-
 									<!-- Modal Form -->
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
@@ -80,11 +80,13 @@
 													</div>
 													</div>
 													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-12 mb-3 mb-lg-0">
                                                             <label for="NOM_PRO">Nombre Producto </label>
 															<input type="text" id="NOM_PRO" name="NOM_PRO" class="form-control" required>															
-														</div>
-														<div class="col-md-6 mb-3 mb-lg-0">
+														</div>																												
+													</div>
+													<div class="form-row">
+													<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="ID_GRUPO">Categoria</label>
 															<select name="ID_GRUPO" id="ID_GRUPO" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
@@ -93,15 +95,18 @@
 																<?php } ?>
 															</select>
 														</div>
-														
-													</div>
-													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="CANTIDAD">Cantidad</label>
 															<input type="number" id="CANTIDAD" class="form-control">
+														</div>																										
+													</div>
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="PRECIO_COMPRA">Precio Compra</label>
+															<input type="text" id="PRECIO_COMPRA" class="form-control">
 														</div>												
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIO">Precio</label>
+															<label for="PRECIO">Precio Venta</label>
 															<input type="text" id="PRECIO" class="form-control">
 														</div>												
 													</div>
@@ -131,11 +136,13 @@
 													</div>
 													</div>
 													<div class="form-row">
-														<div class="col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-12 mb-3 mb-lg-0">
 															<input type="hidden" id="ID_PROE">
                                                             <label for="NOM_PROE">Nombre Producto </label>
 															<input type="text" id="NOM_PROE" name="NOM_PROE" class="form-control" required>															
-														</div>
+														</div>																												
+													</div>
+													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="ID_GRUPOE">Categoria</label>
 															<select name="ID_GRUPO" id="ID_GRUPOE" class="form-control">
@@ -145,17 +152,20 @@
 																<?php } ?>
 															</select>
 														</div>
-														
-													</div>
-													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="CANTIDADE">Cantidad</label>
 															<input type="number" id="CANTIDADE" class="form-control">
-														</div>												
+														</div>																										
+													</div>
+													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIOE">Precio</label>
+															<label for="PRECIOE_COMPRA">Precio Compra</label>
+															<input type="text" id="PRECIOE_COMPRA" class="form-control">
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="PRECIOE">Precio Venta</label>
 															<input type="text" id="PRECIOE" class="form-control">
-														</div>												
+														</div>																								
 													</div>
 												</form>
 											</div>
@@ -254,6 +264,8 @@
 
 
         $('#PRECIO').mask('#.##0', {reverse: true});
+		$('#PRECIO_COMPRA').mask('#.##0', {reverse: true});
+		$('#PRECIOE_COMPRA').mask('#.##0', {reverse: true});
 		$('#PRECIOE').mask('#.##0', {reverse: true});
 
 		$(document).on('click','.modal-edit-article',function(){
@@ -270,6 +282,7 @@
                                 $('#CANTIDADE').val(data[0]['CANTIDAD']);
 								$('#PRECIOE').val(data[0]['PRECIO']);
 								$('#ID_PROE').val(data[0]['ID_PRO']);
+								$('#PRECIOE_COMPRA').val(data[0]['PRECIO_COMPRA']);
 							}
 						});
 					});

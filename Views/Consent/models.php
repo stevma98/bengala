@@ -59,8 +59,6 @@
 						</div>
 						</div>
 					</div>
-                                <div class="card-body">
-
 									<!-- Modal Form -->
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide" style="max-width:1000px !important">
 										<section class="card" >
@@ -102,8 +100,6 @@
 
 								</div>
                                 
-                                <div class="card-body">
-
 									<!-- Modal Form -->
 									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide" style="max-width:1000px !important">
 										<section class="card" >

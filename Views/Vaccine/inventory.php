@@ -58,8 +58,7 @@
 						</div>
 						</div>
 					</div>
-                    <div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalForm1">Open Form</a>
+                    
 
 									<!-- Modal Form -->
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
@@ -118,8 +117,6 @@
 
 								</div>
 
-                                <div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalFormEdit">Open Form</a>
 
 									<!-- Modal Form -->
 									<div id="modalFormEdit" class="modal-block modal-block-primary mfp-hide">

@@ -168,7 +168,7 @@ class Vaccine {
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;
             $ide=$_SESSION['user']->ID_EMPRESA;
-            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Vacuna','ID_PRODUCTO'=>$idva,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price];
+            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Vacuna','ID_PRODUCTO'=>$idva,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price,'CANTIDAD'=>1];
             $this->pdo->insert('carrito',$carrito);
             $action="Ha realizado una vacuna id=".$data['ID_VACUNA'];
             

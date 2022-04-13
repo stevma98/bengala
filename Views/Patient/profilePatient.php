@@ -892,7 +892,7 @@
 									</div>
 								</div>																
 							</div>
-							<div class="card" style="margin-top:3% !important">
+							<div class="card card-featured card-featured-primary" style="margin-top:3% !important">
 								<div class="card-header">
 									<h2 class="card-title">Anotaciones</h2>
 								</div>
@@ -926,7 +926,7 @@
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
-													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $ownerss[0]->ID_PROP ?>">
 													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<div class="form-row">
@@ -1019,7 +1019,7 @@
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
-													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $ownerss[0]->ID_PROP ?>">
 													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<div class="form-row">
@@ -1103,7 +1103,7 @@
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
-													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_PROP" id="ID_PROP" value="<?php echo $ownerss[0]->ID_PROP ?>">
 													<input type="hidden" name="ID_MASCOTA" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA ?>">
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<input type="hidden" name="HOURC" id="HOURC" value="<?php echo date('H:s'); ?>">
@@ -1279,7 +1279,7 @@ Muestras remitidas:</textarea> -->
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
-													<input type="hidden" name="ID_PROP" id="ID_PROPE" value="<?php echo $owners[0]->ID_PROP ?>">
+													<input type="hidden" name="ID_PROP" id="ID_PROPE" value="<?php echo $ownerss[0]->ID_PROP ?>">
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESAE" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<input type="hidden" name="HOURC" id="HOURCE" value="<?php echo date('H:s'); ?>">
 													<input type="hidden" id="confirmer" value="0">
@@ -1400,7 +1400,7 @@ Muestras remitidas:</textarea> -->
 													</div>
 													</div>
 													<input type="hidden" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA; ?>">
-													<input type="hidden" id="ID_PROP" value="<?php echo $data->ID_PROP; ?>">
+													<input type="text" id="ID_PROP" value="<?php echo $data->ID_PROP; ?>">
                                                     <div class="form-row">
                                                         <div class="col-md-12 mb-6 mb-lg-0">
                                                             <label for="TIPO_CONSEN">Consentimiento:</label>

@@ -21,15 +21,11 @@
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
 						</div>
 					</header>
-
+                    <?php foreach ($datas as $data) {?>
 					<!-- start: page -->
 					<form class="order-details action-buttons-fixed" method="post">
 						<div class="row">
 							<div class="col-xl-4 mb-4 mb-xl-0">
-                            <?php 
-                                        $date=date('Y-m-d');
-                            foreach ($datas as $data) {?>
-
 								<div class="card card-modern">
 									<div class="card-header">
 										<h2 class="card-title">General</h2>
@@ -40,7 +36,7 @@
 												<h5><b>Estado</b></h5>
 											</div>
 											<div class="col-lg-9">
-												<input type="text" class="form-control  text-center" name="orderTimeHour" value="Pendiente Cerrar" readonly id="estado" />
+												<input type="text" class="form-control  text-center" name="orderTimeHour" value="<?php echo $data->ESTADO ?>" readonly id="estado" />
 											</div>
 										</div>
 										<br>
@@ -49,7 +45,7 @@
 												<h5><b>Fecha</b></h5>
 											</div>
 											<div class="col-lg-9">
-												<input type="text" class="form-control text-center" name="orderDate" value="<?php echo $date ?>" readonly/>
+												<input type="text" class="form-control text-center" name="orderDate" value="<?php echo $data->FECHA_VENTA ?>" readonly/>
 											</div>
 										</div>
 										<br>
@@ -58,14 +54,13 @@
 												<h5><b>Paciente</b></h5>
 											</div>	
 											<div class="col-lg-9">
-												<input type="text" class="form-control  text-center" name="orderTimeHour" value="<?php echo $patient[0]->NOMBRE ?>" readonly />
+												<input type="text" class="form-control  text-center" name="orderTimeHour" value="<?php echo $data->NOMBRE ?>" readonly />
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="col-xl-8">
-								
 								<div class="card card-modern">
 									<div class="card-header">
 										<h2 class="card-title">Datos</h2>
@@ -75,7 +70,7 @@
 											<div class="col-xl-4 mr-xl-5 pr-xl-5 mb-4 mb-xl-0">
 												<h3 class="text-color-dark font-weight-bold text-4 line-height-1 mt-0 mb-3">Facturación</h3>
 												<ul class="list list-unstyled list-item-bottom-space-0" style="font-size:16x !important">
-                                                    <li><?php echo $patient[0]->DUENO ?></li>
+                                                    <li><?php echo $data->DUENO ?></li>
 													<li><?php echo $data->DIRECCION ?></li>
 													<li><?php echo $data->depart ?></li>
 													<li><?php echo $data->city ?></li>
@@ -88,15 +83,14 @@
 												<strong class="d-block text-color-dark mt-3">Teléfono:</strong>
 												<a href="tel:+5551234" class="text-color-dark"><?php echo $data->TELEFONO ?></a>
 												<input type="hidden" value="<?php echo $_GET['idp'] ?>" id="idp">
-												<input type="hidden" value="<?php echo $_GET['id'] ?>" id="idm">
+												<input type="hidden" value="<?php echo $_GET['idc'] ?>" id="idm">
 											</div>
 										</div>
 									</div>
 								</div>
-
+                            <?php } ?>
 							</div>
 						</div>
-                        <?php } ?>
                         <br>
 						<div class="row">
 							<div class="col-lg-6">
@@ -151,9 +145,8 @@
                                 <div class="card card-modern">
 									<div class="card-header">
 										<h2 class="card-title">Medicamentos/Productos</h2>
-										<br>
                                         <div class="form-group">
-											<a type="button" class="modal-with-form btn btn-primary btn-xs mr-2" href="#modalForm1">+</a>
+											<!-- <a type="button" class="modal-with-form btn btn-primary btn-xs mr-2" href="#modalForm1">+</a> -->
 											<!-- <button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button> -->
 											<input type="hidden" value="1" id="num">
 										</div>
@@ -168,7 +161,6 @@
                                                         <th width="10%" class="pl-4">Cantidad</th>
 														<th width="10%" class="pl-4">Precio</th>
 														<th width="10%" class="pl-4">Total</th>
-														<th width="10%" class="pl-4">Acciones</th>
 													</tr>
 												</thead>
 												<tbody id="tableProducts">
@@ -194,7 +186,7 @@
 											<div class="col-auto mr- 6">
 												<h3 class="font-weight-bold text-color-dark text-4 mb-3">¿Descuentos?(%)</h3>
 												<span class="d-flex align-items-center">
-													<input type="number" class="form-control form-control-sm" id="discount" style="text-align:center;" min=0 max=100 value=0>
+													<input type="number" class="form-control form-control-sm" id="discount" style="text-align:center;" min=0 max=100 value=<?php echo $datas[0]->DESCUENTO ?> readonly>
 												</span>
 											</div>
 											<div class="col-auto mr-6">
@@ -242,11 +234,8 @@
                         
 						<div class="row action-buttons">
 							<div class="col-12 col-md-auto">
-								<a href="#modalForm3" class="modal-with-form btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"><i class="bx bx-save text-4 mr-2"></i> Pagar</a>
+								<a href="#" class="modal-with-form btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"><i class="bx bx-save text-4 mr-2"></i> Pagar</a>
 									
-							</div>
-							<div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
-								<a href="?controller=contability&method=deleteProductsxCar&id=<?php echo $_GET['id'] ?>&idc=<?php echo $procedures[0]->ID_CONSE_CARRITO ?>" onclick="return confirm('¿Estas seguro de cancelar la venta?')"  class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Cancelar</a>
 							</div>
 							<div class="col-12 col-md-auto ml-md-auto mt-3 mt-md-0">
 								<a href="#" class="delete-button btn btn-danger btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">
@@ -359,81 +348,6 @@
 				</section>
 			</div>
 			</div>
-
-			<div id="modalForm3" class="modal-block modal-block-primary mfp-hide">
-				<section class="card">
-					<header class="card-header">
-						<h2 class="card-title">Pago</h2>
-					</header>
-					<div class="card-body">
-						<form id="anadir">
-							<div class="form-row">
-							<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
-								<strong>Oh que mal!</strong> Aun hay espacios por completar.
-							</div>
-							</div>
-							<input type="hidden" value="<?php echo $procedures[0]->ID_CONSE_CARRITO ?>" id="consecutivo">
-							<input type="hidden" value="<?php echo $procedures[0]->ID_MASCOTA ?>" id="ID_MASCOTA">
-							<input type="hidden" value="<?php echo $procedures[0]->ID_PROP ?>" id="ID_PROP">
-							<div class="form-row">
-								<div class="col-lg-4 col-md-4 mb-3 mb-lg-0">
-									<label for="FORMA_PAGO">Forma Pago</label>
-									<select name="FORMA_PAGO" id="FORMA_PAGO" class="form-control" required style="text-align:center">
-										<option value="0">Contado</option>
-										<option value="1">Crédito</option>
-									</select>
-								</div>
-								<div class="col-lg-8 col-md-4 mb-3 mb-lg-0">
-									<label for="totalpagar">Total</label>
-									<input type="text" class="form-control" id="totalpagar" style="text-align:center" disabled>
-								</div>
-							</div>							
-							<div class="form-row">
-								<div class="col-lg-4 col-md-4 mb-3 mb-lg-0">
-									<label for="METODO_PAGO">Método Pago</label>
-									<select name="METODO_PAGO" id="METODO_PAGO" class="form-control" required style="text-align:center">
-										<option value="Banco">Banco</option>
-										<option value="Local" selected>Local</option>
-									</select>
-								</div>
-								<div class="col-lg-8 col-md-4 mb-3 mb-lg-0">
-									<label for="received">Recibo</label>
-									<input type="text" class="form-control" id="received" style="text-align:center">
-									<input type="hidden" class="form-control" id="received1" style="text-align:center">
-								</div>
-							</div>							
-							<div class="form-row">
-								<div class="col-lg-4 col-md-4 mb-3 mb-lg-0">
-								</div>
-								<div class="col-lg-8 col-md-4 mb-3 mb-lg-0">
-									<label for="return">Cambio</label>
-									<input type="text" class="form-control" id="return" style="text-align:center">
-								</div>
-							</div>	
-							<div class="form-row">
-								 <div class="col-lg-8 col-md-8 mb-3 mb-lg-0" >
-									 <label for="OBS">Observaciones</label>
-									<textarea name="OBS" id="OBS" rows="1" class="form-control"></textarea>
-								 </div>
-								 <div class="col-lg-4 col-md-4 mb-3 mb-lg-0 center" style="margin-top:6%">
-									 <label for="TICKET">¿Ticket?</label>
-									<input type="checkbox" id="TICKET" class="checkbox-custom checkbox-default" value="1">
-								 </div>
-							</div>
-						</form>
-					</div>
-					<input type="hidden" id="confirmer" value="0">
-					<footer class="card-footer">
-						<div class="row">
-							<div class="col-md-12 text-right">
-								<button class="btn btn-primary modal-confirm" id="closeSale" >Finalizar</button>
-								<button class="btn btn-default modal-dismiss" >Cancelar</button>
-							</div>
-						</div>
-					</footer>
-				</section>
-			</div>
-
 		</section>	
 
 		<!-- Examples -->.
@@ -475,10 +389,11 @@
 			var idm = $('#idm').val();
 			var idp = $('#idp').val();
 			$.ajax({
-				url:'?controller=contability&method=searchProductsxBill',
+				url:'?controller=contability&method=searchProductsxBillShow',
 				type: 'GET',
 				data: {idm,idp},
 				success : function(response){
+					console.log(response);
 					var datas = JSON.parse(response);
 					var template = '';
 					var count = 1;
@@ -498,8 +413,6 @@
 							<td class="pl-4">${data.CANTIDADP}</td>
 							<td class="pl-4">$${PRECIOF}</td>
 							<td class="pl-4">$${total}</td>
-							<td class="center">
-							<a class="on-default" onclick="deleteRow(${data.ID_CARRITO})" style="color:black"><i class="far fa-trash-alt"></i></a></td>
 							</tr>
 						`
 						count+=1;

@@ -457,7 +457,30 @@
 				                                    Categorias
 				                                </a>
 				                            </li>
+											<li class="nav-parent">
+				                                <a class="nav-link" href="#">
+				                                    Compras
+				                                </a>
+				                                <ul class="nav nav-children">
+				                                    <li>
+				                                        <a class="nav-link" href="?controller=inventory&method=providers">
+				                                            Proveedores
+				                                        </a>
+				                                    </li>
+													<li>
+				                                        <a class="nav-link" href="?controller=inventory&method=shopping">
+				                                            Agregar Compra
+				                                        </a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+											<li>
+				                                <a class="nav-link" href="?controller=inventory&method=kardex">
+				                                    Kardex
+				                                </a>
+				                            </li>
 				                        </ul>
+										
 				                    </li>
 				                    <li class="nav-parent">
 				                        <a class="nav-link" href="#">

@@ -311,9 +311,6 @@
 						</div>
 					</div>
 
-
-                    <div class="card-body">
-
                     <div id="modalForm1" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
 										<section class="card">
 											<header class="card-header">

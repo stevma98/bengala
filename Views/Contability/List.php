@@ -5,7 +5,7 @@
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Registro Recibos</h2>
+					<h2>Lista Registro Ventas</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -15,7 +15,7 @@
 									</a>
 								</li>
 								<li><span>Contabilidad</span></li>
-								<li><span>Verificación</span></li>
+								<li><span>Listar Ventas</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
@@ -23,99 +23,153 @@
 					</header>
 
 					<!-- start: page -->
-					<div class="row">
-						<div class="col">
-							
-							<div class="card card-modern">
-								<div class="card-body">
-									<div class="datatables-header-footer-wrapper">
-										<div class="datatable-header">
-											<div class="row align-items-center mb-3">
-												<div class="col-12 col-lg-auto mb-3 mb-lg-0">
-													<a href="ecommerce-orders-detail.html" class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">+ Add Order</a>
-												</div>
-												<div class="col-8 col-lg-auto ml-auto mb-3 mb-lg-0">
-													<div class="d-flex align-items-lg-center flex-column flex-lg-row">
-														<label class="ws-nowrap mr-3 mb-0">Filter By:</label>
-														<select class="form-control select-style-1 filter-by" name="filter-by">
-															<option value="all" selected>All</option>
-															<option value="1">ID</option>
-															<option value="2">Customer Name</option>
-															<option value="3">Date</option>
-															<option value="4">Total</option>
-															<option value="5">Status</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-4 col-lg-auto pl-lg-1 mb-3 mb-lg-0">
-													<div class="d-flex align-items-lg-center flex-column flex-lg-row">
-														<label class="ws-nowrap mr-3 mb-0">Show:</label>
-														<select class="form-control select-style-1 results-per-page" name="results-per-page">
-															<option value="12" selected>12</option>
-															<option value="24">24</option>
-															<option value="36">36</option>
-															<option value="100">100</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-12 col-lg-auto pl-lg-1">
-													<div class="search search-style-1 search-style-1-lg mx-lg-auto">
-														<div class="input-group">
-															<input type="text" class="search-term form-control" name="search-term" id="search-term" placeholder="Search Order">
-															<span class="input-group-append">
-																<button class="btn btn-default" type="submit"><i class="bx bx-search"></i></button>
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list" style="min-width: 640px;">
+                                    <header class="card-header" style="padding:30px !important">
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+										<h2 class="card-title">Registro Ventas</h2>
+                                    </header>
+                                    
+								<div class="card-body">									
+									<!-- Modal Form -->
+									
+									<div class="card-body">
+										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
 												<tr>
-													<th width="8%">ID</th>
-													<th width="28%">Customer Name</th>
-													<th width="18%">Date</th>
-													<th width="18%">Total</th>
-													<th width="15%">Status</th>
+													<th>No Comprobante</th>
+													<th>Fecha y Hora</th>
+													<th>Forma Pago</th>
+													<th>Tipo Pago</th>
+													<th>Total</th>
+													<th>Opciones</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td><a href="ecommerce-orders-detail.html"><strong>191</strong></a></td>
-													<td><a href="ecommerce-orders-detail.html"><strong>Customer Name Example</strong></a></td>
-													<td>Nov 21, 2019</td>
-													<td>$200</td>
-													<td><span class="ecommerce-status on-hold">On Hold</span></td>
+                                                    <?php foreach($bills as $bill){ ?>
+                                                    <tr>
+													<td><?php echo $bill->ID_CONSE_VENTA; ?></td>
+													<td><?php echo $bill->FECHA_VENTA; ?></td>
+													<td><?php echo ($bill->CREDITO=='1') ? 'Credito' : 'Contado'; ?></td>
+													<td><?php echo $bill->METODO_PAGO ?></td>
+													<td><?php echo ($bill->DESCUENTO==0) ? "$".number_format($bill->VALOR,0,',','.') : "$".number_format($bill->VALOR-($bill->VALOR*($bill->DESCUENTO/100)),0,',','.') ; ?></td>
+													<td><a href="?controller=contability&method=viewBill&id=<?php echo $bill->ID_CONSE_VENTA; ?>&idc=<?php echo $bill->ID_CARRITO ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a></td>
+                                                    </tr>
+                                                    <?php 
+                                                    } ?>
 												</tr>
 											</tbody>
 										</table>
-										<hr class="solid mt-5 opacity-4">
-										<div class="datatable-footer">
-											<div class="row align-items-center justify-content-between mt-3">
-												<div class="col-md-auto order-1 mb-3 mb-lg-0">
-													<div class="d-flex align-items-stretch">
-														<select class="form-control select-style-1 bulk-action mr-3" name="bulk-action" style="min-width: 170px;">
-															<option value="" selected>Bulk Actions</option>
-															<option value="delete">Delete</option>
-														</select>
-														<a href="ecommerce-orders-detail.html" class="bulk-action-apply btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Apply</a>
-													</div>
-												</div>
-												<div class="col-lg-auto text-center order-3 order-lg-2">
-													<div class="results-info-wrapper"></div>
-												</div>
-												<div class="col-lg-auto order-2 order-lg-3 mb-3 mb-lg-0">
-													<div class="pagination-wrapper"></div>
-												</div>
-											</div>
-										</div>
-									</table>
-								</div>
+									</div>
+								</section>
 							</div>
-
+						</div>
 						</div>
 					</div>
+									<!-- Modal Form -->
+									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Formulario de Registro Vacuna</h2>
+											</header>
+											<div class="card-body">
+												<form>
+													<div class="form-row">
+													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+														<strong>Oh que mal!</strong> Aun hay espacios por completar.
+													</div>
+														<div class="form-group col-md-6 mb-3 mb-lg-0">
+															<label for="ID_PROP">Propietario:</label>
+                                                            <select name="ID_PROP" id="ID_PROP" class="form-control" placeholder="Propietario" required>
+                                                                <option value="Seleccione..." Selected>Seleccione...</option>
+																<?php foreach ($owners as $owner) {?>
+																	<option value="<?php echo $owner->ID_PROP ?>"><?php echo $owner->ST_NOM." ".$owner->ND_NOM." ".$owner->ST_APE." ".$owner->ND_APE ?></option>
+																<?php } ?>
+                                                            </select>
+														</div>
+														<div class="form-group col-md-6 mb-3 mb-lg-0">
+															<label for="ID_MASCOTA">Paciente:</label>
+                                                            <select name="ID_MASCOTA" id="ID_MASCOTA" class="form-control" placeholder="Paciente" required>
+                                                            </select>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_VACUNA">Vacuna</label>
+															<select name="ID_VACUNA" id="ID_VACUNA" class="form-control">
+																<option value="Seleccione...">Seleccione...</option>
+																<?php foreach ($vaccinesI as $vaccineI) {?>
+																	<option value="<?php echo $vaccineI->ID_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
+																<?php } ?>
+															</select>
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="LOTE">Lote</label>
+															<input type="text" id="LOTE" name="LOTE" class="form-control" required>															
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="PRESENTACION">Presentacion</label>
+															<input type="text" id="PRESENTACION" name="PRESENTACION" class="form-control" value="0" disabled>
+														</div>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="DOSIS">Dosis</label>
+															<input type="text" id="DOSIS" name="DOSIS" class="form-control" required>
+														</div>														
+													</div>
+													<div class="form-row">
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="VENCIMIENTO">Vencimiento</label>
+															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="FEC_VACUNA">Fecha Vacuna</label>
+															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna</label>
+															<input type="date" id="FECHA_ULT_VACUNA" name="FECHA_ULT_VACUNA" class="form-control" required>
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
+															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
+															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
+																<option value="Seleccione...">Seleccione...</option>
+																<?php foreach ($vaccinesI as $vaccineI) {?>
+																	<option value="<?php echo $vaccineI->NOMBRE_VACUNA ?>"><?php echo $vaccineI->NOMBRE_VACUNA ?></option>
+																<?php } ?>
+															</select>
+														</div>
+														<div class="col-md-4 mb-3 mb-lg-0">
+															<label for="PRECIO_VACUNA">Precio</label>
+															<input type="text" id="PRECIO_VACUNA" name="PRECIO_VACUNA" class="form-control">
+														</div>
+													</div>
+													<div class="form-row">
+														<div class="col-md-12 mb-6 mb-lg-0">
+															<label for="DETALLE">Observaciones</label>
+															<textarea class="form-control" rows="2" id="DETALLE" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
+														</div>
+																</div>													
+												</form>
+											</div>
+											<input type="hidden" id="confirmer" value="0">
+											<footer class="card-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm" id="createVaccineAppointment" >Crear</button>
+														<button class="btn btn-default modal-dismiss" >Cancelar</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+								</div>
 					<!-- end: page -->
 				</section>
 			</div>
@@ -193,4 +247,80 @@
 		<!-- Examples -->
 		<!-- <script src="Assets/js/examples/examples.notifications.js"></script> -->
 		<script src="Assets/js/examples/examples.modals.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+		<script src="Assets/vendor/summernote/summernote-bs4.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+		
+		<!-- Listado con ajax -->
+
+		<!-- <script>
+			$(document).ready(function(){
+				reloadTable();
+			});
+			function reloadTable() {
+				$.ajax({
+					url:'?controller=owner&method=getList',
+					type:'GET',
+					success:function(response){
+						console.log(response);
+						let datas = JSON.parse(response);
+						let template = '';
+						datas.forEach(data=>{
+							template += `
+						<tr >
+							<td>${data.ID_PROP}</td>
+							<td><a href="#" class="task-item">${data.ST_NOMBRE}</a></td>
+							<td>${data.ND_NOMBRE}</td>
+							<td>
+								<button class="task-delete btn btn-danger">
+									Delete
+								</button>
+							</td>
+						</tr>
+						`
+						})
+						$('#datatable-tabletools').html(template);
+						console.log(response);
+					}
+				});
+	}
+		</script> -->
+		<script>
+		$('#PRECIO_VACUNA').mask('#.##0', {reverse: true});
+			$('#ID_VACUNA').on('change',function(){
+				id = $('#ID_VACUNA').val();
+				getPresentation(id);
+			});
+
+			function getPresentation(id) {				
+				$.ajax({
+					url:'?controller=vaccine&method=getPresentation&id='+id,
+					type:'GET',
+					success:function(response){
+						$('#PRESENTACION').val(response);
+					}
+				});
+			}
+
+			$('#ID_PROP').on('change',function(){
+				id = $('#ID_PROP').val();
+				getPatient(id);
+			});
+
+			function getPatient(id) {				
+				$.ajax({
+					url:'?controller=patient&method=getPatient&id='+id,
+					type:'GET',
+					success:function(response){
+						let datas = JSON.parse(response);
+						
+						let template = '<option value="Seleccione...">Seleccione...</option>';
+						datas.forEach(data=>{
+							template += `
+						<option value='${data.ID_MASCOTA}'>${data.NOMBRE}</option>
+						`
+						})
+						$('#ID_MASCOTA').html(template);
+					}
+				});
+			}
+		</script>

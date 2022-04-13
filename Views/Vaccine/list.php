@@ -79,7 +79,6 @@
 						</div>
 						</div>
 					</div>
-                    <div class="card-body">
 
 									<!-- Modal Form -->
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">

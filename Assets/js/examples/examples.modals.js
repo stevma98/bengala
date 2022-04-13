@@ -361,6 +361,66 @@ Theme Version: 	3.0.0
 	});
 
 	/*
+	Create Provider
+	*/
+
+	$(document).on('click', '#createProvider', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#NOMBRE").val().length < 1) {
+				$('#NOMBRE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#NOMBRE').css('border','1px solid green');
+			}		
+			if($("#NIT").val().length < 1) {
+				$('#NIT').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#NIT').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#TELEFONO").val().length < 1) {
+				$('#TELEFONO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#TELEFONO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=createProvider',
+					data: 'PROVEEDOR='+$('#NOMBRE').val()+'&NIT='+$('#NIT').val()+'&TELEFONO='+$('#TELEFONO').val()+'&CONTACTO='+$('#CONTACTO').val()+'&TEL_CONTACTO='+$('#TEL_CONTACTO').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Proveedor '+$('#NOMBRE').val()+' creado éxitosamente',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear el propietario',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
 	Create Consent
 	*/
 
@@ -391,7 +451,6 @@ Theme Version: 	3.0.0
 					url: '?controller=consent&method=createConsent',
 					data: 'NOMBRE_CONSEN='+$('#NOMBRE_CONSEN').val()+'&TEXTO_CONSEN='+$('#OBSERVACIONES').html(),
 					success: function(data){
-						console.log(data);
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Consentimiento Creado Exitosamente.',
@@ -407,6 +466,128 @@ Theme Version: 	3.0.0
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crear el consentimiento',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
+	Add Input
+	*/
+
+	$(document).on('click', '#addInput', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#CODIGO_PRODUCTO").val() == 'Seleccione...') {
+				$('#CODIGO_PRODUCTO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#CODIGO_PRODUCTO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}		
+			if($("#MOTIVO").val() == 'Seleccione...') {
+				$('#MOTIVO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#MOTIVO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}		
+			if($("#CANTIDAD").val().length < 1) {
+				$('#CANTIDAD').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#CANTIDAD').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=manualAddInput',
+					data: 'CODIGO_PRODUCTO='+$('#CODIGO_PRODUCTO').val()+'&MOTIVO_ENTRADA='+$('#MOTIVO').val()+'&CANTIDAD_ENTRADA='+$('#CANTIDAD').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Entrada Creada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la entrada',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
+	Add Output
+	*/
+
+	$(document).on('click', '#addOutput', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#CODIGO_PRODUCTOS").val() == 'Seleccione...') {
+				$('#CODIGO_PRODUCTOS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#CODIGO_PRODUCTOS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}		
+			if($("#MOTIVOS").val() == 'Seleccione...') {
+				$('#MOTIVOS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#MOTIVOS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}		
+			if($("#CANTIDADS").val().length < 1) {
+				$('#CANTIDADS').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#CANTIDADS').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=manualAddOutput',
+					data: 'CODIGO_PRODUCTO='+$('#CODIGO_PRODUCTOS').val()+'&MOTIVO_SALIDA='+$('#MOTIVOS').val()+'&CANTIDAD_SALIDA='+$('#CANTIDADS').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Salida Creada Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la salida',
 							type: 'error',
 							shadow: true
 						});
@@ -745,7 +926,6 @@ Theme Version: 	3.0.0
 					url: '?controller=patient&method=editPatient',
 					data: 'ID_MASCOTA='+$('#ID_MASCOTA').val()+'&NOMBRE='+$('#NOMBRE').val()+'&SEXO='+$('#SEXO').val()+'&TIPO='+$('#TIPO').val()+'&RAZA='+$('#RAZA').val()+'&DUENO='+$('#DUENO').val()+'&COLOR='+$('#COLOR').val()+'&FEC_NAC='+$('#FEC_NAC').val()+'&ESTADO_MASCOTA='+$('#ESTADO_MASCOTA').val()+'&PESO='+$('#PESO').val()+'&DIETA='+$('#DIETA').val()+'&ANORMALIDADES='+$('#ANORMALIDADES').val()+'&ANAMESIS='+$('#ANAMESIS').val(),
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Mascota Editada Exitosamente.',
@@ -776,7 +956,6 @@ Theme Version: 	3.0.0
 					cache: false,
 					processData: false,
 					success: function(response){
-						console.log(response);
 					}
 				});
 			}
@@ -813,7 +992,6 @@ Theme Version: 	3.0.0
 					url: '?controller=vaccine&method=newVaccine',
 					data: 'NOMBRE_VACUNA='+$('#NOMBRE_VACUNA').val()+'&PRESENTACION='+$('#PRESENTACION').val(),
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Vacuna Creada Exitosamente.',
@@ -868,7 +1046,6 @@ Theme Version: 	3.0.0
 					url: '?controller=vaccine&method=editVaccine',
 					data: 'ID_VACUNA='+$('#ID_VACUNA_EDIT').val()+'&NOMBRE_VACUNA='+$('#NOMBRE_VACUNA_EDIT').val()+'&PRESENTACION='+$('#PRESENTACION_EDIT').val(),
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Vacuna Editada Exitosamente.',
@@ -1061,7 +1238,6 @@ Theme Version: 	3.0.0
 					url: '?controller=query&method=createQueryAppointment',
 					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA').val()+'&HORA_CONSULTA='+$('#HORA_CONSULTA').val()+'&OBSERVACIONES='+$('#OBSERVACIONES1').val()+'&ESTADO_CONSULTA=Pendiente',
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Cita de consulta Creada Exitosamente.', 
@@ -1328,7 +1504,6 @@ Theme Version: 	3.0.0
 					url: '?controller=barber&method=createBarberAppointment',
 					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&FEC_PELUQUERIA='+$('#FEC_PELUQUERIA').val()+'&TIPO_CORTE='+$('#TIPO_CORTE').val()+'&ACCESORIOS='+$('#ACCESORIOS').val()+'&CORTE_UNAS='+$('#CORTE_UNAS').val()+'&BANO_MEDICADO='+$('#BANO_MEDICADO').val()+'&PRECIO_PELUQUERIA='+$('#PRECIO_PELUQUERIA').val()+'&DETALLE='+$('#DETALLE').val()+'&ESTADO_PELUQUERIA=Pendiente',
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Registro de peluqueria Creada Exitosamente.',
@@ -1381,6 +1556,13 @@ Theme Version: 	3.0.0
 				$('#alertif').css('display','none');
 				$('#CANTIDAD').css('border','1px solid green');
 			}
+			if($("#PRECIO_COMPRA").val().length < 1) {
+				$('#PRECIO_COMPRA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRECIO_COMPRA').css('border','1px solid green');
+			} 
 			if($("#PRECIO").val().length < 1) {
 				$('#PRECIO').css('border','1px solid red');
 				$('#alertif').css('display','block');
@@ -1394,7 +1576,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=inventory&method=createArticle',
-					data: 'NOM_PRO='+$('#NOM_PRO').val()+'&ID_GRUPO='+$('#ID_GRUPO').val()+'&CANTIDAD='+$('#CANTIDAD').val()+'&PRECIO='+$('#PRECIO').val(),
+					data: 'NOM_PRO='+$('#NOM_PRO').val()+'&ID_GRUPO='+$('#ID_GRUPO').val()+'&CANTIDAD='+$('#CANTIDAD').val()+'&PRECIO='+$('#PRECIO').val()+'&PRECIO_COMPRA='+$('#PRECIO_COMPRA').val(),
 					success: function(data){
 						new PNotify({
 							title: 'Confirmado!',
@@ -1405,6 +1587,51 @@ Theme Version: 	3.0.0
 						setTimeout(() => {
 						location.reload();	
 						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crea el producto',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+				}
+	});
+
+	/*
+	close Sale
+	*/
+
+	$(document).on('click', '#closeSale ', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#received").val().length < 1) {
+				$('#received').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#received').css('border','1px solid green');
+				$('#confirmer').val("1");
+			}
+			var ticket= ($('#TICKET').is(':checked')) ? 1 : 0 ;
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=contability&method=closeSale',
+					data: 'ID_CARRITO='+$('#consecutivo').val()+'&ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&VALOR='+$('#totalVenta1').val()+'&DESCUENTO='+$('#discount').val()+'&METODO_PAGO='+$('#METODO_PAGO').val()+'&FORMA_PAGO='+$('#FORMA_PAGO').val()+'&TICKET='+ticket+'&INICIAL='+$('#received1').val()+'&OBS='+$('#OBS').val(),					
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Producto Creado Exitosamente.',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						window.location.href="?controller=patient&method=profilePatient&id="+$('#ID_MASCOTA').val()+"";	
 					},
 					error: function(data){
 						$.magnificPopup.close();
@@ -1448,6 +1675,13 @@ Theme Version: 	3.0.0
 				$('#alertif').css('display','none');
 				$('#CANTIDADE').css('border','1px solid green');
 			}
+			if($("#PRECIOE_COMPRA").val().length < 1) {
+				$('#PRECIOE_COMPRA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#alertif').css('display','none');
+				$('#PRECIOE_COMPRA').css('border','1px solid green');
+			} 
 			if($("#PRECIOE").val().length < 1) {
 				$('#PRECIOE').css('border','1px solid red');
 				$('#alertif').css('display','block');
@@ -1461,9 +1695,8 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=inventory&method=editArticle',
-					data: 'NOM_PRO='+$('#NOM_PROE').val()+'&ID_GRUPO='+$('#ID_GRUPOE').val()+'&CANTIDAD='+$('#CANTIDADE').val()+'&PRECIO='+$('#PRECIOE').val()+'&ID_PRO='+$('#ID_PROE').val(),
+					data: 'NOM_PRO='+$('#NOM_PROE').val()+'&ID_GRUPO='+$('#ID_GRUPOE').val()+'&CANTIDAD='+$('#CANTIDADE').val()+'&PRECIO='+$('#PRECIOE').val()+'&ID_PRO='+$('#ID_PROE').val()+'&PRECIO_COMPRA='+$('#PRECIOE_COMPRA').val(),
 					success: function(data){
-						console.log(data);			
 						new PNotify({
 							title: 'Confirmado!',
 							text: 'Registro de peluqueria Creada Exitosamente.',

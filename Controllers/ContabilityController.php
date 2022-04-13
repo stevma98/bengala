@@ -30,6 +30,7 @@ class ContabilityController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
+		$bills= $this->model->getAll();
 		require 'Views/Contability/list.php';
 	}
 
@@ -44,9 +45,23 @@ class ContabilityController
 		require 'Views/Contability/checkout.php';
     }
 
+	public function viewBill()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+		$datas= $this->model->getDataByBill($_GET['id']);
+		$procedures = $this->model->getDataxBillShow($_GET['idc']);
+		require 'Views/Contability/viewBill.php';
+	}
+
 	public function searchProductsxBill()
 	{
 		$this->model->searchProductsxBill($_REQUEST);
+	}
+
+	public function searchProductsxBillShow()
+	{
+		$this->model->searchProductsxBillShow($_REQUEST);
 	}
 
 	public function addCar()
@@ -63,6 +78,20 @@ class ContabilityController
 	{
 		$this->model->deleteProductsxCar($_REQUEST);
 		header("Location:?controller=patient&method=profilePatient&id={$_REQUEST['id']}");
+	}
+
+	public function closeSale()
+	{	
+		$ticket=$_REQUEST['TICKET'];
+		unset($_REQUEST['TICKET']);
+
+		if ($_REQUEST['FORMA_PAGO']==1) {
+			$_REQUEST+=['CREDITO'=>1,'PLAZO'=>0,'PAGO'=>0,'ESTADO'=>'Pendiente'];
+		}else{
+			$_REQUEST+=['CREDITO'=>0,'PLAZO'=>0,'PAGO'=>1,'ESTADO'=>'Cerrado'];
+		}
+		$this->model->closeSale($_REQUEST);
+		$this->inventory->addOutputs($_REQUEST);
 	}
 
 }

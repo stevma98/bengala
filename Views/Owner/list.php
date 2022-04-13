@@ -60,9 +60,6 @@
 						</div>
 						</div>
 					</div>
-                    <div class="card-body">
-									<a class="modal-with-form btn btn-default" href="#modalForm">Open Form</a>
-
 									<!-- Modal Form -->
 									<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
