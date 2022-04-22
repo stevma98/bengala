@@ -31,11 +31,11 @@
 								<div class="card-body">									
 									<!-- Modal Form -->
 									<div class="card-body">
-                                    <div id="collapse1One" class="" data-parent="#accordion" style="">
+                                    					<div id="collapse1One" class="" data-parent="#accordion" style="">
 															<div class="card-body" style="padding:0px !important">
 																<header class="panel-heading tab-bg-dark-navy-blueee row">
 																	<div class="col-md-4"></div>
-																	<ul class="nav nav-tabs col-md-8">
+																	<ul class="nav nav-tabs col-md-8" style="border-bottom:0px !important">
 																		<li class="active">
 																			<a class="btn btn-default" data-toggle="tab" href="#all">Todas</a>
 																		</li>
@@ -54,8 +54,7 @@
 																	</ul>
 																</header>
 																<a target="_blank" hidden="true" class="btn btn-success" href="https://web.whatsapp.com/send?phone='+573222390807'&amp;text=Hola%20cordial%20saludo%20de%20Demo Veterinaria '%20,%20para%20nosotros%20nuestros%20pacientes%20son%20importantes%20por%20eso%20te%20enviamos%20la%20formula%20de%20'Miel'%20cita%20a%20la%20cual%20asistio%20el%20'19-12-2021'%20FORMULA:%20'<p>prueba de redadcccion de formual</p>'">Whatsapp</a>
-																<div class="tab-content" style="padding:0px !important">
-																<br>
+																<div class="tab-content" style="padding:10px !important;box-shadow:0 0 0 0 !important;border:0px !important">
 																<!--pendientes-->
 																<div id="pending" class="tab-pane">
 																		<div class="adv-table editable-table ">
@@ -596,8 +595,8 @@
 													</div>
 													<div class="row">
 														<div class="col-lg-4 pull-right">
-															<label for="PRECIO_CONSULTA">Precio</label>
-															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control">
+															<label for="PRECIO_CONSULTAE">Precio</label>
+															<input type="text" id="PRECIO_CONSULTAE" name="PRECIO_CONSULTAE" class="form-control">
 														</div>
 													</div>
 												<br><br>

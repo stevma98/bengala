@@ -301,7 +301,9 @@
 	}
 		</script> -->
 		<script>
+			
 		$('#PRECIO_VACUNA').mask('#.##0', {reverse: true});
+		
 			$('#ID_VACUNA').on('change',function(){
 				id = $('#ID_VACUNA').val();
 				getPresentation(id);

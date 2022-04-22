@@ -16,7 +16,7 @@ Theme Version: 	3.0.0
 			buttons: [
 				{
 					extend: 'print',
-					text: 'Print'
+					text: 'Imprimir'
 				},
 				{
 					extend: 'excel',
@@ -55,7 +55,7 @@ Theme Version: 	3.0.0
 			buttons: [
 				{
 					extend: 'print',
-					text: 'Print'
+					text: 'Imprimir'
 				},
 				{
 					extend: 'excel',
@@ -94,7 +94,7 @@ Theme Version: 	3.0.0
 			buttons: [
 				{
 					extend: 'print',
-					text: 'Print'
+					text: 'Imprimir'
 				},
 				{
 					extend: 'excel',
@@ -134,7 +134,7 @@ Theme Version: 	3.0.0
 			buttons: [
 				{
 					extend: 'print',
-					text: 'Print'
+					text: 'Imprimir'
 				},
 				{
 					extend: 'excel',
@@ -173,7 +173,7 @@ Theme Version: 	3.0.0
 			buttons: [
 				{
 					extend: 'print',
-					text: 'Print'
+					text: 'Imprimir'
 				},
 				{
 					extend: 'excel',
@@ -204,12 +204,60 @@ Theme Version: 	3.0.0
 		$('#datatable-tabletools4_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
 	};
 
+	var datatableInit5 = function() {
+		var $table = $('#datatable-tabletools5');
+
+		var table = $table.dataTable({
+			sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+		});
+
+		$('<div />').addClass('dt-buttons mb-2 pb-1 text-right').prependTo('#datatable-tabletools5_wrapper');
+
+		$table.DataTable().buttons().container().prependTo( '#datatable-tabletools5_wrapper .dt-buttons' );
+
+		$('#datatable-tabletools5_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+	};
+
+	var datatableInit6 = function() {
+		var $table = $('#datatable-tabletools6');
+
+		var table = $table.dataTable({
+			sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+		});
+
+		$('<div />').addClass('dt-buttons mb-2 pb-1 text-right').prependTo('#datatable-tabletools6_wrapper');
+
+		$table.DataTable().buttons().container().prependTo( '#datatable-tabletools6_wrapper .dt-buttons' );
+
+		$('#datatable-tabletools6_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+	};
+	
+	var datatableInit7 = function() {
+		var $table = $('#datatable-tabletools7');
+
+		var table = $table.dataTable({
+			sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+		});
+
+		$('<div />').addClass('dt-buttons mb-2 pb-1 text-right').prependTo('#datatable-tabletools7_wrapper');
+
+		$table.DataTable().buttons().container().prependTo( '#datatable-tabletools7_wrapper .dt-buttons' );
+
+		$('#datatable-tabletools7_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+	};
+	
+
+	
+
 	$(function() {
 		datatableInit();
 		datatableInit1();
 		datatableInit2();
 		datatableInit3();
 		datatableInit4();
+		datatableInit5();
+		datatableInit6();
+		datatableInit7();
 	});
 
 }).apply(this, [jQuery]);

@@ -172,6 +172,7 @@ Theme Version: 	3.0.0
 	/*
 	Edit Owner
 	*/
+	
 	$(document).on('click', '#editOwner', function (e) {
 		var confirmer;
 		e.preventDefault();
@@ -352,6 +353,309 @@ Theme Version: 	3.0.0
 						new PNotify({
 							title: 'Rechazado!',
 							text: 'Hubo un error al crear el propietario',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
+	close shopping
+	*/
+
+	$(document).on('click', '#closeShopping', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#PROVEEDOR").val() == "Seleccione...") {
+				$('#PROVEEDOR').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PROVEEDOR').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#NUM_FAC").val().length < 1) {
+				$('#NUM_FAC').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#NUM_FAC').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#FECHA_COMPROBANTE").val().length < 1) {
+				$('#FECHA_COMPROBANTE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#FECHA_COMPROBANTE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=closeShopping',
+					data: 'PROVEEDOR='+$('#PROVEEDOR').val()+'&NUM_FAC='+$('#NUM_FAC').val()+'&FECHA_COMPROBANTE='+$('#FECHA_COMPROBANTE').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Compra comprobante N° '+$('#NUM_FAC').val() +' creado éxitosamente',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la compra',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
+	close sale direct
+	*/
+
+	$(document).on('click', '#closeSaleDirect', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#CLIENTE").val() == "Seleccione...") {
+				$('#CLIENTE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#CLIENTE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#received").val().length < 1) {
+				$('#received').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#received').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}var ticket= ($('#TICKET').is(':checked')) ? 1 : 0 ;
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=inventory&method=closeSaleDirect',
+					data: 'ID_PROP='+$('#CLIENTE').val()+'&INICIAL='+$('#received1').val()+'&OBS='+$('#OBS').val()+'&DESCUENTO='+$('#discount').val()+'&TICKET='+ticket+'&VALOR='+$('#totalVenta1').val()+'&FORMA_PAGO='+$('#FORMA_PAGO').val()+'&METODO_PAGO='+$('#METODO_PAGO').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Venta realizada éxitosamente',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la venta',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
+	create user
+	*/
+
+	$(document).on('click', '#createUser', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#ST_NOM").val().length < 1) {
+				$('#ST_NOM').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ST_NOM').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ND_NOM").val().length < 1) {
+				$('#ND_NOM').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ND_NOM').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ST_APE").val().length < 1) {
+				$('#ST_APE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ST_APE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ND_APE").val().length < 1) {
+				$('#ND_APE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ND_APE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#TELEFONO").val().length < 1) {
+				$('#TELEFONO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#TELEFONO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#EMAIL").val().length < 1) {
+				$('#EMAIL').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#EMAIL').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ID").val().length < 1) {
+				$('#ID').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#PERFIL").val() == "Seleccione...") {
+				$('#PERFIL').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PERFIL').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");		
+			}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=person&method=createUser',
+					data: 'ST_NOM='+$('#ST_NOM').val()+'&ND_NOM='+$('#ND_NOM').val()+'&ST_APE='+$('#ST_APE').val()+'&ND_APE='+$('#ND_APE').val()+'&TELEFONO='+$('#TELEFONO').val()+'&EMAIL='+$('#EMAIL').val()+'&PERFIL='+$('#PERFIL').val()+'&identyUser='+$('#ID').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Usuario '+$('#ST_NOM').val()+' creado éxitosamente',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Actualmente ya existe el usuario '+$('#ID').val(),							
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
+	edit user
+	*/
+
+	$(document).on('click', '#editUser', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#ST_NOME").val().length < 1) {
+				$('#ST_NOME').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ST_NOME').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ND_NOME").val().length < 1) {
+				$('#ND_NOME').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ND_NOME').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ST_APEE").val().length < 1) {
+				$('#ST_APEE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ST_APEE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#ND_APEE").val().length < 1) {
+				$('#ND_APEE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ND_APEE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#TELEFONOE").val().length < 1) {
+				$('#TELEFONOE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#TELEFONOE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#EMAILE").val().length < 1) {
+				$('#EMAILE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#EMAILE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#IDE").val().length < 1) {
+				$('#IDE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#IDE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#PERFILE").val() == "Seleccione...") {
+				$('#PERFILE').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#PERFILE').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");		
+			}
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=person&method=editUser',
+					data: 'ST_NOM='+$('#ST_NOME').val()+'&ND_NOM='+$('#ND_NOME').val()+'&ST_APE='+$('#ST_APEE').val()+'&ND_APE='+$('#ND_APEE').val()+'&TELEFONO='+$('#TELEFONOE').val()+'&EMAIL='+$('#EMAILE').val()+'&PERFIL='+$('#PERFILE').val()+'&identyUser='+$('#IDE').val(),
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Usuario '+$('#ST_NOME').val()+' editado éxitosamente',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'hubo un error al editar el usuario '+$('#ID').val(),							
 							type: 'error',
 							shadow: true
 						});
@@ -1623,7 +1927,7 @@ Theme Version: 	3.0.0
 				$.ajax({
 					type: 'POST',
 					url: '?controller=contability&method=closeSale',
-					data: 'ID_CARRITO='+$('#consecutivo').val()+'&ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&VALOR='+$('#totalVenta1').val()+'&DESCUENTO='+$('#discount').val()+'&METODO_PAGO='+$('#METODO_PAGO').val()+'&FORMA_PAGO='+$('#FORMA_PAGO').val()+'&TICKET='+ticket+'&INICIAL='+$('#received1').val()+'&OBS='+$('#OBS').val(),					
+					data: 'ID_CARRITO='+$('#consecutivo').val()+'&ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&VALOR='+$('#totalVenta1').val()+'&DESCUENTO='+$('#discount').val()+'&METODO_PAGO='+$('#METODO_PAGO').val()+'&FORMA_PAGO='+$('#FORMA_PAGO').val()+'&TICKET='+ticket+'&INICIAL='+$('#received1').val()+'&OBS='+$('#OBS').val(),	
 					success: function(data){
 						new PNotify({
 							title: 'Confirmado!',

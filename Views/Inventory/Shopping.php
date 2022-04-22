@@ -22,6 +22,32 @@
 						</div>
 					</header>
 
+                                    <div id="modalIcon" class="modal-block modal-block-info mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">¿Estas Seguro?</h2>
+											</header>
+											<div class="card-body">
+												<div class="modal-wrapper">
+													<div class="modal-icon">
+														<i class="fas fa-question-circle"></i>
+													</div>
+													<div class="modal-text">
+														<p class="mb-0">¿Estas seguro de que quieres eliminar esta compra?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="card-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-info" id="cancelShopping">Eliminar</button>
+														<button class="btn btn-default modal-dismiss">Cancelar</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
 					<!-- start: page -->
                             <div class="row">
                                 <div class="col-md-8 col-lg-8">
@@ -55,7 +81,7 @@
                                                 </table>
                                             </div>
                                             <div class="col-md-6 col-lg-6">
-                                                <button class="btn btn-danger btn-block"><i class="fas fa-times-circle"></i> Cancelar Compra</button>
+                                                <a href="#modalIcon" class="btn btn-danger btn-block modal-basic" id="cancelShoppingButton" style="display:none"><i class="fas fa-times-circle"></i> Cancelar Compra</a>
                                             </div>
                                         </div>
                                     </div>
@@ -67,6 +93,9 @@
                                     </header>
                                     <div class="card-body">									
                                         <div class="row">
+                                        <div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+														<strong>Oh que mal!</strong> Aun hay espacios por completar.
+													</div>
                                             <div class="col-md-12 col-lg-12">
                                                 <label for="PROVEEDOR">Proveedor</label>
                                                 <select name="PROVEEDOR" id="PROVEEDOR" class="form-control">
@@ -85,12 +114,13 @@
                                             <div class="col-md-6 col-lg-6">
                                                     <label for="FECHA_COMPROBANTE">Fecha Comprobante</label>
                                                     <input type="date" class="form-control" id="FECHA_COMPROBANTE">
+                                                    <input type="hidden" value="0" id="confirmer">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12 col-lg-12">
-                                                    <button class="btn btn-success btn-block"><i class="fas fa-save"></i> Guardar</button>
+                                                    <button class="btn btn-success btn-block modal-confirm" id="closeShopping"><i class="fas fa-save"></i> Guardar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -185,6 +215,7 @@
         <script>
             //initialiazing the table
             tableProducts();
+            var stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
 
 
             $('#CODIGO_PRODUCTO').change(function(){
@@ -194,7 +225,28 @@
                     url : '?controller=inventory&method=addToPartial',
                     data: 'ID_PRO='+id,
                     success  : function(response){
+                        if(response!='1'){
+                            new PNotify({
+                                title: 'Notification',
+                                text: 'Ya existe el producto en la orden.',
+                                type: 'error',
+                                addclass: 'stack-bottomleft',
+                                stack: stack_bottomleft
+						    });
+                        }
                         tableProducts();
+                    }
+                });
+            });
+            
+            $('#cancelShopping').click(function(){
+                $.ajax({
+                    url : '?controller=inventory&method=cancelShopping',
+                    success  : function(response){
+                        console.log(response);
+                        setTimeout(() => {
+						location.reload();	
+						}, 100);
                     }
                 });
             });
@@ -203,8 +255,8 @@
                 $.ajax({
                     type:'POST',
                     url:'?controller=inventory&method=deleteRow',
-                    data : 'ID_PRO='+id,
-                    success : function(response){
+                    data : 'ID_PRO='+id, 
+                    success : function(response){                        
                         tableProducts();
                     }
                 });
@@ -239,6 +291,11 @@
                         $('#CODIGO_PRODUCTO').val($('#CODIGO_PRODUCTO > option:first').val());
                         $('#tableProducts').html(template);
                         $('#total').html("$"+total);
+                        if(total!=0){
+                            $('#cancelShoppingButton').css('display','block');
+                        }else{
+                            $('#cancelShoppingButton').css('display','none');
+                        }
                     }
                 });
 		    }

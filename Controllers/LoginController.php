@@ -16,7 +16,7 @@ class LoginController
 		if (!isset($_SESSION['user']) ) {
 			require 'Views/login.php';
 		}else{
-			header('Location: ?controller=person&method=template');
+			header('Location: ?controller=person&method=dashboard');
 		}
     }
     
@@ -26,8 +26,7 @@ class LoginController
 			// $validateUserEmp = $this->model->validateUserEmp($_POST);
 			$validateAdmin = $this->model->validateAdmin($_POST);
 			if ($validateUserEmp === true || $validateAdmin === true) {
-                $_SESSION['user']->identyUser;
-				header('Location: ?controller=person&method=template');
+				header('Location: ?controller=person&method=dashboard');
 		    }else {
 				?>
                 <script>

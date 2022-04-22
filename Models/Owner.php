@@ -50,7 +50,13 @@ class Owner {
     public function createOwner($data)
     {
         try {
-		unset($data['PHPSESSID']);
+            $stn=ucfirst(strtolower($data['ST_NOM']));
+            $ndn=ucfirst(strtolower($data['ND_NOM']));
+            $sta=ucfirst(strtolower($data['ST_APE']));
+            $nda=ucfirst(strtolower($data['ND_APE']));
+            $email=strtolower($data['EMAIL']);
+            unset($data['controller'], $data['method'],$data['PHPSESSID'],$data['ST_NOM'],$data['ND_NOM'],$data['ST_APE'],$data['ND_APE'],$data['EMAIL']);
+            $data += ['ST_NOM'=>$stn,'ND_NOM'=>$ndn,'ST_APE'=>$sta,'ND_APE'=>$stn,'EMAIL'=>$email];
             $this->pdo->insert('propietarios' , $data);
             $date=date('Y-m-d H:s:i');
             $user=$_SESSION['user']->identyUser;

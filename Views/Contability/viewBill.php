@@ -249,104 +249,7 @@
 			</div>
 			<div class="card-body">
 
-			<!-- Modal Form -->
-			<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
-				<section class="card">
-					<header class="card-header">
-						<h2 class="card-title">Añadir Producto</h2>
-					</header>
-					<div class="card-body">
-						<form id="anadir">
-							<div class="form-row">
-							<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
-								<strong>Oh que mal!</strong> Aun hay espacios por completar.
-							</div>
-							</div>
-							<input type="hidden" value="<?php echo $procedures[0]->ID_CONSE_CARRITO ?>" id="consecutivo">
-							<input type="hidden" value="<?php echo $procedures[0]->ID_MASCOTA ?>" id="ID_MASCOTA">
-							<input type="hidden" value="<?php echo $procedures[0]->ID_PROP ?>" id="ID_PROP">
-							<div class="form-row">
-							<div class="col-md-6 mb-3 mb-lg-0">
-									<label for="ID_PRO">Tipo Corte</label>
-									<select name="ID_PRO" id="ID_PRO" class="form-control" required>
-										<option value="Seleccione...">Seleccione...</option>
-										<?php foreach ($products as $product) {?>
-										<option value="<?php echo $product->ID_PRO ?>"><?php echo $product->NOM_PRO ?></option>	
-										<?php } ?>
-									</select>
-								</div>
-								<div class="col-md-2 mb-3 mb-lg-0 center">
-								<label for="SALDO">Saldo </label>
-								<input type="text" disabled id="SALDO" class="form-control">
-								</div>
-								<div class="col-md-4 mb-3 mb-lg-0">
-									<label for="CANTIDAD">Cantidad </label>
-									<input type="number" id="CANTIDAD" name="CANTIDAD" class="form-control" required min=0>															
-									<input type="hidden" id="PRECIO">
-								</div>
-							</div>							
-						</form>
-					</div>
-					<input type="hidden" id="confirmer" value="0">
-					<footer class="card-footer">
-						<div class="row">
-							<div class="col-md-12 text-right">
-								<button class="btn btn-primary modal-confirm" id="addCar" >Añadir</button>
-								<button class="btn btn-default modal-dismiss" >Cancelar</button>
-							</div>
-						</div>
-					</footer>
-				</section>
-			</div>
-
-			<div id="modalForm2" class="modal-block modal-block-primary mfp-hide">
-				<section class="card">
-					<header class="card-header">
-						<h2 class="card-title">Añadir Producto</h2>
-					</header>
-					<div class="card-body">
-						<form id="anadir">
-							<div class="form-row">
-							<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
-								<strong>Oh que mal!</strong> Aun hay espacios por completar.
-							</div>
-							</div>
-							<input type="hidden" value="<?php echo $procedures[0]->ID_CONSE_CARRITO ?>" id="consecutivo">
-							<input type="hidden" value="<?php echo $procedures[0]->ID_MASCOTA ?>" id="ID_MASCOTA">
-							<input type="hidden" value="<?php echo $procedures[0]->ID_PROP ?>" id="ID_PROP">
-							<div class="form-row">
-							<div class="col-md-6 mb-3 mb-lg-0">
-									<label for="ID_PRO">Tipo Corte</label>
-									<select name="ID_PRO" id="ID_PRO" class="form-control" required>
-										<option value="Seleccione...">Seleccione...</option>
-										<?php foreach ($products as $product) {?>
-										<option value="<?php echo $product->ID_PRO ?>"><?php echo $product->NOM_PRO ?></option>	
-										<?php } ?>
-									</select>
-								</div>
-								<div class="col-md-2 mb-3 mb-lg-0 center">
-								<label for="SALDO">Saldo </label>
-								<input type="text" disabled id="SALDO" class="form-control">
-								</div>
-								<div class="col-md-4 mb-3 mb-lg-0">
-									<label for="CANTIDAD">Cantidad </label>
-									<input type="number" id="CANTIDAD" name="CANTIDAD" class="form-control" required min=0>															
-									<input type="hidden" id="PRECIO">
-								</div>
-							</div>							
-						</form>
-					</div>
-					<input type="hidden" id="confirmer" value="0">
-					<footer class="card-footer">
-						<div class="row">
-							<div class="col-md-12 text-right">
-								<button class="btn btn-primary modal-confirm" id="addCar" >Añadir</button>
-								<button class="btn btn-default modal-dismiss" >Cancelar</button>
-							</div>
-						</div>
-					</footer>
-				</section>
-			</div>
+			
 			</div>
 		</section>	
 
@@ -393,7 +296,6 @@
 				type: 'GET',
 				data: {idm,idp},
 				success : function(response){
-					console.log(response);
 					var datas = JSON.parse(response);
 					var template = '';
 					var count = 1;

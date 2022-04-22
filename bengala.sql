@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 13, 2022 at 10:26 PM
+-- Generation Time: Apr 22, 2022 at 09:53 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -29,11 +29,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
+  `SESION` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `identyUser` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `passwordUser` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `NOM_USER` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ST_NOM` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ND_NOM` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ST_APE` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ND_APE` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `TELEFONO` bigint(20) NOT NULL,
+  `EMAIL` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `ID_EMPRESA` bigint(20) NOT NULL,
-  `PERFIL` int(11) NOT NULL,
+  `PERFIL` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `ESTADO_USER` varchar(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -41,9 +47,35 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`identyUser`, `passwordUser`, `NOM_USER`, `ID_EMPRESA`, `PERFIL`, `ESTADO_USER`) VALUES
-('1110588476', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', 'Brian', 900221406, 0, '1'),
-('1110588477', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', 'Steven', 830085335, 0, '1');
+INSERT INTO `admin` (`SESION`, `identyUser`, `passwordUser`, `ST_NOM`, `ND_NOM`, `ST_APE`, `ND_APE`, `TELEFONO`, `EMAIL`, `ID_EMPRESA`, `PERFIL`, `ESTADO_USER`) VALUES
+('127.0.0.1 \n2022-04-22 08:31:52am; \n127.0.0.1 \n2022-04-21 11:22:17am;', '1110588476', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', 'BRIAN', 'STEVEN', 'REYES', 'MARTINEZ', 3158289950, 'steven-0198@hotmail.com', 900221406, 'Admin', '1'),
+('', '1110588477', 'cd3f0c85b158c08a2b113464991810cf2cdfc387', 'Steven', '', '', '', 0, '', 830085335, '0', '1'),
+('127.0.0.1 \n2022-04-19 08:28:50am; \n', '1110588479', 'a0a681ba364dc586207e192c5d6b10bfd4c44091', 'Jhonatan', 'Hart', 'Romero', 'Martinez', 3158289999, 'steven-0198@hotmail.com', 900221406, 'Caja', '1'),
+('', '123456789', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 'Jhonatan2e', 'Hart', 'Romeros', 'Dsss222', 3158289945, 'ste@asdo', 900221406, 'Caja', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `caja`
+--
+
+CREATE TABLE `caja` (
+  `ID_CAJA` bigint(20) NOT NULL,
+  `FECHA_CAJA` date NOT NULL,
+  `FECHA_CIERRE` datetime NOT NULL,
+  `VALOR_CIERRE` bigint(20) NOT NULL,
+  `VALOR_APERTURA` bigint(20) NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL,
+  `ID_USUARIO` bigint(20) NOT NULL,
+  `ESTADO_CAJA` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `caja`
+--
+
+INSERT INTO `caja` (`ID_CAJA`, `FECHA_CAJA`, `FECHA_CIERRE`, `VALOR_CIERRE`, `VALOR_APERTURA`, `ID_EMPRESA`, `ID_USUARIO`, `ESTADO_CAJA`) VALUES
+(1, '2022-04-22', '0000-00-00 00:00:00', 0, 80000, 900221406, 1110588476, 'Abierta');
 
 -- --------------------------------------------------------
 
@@ -84,7 +116,13 @@ INSERT INTO `carrito` (`ID_CARRITO`, `ID_CONSE_CARRITO`, `ID_MASCOTA`, `ID_PROP`
 (12, 2, 1, 1110588476, 900221406, '2022-04-13 14:04:46', 1110588476, 'Vacuna', 1, 45000, 5, 'Completado'),
 (14, 2, 1, 1110588476, 900221406, '2022-04-13 14:42:46', 1110588476, 'Productos', 5, 122312, 5, 'Completado'),
 (15, 2, 1, 1110588476, 900221406, '2022-04-13 14:49:46', 1110588476, 'Productos', 6, 15000, 6, 'Completado'),
-(16, 2, 1, 1110588476, 900221406, '2022-04-13 15:04:58', 1110588476, 'Productos', 15, 15000, 8, 'Completado');
+(16, 2, 1, 1110588476, 900221406, '2022-04-13 15:04:58', 1110588476, 'Productos', 15, 15000, 8, 'Completado'),
+(17, 3, 1, 1110588476, 900221406, '2022-04-18 15:03:21', 1110588476, 'Vacuna', 1, 45000, 5, 'Completado'),
+(18, 1, 7, 15978654, 900221406, '2022-04-20 20:45:05', 1110588476, 'Consulta', 1, 5000, 9, 'Pendiente'),
+(19, 3, 1, 1110588476, 900221406, '2022-04-20 20:45:05', 1110588476, 'Consulta', 1, 45000, 10, 'Completado'),
+(20, 3, 1, 1110588476, 900221406, '2022-04-20 20:31:11', 1110588476, 'Consulta', 0, 45000, 33, 'Completado'),
+(21, 3, 1, 1110588476, 900221406, '2022-04-20 20:23:12', 1110588476, 'Consulta', 1, 95000, 10, 'Completado'),
+(22, 3, 1, 1110588476, 900221406, '2022-04-21 20:41:50', 1110588476, 'Productos', 10, 122312, 5, 'Completado');
 
 -- --------------------------------------------------------
 
@@ -114,21 +152,40 @@ INSERT INTO `categorias` (`ID_CATEGORIA`, `NOM_CATEGORIA`, `DETALLE_CATEGORIA`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `compras`
+--
+
+CREATE TABLE `compras` (
+  `CON_COMPRA` bigint(20) NOT NULL,
+  `ID_CONSE_COMPRA` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `VALOR` bigint(20) NOT NULL,
+  `FECHA_COMPRA` datetime NOT NULL,
+  `ANO_COMPRA` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `USUARIO` bigint(15) NOT NULL,
+  `ANULADOR` bigint(15) DEFAULT NULL,
+  `ESTADO` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `compras`
+--
+
+INSERT INTO `compras` (`CON_COMPRA`, `ID_CONSE_COMPRA`, `VALOR`, `FECHA_COMPRA`, `ANO_COMPRA`, `USUARIO`, `ANULADOR`, `ESTADO`, `ID_EMPRESA`) VALUES
+(1, '159789', 250000, '2022-04-19 15:47:28', '2022', 1110588476, NULL, 'Cerrado', 900221406),
+(2, '123', 50000, '2022-04-19 15:00:30', '2022', 1110588476, NULL, 'Cerrado', 900221406);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `compras_idpro`
 --
 
 CREATE TABLE `compras_idpro` (
   `ID_PRO` bigint(20) NOT NULL,
-  `CANTIDAD` int(11) NOT NULL DEFAULT '1'
+  `CANTIDAD` int(11) NOT NULL DEFAULT '1',
+  `ID_EMPRESA` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `compras_idpro`
---
-
-INSERT INTO `compras_idpro` (`ID_PRO`, `CANTIDAD`) VALUES
-(11, 4),
-(5, 2);
 
 -- --------------------------------------------------------
 
@@ -198,13 +255,14 @@ INSERT INTO `consultas` (`ID_CONSULTA`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `
 (23, 900221406, 1, 1110588476, 6, '2022-03-24', '21:58', '1110588476', 'asd', 'asd', 'asd', '\n														<p>FC: <br>\n														FR:asd<br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'asd', 'Producto Prueba<br> <b>Dosis:</b> 11<br> <b>Frecuencia:</b> 22<br> <b>Dias:</b> 33<br> <b>Uso:</b> 44', 0, 'Realizado'),
 (24, 900221406, 3, 1110588476, 7, '2022-04-05', '17:13', '1110588476', 'qwe', 'qwe', 'qwe', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'qwe', 'porueba22<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 34<br> <b>Uso:</b> 4', 0, 'Realizado'),
 (25, 900221406, 1, 1110588476, 8, '2022-03-24', '20:16', '1110588476', 'antee', 'sinto', 'diag', '\n														<p>FC: <br>\n														FR:ad<br>\n														Peso (Kg):ssssss<br>\n														C.C:asd<br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'formula', 'Producto Prueba<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 0, 'Realizado'),
-(26, 900221406, 7, 15978654, 9, '2022-03-25', '09:21', '1110588476', '', '', '', 'prueba', '', '', 0, 'Pendiente'),
-(27, 900221406, 1, 1110588476, 10, '2022-03-25', '09:37', '1110588476', '', '', '', '', '', '', 0, 'Pendiente'),
-(28, 900221406, 1, 1110588476, 11, '2022-03-30', '00:34', '1110588476', '', '', '', 'asd', '', '', 0, 'Pendiente'),
+(26, 900221406, 7, 15978654, 9, '2022-04-20', '19:43', '1110588476', 'asd', 'dsa', 'asd', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'dsa', 'porueba22<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4444', 0, 'Realizado'),
+(27, 900221406, 1, 1110588476, 10, '2022-04-20', '20:00', '1110588476', '321', '3333', '34444', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario:4<br>\n														Muestras remitidas:</p>\n													', '442', 'porueba22<br> <b>Dosis:</b> 2<br> <b>Frecuencia:</b> 1<br> <b>Dias:</b> 4<br> <b>Uso:</b> 5', 95000, 'Realizado'),
+(28, 900221406, 1, 1110588476, 11, '2022-03-30', '00:34', '1110588476', '', '', '', 'asd', '', '', 5, 'Pendiente'),
 (29, 900221406, 3, 1110588476, 12, '2022-04-06', '15:16', '1110588476', '123', '123', '123', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', '123', 'porueba22<br> <b>Dosis:</b> 12<br> <b>Frecuencia:</b> 123<br> <b>Dias:</b> 123<br> <b>Uso:</b> 123', 40000, 'Realizado'),
 (30, 900221406, 3, 1110588476, 13, '2022-04-06', '15:20', '1110588476', '123', '123', '123', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', '123', 'porueba22<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 65000, 'Realizado'),
 (31, 900221406, 3, 1110588476, 14, '2022-04-06', '15:19', '1110588476', '12345', '123', 'qwe', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'qwe', '123<br> <b>Dosis:</b> 123<br> <b>Frecuencia:</b> 123<br> <b>Dias:</b> 123<br> <b>Uso:</b> 123', 50000, 'Realizado'),
-(32, 900221406, 3, 15978654, 15, '2022-04-12', '15:15', '1110588476', '123', '1596', '456', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', '123', 'porueba22<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 50000, 'Realizado');
+(32, 900221406, 3, 15978654, 15, '2022-04-12', '15:15', '1110588476', '123', '1596', '456', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', '123', 'porueba22<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 50000, 'Realizado'),
+(33, 900221406, 1, 1110588476, 16, '2022-04-20', '20:17', '1110588476', 'asd', 'asd', 'asd', '\n														<p>FC: <br>\n														FR: <br>\n														Peso (Kg): <br>\n														C.C: <br>\n														Temperatura: <br>\n														Mucosas: <br>\n														Sistema Digestivo: <br>\n														Sistema Respiratorio: <br>\n														Sistema Circulatorio: <br>\n														Sistema Urinario: <br>\n														Sistema Genital: <br>\n														Sistema Nervioso: <br>\n														Sistema Locomotor: <br>\n														Sistema Tegumentario: <br>\n														Muestras remitidas:</p>\n													', 'asd', 'porueba22<br> <b>Dosis:</b> 1<br> <b>Frecuencia:</b> 2<br> <b>Dias:</b> 3<br> <b>Uso:</b> 4', 45000, 'Realizado');
 
 -- --------------------------------------------------------
 
@@ -310,6 +368,7 @@ CREATE TABLE `entradas` (
   `ID_ENTRADA` bigint(20) NOT NULL,
   `NUM_FAC` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '1',
   `FECHA_ENTRADA` datetime DEFAULT NULL,
+  `PROVEEDOR` bigint(20) NOT NULL DEFAULT '0',
   `FECHA_COMPROBANTE` datetime NOT NULL,
   `CODIGO_PRODUCTO` bigint(20) NOT NULL,
   `CANTIDAD_ENTRADA` bigint(20) NOT NULL,
@@ -322,10 +381,19 @@ CREATE TABLE `entradas` (
 -- Dumping data for table `entradas`
 --
 
-INSERT INTO `entradas` (`ID_ENTRADA`, `NUM_FAC`, `FECHA_ENTRADA`, `FECHA_COMPROBANTE`, `CODIGO_PRODUCTO`, `CANTIDAD_ENTRADA`, `MOTIVO_ENTRADA`, `ID_EMPRESA`, `ID_USUARIO`) VALUES
-(1, '1', '2022-04-13 16:31:23', '0000-00-00 00:00:00', 8, 15, 'POR INVENTARIO INICIAL', 900221406, 1110588476),
-(2, '1', '2022-04-13 16:08:33', '0000-00-00 00:00:00', 8, 50, 'POR AJUSTE INVENTARIO', 900221406, 1110588476),
-(3, '1', '2022-04-13 16:20:33', '0000-00-00 00:00:00', 8, 50, 'POR AJUSTE INVENTARIO', 900221406, 1110588476);
+INSERT INTO `entradas` (`ID_ENTRADA`, `NUM_FAC`, `FECHA_ENTRADA`, `PROVEEDOR`, `FECHA_COMPROBANTE`, `CODIGO_PRODUCTO`, `CANTIDAD_ENTRADA`, `MOTIVO_ENTRADA`, `ID_EMPRESA`, `ID_USUARIO`) VALUES
+(1, '1', '2022-04-13 16:31:23', 0, '0000-00-00 00:00:00', 8, 15, 'POR INVENTARIO INICIAL', 900221406, 1110588476),
+(2, '1', '2022-04-13 16:08:33', 0, '0000-00-00 00:00:00', 8, 50, 'POR AJUSTE INVENTARIO', 900221406, 1110588476),
+(3, '1', '2022-04-13 16:20:33', 0, '0000-00-00 00:00:00', 8, 50, 'POR AJUSTE INVENTARIO', 900221406, 1110588476),
+(5, '123', '2022-04-18 20:37:20', 0, '2022-04-05 00:00:00', 8, 15, 'POR COMPRA FACTURA: 123', 900221406, 1110588476),
+(6, '123', '2022-04-18 20:37:20', 0, '2022-04-05 00:00:00', 6, 5, 'POR COMPRA FACTURA: 123', 900221406, 1110588476),
+(7, '123333', '2022-04-18 20:57:21', 0, '2022-04-05 00:00:00', 6, 15, 'POR COMPRA FACTURA: 123333', 900221406, 1110588476),
+(8, '32111', '2022-04-18 20:12:23', 0, '2022-04-04 00:00:00', 7, 1, 'POR COMPRA FACTURA: 32111', 900221406, 1110588476),
+(9, '321', '2022-04-18 20:02:24', 3, '2022-04-04 00:00:00', 11, 10, 'POR COMPRA FACTURA: 321', 900221406, 1110588476),
+(10, '12333', '2022-04-18 20:27:31', 4, '2022-04-04 00:00:00', 5, 25, 'POR COMPRA FACTURA: 12333', 900221406, 1110588476),
+(11, '159789', '2022-04-19 15:47:28', 4, '2022-04-12 00:00:00', 6, 15, 'POR COMPRA FACTURA: 159789', 900221406, 1110588476),
+(12, '159789', '2022-04-19 15:47:28', 4, '2022-04-12 00:00:00', 8, 10, 'POR COMPRA FACTURA: 159789', 900221406, 1110588476),
+(13, '123', '2022-04-19 15:00:30', 3, '2022-04-19 00:00:00', 7, 5, 'POR COMPRA FACTURA: 123', 900221406, 1110588476);
 
 -- --------------------------------------------------------
 
@@ -637,7 +705,64 @@ INSERT INTO `historial` (`ID_HISTORIAL`, `FECHA_HISTORIAL`, `USUARIO_HISTORIAL`,
 (289, '2022-04-13 21:43:40', 1110588476, 'Ha modificado la salida del producto=8', 900221406),
 (290, '2022-04-13 21:14:41', 1110588476, 'Ha modificado la salida del producto=8', 900221406),
 (291, '2022-04-13 22:04:19', 1110588476, 'Ha Creado un Producto Nombre=Mouse', 900221406),
-(292, '2022-04-13 22:22:23', 1110588476, 'Ha editado el producto id=5', 900221406);
+(292, '2022-04-13 22:22:23', 1110588476, 'Ha editado el producto id=5', 900221406),
+(293, '2022-04-18 20:03:21', 1110588476, 'Ha realizado una vacuna id=', 900221406),
+(294, '2022-04-19 18:21:26', 1110588476, 'Ha creado el usuario Jhonatan', 900221406),
+(295, '2022-04-19 18:45:27', 1110588476, 'Ha creado el usuario Jhonatan', 900221406),
+(296, '2022-04-19 18:25:28', 1110588476, 'Ha creado el usuario Jhonatan', 900221406),
+(297, '2022-04-19 18:51:32', 1110588476, 'Ha creado el usuario JHONATAN', 900221406),
+(298, '2022-04-19 18:00:33', 1110588476, 'Ha creado el usuario JHONATAN', 900221406),
+(299, '2022-04-19 18:38:33', 1110588476, 'Ha creado el usuario JHONATAN', 900221406),
+(300, '2022-04-19 18:49:33', 1110588476, 'Ha creado el usuario JHONATAN', 900221406),
+(301, '2022-04-19 18:37:36', 1110588476, 'Ha creado el usuario Jhonatan', 900221406),
+(302, '2022-04-19 18:53:37', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(303, '2022-04-19 18:54:47', 1110588476, 'Ha insertado el propietario con id=456789123', 900221406),
+(304, '2022-04-19 18:47:48', 1110588476, 'Ha Creado la mascota con id=undefined', 900221406),
+(305, '2022-04-19 19:54:26', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(306, '2022-04-19 19:02:27', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(307, '2022-04-19 19:10:27', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(308, '2022-04-19 19:46:27', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(309, '2022-04-19 19:56:28', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(310, '2022-04-19 19:09:29', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(311, '2022-04-19 19:13:29', 1110588476, 'Ha creado el usuario 123456789', 900221406),
+(312, '2022-04-19 20:48:28', 1110588476, 'Ha cerrado la compra id=159789', 900221406),
+(313, '2022-04-19 20:00:30', 1110588476, 'Ha cerrado la compra id=123', 900221406),
+(314, '2022-04-21 01:45:05', 1110588476, 'Ha atendido la consulta consecutivo=', 900221406),
+(315, '2022-04-21 01:45:05', 1110588476, 'Ha atendido la consulta consecutivo=', 900221406),
+(316, '2022-04-21 01:31:11', 1110588476, 'Ha programado una consulta consecutivo=16', 900221406),
+(317, '2022-04-21 01:23:12', 1110588476, 'Ha atendido la consulta consecutivo=', 900221406),
+(318, '2022-04-21 22:42:14', 1110588476, 'Ha cerrado la venta id=FV-000013', 900221406),
+(319, '2022-04-21 22:06:16', 1110588476, 'Ha cerrado la venta id=FV-000014', 900221406),
+(320, '2022-04-21 22:12:33', 1110588476, 'Ha cerrado la venta id=FV-000015', 900221406),
+(321, '2022-04-21 22:10:36', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(322, '2022-04-21 22:26:36', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(323, '2022-04-21 22:42:36', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(324, '2022-04-21 22:09:37', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(325, '2022-04-21 22:40:37', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(326, '2022-04-21 22:46:37', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(327, '2022-04-21 22:46:38', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(328, '2022-04-21 22:50:38', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(329, '2022-04-21 22:50:38', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(330, '2022-04-21 22:39:39', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(331, '2022-04-21 22:41:39', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(332, '2022-04-21 22:04:40', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(333, '2022-04-21 22:40:43', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(334, '2022-04-21 22:59:43', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(335, '2022-04-21 22:12:44', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(336, '2022-04-21 22:15:44', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(337, '2022-04-21 22:41:44', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(338, '2022-04-21 22:56:44', 1110588476, 'Ha cerrado la venta id=FV-000016', 900221406),
+(339, '2022-04-21 22:08:45', 1110588476, 'Ha cerrado la venta id=FV-000017', 900221406),
+(340, '2022-04-21 22:23:45', 1110588476, 'Ha cerrado la venta id=FV-000018', 900221406),
+(341, '2022-04-21 22:42:45', 1110588476, 'Ha cerrado la venta id=FV-000019', 900221406),
+(342, '2022-04-21 23:30:57', 1110588476, 'Ha cerrado la venta id=FV-000017', 900221406),
+(343, '2022-04-21 23:23:58', 1110588476, 'Ha cerrado la venta id=FV-000018', 900221406),
+(344, '2022-04-22 01:41:50', 1110588476, 'Ha añadido un articulo al carrito=3', 900221406),
+(345, '2022-04-22 01:55:50', 1110588476, 'Ha concretado la venta del carrito3', 900221406),
+(346, '2022-04-22 02:42:33', 1110588476, 'Ha cerrado la venta id=FV-000020', 900221406),
+(347, '2022-04-22 05:00:00', 1110588476, 'Ha insertado un gasto para la caja con fecha 2022-04-22', 900221406),
+(348, '2022-04-22 05:00:00', 1110588476, 'Ha insertado un prestamo para la caja con fecha 2022-04-22', 900221406),
+(349, '2022-04-22 05:00:00', 1110588476, 'Ha insertado un prestamo para la caja con fecha 2022-04-22', 900221406);
 
 -- --------------------------------------------------------
 
@@ -685,8 +810,6 @@ CREATE TABLE `inventario_vacunas` (
 INSERT INTO `inventario_vacunas` (`ID_VACUNA`, `ID_EMPRESA`, `NOMBRE_VACUNA`, `PRESENTACION`) VALUES
 (5, 900221406, 'Prueba Vacuna123', 'Gr'),
 (6, 900221406, 'Funcionando Edit', 'Dosis'),
-(8, 0, 'Nociclone', 'Gr'),
-(9, 0, 'avas', 'Gr'),
 (10, 830085335, 'Nociclone0', 'Gr'),
 (11, 830085335, 'prueba2', 'Ol');
 
@@ -725,7 +848,36 @@ INSERT INTO `mascotas` (`ID_MASCOTA`, `ID_EMPRESA`, `NOMBRE`, `SEXO`, `FEC_NAC`,
 (2, 830085336, 'Katie', 'Hembra Esterilizada', '2021-02-20', 'Felino', 'Siames', 'Blanco', 1110588476, 'Brian Steven Beltran Martinez', 3158289950, '2022-03-10', 'Vivo', 0, '', '', ''),
 (3, 900221406, 'Black', 'Macho Castrado', '2021-01-01', 'Canino', 'Criollo', 'Negro', 15978654, 'Laura Alejandra Barragan Cordoba', 3111111111, '2022-03-22', 'Vivo', 2, '12', '', ''),
 (7, 900221406, 'Katie', 'Hembra Esterilizada', '2019-12-30', 'Felino', 'Criollo', 'Blanco', 15978654, 'Laura Alejandra Barragan Cordoba', 3111111111, '2022-03-22', 'Vivo', 0, '', '', ''),
-(8, 830085335, 'Katie', 'Hembra', '2015-12-29', 'Felino', 'Siames', 'Blanco', 123456789, 'Steven Brian Reyes Martinez', 3158289950, '2022-03-24', 'Vivo', 20, '', '', '');
+(8, 830085335, 'Katie', 'Hembra', '2015-12-29', 'Felino', 'Siames', 'Blanco', 123456789, 'Steven Brian Reyes Martinez', 3158289950, '2022-03-24', 'Vivo', 20, '', '', ''),
+(9, 900221406, 'Pruebita', 'Hembra Esterilizada', '2019-10-27', 'Felino', 'Criollo', 'Rojo', 456789123, 'Prueba Nombre Apellido Prueba', 123564, '2022-04-19', 'Vivo', 0, '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movimientos`
+--
+
+CREATE TABLE `movimientos` (
+  `ID_MOVIMIENTO` bigint(20) NOT NULL,
+  `ID_CAJA` bigint(20) NOT NULL,
+  `FECHA_MOVIMIENTO` date NOT NULL,
+  `OBS_MOVIMIENTO` text COLLATE utf8_spanish_ci NOT NULL,
+  `MONTO_MOVIMIENTO` bigint(20) NOT NULL,
+  `TIPO_MOVIMIENTO` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_EMPRESA` bigint(20) NOT NULL,
+  `ID_USUARIO` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `movimientos`
+--
+
+INSERT INTO `movimientos` (`ID_MOVIMIENTO`, `ID_CAJA`, `FECHA_MOVIMIENTO`, `OBS_MOVIMIENTO`, `MONTO_MOVIMIENTO`, `TIPO_MOVIMIENTO`, `ID_EMPRESA`, `ID_USUARIO`) VALUES
+(1, 1, '2022-04-22', 'prueba movimiento', 30000, 'GASTO', 900221406, 1110588476),
+(2, 1, '2022-04-22', 'prueba 2 de gasto', 15000, 'GASTO', 900221406, 1110588476),
+(3, 1, '2022-04-22', 'porque si', 15000, 'GASTO', 900221406, 1110588476),
+(4, 1, '2022-04-22', 'me dio hambre', 5000, 'PRESTAMO', 900221406, 1110588476),
+(5, 1, '2022-04-22', 'probnado que funciona', 12000, 'PRESTAMO', 900221406, 1110588476);
 
 -- --------------------------------------------------------
 
@@ -1996,13 +2148,13 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`ID_PRO`, `ID_EMPRESA`, `ID_PROD_INV`, `NOM_PRO`, `ID_GRUPO`, `PRECIO_COMPRA`, `PRECIO`, `CANTIDAD`, `SALIDAS_PRO`, `ENTRADAS_PRO`, `STOCK`, `ID_USUARIO`, `ESTADO_PRODUCTO`) VALUES
-(5, 900221406, 2, 'porueba22', 3, 50000, '122312', 100, 10, 0, 90, 1110588476, 'Activo'),
+(5, 900221406, 2, 'porueba22', 3, 50000, '122312', 100, 36, 25, 89, 1110588476, 'Activo'),
 (4, 900221406, 1, '123', 2, 10000, '11233', 118, 0, 0, 118, 1110588476, 'Inactivo'),
-(6, 900221406, 3, 'Prueba', 2, 10000, '15000', 10, 0, 0, 10, 1110588476, 'Activo'),
-(7, 900221406, 4, 'Pastas', 2, 10000, '16000', 15, 0, 0, 15, 1110588476, 'Activo'),
-(8, 900221406, 5, 'Ibuprofeno', 2, 10000, '15000', 50, 75, 50, 60, 1110588476, 'Activo'),
+(6, 900221406, 3, 'Prueba', 2, 10000, '15000', 10, 46, 36, 0, 1110588476, 'Activo'),
+(7, 900221406, 4, 'Pastas', 2, 10000, '16000', 15, 20, 6, 1, 1110588476, 'Activo'),
+(8, 900221406, 5, 'Ibuprofeno', 2, 10000, '15000', 50, 102, 91, 74, 1110588476, 'Activo'),
 (10, 830085335, 1, 'Trivago', 4, 25000, '50000', 100, 15, 0, 85, 1110588477, 'Activo'),
-(11, 900221406, 6, 'Mouse', 2, 15000, '25000', 50, 0, 0, 50, 1110588476, 'Activo');
+(11, 900221406, 6, 'Mouse', 2, 15000, '25000', 50, 60, 10, 0, 1110588476, 'Activo');
 
 -- --------------------------------------------------------
 
@@ -2035,7 +2187,8 @@ INSERT INTO `propietarios` (`ID_PROP`, `ID_EMPRESA`, `TIPO_DOC`, `ST_NOM`, `ND_N
 (38254646, 900221406, 'CC', 'Maria', 'Ismelida', 'Martinez', '', '23', '962', 'Calle 103 #100-92', 3138967493, 0, 'maria.isme@hotmail.com'),
 (11105884761, 830085336, 'CC', 'Brianss', 'Stevensss', 'Beltran', 'Martinez', '23', '962', 'Calle 136 #98A-32', 3158289950, 0, 'steven-0198@hotmail.com'),
 (15978654, 900221406, 'CC', 'Laura', 'Alejandra', 'Barragan', 'Cordoba', '23', '962', 'Carrera 5 #103-92 Yerbabuena', 3111111111, 0, 'laura@hotmail.com'),
-(123456789, 830085335, 'CC', 'Steven', 'Brian', 'Reyes', 'Martinez', '23', '962', 'Calle 95 sapo', 3158289950, 0, 'steven-0198@hotmail.com');
+(123456789, 830085335, 'CC', 'Steven', 'Brian', 'Reyes', 'Martinez', '23', '962', 'Calle 95 sapo', 3158289950, 0, 'steven-0198@hotmail.com'),
+(456789123, 900221406, 'CC', 'Prueba', 'Nombre', 'Apellido', 'Prueba', '4', '173', '132132', 123564, 112542, '3as@asdas');
 
 -- --------------------------------------------------------
 
@@ -2060,7 +2213,8 @@ INSERT INTO `prop_masc` (`ID_PROP_MASC`, `ID_MASCOTA`, `ID_PROP`, `TIPO_PROP`, `
 (3, 3, '15978654', '1', 'Activo', 900221406),
 (4, 7, '15978654', '1', 'Activo', 900221406),
 (5, 1, '1110588476', '1', 'Activo', 900221406),
-(6, 8, '123456789', '1', 'Activo', 830085335);
+(6, 8, '123456789', '1', 'Activo', 830085335),
+(7, 9, '456789123', '1', 'Activo', 900221406);
 
 -- --------------------------------------------------------
 
@@ -2141,7 +2295,29 @@ INSERT INTO `salidas` (`ID_SALIDA`, `NUM_FAC`, `FECHA_SALIDA`, `CODIGO_PRODUCTO`
 (38, 'FV-000009', '2022-04-13 15:09:58', 5, 5, 'FV-000009', 900221406, 1110588476),
 (39, 'FV-000009', '2022-04-13 15:09:58', 6, 6, 'FV-000009', 900221406, 1110588476),
 (40, 'FV-000009', '2022-04-13 15:09:58', 8, 15, 'FV-000009', 900221406, 1110588476),
-(42, '', '2022-04-13 16:14:41', 8, 25, 'POR AJUSTE INVENTARIO', 900221406, 1110588476);
+(42, '', '2022-04-13 16:14:41', 8, 25, 'POR AJUSTE INVENTARIO', 900221406, 1110588476),
+(43, 'FV-000010', '2022-04-21 16:50:50', 6, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(44, 'FV-000010', '2022-04-21 16:50:50', 8, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(45, 'FV-000010', '2022-04-21 17:44:03', 6, 0, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(46, 'FV-000010', '2022-04-21 17:44:03', 7, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(47, 'FV-000010', '2022-04-21 17:44:03', 8, 6, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(48, 'FV-000010', '2022-04-21 17:47:03', 6, 0, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(49, 'FV-000010', '2022-04-21 17:47:03', 7, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(50, 'FV-000010', '2022-04-21 17:47:03', 8, 6, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(51, 'FV-000010', '2022-04-21 17:09:04', 7, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(52, 'FV-000010', '2022-04-21 17:09:04', 8, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(53, 'FV-000010', '2022-04-21 17:26:05', 7, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(54, 'FV-000010', '2022-04-21 17:26:05', 8, 1, 'POR VENTA FACTURA: FV-000010', 900221406, 1110588476),
+(55, 'FV-000014', '2022-04-21 17:05:16', 5, 1, 'POR VENTA FACTURA: FV-000014', 900221406, 1110588476),
+(56, 'FV-000015', '2022-04-21 17:12:33', 8, 5, 'POR VENTA FACTURA: FV-000015', 900221406, 1110588476),
+(57, 'FV-000016', '2022-04-21 17:10:36', 7, 10, 'POR VENTA FACTURA: FV-000016', 900221406, 1110588476),
+(58, 'FV-000016', '2022-04-21 17:26:36', 8, 1, 'POR VENTA FACTURA: FV-000016', 900221406, 1110588476),
+(59, 'FV-000016', '2022-04-21 17:42:36', 7, 5, 'POR VENTA FACTURA: FV-000016', 900221406, 1110588476),
+(60, 'FV-000016', '2022-04-21 17:46:38', 7, 1, 'POR VENTA FACTURA: FV-000016', 900221406, 1110588476),
+(61, 'FV-000017', '2022-04-21 18:30:57', 8, 2, 'POR VENTA FACTURA: FV-000017', 900221406, 1110588476),
+(62, 'FV-000018', '2022-04-21 18:23:58', 8, 5, 'POR VENTA FACTURA: FV-000018', 900221406, 1110588476),
+(63, 'FV-000019', '2022-04-21 20:55:50', 5, 10, 'POR VENTA FACTURA: FV-000019', 900221406, 1110588476),
+(64, 'FV-000020', '2022-04-21 21:42:33', 5, 15, 'POR VENTA FACTURA: FV-000020', 900221406, 1110588476);
 
 -- --------------------------------------------------------
 
@@ -2177,7 +2353,7 @@ INSERT INTO `vacunas` (`ID_VACUNA_PRO`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `
 (2, 900221406, 1, 1110588476, '2022-04-04', '6', 'Dosis', 159, '2022-04-12', 546, 30000, '2022-04-06', '2022-04-12', 'Funcionando Edit', '321', 'Realizado'),
 (3, 830085335, 8, 123456789, '2022-04-12', '11', 'Ol', 123, '2022-04-12', 159, 40000, '2022-04-05', '2022-04-12', 'prueba2', '123', 'Realizado'),
 (4, 900221406, 3, 15978654, '2022-03-29', '6', 'Dosis', 159, '2022-03-29', 951, 15000, '2022-04-11', '2022-04-15', 'Funcionando Edit', '123', 'Realizado'),
-(5, 900221406, 1, 1110588476, '2022-04-20', '5', 'Gr', 1569, '2022-04-06', 123, 45000, '2022-04-20', '2022-04-15', 'Funcionando Edit', '', 'Pendiente');
+(5, 900221406, 1, 1110588476, '2022-04-20', '5', 'Gr', 1569, '2022-04-06', 123, 45000, '2022-04-20', '2022-04-15', 'Funcionando Edit', '', 'Realizado');
 
 -- --------------------------------------------------------
 
@@ -2188,40 +2364,59 @@ INSERT INTO `vacunas` (`ID_VACUNA_PRO`, `ID_EMPRESA`, `ID_MASCOTA`, `ID_PROP`, `
 CREATE TABLE `ventas` (
   `CON_VENTA` bigint(20) NOT NULL,
   `ID_CARRITO` int(11) NOT NULL,
-  `ID_CONSE_VENTA` varchar(15) NOT NULL,
+  `ID_CONSE_VENTA` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `ID_EMPRESA` bigint(20) NOT NULL,
-  `ID_PROP` bigint(20) NOT NULL,
+  `ID_PROP` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `ID_MASCOTA` bigint(20) NOT NULL DEFAULT '0',
   `VALOR` bigint(20) NOT NULL,
   `DESCUENTO` int(11) NOT NULL,
   `FECHA_VENTA` datetime NOT NULL,
-  `METODO_PAGO` varchar(20) NOT NULL,
+  `METODO_PAGO` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `CREDITO` binary(1) NOT NULL,
   `PLAZO` tinyint(4) NOT NULL,
-  `ANO_VENTA` varchar(4) NOT NULL,
+  `ANO_VENTA` varchar(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `INICIAL` int(11) NOT NULL,
   `PAGO` tinyint(4) NOT NULL,
-  `OBS` varchar(200) NOT NULL,
-  `USUARIO` varchar(20) NOT NULL,
-  `ESTADO` varchar(20) NOT NULL DEFAULT '1',
-  `ANULADOR` varchar(20) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `OBS` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `USUARIO` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `ESTADO` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '1',
+  `ANULADOR` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `ventas`
 --
 
 INSERT INTO `ventas` (`CON_VENTA`, `ID_CARRITO`, `ID_CONSE_VENTA`, `ID_EMPRESA`, `ID_PROP`, `ID_MASCOTA`, `VALOR`, `DESCUENTO`, `FECHA_VENTA`, `METODO_PAGO`, `CREDITO`, `PLAZO`, `ANO_VENTA`, `INICIAL`, `PAGO`, `OBS`, `USUARIO`, `ESTADO`, `ANULADOR`) VALUES
-(10, 1, 'FV-000003', 900221406, 1110588476, 1, 60000, 0, '2022-04-12 16:37:23', 'Local', 0x30, 0, '2022', 70000, 1, '', '1110588476', 'Cerrado', ''),
-(9, 1, 'FV-000002', 900221406, 1110588476, 1, 60000, 0, '2022-04-12 16:58:21', 'Local', 0x30, 0, '2022', 100000, 1, '', '1110588476', 'Cerrado', ''),
-(8, 1, 'FV-000001', 900221406, 1110588476, 1, 1253120, 0, '2022-04-12 16:38:17', 'Local', 0x30, 0, '2022', 1500000, 1, '312', '1110588476', 'Cerrado', ''),
-(11, 1, 'FV-000004', 900221406, 1110588476, 1, 60000, 0, '2022-04-12 16:03:27', 'Local', 0x30, 0, '2022', 70000, 1, '', '1110588476', 'Cerrado', ''),
-(12, 1, 'FV-000005', 900221406, 1110588476, 1, 60000, 0, '2022-04-12 16:31:32', 'Local', 0x30, 0, '2022', 70000, 1, '', '1110588476', 'Cerrado', ''),
-(13, 1, 'FV-000006', 900221406, 15978654, 3, 155000, 0, '2022-04-12 16:00:34', 'Local', 0x31, 0, '2022', 100000, 0, '321', '1110588476', 'Pendiente', ''),
-(14, 1, 'FV-000001', 830085335, 123456789, 8, 790000, 10, '2022-04-12 19:32:24', 'Local', 0x30, 0, '2022', 800000, 1, '123', '1110588477', 'Cerrado', ''),
-(15, 2, 'FV-000007', 900221406, 15978654, 3, 15000, 0, '2022-04-12 20:49:23', 'Local', 0x30, 0, '2022', 20000, 1, '321', '1110588476', 'Cerrado', ''),
-(16, 2, 'FV-000008', 900221406, 1110588476, 1, 746560, 5, '2022-04-13 14:00:47', 'Local', 0x30, 0, '2022', 850000, 1, '', '1110588476', 'Cerrado', ''),
-(17, 2, 'FV-000009', 900221406, 1110588476, 1, 270000, 0, '2022-04-13 15:09:58', 'Local', 0x30, 0, '2022', 300000, 1, '123', '1110588476', 'Cerrado', '');
+(10, 1, 'FV-000001', 900221406, '1110588476', 1, 60000, 0, '2022-04-12 16:37:23', 'Local', 0x30, 0, '2022', 70000, 1, '', '1110588476', 'Cerrado', ''),
+(9, 1, 'FV-000002', 900221406, '1110588476', 1, 60000, 0, '2022-04-12 16:58:21', 'Local', 0x30, 0, '2022', 100000, 1, '', '1110588476', 'Cerrado', ''),
+(8, 1, 'FV-000003', 900221406, '1110588476', 1, 1253120, 0, '2022-04-12 16:38:17', 'Local', 0x30, 0, '2022', 1500000, 1, '312', '1110588476', 'Cerrado', ''),
+(11, 1, 'FV-000004', 900221406, '1110588476', 1, 60000, 0, '2022-04-12 16:03:27', 'Local', 0x30, 0, '2022', 70000, 1, '', '1110588476', 'Cerrado', ''),
+(12, 1, 'FV-000005', 900221406, '1110588476', 1, 60000, 0, '2022-04-12 16:31:32', 'Local', 0x30, 0, '2022', 70000, 1, '', '1110588476', 'Cerrado', ''),
+(13, 1, 'FV-000006', 900221406, '15978654', 3, 155000, 0, '2022-04-12 16:00:34', 'Local', 0x31, 0, '2022', 100000, 0, '321', '1110588476', 'Pendiente', ''),
+(14, 1, 'FV-000007', 830085335, '123456789', 8, 790000, 10, '2022-04-12 19:32:24', 'Local', 0x30, 0, '2022', 800000, 1, '123', '1110588477', 'Cerrado', ''),
+(15, 2, 'FV-000008', 900221406, '15978654', 3, 15000, 0, '2022-04-12 20:49:23', 'Local', 0x30, 0, '2022', 20000, 1, '321', '1110588476', 'Cerrado', ''),
+(16, 2, 'FV-000009', 900221406, '1110588476', 1, 746560, 5, '2022-04-13 14:00:47', 'Local', 0x30, 0, '2022', 850000, 1, '', '1110588476', 'Cerrado', ''),
+(17, 2, 'FV-000010', 900221406, '1110588476', 1, 270000, 0, '2022-04-13 15:09:58', 'Local', 0x30, 0, '2022', 300000, 1, '123', '1110588476', 'Cerrado', ''),
+(18, 0, 'FV-000014', 900221406, 'Unica Vez', 0, 15000, 0, '2022-04-21 17:41:07', 'Local', 0x00, 0, '2022', 0, 0, '', '1110588476', 'Cerrado', ''),
+(20, 0, 'FV-000015', 900221406, '38254646', 0, 122312, 0, '2022-04-21 17:38:13', 'Local', 0x30, 0, '2022', 150000, 1, '', '1110588476', 'Cerrado', ''),
+(21, 0, 'FV-000016', 900221406, '38254646', 0, 122312, 0, '2022-04-21 17:42:14', 'Local', 0x30, 0, '2022', 150000, 1, '321', '1110588476', 'Cerrado', ''),
+(28, 0, 'FV-000017', 900221406, 'Unica Vez', 0, 30000, 10, '2022-04-21 18:30:57', 'Local', 0x31, 0, '2022', 15000, 0, '321', '1110588476', 'Cerrado', ''),
+(29, 0, 'FV-000018', 900221406, 'Unica Vez', 0, 75000, 10, '2022-04-21 18:23:58', 'Local', 0x31, 0, '2022', 50000, 0, '321', '1110588476', 'Cerrado', ''),
+(31, 0, 'FV-000020', 900221406, '15978654', 0, 1834680, 50, '2022-04-21 21:42:33', 'Local', 0x30, 0, '2022', 1000000, 1, '123', '1110588476', 'Cerrado', ''),
+(30, 3, 'FV-000019', 900221406, '1110588476', 1, 1453120, 5, '2022-04-21 20:55:50', 'Local', 0x30, 0, '2022', 1400000, 1, '123', '1110588476', 'Cerrado', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ventas_idpro`
+--
+
+CREATE TABLE `ventas_idpro` (
+  `ID_PRO` bigint(20) NOT NULL,
+  `CANTIDAD` bigint(20) NOT NULL DEFAULT '1',
+  `ID_EMPRESA` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Indexes for dumped tables
@@ -2234,6 +2429,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`identyUser`);
 
 --
+-- Indexes for table `caja`
+--
+ALTER TABLE `caja`
+  ADD PRIMARY KEY (`ID_CAJA`);
+
+--
 -- Indexes for table `carrito`
 --
 ALTER TABLE `carrito`
@@ -2244,6 +2445,18 @@ ALTER TABLE `carrito`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`ID_CATEGORIA`);
+
+--
+-- Indexes for table `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`CON_COMPRA`);
+
+--
+-- Indexes for table `compras_idpro`
+--
+ALTER TABLE `compras_idpro`
+  ADD PRIMARY KEY (`ID_PRO`);
 
 --
 -- Indexes for table `consentimientos`
@@ -2298,6 +2511,12 @@ ALTER TABLE `inventario_vacunas`
 --
 ALTER TABLE `mascotas`
   ADD PRIMARY KEY (`ID_MASCOTA`);
+
+--
+-- Indexes for table `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD PRIMARY KEY (`ID_MOVIMIENTO`);
 
 --
 -- Indexes for table `notas`
@@ -2366,20 +2585,38 @@ ALTER TABLE `ventas`
   ADD PRIMARY KEY (`CON_VENTA`,`ID_CARRITO`);
 
 --
+-- Indexes for table `ventas_idpro`
+--
+ALTER TABLE `ventas_idpro`
+  ADD PRIMARY KEY (`ID_PRO`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `caja`
+--
+ALTER TABLE `caja`
+  MODIFY `ID_CAJA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `ID_CARRITO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID_CARRITO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `ID_CATEGORIA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `CON_COMPRA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `consentimientos`
@@ -2391,7 +2628,7 @@ ALTER TABLE `consentimientos`
 -- AUTO_INCREMENT for table `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `ID_CONSULTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ID_CONSULTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `cronograma`
@@ -2403,13 +2640,13 @@ ALTER TABLE `cronograma`
 -- AUTO_INCREMENT for table `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `ID_ENTRADA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_ENTRADA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `ID_HISTORIAL` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+  MODIFY `ID_HISTORIAL` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=350;
 
 --
 -- AUTO_INCREMENT for table `inventario_consentimientos`
@@ -2427,7 +2664,13 @@ ALTER TABLE `inventario_vacunas`
 -- AUTO_INCREMENT for table `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `ID_MASCOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_MASCOTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `movimientos`
+--
+ALTER TABLE `movimientos`
+  MODIFY `ID_MOVIMIENTO` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `notas`
@@ -2463,7 +2706,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT for table `prop_masc`
 --
 ALTER TABLE `prop_masc`
-  MODIFY `ID_PROP_MASC` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_PROP_MASC` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `proveedores`
@@ -2475,7 +2718,7 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT for table `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `ID_SALIDA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID_SALIDA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `vacunas`
@@ -2487,7 +2730,7 @@ ALTER TABLE `vacunas`
 -- AUTO_INCREMENT for table `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `CON_VENTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `CON_VENTA` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

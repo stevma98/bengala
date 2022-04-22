@@ -30,8 +30,23 @@ class ContabilityController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
-		$bills= $this->model->getAll();
-		require 'Views/Contability/list.php';
+		$check= $this->model->checkBox();
+		$expenses =$this->model->getExpenses();
+		$totale=0;
+		$totall=0;
+		$counte=0;
+		$countl=0;
+		foreach ($expenses as $expense) {
+			$counte += 1;
+			$totale += $expense->MONTO_MOVIMIENTO;
+		}
+		$loans = $this->model->getLoans();
+		foreach ($loans as $loan) {
+			$countl +=1 ;
+			$totall += $loan->MONTO_MOVIMIENTO;
+		}
+		
+		require 'Views/Contability/cashFlow.php';
 	}
 
     public function getDataxBill()
@@ -50,13 +65,28 @@ class ContabilityController
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
 		$datas= $this->model->getDataByBill($_GET['id']);
-		$procedures = $this->model->getDataxBillShow($_GET['idc']);
+		$procedures = $this->model->getDataxBillShow($_GET['idc'],$datas[0]->ID_MASCOTA);
 		require 'Views/Contability/viewBill.php';
 	}
 
 	public function searchProductsxBill()
 	{
 		$this->model->searchProductsxBill($_REQUEST);
+	}
+
+	public function editInitialBox()
+	{
+		$this->model->editInitialBox($_REQUEST);
+	}
+
+	public function addExpense()
+	{
+		$this->model->addExpense($_REQUEST);
+	}
+
+	public function addLoan()
+	{
+		$this->model->addLoan($_REQUEST);
 	}
 
 	public function searchProductsxBillShow()

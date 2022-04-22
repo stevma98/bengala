@@ -39,7 +39,11 @@ class Patient {
     public function createPatient($data)
     {
         try {
-		unset($data['PHPSESSID']);
+            $nom=ucfirst(strtolower($data['NOMBRE']));
+            $ra=ucfirst(strtolower($data['RAZA']));
+            $col=ucfirst(strtolower($data['COLOR']));
+		    unset($data['PHPSESSID'],$data['NOMBRE'],$data['RAZA'],$data['COLOR']);            
+            $data += ['NOMBRE'=>$nom,'RAZA'=>$ra,'COLOR'=>$col];
             $this->pdo->insert('mascotas' , $data);
             $strSql = "SELECT * FROM mascotas WHERE ID_PROP = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_MASCOTA DESC LIMIT 1";
             $array = ['id' => $data['ID_PROP']];

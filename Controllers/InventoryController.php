@@ -16,7 +16,6 @@ class InventoryController
 	{
 		$this->model = new Inventory;
 		$this->owner = new Owner;
-		
 	}
 	
 	public function template()
@@ -60,10 +59,55 @@ class InventoryController
         $products=$this->model->getAllArticle();
 		require 'Views/Inventory/Shopping.php';
 	}
+    
+    public function history()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+        $datas=$this->model->getShopping();
+		require 'Views/Inventory/History.php';
+	}
+
+    public function historySales()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+        $datas=$this->model->getSales();
+		require 'Views/Inventory/HistorySales.php';
+	}
+
+    public function sale()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+        $products=$this->model->getAllArticle();
+        $owners=$this->owner->getAll();
+        require 'Views/Inventory/Sale.php';
+	}
 
     public function createProvider()
     {
         $this->model->createProvider($_REQUEST);
+    }
+
+    public function watchInfo()
+    {
+        $this->model->watchInfo($_REQUEST);
+    }
+
+    public function watchInfoS()
+    {
+        $this->model->watchInfoS($_REQUEST);
+    }
+
+    public function watchInfoProducts()
+    {
+        $this->model->watchInfoProducts($_REQUEST);
+    }
+    
+    public function watchInfoProductsS()
+    {
+        $this->model->watchInfoProductsS($_REQUEST);
     }
 
     public function inactivateProvider()
@@ -79,7 +123,7 @@ class InventoryController
     public function editCategorie()
     {
         $this->model->editCategorie($_REQUEST);
-    }
+    }   
 
 
     public function getDataCategorie()
@@ -92,19 +136,55 @@ class InventoryController
         $this->model->getDataArticle($_REQUEST);
     }
 
+    public function closeShopping()
+    {
+        $this->model->closeShopping($_REQUEST);
+    }
+
+    public function closeSaleDirect()
+    {
+        $ticket=$_REQUEST['TICKET'];
+		unset($_REQUEST['TICKET']);
+
+		if ($_REQUEST['FORMA_PAGO']==1) {
+			$_REQUEST+=['CREDITO'=>1,'PLAZO'=>0,'PAGO'=>0,'ESTADO'=>'Pendiente'];
+		}else{
+			$_REQUEST+=['CREDITO'=>0,'PLAZO'=>0,'PAGO'=>1,'ESTADO'=>'Cerrado'];
+		}
+
+        $this->model->closeSaleDirect($_REQUEST);
+    }
+
     public function addToPartial()
     {
+        $_REQUEST += ['ID_EMPRESA' => $_SESSION['user']->ID_EMPRESA];
         $this->model->addToPartial($_REQUEST);
+    }
+
+    public function addToPartialSale()
+    {
+        $_REQUEST += ['ID_EMPRESA' => $_SESSION['user']->ID_EMPRESA];
+        $this->model->addToPartialSale($_REQUEST);
     }
 
     public function deleteRow()
 	{
 		$this->model->deleteRow($_REQUEST);
 	}
+
+    public function deleteRowSale()
+	{
+		$this->model->deleteRowSale($_REQUEST);
+	}
     
     public function searchProductsxShopping()
     {
         $this->model->searchProductsxShopping();
+    }
+
+    public function searchProductsxSale()
+    {
+        $this->model->searchProductsxSale();
     }
 
     public function searchProductsxShoppingById()
@@ -117,9 +197,24 @@ class InventoryController
         $this->model->quantityUpdate($_REQUEST);
     }
 
+    public function quantityUpdateSale()
+    {
+        $this->model->quantityUpdateSale($_REQUEST);
+    }
+
     public function inactivateCategorie()
     {
         $this->model->inactivateCategorie($_REQUEST);
+    }
+
+    public function cancelShopping()
+    {
+        $this->model->cancelShopping();
+    }
+
+    public function cancelSale()
+    {
+        $this->model->cancelSale();
     }
 
     public function inactivateArticle()

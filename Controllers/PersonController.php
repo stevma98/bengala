@@ -15,25 +15,40 @@ require 'vendor/autoload.php';
 class PersonController
 {
 	private $model;
-	private $rol;
-	private $client;
-	private $garanty;
 
 	public function __construct()
 	{
 		$this->model = new Person;
-		// $this->rol = new Rol;
-		// $this->client = new User;
-		// $this->garanty = new Garanty;
 	}
 
-
-
-	public function template()
+	public function dashboard()
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
-		require 'Views/Person/list.php';
+		require 'Views/Person/Dashboard.php';
+	}
+	
+	public function users()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+		$users = $this->model->getAllEmployees();
+		require 'Views/Person/listUsers.php';
+	}
+
+	public function createUser()
+	{
+		$this->model->createUser($_REQUEST);
+	}
+
+	public function editUser()
+	{
+		$this->model->editUser($_REQUEST);
+	}
+
+	public function getDataById()
+	{
+		$this->model->getDataById($_REQUEST);
 	}
 
 }

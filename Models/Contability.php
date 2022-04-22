@@ -39,10 +39,10 @@ class Contability {
         }
     }
 
-    public function getDataxBillShow($id)
+    public function getDataxBillShow($id,$idm)
     {
         try {
-            $strSql = "SELECT * FROM carrito c LEFT JOIN inventario_vacunas v ON c.ID_PRODUCTO=v.ID_VACUNA WHERE c.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND c.ID_CARRITO='$id' AND TIPO != 'Productos'";
+            $strSql = "SELECT * FROM carrito c LEFT JOIN inventario_vacunas v ON c.ID_PRODUCTO=v.ID_VACUNA WHERE c.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND c.ID_CONSE_CARRITO='$id' AND TIPO != 'Productos' AND c.ID_MASCOTA='$idm' ";
             $query = $this->pdo->select($strSql);
             return $query;
         } catch ( PDOException $e) {
@@ -109,7 +109,6 @@ class Contability {
     {
         try { 
             $id=$data['ID_CARRITO'];
-            var_dump($data);
             $sql1="DELETE FROM carrito WHERE ID_CARRITO=:id";
             $sentenciasql=$this->pdo->prepare($sql1)->execute([':id'=>$id]);
             $date=date('Y-m-d H:s:i');
@@ -179,5 +178,101 @@ class Contability {
         }
     }
 
+    public function checkBox()
+    {
+        try {
+            $date=date('Y-m-d');
+            $strSql = "SELECT * FROM caja WHERE ID_EMPRESA='{$this->ide}' AND FECHA_CAJA='$date'";
+            $query = $this->pdo->select($strSql);
+            if(count($query)==0){
+                $sql="INSERT INTO `caja`(`FECHA_CAJA`, `VALOR_APERTURA`, `ID_EMPRESA`, `ID_USUARIO`, `ESTADO_CAJA`) VALUES ('$date','0','{$this->ide}','{$this->user}','Abierta')";
+                $this->pdo->prepare($sql)->execute();
+            }else{ 
+                return $query;
+            }
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function getExpenses()
+    {
+        try {
+            $date=date('Y-m-d');
+            $strSql = "SELECT * FROM movimientos WHERE ID_EMPRESA='{$this->ide}' AND FECHA_MOVIMIENTO='$date' AND TIPO_MOVIMIENTO='GASTO'";
+            $query = $this->pdo->select($strSql);  
+            return $query;          
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function getLoans()
+    {
+        try {
+            $date=date('Y-m-d');
+            $strSql = "SELECT * FROM movimientos WHERE ID_EMPRESA='{$this->ide}' AND FECHA_MOVIMIENTO='$date' AND TIPO_MOVIMIENTO='PRESTAMO'";
+            $query = $this->pdo->select($strSql);  
+            return $query;          
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function editInitialBox($data)
+    {
+        try {
+            $data['VALOR_APERTURA'] = str_replace('.','',$data['VALOR_APERTURA']);
+            unset($data['PHPSESSID'],$data['controller'],$data['method']);
+            $strWhere2 = "ID_EMPRESA=".$this->ide." AND ID_CAJA={$data['ID_CAJA']}";
+            $query2=$this->pdo->update('caja', $data, $strWhere2);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function addExpense($data)
+    {
+        try {
+            $date=date('Y-m-d');
+            $data['MONTO_MOVIMIENTO'] = str_replace('.','',$data['MONTO_MOVIMIENTO']);
+            $data+=['FECHA_MOVIMIENTO'=>$date,'TIPO_MOVIMIENTO'=>'GASTO','ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user];
+            unset($data['PHPSESSID'],$data['controller'],$data['method']);
+            $query=$this->pdo->insert('movimientos', $data);
+            $action="Ha insertado un gasto para la caja con fecha ".$date;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $this->user,
+                ':actioon' => $action,
+                ':ide' => $this->ide
+            ]);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function addLoan($data)
+    {
+        try {
+            $date=date('Y-m-d');
+            $data['MONTO_MOVIMIENTO'] = str_replace('.','',$data['MONTO_MOVIMIENTO']);
+            $data+=['FECHA_MOVIMIENTO'=>$date,'TIPO_MOVIMIENTO'=>'PRESTAMO','ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user];
+            unset($data['PHPSESSID'],$data['controller'],$data['method']);
+            $query=$this->pdo->insert('movimientos', $data);
+            $action="Ha insertado un prestamo para la caja con fecha ".$date;
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $this->user,
+                ':actioon' => $action,
+                ':ide' => $this->ide
+            ]);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
 
 }

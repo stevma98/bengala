@@ -231,6 +231,7 @@
 													<i class="fas fa-chevron-right text-color-primary px-3"></i>
 													<b class="text-color-dark text-xxs" id="totalvent"></b>
 													<input type="hidden" id="totalVenta1">
+													<input type="hidden" id="totalVenta2">
 												</span>
 											</div>
 										</div>
@@ -407,7 +408,7 @@
 								</div>
 								<div class="col-lg-8 col-md-4 mb-3 mb-lg-0">
 									<label for="return">Cambio</label>
-									<input type="text" class="form-control" id="return" style="text-align:center">
+									<input type="text" class="form-control" id="return" style="text-align:center" readonly>
 								</div>
 							</div>	
 							<div class="form-row">
@@ -521,6 +522,7 @@
 						var dis=totalVent*d;
 						totalVent-=dis;
 					}
+					$('#totalVenta2').val(totalVent);
 					totalVent = new Intl.NumberFormat('es-mx', { maximumSignificantDigits: 4 }).format(totalVent);
 					totalVent = totalVent.replace(",",".");
 					$('#totalproducts').html(totalArt);
@@ -537,7 +539,7 @@
 			for (let index = 0; index < 4 ; index++) {
 				received = received.replace('.','');
 			}
-			var tv = parseInt($('#totalVenta1').val());
+			var tv = parseInt($('#totalVenta2').val());
 			var total = received - tv;
 			if (total<0) {
 				$('#return').val("Credito");	

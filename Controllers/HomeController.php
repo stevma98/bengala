@@ -8,7 +8,7 @@ class HomeController
 	public function index()
 	{
 		if (isset($_SESSION['user'])) {
-			header('Location: ?controller=person&method=template');
+			header('Location: ?controller=person&method=dashboard');
 		}else{
 			?>
           <script type="text/javascript">

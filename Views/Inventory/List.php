@@ -24,7 +24,12 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+									<button type="button" class="btn btn-info dropdown-toggle pull-right" data-toggle="dropdown"><i class="fas fa-print"></i> Generar Reporte </button>
+                                        <div class="dropdown-menu" role="menu" style="min-width:10% !important;font-size:18px">
+                                            <a class="dropdown-item text-1" href="?controller=report&method=productsStockZero"><i class="far fa-file-pdf"></i> Productos Sin Stock</a>
+                                            <a class="dropdown-item text-1" href="#"><i class="far fa-file-pdf"></i> Registrar Salida</a>
+                                        </div>
+										<a class="modal-with-form btn btn-primary pull-right" href="#modalForm1" style="margin-right:5px"><i class="fas fa-plus-circle"></i> Registrar</a>									
 										<h2 class="card-title">Registro Articulos</h2>
                                     </header>
                                     
