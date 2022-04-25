@@ -26,16 +26,28 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-									<button type="button" class="btn btn-primary dropdown-toggle pull-right" data-toggle="dropdown" id="move"><i class="fas fa-dollar-sign"></i> Movimientos de Caja</button>
-									<button type="button" class="btn btn-dark dropdown-toggle pull-right" data-toggle="dropdown" id="cuts"><i class="fas fa-wallet"></i> Cortes de Caja</button>
+									<?php 
+								
+									if ($check[0]->ESTADO_CAJA=='Abierta' && $check[0]->FECHA_CAJA==date('Y-m-d')) {?>
+										<button type="button" class="btn btn-primary dropdown-toggle pull-right" data-toggle="dropdown" id="move"><i class="fas fa-dollar-sign"></i> Movimientos de Caja</button>
+										<button type="button" class="btn btn-dark dropdown-toggle pull-right" data-toggle="dropdown" id="cuts"><i class="fas fa-wallet"></i> Cortes de Caja</button>
+									<?php } ?>
 									<button type="button" class="btn btn-success dropdown-toggle pull-right" data-toggle="dropdown" id="options"><i class="fas fa-bars"></i> Opciones</button>
 									<div class="dropdown-menu" role="menu" >
 										<a class="modal-with-form dropdown-item text-1 cutsMenu" href="#modalForm" style="display:none"><i class="far fa-flag"></i> Corte Z - Diario</a>
 										<a class="modal-with-form dropdown-item text-1 cutsMenu" href="#modalForm" style="display:none"><i class="fas fa-flag"></i> Corte Z - Mensual</a>
 									
-											
-										<a class="modal-with-form dropdown-item text-1 optionsMenu" href="#modalForm1" style="display:none"><i class="fas fa-pen"></i> Editar Monto Inicial</a>
-										<a class="modal-with-form dropdown-item text-1 optionsMenu" href="#modalForm" style="display:none"><i class="fas fa-download"></i> Cerrar Caja</a>
+										<?php if ($check[0]->ESTADO_CAJA=='Abierta' && $check[0]->FECHA_CAJA==date('Y-m-d')) {?>
+											<a class="modal-with-form dropdown-item text-1 optionsMenu" href="#modalForm1" style="display:none"><i class="fas fa-pen"></i> Editar Monto Inicial</a>
+											<a class="modal-with-form dropdown-item text-1 optionsMenu" href="#modalForm4" style="display:none"><i class="fas fa-download"></i> Cerrar Caja</a>
+										<?php }else if($check[0]->ESTADO_CAJA=='Cerrada' && $check[0]->FECHA_CAJA==date('Y-m-d')){?>											
+											<a class="dropdown-item text-1 optionsMenu" href="?controller=contability&method=openBox&id=<?php echo $check[0]->ID_CAJA ?>" style="display:none"><i class="fas fa-lock-open"></i> Abrir Caja</a>
+										<?php }else if($check[0]->ESTADO_CAJA=='Cerrada' && $check[0]->FECHA_CAJA!=date('Y-m-d')) { ?>
+											<a class="dropdown-item text-1 optionsMenu" style="display:none" href="#"><i class="fas fa-sad-cry"></i> No Hay</a>
+										<?php }else{?>
+											<a class="modal-with-form dropdown-item text-1 optionsMenu" href="#modalForm4" style="display:none"><i class="fas fa-download"></i> Cerrar Caja</a>
+										<?php } ?>
+										
 
 										<a class="modal-with-form dropdown-item text-1 moveMenu" href="#modalForm2" style="display:none"><i class="far fa-money-bill-alt"></i> Gasto</a>
 										<a class="modal-with-form dropdown-item text-1 moveMenu" href="#modalForm3" style="display:none"><i class="fas fa-money-bill-alt"></i> Préstamo</a>
@@ -50,13 +62,13 @@
 											<div class="col-lg-6">
 												<table class="table table-responsive-lg ">
 													<tr><td class="square"><i class="fas fa-square" style="color:#37474F;" ></i></td><td>MONTO INICIAL</td><td style="color:#37474F;">$<?php echo number_format($check[0]->VALOR_APERTURA,0,',','.') ?></td></tr>
-													<tr><td class="square"><i class="fas fa-square" style="color:#5cb85c;" ></i></td><td>INGRESOS</td><td style="color:#5cb85c;">10</td></tr>
+													<tr><td class="square"><i class="fas fa-square" style="color:#5cb85c;" ></i></td><td>INGRESOS</td><td style="color:#5cb85c;">$<?php echo number_format($totali,0,',','.') ?></td></tr>
 													<tr><td class="square"><i class="fas fa-square" style="color:#63d3e9;" ></i></td><td>PRÉSTAMOS</td><td style="color:#63d3e9;">$<?php echo number_format($totall,0,',','.') ?></td></tr>
 													<tr><td class="square"><i class="fas fa-square" style="color:#e9573f;" ></i></td><td>GASTOS</td><td style="color:#e9573f;">$<?php echo number_format($totale,0,',','.') ?></td></tr>
-													<tr><td></td><td class="center" style="color:#5cb85c"><b>INGRESOS TOTALES</b></td><td style="color:#5cb85c">10</td></tr>
-													<tr><td></td><td class="center" style="color:#e9573f"><b>EGRESOS TOTALES</b></td><td style="color:#e9573f">10</td></tr>
-													<tr><td></td><td class="center"><b>SALDO</b></td><td>10</td></tr>
-													<tr><td></td><td class="center" style="color:#cc6600"><b>MONTO INICIAL + SALDO</b></td><td style="color:#cc6600">10</td></tr>
+													<tr><td></td><td class="center" style="color:#5cb85c"><b>INGRESOS TOTALES</b></td><td style="color:#5cb85c"><b>$<?php echo number_format($totali,0,',','.') ?></b></td></tr>
+													<tr><td></td><td class="center" style="color:#e9573f"><b>EGRESOS TOTALES</b></td><td style="color:#e9573f"><b>$<?php echo number_format($totale,0,',','.') ?></b></td></tr>
+													<tr><td></td><td class="center"><b>SALDO</b></td><td><b>$<?php echo number_format($saldo,0,',','.') ?></b></td></tr>
+													<tr><td></td><td class="center" style="color:#cc6600"><b>MONTO INICIAL + SALDO</b></td><td><?php echo ($final>0) ? '<b  style="color:#5cb85c">$'.number_format($final,0,',','.')	  : '<b  style="color:#e9573f">$'.number_format($final,0,',','.') ;   ?></b></td></tr>
 												</table>
 											</div>
 											<div class="col-lg-6">
@@ -66,25 +78,25 @@
 													var flotPieData = [{
 														label: "INGRESOS",
 														data: [
-															[1, 25]
+															[1, <?php echo $incomesg ?>]
 														],
 														color: '#5cb85c'
 													}, {
 														label: "EGRESOS",
 														data: [
-															[1, 35]
+															[1, <?php echo $expensesg ?>]
 														],
 														color: '#e9573f'
 													}, {
 														label: "PRÉSTAMOS",
 														data: [
-															[1, 30]
+															[1, <?php echo $incomesg ?>]
 														],
 														color: '#63d3e9'
 													}, {
 														label: "MONTO INICIAL",
 														data: [
-															[1, 10]
+															[1, <?php echo $iniciog ?>]
 														],
 														color: '#37474F'
 													}];
@@ -102,7 +114,7 @@
 																	<div class="col-md-1"></div>
 																	<ul class="nav nav-tabs col-md-8" style="border-bottom:0px !important">
 																		<li class="active">
-																			<a class="btn btn-default" data-toggle="tab" href="#all"><i class="fas fa-square" style="color:#5cb85c;" ></i> INGRESOS </a>
+																			<a class="btn btn-default" data-toggle="tab" href="#all"><i class="fas fa-square" style="color:#5cb85c;" ></i> INGRESOS (<?php echo $counti ?>)</a>
 																		</li>
 																		<li class="">
 																			<a class="btn btn-default"  data-toggle="tab" href="#pending"><i class="fas fa-square" style="color:#63d3e9;" ></i> PRÉSTAMOS (<?php echo $countl ?>)</a>
@@ -161,7 +173,13 @@
                                                                                     <th>Monto</th>
                                                                                 </thead>                                    
 																			<tbody>
-																				
+																			<?php foreach ($incomes as $income) {
+																				$value=($income->DESCUENTO==0) ? $income->VALOR : $income->VALOR-($income->VALOR*($income->DESCUENTO/100));
+																				?>
+																						<tr>
+																							<td><?php echo "VENTA N° ".$income->ID_CONSE_VENTA ?></td>
+																							<td><?php echo "$".number_format($value,0,',','.') ?></td>
+																					<?php } ?>
 																			</tbody>
 																			</table>
 																		</div>
@@ -273,6 +291,76 @@
 													<div class="col-md-12 text-right">
 														<button class="btn btn-primary modal-confirm" id="addLoan" >Guardar</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide" style="max-width:300px !important">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">Cierre de Caja</h2>
+											</header>
+											<div class="card-body">
+												
+													<div class="form-row">
+														<?php
+														if ($final>0) {?>
+															<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
+																<strong>Oh que mal!</strong> Aun hay espacios por completar.
+															</div>
+																<div class="form-group col-md-12">
+																	<label for="VALOR_CIERRE">Valor Cierre</label>
+																	<input type="text" class="form-control" id="VALOR_CIERRE" name="VALOR_CIERRE" placeholder="Monto Cierre" value="<?php echo $final ?>">
+																	<input type="hidden" id="confirmer" value="0">
+																</div>
+															</div>
+														<?php } else { ?>
+															<div class="alert alert-danger" style="width:100%;text-align:center">
+																<strong>Oh que mal!</strong> El cierre de caja no puede ser negativo.
+															</div>
+														<?php }	?>
+													
+												
+											</div>
+											<footer class="card-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<?php 
+														if ($final>0) {?>
+															<a class="modal-with-form  btn btn-primary" href="#modalIcon"><i class="fas fa-check-circle" style="color:white"></i> Cerrar Caja</a>
+														<?php }
+														?>
+														<button class="btn btn-default modal-dismiss" >Cancelar</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+
+
+									<div id="modalIcon" class="modal-block modal-block-info mfp-hide">
+										<section class="card">
+											<header class="card-header">
+												<h2 class="card-title">¿Estas Seguro?</h2>
+											</header>
+											<div class="card-body">
+												<div class="modal-wrapper">
+													<div class="modal-icon">
+														<i class="fas fa-question-circle"></i>
+													</div>
+													<div class="modal-text">
+														<p class="mb-0">¿Estas seguro de que quieres cerrar caja con el monto <span id="cierrecaja"><?php echo "$".number_format($final,0,',','.') ?></span> ?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="card-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+													<button class="btn btn-primary modal-confirm" id="closeBox" >Cerrar</button>
+														<button class="btn btn-default modal-dismiss">Cancelar</button>
 													</div>
 												</div>
 											</footer>
@@ -395,7 +483,13 @@
 			$('#VALOR_APERTURA').mask('#.##0', {reverse: true});
 			$('#MONTO_GASTO').mask('#.##0', {reverse: true});
 			$('#MONTO_PRESTAMO').mask('#.##0', {reverse: true});
+			$('#VALOR_CIERRE').mask('#.##0', {reverse: true});
 
+			$('#VALOR_CIERRE').keyup(function(){
+				var c = $('#VALOR_CIERRE').val();
+				$('#cierrecaja').html("$"+c);
+			});
+			
 			$('#options').click(function(){
 				if ($('.optionsMenu').css('display')=='none') {
 					$('.optionsMenu').css('display','block');	
@@ -549,6 +643,46 @@
 							new PNotify({
 								title: 'Rechazado!',
 								text: 'Hubo un error al añadir el prestamo',
+								type: 'error',
+								shadow: true
+							});
+						}
+					})
+				}
+			});
+
+			$('#closeBox').click(function(){
+				if($("#VALOR_CIERRE").val().length < 1) {
+					$('#VALOR_CIERRE').css('border','1px solid red');
+					$('#alertif').css('display','block');
+				}else{
+					$('#VALOR_CIERRE').css('border','1px solid green');
+					$('#alertif').css('display','none');
+					$('#confirmer').val("1");
+				}
+				confirmer=$('#confirmer').val();
+				if (confirmer=='1') {
+					$.ajax({
+						type:'POST',
+						url:'?controller=contability&method=closeBox',
+						data:'VALOR_CIERRE='+$('#VALOR_CIERRE').val()+'&ID_CAJA='+$('#ID_CAJA').val(),
+						success:function(response){
+							console.log(response);
+							new PNotify({
+								title: 'Confirmado!',
+								text: 'Cierre de caja realizado con éxito.',
+								type: 'success'
+							});
+							$.magnificPopup.close();
+							setTimeout(() => {
+							location.reload();	
+							}, 2000);
+						},
+						error:function(response){
+							$.magnificPopup.close();
+							new PNotify({
+								title: 'Rechazado!',
+								text: 'Hubo un error al cerrar caja',
 								type: 'error',
 								shadow: true
 							});

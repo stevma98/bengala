@@ -30,22 +30,44 @@ class ContabilityController
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
-		$check= $this->model->checkBox();
-		$expenses =$this->model->getExpenses();
+		if (isset($_GET['id'])) {
+			$check= $this->model->checkBox($_GET['id']);	
+		}else{
+			$date=date('Y-m-d');
+			$check= $this->model->checkBox($date);	
+		}
+		$data= $this->model->getAllBox($check[0]->ID_CAJA);
+		$date=$data[0]->FECHA_CAJA;
+		$expenses =$this->model->getExpenses($date);
 		$totale=0;
 		$totall=0;
+		$totali=0;
 		$counte=0;
 		$countl=0;
+		$counti=0;
 		foreach ($expenses as $expense) {
 			$counte += 1;
 			$totale += $expense->MONTO_MOVIMIENTO;
 		}
-		$loans = $this->model->getLoans();
+		$loans = $this->model->getLoans($date);
 		foreach ($loans as $loan) {
 			$countl +=1 ;
 			$totall += $loan->MONTO_MOVIMIENTO;
 		}
-		
+		$incomes=$this->model->getIncomes($date);	
+		foreach ($incomes as $income) {
+			$counti +=1;
+			$adder = ($income->DESCUENTO==0) ? $income->VALOR : $income->VALOR-($income->VALOR*($income->DESCUENTO/100));
+			$totali += $adder;
+		}
+		$saldo=$totali-$totale;
+		$final=$check[0]->VALOR_APERTURA+$saldo;
+		$totalg=$totale+$totali+$totall+$check[0]->VALOR_APERTURA;
+		$iniciog=number_format($check[0]->VALOR_APERTURA*100/$totalg,2,',','.');
+		$incomesg=number_format($totali*100/$totalg,2,',','.');
+		$expensesg=number_format($totale*100/$totalg,2,',','.');
+		$expensesl=number_format($totall*100/$totalg,2,',','.');
+
 		require 'Views/Contability/cashFlow.php';
 	}
 
@@ -58,6 +80,14 @@ class ContabilityController
         $procedures = $this->model->getDataxBill($_GET['id']);
 		$products = $this->inventory->getAllArticle();
 		require 'Views/Contability/checkout.php';
+    }
+
+	public function historyBox()
+    {
+        require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+        $boxes = $this->model->getAllBoxes();
+		require 'Views/Contability/historyBox.php';
     }
 
 	public function viewBill()
@@ -74,6 +104,11 @@ class ContabilityController
 		$this->model->searchProductsxBill($_REQUEST);
 	}
 
+	public function openBox()
+	{
+		$this->model->openBox($_GET['id']);
+	}
+
 	public function editInitialBox()
 	{
 		$this->model->editInitialBox($_REQUEST);
@@ -82,6 +117,13 @@ class ContabilityController
 	public function addExpense()
 	{
 		$this->model->addExpense($_REQUEST);
+	}
+
+	public function closeBox()
+	{
+		$date=date('Y-m-d H:s:i');
+		$_REQUEST += ['FECHA_CIERRE'=>$date,'ESTADO_CAJA'=>'Cerrada'];
+		$this->model->closeBox($_REQUEST);
 	}
 
 	public function addLoan()

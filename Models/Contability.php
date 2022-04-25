@@ -28,6 +28,28 @@ class Contability {
         }
     }
 
+    public function getAllBox($id)
+    {
+        try {
+            $strSql = "SELECT * FROM caja WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_CAJA ='$id'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getAllBoxes()
+    {
+        try {
+            $strSql = "SELECT * FROM caja WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+    
     public function getDataxBill($id)
     {
         try {
@@ -178,15 +200,17 @@ class Contability {
         }
     }
 
-    public function checkBox()
+    public function checkBox($date)
     {
         try {
-            $date=date('Y-m-d');
             $strSql = "SELECT * FROM caja WHERE ID_EMPRESA='{$this->ide}' AND FECHA_CAJA='$date'";
             $query = $this->pdo->select($strSql);
             if(count($query)==0){
                 $sql="INSERT INTO `caja`(`FECHA_CAJA`, `VALOR_APERTURA`, `ID_EMPRESA`, `ID_USUARIO`, `ESTADO_CAJA`) VALUES ('$date','0','{$this->ide}','{$this->user}','Abierta')";
                 $this->pdo->prepare($sql)->execute();
+                $strSql = "SELECT * FROM caja WHERE ID_EMPRESA='{$this->ide}' AND FECHA_CAJA='$date'";
+                $query = $this->pdo->select($strSql);
+                return $query;
             }else{ 
                 return $query;
             }
@@ -195,10 +219,9 @@ class Contability {
         } 
     }
 
-    public function getExpenses()
+    public function getExpenses($date)
     {
-        try {
-            $date=date('Y-m-d');
+        try {        
             $strSql = "SELECT * FROM movimientos WHERE ID_EMPRESA='{$this->ide}' AND FECHA_MOVIMIENTO='$date' AND TIPO_MOVIMIENTO='GASTO'";
             $query = $this->pdo->select($strSql);  
             return $query;          
@@ -207,10 +230,20 @@ class Contability {
         } 
     }
 
-    public function getLoans()
+    public function getIncomes($date)
     {
-        try {
-            $date=date('Y-m-d');
+        try {        
+            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND FECHA_VENTA LIKE '%$date%'";
+            $query = $this->pdo->select($strSql);  
+            return $query;          
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function getLoans($date)
+    {
+        try {        
             $strSql = "SELECT * FROM movimientos WHERE ID_EMPRESA='{$this->ide}' AND FECHA_MOVIMIENTO='$date' AND TIPO_MOVIMIENTO='PRESTAMO'";
             $query = $this->pdo->select($strSql);  
             return $query;          
@@ -226,6 +259,56 @@ class Contability {
             unset($data['PHPSESSID'],$data['controller'],$data['method']);
             $strWhere2 = "ID_EMPRESA=".$this->ide." AND ID_CAJA={$data['ID_CAJA']}";
             $query2=$this->pdo->update('caja', $data, $strWhere2);
+            $action="Ha cambiado el valor inicial de la caja ID= ".$data['ID_CAJA'];
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $this->user,
+                ':actioon' => $action,
+                ':ide' => $this->ide
+            ]);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function closeBox($data)
+    {
+        try {
+            $data['VALOR_CIERRE'] = str_replace('.','',$data['VALOR_CIERRE']);
+            unset($data['PHPSESSID'],$data['controller'],$data['method']);
+            $strWhere2 = "ID_EMPRESA=".$this->ide." AND ID_CAJA={$data['ID_CAJA']}";
+            $query2=$this->pdo->update('caja', $data, $strWhere2);
+            $action="Ha cerrado la caja ID= ".$data['ID_CAJA'];
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $this->user,
+                ':actioon' => $action,
+                ':ide' => $this->ide
+            ]);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function openBox($id)
+    {
+        try {
+            $date=date('Y-m-d H:s:i');
+            $data = ['ESTADO_CAJA'=>'Abierta'];
+            unset($data['PHPSESSID'],$data['controller'],$data['method']);
+            $strWhere2 = "ID_EMPRESA=".$this->ide." AND ID_CAJA={$id}";
+            $query2=$this->pdo->update('caja', $data, $strWhere2);
+            $action="Ha abierto la caja ID= ".$data['ID_CAJA'];
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $this->user,
+                ':actioon' => $action,
+                ':ide' => $this->ide
+            ]);
+            header("Location: ?controller=contability&method=template");
         } catch ( PDOException $e) {
             die($e->getMessage());
         } 
