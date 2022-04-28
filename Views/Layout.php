@@ -370,6 +370,11 @@
 				                                    Historial Caja
 				                                </a>
 				                            </li>
+											<li>
+				                                <a class="nav-link" href="?controller=contability&method=adminCredi">
+				                                    Administrar Créditos
+				                                </a>
+				                            </li>
 				                        </ul>
 				                    </li>
 									<li class="nav-parent">

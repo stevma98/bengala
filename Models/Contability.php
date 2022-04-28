@@ -126,6 +126,39 @@ class Contability {
             die($e->getMessage());
         }
     }
+
+    public function getAllCredits()
+    {
+        try {
+            $strSql = "SELECT * FROM ventas v INNER JOIN propietarios p ON v.ID_PROP=p.ID_PROP WHERE v.ID_EMPRESA='$this->ide' AND CREDITO = 1";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getAllCreditstp()
+    {
+        try {
+            $strSql = "SELECT * FROM ventas v INNER JOIN propietarios p ON v.ID_PROP=p.ID_PROP WHERE v.ID_EMPRESA='$this->ide' AND CREDITO = 1 AND ESTADO='Pendiente'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getAllAbonos()
+    {
+        try {
+            $strSql = "SELECT * FROM pagos WHERE ID_EMPRESA='$this->ide'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
     
     public function deleteRow($data)
     {
@@ -183,18 +216,22 @@ class Contability {
             unset($data['PHPSESSID'],$data['FORMA_PAGO']);
             $data+=['USUARIO'=>$this->user,'ID_EMPRESA'=>$this->ide,'FECHA_VENTA'=>$date,'ANO_VENTA'=>$date1[0],'ID_CONSE_VENTA'=>$consecutive];
             $_REQUEST+=['USUARIO'=>$this->user,'ID_EMPRESA'=>$this->ide,'FECHA_VENTA'=>$date,'ANO_VENTA'=>$date1[0],'ID_CONSE_VENTA'=>$consecutive];            
-            $this->pdo->insert('ventas', $data);
+            // $this->pdo->insert('ventas', $data);
+            if ($_REQUEST['CREDITO']==1 && $_REQUEST['INICIAL']!=0) {
+                $data3=['ID_VENTA'=>$consecutive,'FECHA_PAGO'=>$date,'ANO_PAGO'=>date('Y'),'VALOR_PAGO'=>$_REQUEST['INICIAL'],'USUARIO_ABONO'=>$this->user,'ID_EMPRESA'=>$this->ide,'PAGO_COMP'=>$consecutive];
+                $this->pdo->insert('pagos',$data3);
+            }
             $data1=['ESTADO_CARRITO'=>'Completado'];
             $strWhere2 = 'ID_EMPRESA='.$this->ide." AND ID_CONSE_CARRITO='{$data['ID_CARRITO']}' AND ID_MASCOTA='{$data['ID_MASCOTA']}'";
-            $query2=$this->pdo->update('carrito', $data1, $strWhere2);     
+            // $query2=$this->pdo->update('carrito', $data1, $strWhere2);     
             $action="Ha concretado la venta del carrito".$data['ID_CARRITO'];
             $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            // $sentencia=$this->pdo->prepare($sql)->execute([
+            //     ':fecha' => $date ,
+            //     ':user' => $this->user,
+            //     ':actioon' => $action,
+            //     ':ide' => $this->ide
+            // ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -230,10 +267,61 @@ class Contability {
         } 
     }
 
+    public function addPayment($data)
+    {
+        try {     
+            $strSql = "SELECT * FROM pagos WHERE ID_EMPRESA='{$this->ide}' AND PAGO_COMP LIKE '%ABONO%' ORDER BY ID_PAGO DESC LIMIT 1";
+            $query = $this->pdo->select($strSql);
+            $s=explode('-',$query[0]->PAGO_COMP);
+            $consecutive=$s[1]+1;
+            $consecutive=str_pad($consecutive,6,'00000',STR_PAD_LEFT);
+            $consecutive='ABONO-'.$consecutive;
+            $data['VALOR_PAGO'] = str_replace('.','',$data['VALOR_PAGO']);
+            unset($data['PHPSESSID'],$data['controller'],$data['method'],$data['TICKET']);
+            $date=date('Y-m-d H:s:i');
+            $data+=['FECHA_PAGO'=>$date,'ID_EMPRESA'=>$this->ide,'USUARIO_ABONO'=>$this->user,'ANO_PAGO'=>date('Y'),'PAGO_COMP'=>$consecutive];
+            $query2=$this->pdo->insert('pagos', $data);
+            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
+            $query = $this->pdo->select($strSql);
+            $total=$query[0]->INICIAL+$data['VALOR_PAGO'];
+            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
+            $query = $this->pdo->select($strSql);
+            $totalt=$query[0]->VALOR-$total;
+            if ($totalt<=0) {
+                $data1=['INICIAL'=>$total,'ESTADO'=>'Cerrado','PAGO'=>1];
+            } else {
+                $data1=['INICIAL'=>$total];
+            }                    
+            $strWhere2 = 'ID_EMPRESA='.$this->ide." AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
+            $query2=$this->pdo->update('ventas', $data1, $strWhere2);     
+            $action="Ha agregado un abono al credito ID= ".$data['ID_VENTA'];
+            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+            $sentencia=$this->pdo->prepare($sql)->execute([
+                ':fecha' => $date ,
+                ':user' => $this->user,
+                ':actioon' => $action,
+                ':ide' => $this->ide
+            ]);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
     public function getIncomes($date)
     {
         try {        
-            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND FECHA_VENTA LIKE '%$date%'";
+            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND FECHA_VENTA LIKE '%$date%' AND ESTADO='Cerrado'";
+            $query = $this->pdo->select($strSql);  
+            return $query;          
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        } 
+    }
+
+    public function getPayments($date)
+    {
+        try {        
+            $strSql = "SELECT * FROM pagos WHERE ID_EMPRESA='{$this->ide}' AND FECHA_PAGO LIKE '%$date%'";
             $query = $this->pdo->select($strSql);  
             return $query;          
         } catch ( PDOException $e) {

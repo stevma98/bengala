@@ -149,7 +149,49 @@
 								</ul>
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
+												<?php if ($creditsc>0) {?>		
+												<div class="accordion" id="accordion">																									
+													<div class="card card-default">
+														<div class="card-header">
+															<h4 class="card-title m-0" style="background-color:#0088CC">
+																<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1Five" aria-expanded="false" style="color:white">
+																<i class="fa fa-plus"></i>
+																	Pagos Pendientes
+																</a>
+															</h4>
+														</div>
+														<div id="collapse1Five" class="collapse" data-parent="#accordion" style="">
+														<div class="card-body" style="padding:0px !important">
+															<table class="table table-responsive-md mb-0">
+															<thead>
+																<tr style="font-size:10px">
+																	<th>#</th>
+																	<th>N° Factura</th>
+																	<th>Valor Crédito</th>
+																	<th>Valor Pendiente</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php 
+																$count=1;
+																foreach ($credits as $credit) { ?>
+																	<tr style="font-size:12px">
+																	<td><?php echo $count; ?></td>
+																		<td><?php echo $credit->ID_CONSE_VENTA?></td>
+																		<td><?php echo "$".number_format($credit->VALOR,0,',','.'); ?></td>
+                                                    					<td><?php echo "$".number_format($credit->VALOR-$credit->INICIAL,0,',','.'); ?></td>
+																	</tr>
+																<?php $count+=1; } ?>
+															</tbody>
+														</table>
+																<a href="?controller=contability&method=adminCredi" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i> Abonar</a>
+															</div>
+														</div>
 
+														
+													</div>
+												</div>
+												<?php } ?>
 										<div class="p-3">
 
 											<h4 class="mb-3">Update Status</h4>

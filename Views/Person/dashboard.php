@@ -33,21 +33,27 @@
 											<div class="row">
 												<div class="col-lg-12 mb-12">
 													<label for="FAST_SEARCH"><li class="fas fa-search"></li> Busqueda Rapida</label>
-													<select name="FAST_SEARCH" id="FAST_SEARCH" class="form-control">
+													<select data-plugin-selectTwo class="form-control populate" id="FAST_SEARCH">
 														<option value="">Seleccione...</option>
+														<?php foreach ($patients as $patient) { ?>
+															<option value="?controller=patient&method=profilePatient&id=<?php echo $patient->ID_MASCOTA ?>">Paciente: <?php echo $patient->NOMBRE ?></option>
+														<?php } ?>
+														<?php foreach ($owners as $owner) { ?>
+															<option value="?controller=owner&method=profileOwner&id=<?php echo $owner->ID_PROP ?>">Propietario: <?php echo $owner->ST_NOM." ".$owner->ST_APE ?></option>
+														<?php } ?>
 													</select>
 												</div>
 											</div>
 												<br><br>
 											<div class="row">
 												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
-												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
-												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=barber&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/barbery.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Peluqueria</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=query&method=controlQuery" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/query.png);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Consultas</h2></div></div></div></a>
 											</div>
 											<div class="row">
-												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
-												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
-												<div class="col-lg-4 mb-4"><a href="?controller=vaccine&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/vacuna.jpg);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Vacunas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=contability&method=template" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/box.png);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Caja</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=inventory&method=historySales" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/receipt.png);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Ventas</h2></div></div></div></a>
+												<div class="col-lg-4 mb-4"><a href="?controller=inventory&method=history" style="decoration-text:none;color:#787575"><div class="card"><div class="card-body" style="background-color:white;height:100px;background-image:url(Assets/img/purchase.png);background-size:90px;background-repeat:no-repeat;border:1px solid #bfbfbf;box-shadow: 2px 2px 3px #bfbfbf"><h2 class="pull-right">Compras</h2></div></div></div></a>
 											</div>
 										</div>
 									</div>
@@ -128,3 +134,33 @@
 			</aside>
 
 		</section>
+		<script src="Assets/vendor/select2/js/select2.js"></script>
+		<script>
+			(function($) {
+
+'use strict';
+
+if ( $.isFunction($.fn[ 'select2' ]) ) {
+
+	$(function() {
+		$('[data-plugin-selectTwo]').each(function() {
+			var $this = $( this ),
+				opts = {};
+
+			var pluginOptions = $this.data('plugin-options');
+			if (pluginOptions)
+				opts = pluginOptions;
+
+			$this.themePluginSelect2(opts);
+		});
+	});
+
+}
+
+}).apply(this, [jQuery]);
+
+$('#FAST_SEARCH').change(function(){
+	var link = $('#FAST_SEARCH').val();
+	location.href=link;
+});
+		</script>

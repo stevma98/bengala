@@ -66,7 +66,7 @@
 													<tr><td class="square"><i class="fas fa-square" style="color:#63d3e9;" ></i></td><td>PRÉSTAMOS</td><td style="color:#63d3e9;">$<?php echo number_format($totall,0,',','.') ?></td></tr>
 													<tr><td class="square"><i class="fas fa-square" style="color:#e9573f;" ></i></td><td>GASTOS</td><td style="color:#e9573f;">$<?php echo number_format($totale,0,',','.') ?></td></tr>
 													<tr><td></td><td class="center" style="color:#5cb85c"><b>INGRESOS TOTALES</b></td><td style="color:#5cb85c"><b>$<?php echo number_format($totali,0,',','.') ?></b></td></tr>
-													<tr><td></td><td class="center" style="color:#e9573f"><b>EGRESOS TOTALES</b></td><td style="color:#e9573f"><b>$<?php echo number_format($totale,0,',','.') ?></b></td></tr>
+													<tr><td></td><td class="center" style="color:#e9573f"><b>EGRESOS TOTALES</b></td><td style="color:#e9573f"><b>$<?php echo number_format($totalee,0,',','.') ?></b></td></tr>
 													<tr><td></td><td class="center"><b>SALDO</b></td><td><b>$<?php echo number_format($saldo,0,',','.') ?></b></td></tr>
 													<tr><td></td><td class="center" style="color:#cc6600"><b>MONTO INICIAL + SALDO</b></td><td><?php echo ($final>0) ? '<b  style="color:#5cb85c">$'.number_format($final,0,',','.')	  : '<b  style="color:#e9573f">$'.number_format($final,0,',','.') ;   ?></b></td></tr>
 												</table>
@@ -90,7 +90,7 @@
 													}, {
 														label: "PRÉSTAMOS",
 														data: [
-															[1, <?php echo $incomesg ?>]
+															[1, <?php echo $loansg ?>]
 														],
 														color: '#63d3e9'
 													}, {
@@ -180,6 +180,12 @@
 																							<td><?php echo "VENTA N° ".$income->ID_CONSE_VENTA ?></td>
 																							<td><?php echo "$".number_format($value,0,',','.') ?></td>
 																					<?php } ?>
+																				<?php foreach ($incomesP as $incomep) {
+																				?>
+																						<tr>
+																							<td><?php echo "Abono N° ".$incomep->PAGO_COMP ?></td>
+																							<td><?php echo "$".number_format($incomep->VALOR_PAGO,0,',','.') ?></td>
+																					<?php } ?>																					
 																			</tbody>
 																			</table>
 																		</div>

@@ -77,7 +77,7 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right">Agregar</a>
+                                        <a class="btn btn-primary" href="?controller=inventory&method=shopping" style="float:right">Agregar</a>
 										<h2 class="card-title">Compras</h2>
                                     </header>
 									

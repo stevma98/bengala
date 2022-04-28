@@ -100,6 +100,16 @@ class InventoryController
         $this->model->watchInfoS($_REQUEST);
     }
 
+    public function watchInfoC()
+    {
+        $this->model->watchInfoC($_REQUEST);
+    }
+
+    public function watchInfoCredit()
+    {
+        $this->model->watchInfoCredit($_REQUEST);
+    }
+
     public function watchInfoProducts()
     {
         $this->model->watchInfoProducts($_REQUEST);

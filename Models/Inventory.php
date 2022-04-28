@@ -181,6 +181,32 @@ class Inventory {
         }
     }
 
+    public function watchInfoC($id)
+    {
+        try {
+            $id=$id['ID_CONSE_VENTA'];
+            $strSql = "SELECT * FROM ventas c INNER JOIN salidas e ON c.ID_CONSE_VENTA=e.NUM_FAC LEFT JOIN propietarios p ON p.ID_PROP=c.ID_PROP WHERE c.ID_EMPRESA='$this->ide' AND ID_CONSE_VENTA='$id'";
+            $query = $this->pdo->select($strSql);
+            $query = json_encode($query);
+            echo $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function watchInfoCredit($id)
+    {
+        try {
+            $id=$id['ID_VENTA'];
+            $strSql = "SELECT * FROM pagos WHERE ID_EMPRESA='$this->ide' AND ID_VENTA='$id'";
+            $query = $this->pdo->select($strSql);
+            $query = json_encode($query);
+            echo $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function searchProductsxShopping()
     {
         try {
@@ -302,7 +328,7 @@ class Inventory {
             $date=date('Y-m-d H:s:i');
             foreach ($query as $dato) {
                 $datos=['NUM_FAC'=>$consecutive,'FECHA_SALIDA'=>$date,'CODIGO_PRODUCTO'=>$dato->ID_PRO,'CANTIDAD_SALIDA'=>$dato->CANTIDAD,'ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user,'MOTIVO_SALIDA'=> "POR VENTA FACTURA: ".$consecutive];                
-                $this->pdo->insert('salidas', $datos);
+                $this->pdo->insert('salidas', $datos); 
                 $strSql1 = "SELECT * from productos WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_PRO='{$dato->ID_PRO}' ";
                 $query1 = $this->pdo->select($strSql1);
                 if (count($query1)==1) {
@@ -316,8 +342,13 @@ class Inventory {
                 $sql1="DELETE FROM ventas_idpro WHERE ID_EMPRESA ='{$this->ide}'";
                 $sentenciasql=$this->pdo->prepare($sql1)->execute();
             }
+            if ($_REQUEST['CREDITO']==1 && $_REQUEST['INICIAL']!=0) {
+                $data3=['ID_VENTA'=>$consecutive,'FECHA_PAGO'=>$date,'ANO_PAGO'=>date('Y'),'VALOR_PAGO'=>$_REQUEST['INICIAL'],'USUARIO_ABONO'=>$this->user,'ID_EMPRESA'=>$this->ide,'PAGO_COMP'=>$consecutive];
+                $this->pdo->insert('pagos',$data3);
+            }
+            var_dump($_REQUEST);
             $y=date('Y');
-            $datav = ['ID_CONSE_VENTA'=>$consecutive,'VALOR'=>$data['VALOR'],'FECHA_VENTA'=>$date,'ANO_VENTA'=>$y,'USUARIO'=>$this->user,'ESTADO'=>'Cerrado','ID_EMPRESA'=>$this->ide,'ID_PROP'=>$data['ID_PROP'],'CREDITO'=>$data['CREDITO'],'PLAZO'=>$data['PLAZO'],'PAGO'=>$data['PAGO'],'INICIAL'=>$data['INICIAL'],'OBS'=>$data['OBS'],'DESCUENTO'=>$data['DESCUENTO'],'METODO_PAGO'=>$data['METODO_PAGO']];
+            $datav = ['ID_CONSE_VENTA'=>$consecutive,'VALOR'=>$data['VALOR'],'FECHA_VENTA'=>$date,'ANO_VENTA'=>$y,'USUARIO'=>$this->user,'ESTADO'=>$data['ESTADO'],'ID_EMPRESA'=>$this->ide,'ID_PROP'=>$data['ID_PROP'],'CREDITO'=>$data['CREDITO'],'PLAZO'=>$data['PLAZO'],'PAGO'=>$data['PAGO'],'INICIAL'=>$data['INICIAL'],'OBS'=>$data['OBS'],'DESCUENTO'=>$data['DESCUENTO'],'METODO_PAGO'=>$data['METODO_PAGO']];
             $this->pdo->insert('ventas', $datav);
             $date=date('Y-m-d H:s:i');
             $action="Ha cerrado la venta id=".$consecutive;

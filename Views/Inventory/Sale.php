@@ -278,6 +278,14 @@
 					},
                 });
             });
+
+			$('#CLIENTE').change(function(){
+				if($('#CLIENTE').val()=='Unica Vez'){
+					$('#FORMA_PAGO').attr('disabled',true);
+				}else{
+					$('#FORMA_PAGO').attr('disabled',false);
+				}
+			});
             
             $('#cancelShopping').click(function(){
                 $.ajax({

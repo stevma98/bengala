@@ -47,6 +47,17 @@ class Owner {
         }
     }
 
+    public function getCreditById($id)
+    {
+        try {
+            $strSql = "SELECT * FROM ventas v INNER JOIN propietarios p ON v.ID_PROP=p.ID_PROP WHERE v.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND CREDITO = 1 AND ESTADO='Pendiente' AND v.ID_PROP='$id'";
+            $query = $this->pdo->select($strSql);
+            return $query;
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function createOwner($data)
     {
         try {

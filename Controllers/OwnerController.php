@@ -47,6 +47,8 @@ class OwnerController
 		$cpets=count($pets);
 		$departament=$this->departament->getAll();
 		$data=$this->model->getById($_GET['id']);
+		$credits = $this->model->getCreditById($_GET['id']);
+		$creditsc = count($credits);
 		require 'Views/Owner/profileOwner.php';
 	}
 

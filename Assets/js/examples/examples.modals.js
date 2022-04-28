@@ -475,6 +475,60 @@ Theme Version: 	3.0.0
 	});
 
 	/*
+	add payment
+	*/
+
+	$(document).on('click', '#addPayment', function (e) {
+		var confirmer;
+		e.preventDefault();
+        e.stopImmediatePropagation();
+			if($("#ID_VENTA").val() == "Seleccione...") {
+				$('#ID_VENTA').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#ID_VENTA').css('border','1px solid green');
+				$('#alertif').css('display','none');
+			}
+			if($("#VALOR_PAGO").val().length < 1) {
+				$('#VALOR_PAGO').css('border','1px solid red');
+				$('#alertif').css('display','block');
+			}else{
+				$('#VALOR_PAGO').css('border','1px solid green');
+				$('#alertif').css('display','none');
+				$('#confirmer').val("1");
+			}
+			var ticket= ($('#TICKET').is(':checked')) ? 1 : 0 ;
+			confirmer=$('#confirmer').val();
+			if (confirmer=='1') {
+				$.ajax({
+					type: 'POST',
+					url: '?controller=contability&method=addPayment',
+					data: 'ID_VENTA='+$('#ID_VENTA').val()+'&VALOR_PAGO='+$('#VALOR_PAGO').val()+'&TICKET='+ticket,
+					success: function(data){
+						new PNotify({
+							title: 'Confirmado!',
+							text: 'Venta realizada éxitosamente',
+							type: 'success'
+						});
+						$.magnificPopup.close();
+						setTimeout(() => {
+						location.reload();	
+						}, 2000);
+					},
+					error: function(data){
+						$.magnificPopup.close();
+						new PNotify({
+							title: 'Rechazado!',
+							text: 'Hubo un error al crear la venta',
+							type: 'error',
+							shadow: true
+						});
+					}
+					});	
+			}
+	});
+
+	/*
 	create user
 	*/
 

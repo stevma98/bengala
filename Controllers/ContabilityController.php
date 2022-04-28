@@ -60,13 +60,20 @@ class ContabilityController
 			$adder = ($income->DESCUENTO==0) ? $income->VALOR : $income->VALOR-($income->VALOR*($income->DESCUENTO/100));
 			$totali += $adder;
 		}
-		$saldo=$totali-$totale;
+		$incomesP=$this->model->getPayments($date);	
+		foreach ($incomesP as $incomep) {
+			$counti +=1;
+			$totali += $incomep->VALOR_PAGO;
+		}
+		$totalee=$totale+$totall;
+		$saldo=$totali-$totalee;
 		$final=$check[0]->VALOR_APERTURA+$saldo;
 		$totalg=$totale+$totali+$totall+$check[0]->VALOR_APERTURA;
 		$iniciog=number_format($check[0]->VALOR_APERTURA*100/$totalg,2,',','.');
 		$incomesg=number_format($totali*100/$totalg,2,',','.');
 		$expensesg=number_format($totale*100/$totalg,2,',','.');
-		$expensesl=number_format($totall*100/$totalg,2,',','.');
+		$loansg=number_format($totall*100/$totalg,2,',','.');
+		
 
 		require 'Views/Contability/cashFlow.php';
 	}
@@ -80,6 +87,16 @@ class ContabilityController
         $procedures = $this->model->getDataxBill($_GET['id']);
 		$products = $this->inventory->getAllArticle();
 		require 'Views/Contability/checkout.php';
+    }
+	
+	public function adminCredi()
+    {
+        require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+		$credits = $this->model->getAllCredits();
+		$creditstp = $this->model->getAllCreditstp();
+		$abonos = $this->model->getAllAbonos();
+		require 'Views/Contability/adminCredi.php';
     }
 
 	public function historyBox()
@@ -102,6 +119,11 @@ class ContabilityController
 	public function searchProductsxBill()
 	{
 		$this->model->searchProductsxBill($_REQUEST);
+	}
+
+	public function addPayment()
+	{
+		$this->model->addPayment($_REQUEST);
 	}
 
 	public function openBox()

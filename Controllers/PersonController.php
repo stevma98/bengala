@@ -1,8 +1,8 @@
 <?php
 
 require 'Models/Person.php';
-// require 'Models/User.php';
-// require 'Models/Garanty.php';
+require 'Models/Owner.php';
+require 'Models/Patient.php';
 // require 'Models/Rol.php';
 
 
@@ -19,12 +19,16 @@ class PersonController
 	public function __construct()
 	{
 		$this->model = new Person;
+		$this->patient = new Patient;
+		$this->owner = new Owner;
 	}
 
 	public function dashboard()
 	{
 		require 'Views/Layout.php';
 		require 'Views/Scripts.php';
+		$patients = $this->patient->getAll();
+		$owners = $this->owner->getAll();
 		require 'Views/Person/Dashboard.php';
 	}
 	
