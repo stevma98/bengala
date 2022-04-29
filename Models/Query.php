@@ -96,6 +96,48 @@ class Query {
         }
     }
 
+    public function getCalendarData()
+    {
+        try {
+            $data= array();
+            $strSql = "SELECT * from peluqueria p INNER JOIN mascotas m ON m.ID_MASCOTA=p.ID_MASCOTA WHERE p.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ESTADO_PELUQUERIA='Pendiente'";
+            $query = $this->pdo->select($strSql);
+            foreach ($query as $row) {
+                $data[] = array(
+                    'id' => $row->ID_PELUQUERIA,
+                    'title' => "Peluqueria de ".$row->NOMBRE,
+                    'start' => $row->FEC_PELUQUERIA,
+                    'end' => $row->FEC_PELUQUERIA,
+                    'color' => 'red'                    
+                );
+            }
+            $strSql = "SELECT * from vacunas p INNER JOIN mascotas m ON m.ID_MASCOTA=p.ID_MASCOTA WHERE p.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ESTADO_VACUNA='Pendiente'";
+            $query = $this->pdo->select($strSql);
+            foreach ($query as $row) {
+                $data[] = array(
+                    'id' => $row->ID_VACUNA,
+                    'title' => "Vacuna de ".$row->NOMBRE,
+                    'start' => $row->FEC_VACUNA,
+                    'end' => $row->FEC_VACUNA,
+                    'color' => 'green'
+                );
+            }
+            $strSql = "SELECT * from consultas p INNER JOIN mascotas m ON m.ID_MASCOTA=p.ID_MASCOTA WHERE p.ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ESTADO_CONSULTA='Pendiente'";
+            $query = $this->pdo->select($strSql);
+            foreach ($query as $row) {
+                $data[] = array(
+                    'id' => $row->IO_CONSULTA,
+                    'title' => "Consulta de ".$row->NOMBRE,
+                    'start' => $row->FECHA_CONSULTA,
+                    'end' => $row->FECHA_CONSULTA   ,
+                );
+            }
+            echo json_encode($data);
+        } catch ( PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function searchQuerysById($id)
     {
         try {

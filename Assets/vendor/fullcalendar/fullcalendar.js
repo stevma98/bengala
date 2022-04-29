@@ -2851,11 +2851,11 @@ exports.globalDefaults = {
         next: 'next',
         prevYear: 'prev year',
         nextYear: 'next year',
-        year: 'year',
-        today: 'today',
-        month: 'month',
-        week: 'week',
-        day: 'day'
+        year: 'Año',
+        today: 'Hoy',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Dia'
     },
     // buttonIcons: null,
     allDayText: 'all-day',

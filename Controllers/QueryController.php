@@ -64,6 +64,13 @@ class QueryController
 		require 'Views/Query/list.php';
 	}
 
+	public function calendar()
+	{
+		require 'Views/Layout.php';
+		require 'Views/Scripts.php';
+		require 'Views/Query/Calendar.php';
+	}
+
 	public function getById()
 	{
 		$this->model->getByIdInventory($_POST['id']);
@@ -85,6 +92,11 @@ class QueryController
 	public function editQuery1()
 	{
 		$this->model->editQuery1($_REQUEST);
+	}
+
+	public function getCalendarData()
+	{
+		$this->model->getCalendarData();
 	}
 	
 

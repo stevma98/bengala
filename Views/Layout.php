@@ -121,6 +121,11 @@
 							</a>
 						</li>
 						<li>
+							<a href="?controller=query&method=calendar" class="notification-icon" style="background-color:#c74a6f;border-radius:10% !important">
+								<i class="far fa-calendar-alt" style="color:white"></i>
+							</a>
+						</li>
+						<li>
 							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
 								<i class="fas fa-tasks"></i>
 								<span class="badge">3</span>
@@ -193,6 +198,15 @@
 								</div>
 								<div class="content">
 									<ul>
+										<li>
+											<a href="#" class="clearfix">
+												<div class="image">
+													<i class="fas fa-thumbs-down bg-danger text-light"></i>
+												</div>
+												<span class="title">Server is Down!</span>
+												<span class="message">Just now</span>
+											</a>
+										</li>
 										<li>
 											<a href="#" class="clearfix">
 												<div class="image">
