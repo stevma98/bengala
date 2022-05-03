@@ -43,17 +43,22 @@ class Barber {
             $price=str_replace('.',"",$data['PRECIO_PELUQUERIA']);
 		    unset($data['PHPSESSID'],$data['PRECIO_PELUQUERIA']);
             $data+=['PRECIO_PELUQUERIA'=>$price];
-            $this->pdo->insert('peluqueria', $data);
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha creado una peluqueria para mascota id=".$data['ID_MASCOTA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+            $query=$this->pdo->insert('peluqueria', $data);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha creado una peluqueria para mascota id=".$data['ID_MASCOTA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);    
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -67,33 +72,38 @@ class Barber {
             $strWhere = 'ID_PELUQUERIA='.$data['ID_PELUQUERIA'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
 		    unset($data['PHPSESSID']);
             $query=$this->pdo->update('peluqueria', $data , $strWhere); 
-            $strSql = "SELECT * FROM peluqueria WHERE ID_PELUQUERIA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
-            $array = ['id' => $id];
-            $query = $this->pdo->select($strSql,$array);
-            $idmascota=$query[0]->ID_MASCOTA;            
-            $idprop=$query[0]->ID_PROP;
-            $price=str_replace(".","",$query[0]->PRECIO_PELUQUERIA);
-            $strSql = "SELECT * FROM carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_CARRITO DESC limit 1";
-            $array = ['id' => $idmascota];
-            $query = $this->pdo->select($strSql,$array);
-            if ($query[0]->ESTADO_CARRITO == 'Pendiente') {
-                $consecutivo=$query[0]->ID_CONSE_CARRITO;
+            if ($query=='') {
+                $strSql = "SELECT * FROM peluqueria WHERE ID_PELUQUERIA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
+                $array = ['id' => $id];
+                $query = $this->pdo->select($strSql,$array);
+                $idmascota=$query[0]->ID_MASCOTA;            
+                $idprop=$query[0]->ID_PROP;
+                $price=str_replace(".","",$query[0]->PRECIO_PELUQUERIA);
+                $strSql = "SELECT * FROM carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_CARRITO DESC limit 1";
+                $array = ['id' => $idmascota];
+                $query = $this->pdo->select($strSql,$array);
+                if ($query[0]->ESTADO_CARRITO == 'Pendiente') {
+                    $consecutivo=$query[0]->ID_CONSE_CARRITO;
+                } else {
+                    $consecutivo=$query[0]->ID_CONSE_CARRITO+1;
+                }
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Peluqueria','ID_PRODUCTO'=>$id,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price,'CANTIDAD'=>1];
+                $this->pdo->insert('carrito',$carrito);
+                $action="Ha realizado la peluqueria de id=".$data['ID_PELUQUERIA'];            
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);          
+                echo "true";
             } else {
-                $consecutivo=$query[0]->ID_CONSE_CARRITO+1;
+                echo "false";
             }
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Peluqueria','ID_PRODUCTO'=>$id,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price,'CANTIDAD'=>1];
-            $this->pdo->insert('carrito',$carrito);
-            $action="Ha realizado la peluqueria de id=".$data['ID_PELUQUERIA'];            
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -104,20 +114,24 @@ class Barber {
         try {
             $dato=$data['ESTADO_PELUQUERIA'];
             $strWhere = 'ID_PELUQUERIA='.$data['ID_PELUQUERIA'].' AND ID_EMPRESA='.$data['ID_EMPRESA'];
-		unset($data['PHPSESSID']);
+		    unset($data['PHPSESSID']);
             $query=$this->pdo->update('peluqueria', $data , $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha Cancelado una peluqueria de id=".$data['ID_PELUQUERIA'];
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha Cancelado una peluqueria de id=".$data['ID_PELUQUERIA'];
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

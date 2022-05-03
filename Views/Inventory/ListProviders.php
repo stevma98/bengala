@@ -6,7 +6,7 @@
 				<div class="inner-wrapper" style="padding:0px !important">	
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Pacientes</h2>
+					<h2>Lista Proveedores</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -26,13 +26,10 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right">Agregar</a>
+                                        <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right"><i class="fas fa-plus-circle"></i> Agregar</a>
 										<h2 class="card-title">Proveedores</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
+
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
@@ -137,73 +134,6 @@
 				</section>
 			</div>
 
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close d-md-none">
-							Collapse <i class="fas fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark"></div>
-			
-								<ul>
-									<li>
-										<time datetime="2017-04-19T00:00+00:00">04/19/2017</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>
 
 		</section>	
 
@@ -222,25 +152,25 @@
 							url: '?controller=inventory&method=inactivateProvider',
 							data: 'ID_PROVEEDOR='+id,
 							success: function(data){
-						console.log(data);			
-						new PNotify({
-							title: 'Confirmado!',
-							text: 'Proveedor Desactivado Exitosamente.', 
-							type: 'success'
-						});
-						// setTimeout(() => {
-						// location.reload();	
-						// }, 2000);
-					},
-					error: function(data){
-						$.magnificPopup.close();	
-						new PNotify({
-							title: 'Rechazado!',
-							text: 'Hubo un error al desactivar el proveedor',
-							type: 'error',
-							shadow: true
-						});
-					}
+								if (data=='true') {
+									new PNotify({
+										title: 'Confirmado!',
+										text: 'Proveedor Desactivado Exitosamente.', 
+										type: 'success'
+									});
+									setTimeout(() => {
+									location.reload();	
+									}, 2000);	
+								} else {
+									$.magnificPopup.close();	
+									new PNotify({
+										title: 'Rechazado!',
+										text: 'Hubo un error al desactivar el proveedor',
+										type: 'error',
+										shadow: true
+									});	
+								}
+							}
 						});
 					});
         </script>

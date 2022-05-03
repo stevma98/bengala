@@ -64,18 +64,24 @@ class Vaccine {
 		    unset($data['PHPSESSID'],$data['PRECIO_VACUNA']);
             $ide=$_SESSION['user']->ID_EMPRESA;            
             $data+=['ID_EMPRESA'=>$ide,'PRECIO_VACUNA'=>$price];
-            var_dump($data);
-            $this->pdo->insert('vacunas', $data);
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha programado una vacuna para mascota id=".$data['ID_MASCOTA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+            $query=$this->pdo->insert('vacunas', $data);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha programado una vacuna para mascota id=".$data['ID_MASCOTA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);    
+                echo "true";
+            } else {
+                echo "false";
+            }
+            
+            
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -149,36 +155,41 @@ class Vaccine {
             $id=$data['ID_VACUNA_PRO'];
             unset($data['ID_EMPRESA'],$data['PHPSESSID']);
             $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$_SESSION['user']->ID_EMPRESA;
-            $this->pdo->update('vacunas', $data , $strWhere); 
-            $strSql = "SELECT * FROM vacunas WHERE ID_VACUNA_PRO = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
-            $array = ['id' => $id];
-            $query = $this->pdo->select($strSql,$array);
-            $idmascota=$query[0]->ID_MASCOTA;            
-            $idprop=$query[0]->ID_PROP;
-            $idva=$query[0]->ID_VACUNA;
-            $price=str_replace('.','',$query[0]->PRECIO_VACUNA);
-            $strSql = "SELECT * FROM carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_CARRITO DESC limit 1";
-            $array = ['id' => $idmascota];
-            $query = $this->pdo->select($strSql,$array);
-            if ($query[0]->ESTADO_CARRITO == 'Pendiente') {
-                $consecutivo=$query[0]->ID_CONSE_CARRITO;
+            $query=$this->pdo->update('vacunas', $data , $strWhere);
+            if ($query=='') {
+                $strSql = "SELECT * FROM vacunas WHERE ID_VACUNA_PRO = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}'";
+                $array = ['id' => $id];
+                $query = $this->pdo->select($strSql,$array);
+                $idmascota=$query[0]->ID_MASCOTA;            
+                $idprop=$query[0]->ID_PROP;
+                $idva=$query[0]->ID_VACUNA;
+                $price=str_replace('.','',$query[0]->PRECIO_VACUNA);
+                $strSql = "SELECT * FROM carrito WHERE ID_MASCOTA = :id AND ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' order by ID_CARRITO DESC limit 1";
+                $array = ['id' => $idmascota];
+                $query = $this->pdo->select($strSql,$array);
+                if ($query[0]->ESTADO_CARRITO == 'Pendiente') {
+                    $consecutivo=$query[0]->ID_CONSE_CARRITO;
+                } else {
+                    $consecutivo=$query[0]->ID_CONSE_CARRITO+1;
+                }
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Vacuna','ID_PRODUCTO'=>$idva,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price,'CANTIDAD'=>1];
+                $this->pdo->insert('carrito',$carrito);
+                $action="Ha realizado una vacuna id=".$data['ID_VACUNA'];
+                
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
             } else {
-                $consecutivo=$query[0]->ID_CONSE_CARRITO+1;
+                echo "false";
             }
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $carrito = ['ID_MASCOTA' => $idmascota,'ID_PROP' => $idprop, 'ID_EMPRESA' => $ide,'FECHA_ANADIDO'=>$date,'ID_USUARIO'=>$user,'TIPO'=>'Vacuna','ID_PRODUCTO'=>$idva,'ESTADO_CARRITO'=>'Pendiente','ID_CONSE_CARRITO'=>$consecutivo,'PRECIO'=>$price,'CANTIDAD'=>1];
-            $this->pdo->insert('carrito',$carrito);
-            $action="Ha realizado una vacuna id=".$data['ID_VACUNA'];
-            
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -191,18 +202,22 @@ class Vaccine {
             unset($data['ID_EMPRESA'],$data['PHPSESSID']);
             $strWhere = 'ID_VACUNA_PRO='.$data['ID_VACUNA_PRO'].' AND ID_EMPRESA='.$_SESSION['user']->ID_EMPRESA;
             $query=$this->pdo->update('vacunas', $data , $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha cancelado una vacuna id=".$data['ID_VACUNA'];
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha cancelado una vacuna id=".$data['ID_VACUNA'];
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

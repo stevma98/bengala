@@ -32,15 +32,21 @@ class PatientController
 		$last=$this->model->getLastId();
 		$lastId=$last[0]->ID_MASCOTA;
 		$name=$last[0]->NOMBRE;
-		if ($_FILES['file']['type']=='image/jpeg' || $_FILES['file']['type']=='image/png') {
+		if ($_FILES['file']['type']=='image/jpeg' || $_FILES['file']['type']=='image/png' || $_FILES['file']['type']=='image/jpg') {
 			$root='./Pets/'.$lastId."/";
 			if(!file_exists($root)){
 				mkdir($root,0777,true);
 			}
 			$rootc=$root.$name.".jpg";
-			if (copy($_FILES['file']['tmp_name'],$rootc)or die("noah")) {
-				echo $name;
+			if (copy($_FILES['file']['tmp_name'],$rootc)) {
+				echo "true";
+			}else{
+				$this->model->deleteCreated($lastId);
+				echo "false";
 			}
+		}else{
+			$this->model->deleteCreated($lastId);
+			echo "false";
 		}
 	}
 

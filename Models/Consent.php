@@ -65,19 +65,26 @@ class Consent {
             $data += ['ID_EMPRESA' => $_SESSION['user']->ID_EMPRESA];
             $data += ['FECHA_CONSEN' => $date1];
             $data += ['ESTADO_CONSEN' => 'Activo'];
-		unset($data['PHPSESSID']);
-            $this->pdo->insert('inventario_consentimientos',$data);
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha creado un consentimiento";
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+		    unset($data['PHPSESSID']);
+            $query=$this->pdo->insert('inventario_consentimientos',$data);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha creado un consentimiento";
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
+            
+            
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -113,18 +120,25 @@ class Consent {
             ksort($data);
             unset($data['controller'],$data['method'],$data['PHPSESSID']);
             $strWhere = 'ID_CONSENTIMIENTO='.$data['ID_CONSENTIMIENTO'];
-            $this->pdo->update('consentimientos', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha Editado el consentimiento con id=".$data['ID_CONSENTIMIENTO'];
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+            $query=$this->pdo->update('consentimientos', $data, $strWhere); 
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha Editado el consentimiento con id=".$data['ID_CONSENTIMIENTO'];
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
+            
+            
         } catch ( PDOException $e) {
             die($e->getMessage());
         }  
@@ -136,19 +150,23 @@ class Consent {
             ksort($data);
             unset($data['controller'],$data['method'],$data['PHPSESSID']);
             $strWhere = 'ID_CONSEN='.$data['ID_CONSEN'];
-            $this->pdo->update('inventario_consentimientos', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha Editado el consentimiento con id=".$data['ID_CONSEN'];
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]); 
-
+            $query=$this->pdo->update('inventario_consentimientos', $data, $strWhere); 
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha Editado el consentimiento con id=".$data['ID_CONSEN'];
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]); 
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }  
@@ -183,18 +201,23 @@ class Consent {
             unset($data['controller'],$data['method']);
             $data+=['ESTADO_CONSENTIMIENTO'=>'Inactivo'];
             $strWhere = 'ID_CONSENTIMIENTO='.$data['ID_CONSENTIMIENTO'];
-            $this->pdo->update('consentimientos', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha inactivado el consentimiento con id=".$data['ID_CONSENTIMIENTO'];
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+            $query=$this->pdo->update('consentimientos', $data, $strWhere); 
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha inactivado el consentimiento con id=".$data['ID_CONSENTIMIENTO'];
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);    
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }  
@@ -210,19 +233,23 @@ class Consent {
             $user=$_SESSION['user']->identyUser;
             $data += ['ID_EMPRESA' => $ide];
             $data += ['ID_USUARIO' => $user];
-		unset($data['PHPSESSID']);
-            $this->pdo->insert('consentimientos',$data);
-            $date=date('Y-m-d H:s:i');
-            
-            $action="Ha creado un consentimiento";
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+		    unset($data['PHPSESSID']);
+            $query = $this->pdo->insert('consentimientos',$data);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha creado un consentimiento";
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

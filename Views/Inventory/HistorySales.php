@@ -67,7 +67,6 @@
 											<input type="hidden" id="confirmer" value="0"><footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="editUser" >Editar</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -77,7 +76,7 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="btn btn-primary" href="?controller=inventory&method=sale" style="float:right">Agregar</a>
+                                        <a class="btn btn-primary" href="?controller=inventory&method=sale" style="float:right"><i class="fas fa-plus-circle"></i> Agregar</a>
 										<h2 class="card-title">Ventas</h2>
                                     </header>
 									

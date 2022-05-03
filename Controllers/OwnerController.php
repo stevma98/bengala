@@ -31,7 +31,6 @@ class OwnerController
 	public function editOwner()
 	{
 	    $this->model->updateOwner($_REQUEST);
-		// var_dump($_REQUEST);
 	}
 	
 	public function getList()

@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
     <link rel="stylesheet" href="Assets/vendor/summernote/summernote-bs4.css" />
 				<div class="inner-wrapper" style="padding:0px !important">
@@ -25,13 +26,9 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
-										<h2 class="card-title">Registro Consentimiento</h2>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar</a>
+										<h2 class="card-title">Registro Modelos Consentimientos</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<!-- <table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											 -->
@@ -63,23 +60,27 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide" style="max-width:1000px !important">
 										<section class="card" >
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Creacion Consentimiento</h2>
+												<h2 class="card-title">Creación Consentimiento</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
                                                     <input type="hidden" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->identyUser; ?>">
 														<div class="form-group col-md-12 mb-3 mb-lg-0">
-															<label for="NOMBRE_CONSEN">Nombre:</label>
+															<label for="NOMBRE_CONSEN">Nombre <strong>*</strong></label>
                                                             <input type="text" name="NOMBRE_CONSEN" id="NOMBRE_CONSEN" class="form-control">
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="TEXTO_CONSEN">Detalle Consentimiento</label>
+															<label for="TEXTO_CONSEN">Detalle Consentimiento <strong>*</strong></label>
 															<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'>
 													        </div>
 														</div>
@@ -104,23 +105,27 @@
 									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide" style="max-width:1000px !important">
 										<section class="card" >
 											<header class="card-header">
-												<h2 class="card-title">Formulario de edicion Consentimiento</h2>
+												<h2 class="card-title">Edicion Consentimiento</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-													<input type="text" id="ID_CONSEN">
+													<input type="hidden" id="ID_CONSEN">
 														<div class="form-group col-md-12 mb-3 mb-lg-0">
-															<label for="NOMBRE_CONSEN">Nombre:</label>
+															<label for="NOMBRE_CONSEN">Nombre <strong>*</strong></label>
                                                             <input type="text" name="NOMBRE_CONSEN" id="NOMBRE_CONSEN" class="form-control">
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="TEXTO_CONSEN">Detalle Consentimiento</label>
+															<label for="TEXTO_CONSEN">Detalle Consentimiento <strong>*</strong></label>
 															<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'>
 													        </div>
 														</div>
@@ -143,74 +148,6 @@
 					<!-- end: page -->
 				</section>
 			</div>
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close d-md-none">
-							Collapse <i class="fas fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark"></div>
-			
-								<ul>
-									<li>
-										<time datetime="2017-04-19T00:00+00:00">04/19/2017</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>
 
 		</section>	
 
@@ -314,25 +251,25 @@
 					url: '?controller=consent&method=editConsent1',
 					data: 'TEXTO_CONSEN='+$('#OBSERVACIONES').html()+'&ID_CONSEN='+$('#ID_CONSEN').val()+'&NOMBRE_CONSEN='+$('#NOMBRE_CONSEN').val(),
 					success: function(data){
-						console.log(data);
-						new PNotify({
-							title: 'Confirmado!',
-							text: 'Consentimiento Editado Exitosamente.',
-							type: 'success'
-						});
-						$.magnificPopup.close();
-						setTimeout(() => {
-						location.reload();	
-						}, 2000);
-					},
-					error: function(data){
-						$.magnificPopup.close();
-						new PNotify({
-							title: 'Rechazado!',
-							text: 'Hubo un error al editar el consentimiento',
-							type: 'error',
-							shadow: true
-						});
+						if (data=='true') {
+							new PNotify({
+								title: 'Confirmado!',
+								text: 'Consentimiento Editado Exitosamente.',
+								type: 'success'
+							});
+							$.magnificPopup.close();
+							setTimeout(() => {
+							location.reload();	
+							}, 2000);	
+						} else {
+							$.magnificPopup.close();
+							new PNotify({
+								title: 'Rechazado!',
+								text: 'Hubo un error al editar el consentimiento',
+								type: 'error',
+								shadow: true
+							});	
+						}
 					}
 					});	
 			}

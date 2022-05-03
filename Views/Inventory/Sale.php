@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -95,11 +96,15 @@
                                     </header>
                                     <div class="card-body">									
                                         <div class="row">
+										<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
                                         <div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
                                             <div class="col-md-12 col-lg-12">
-                                                <label for="CLIENTE">Cliente</label>
+                                                <label for="CLIENTE">Cliente <strong>*</strong></label>
                                                 <select name="CLIENTE" id="CLIENTE" class="form-control">
                                                 <option value="Seleccione...">Seleccione...</option>
 												<option value="Unica Vez">Unica Vez</option>
@@ -121,21 +126,21 @@
 							</div>							
 							<div class="form-row">
 								<div class="col-lg-4 col-md-4 mb-3 mb-lg-0">
-									<label for="FORMA_PAGO">Forma Pago</label>
+									<label for="FORMA_PAGO">Forma Pago <strong>*</strong></label>
 									<select name="FORMA_PAGO" id="FORMA_PAGO" class="form-control" required style="text-align:center">
 										<option value="0">Contado</option>
 										<option value="1">Crédito</option>
 									</select>
 								</div>
 								<div class="col-lg-8 col-md-4 mb-3 mb-lg-0">
-									<label for="received">Recibo</label>
+									<label for="received">Recibo <strong>*</strong></label>
 									<input type="text" class="form-control" id="received" style="text-align:center">
 									<input type="hidden" class="form-control" id="received1" style="text-align:center">
 								</div>
 							</div>							
 							<div class="form-row">
 								<div class="col-lg-4 col-md-4 mb-3 mb-lg-0">
-								<label for="METODO_PAGO">Método Pago</label>
+								<label for="METODO_PAGO">Método Pago <strong>*</strong></label>
 									<select name="METODO_PAGO" id="METODO_PAGO" class="form-control" required style="text-align:center">
 										<option value="Banco">Banco</option>
 										<option value="Local" selected>Local</option>

@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -24,12 +25,10 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar</a>
 										<h2 class="card-title">Registro Vacunas</h2>
                                     </header>
                                     
-								<div class="card-body">									
-									<!-- Modal Form -->
 									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
@@ -45,6 +44,7 @@
 													<th>Proxima Vacuna</th>
 													<th>Vencimiento</th>
 													<th>Detalle</th>
+													<th>Estado</th>
 													<th>Opciones</th>
 												</tr>
 											</thead>
@@ -61,12 +61,9 @@
 													<td><?php echo $Vaccine->PROXIMA_VACUNA; ?></td>
 													<td><?php echo $Vaccine->VENCIMIENTO; ?></td>
 													<td><?php echo $Vaccine->DETALLE; ?></td>
-													<?php if ($Vaccine->ESTADO_VACUNA=='No Aplicada') { ?>
-														<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a> <a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-warning"><i class="fas fa-dollar-sign"></i> Pagar</a></td>
-													<?php } else { ?>
-														<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a> <a href="#" class="btn btn-success"><i class="fas fa-check"></i> Pagado</a></td>
-													<?php } ?>
-													
+													<td><?php echo $Vaccine->ESTADO_VACUNA; ?></td>
+													<td><a href="?controller=patient&method=profilePatient&id=<?php echo $Vaccine->ID_MASCOTA; ?>" class="btn btn-primary"><i class="fas fa-eye"></i> Ver</a> 
+													</td>
                                                     </tr>
                                                     <?php 
                                                     } ?>
@@ -84,16 +81,20 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Vacuna</h2>
+												<h2 class="card-title">Registro Vacuna</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_PROP">Propietario:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_PROP">Propietario <strong>*</strong></label>
                                                             <select name="ID_PROP" id="ID_PROP" class="form-control" placeholder="Propietario" required>
                                                                 <option value="Seleccione..." Selected>Seleccione...</option>
 																<?php foreach ($owners as $owner) {?>
@@ -101,15 +102,15 @@
 																<?php } ?>
                                                             </select>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_MASCOTA">Paciente:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_MASCOTA">Paciente <strong>*</strong></label>
                                                             <select name="ID_MASCOTA" id="ID_MASCOTA" class="form-control" placeholder="Paciente" required>
                                                             </select>
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ID_VACUNA">Vacuna</label>
+															<label for="ID_VACUNA">Vacuna <strong>*</strong></label>
 															<select name="ID_VACUNA" id="ID_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($vaccinesI as $vaccineI) {?>
@@ -118,41 +119,41 @@
 															</select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="LOTE">Lote</label>
+															<label for="LOTE">Lote <strong>*</strong></label>
 															<input type="text" id="LOTE" name="LOTE" class="form-control" required>															
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRESENTACION">Presentacion</label>
+															<label for="PRESENTACION">Presentacion </label>
 															<input type="text" id="PRESENTACION" name="PRESENTACION" class="form-control" value="0" disabled>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="DOSIS">Dosis</label>
+															<label for="DOSIS">Dosis <strong>*</strong></label>
 															<input type="text" id="DOSIS" name="DOSIS" class="form-control" required>
 														</div>														
 													</div>
 													<div class="form-row">
-														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="VENCIMIENTO">Vencimiento</label>
+														<div class="col-md-4 mb-3 mb-lg-0"> 
+															<label for="VENCIMIENTO">Vencimiento <strong>*</strong></label>
 															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="FEC_VACUNA">Fecha Vacuna</label>
+															<label for="FEC_VACUNA">Fecha Vacuna <strong>*</strong></label>
 															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna</label>
+															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna <strong>*</strong></label>
 															<input type="date" id="FECHA_ULT_VACUNA" name="FECHA_ULT_VACUNA" class="form-control" required>
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
+															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna <strong>*</strong></label>
 															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required>															
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
+															<label for="PROXIMA_VACUNA">Proxima Vacuna <strong>*</strong></label>
 															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($vaccinesI as $vaccineI) {?>
@@ -161,7 +162,7 @@
 															</select>
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="PRECIO_VACUNA">Precio</label>
+															<label for="PRECIO_VACUNA">Precio<strong>*</strong> </label>
 															<input type="text" id="PRECIO_VACUNA" name="PRECIO_VACUNA" class="form-control">
 														</div>
 													</div>

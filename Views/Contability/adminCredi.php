@@ -6,6 +6,7 @@
             border-collapse: collapse;
             padding: 8px;
         }
+        strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -29,7 +30,7 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar Abono</a>
+                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar Abono</a>
 										<h2 class="card-title">Administracion de Créditos</h2>
                                     </header>
                                     
@@ -140,6 +141,7 @@
                                                                                 <tr>
                                                                                     <th>#</th>
                                                                                     <th>N° Factura</th>
+                                                                                    <th>ID Abono</th>
                                                                                     <th>Fecha Abono</th>
                                                                                     <th>Valor Abono</th>
                                                                                     <th>Opciones</th>
@@ -154,6 +156,7 @@
                                                                                     <tr id="<?php echo $abono->ID_VENTA; ?>">
                                                                                     <td><?php echo $count2; ?></td>
                                                                                     <td><?php echo $abono->ID_VENTA; ?></td>
+                                                                                    <td><?php echo $abono->PAGO_COMP; ?></td>
                                                                                     <td><?php echo $abono->FECHA_PAGO; ?></td>
                                                                                     <td><?php echo "$".number_format($abono->VALOR_PAGO,0,',','.'); ?></td>
                                                                                     
@@ -242,16 +245,20 @@
                 <div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Abono</h2>
+												<h2 class="card-title">Registro Abono</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+                                                    <div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 														<div class="col-md-12 mb-3 mb-lg-0">
-															<label for="ID_VENTA">Destino:</label>
+															<label for="ID_VENTA">Destino <strong>*</strong></label>
                                                             <select name="ID_VENTA" id="ID_VENTA" class="form-control" placeholder="Propietario" required>
                                                                 <option value="Seleccione..." Selected>Seleccione...</option>
 																<?php foreach ($creditstp as $credit) {?>
@@ -262,7 +269,7 @@
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="VALOR_PAGO">Valor Abono</label>
+															<label for="VALOR_PAGO">Valor Abono <strong>*</strong></label>
 															<input type="text" id="VALOR_PAGO" name="VALOR_PAGO" class="form-control" placeholder="Valor Abono" required>															
 														</div>
                                                         <div class="col-md-6 mb-6 mb-lg-0 center" style="margin-top:6%">

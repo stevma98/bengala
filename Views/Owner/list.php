@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -10,7 +11,7 @@
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
 								<li>
-									<a href="index.html">
+									<a href="?controller=person&method=dashboard">
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
@@ -24,17 +25,15 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right">Agregar</a>
+                                        <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right"><i class="fas fa-plus-circle"></i> Agregar</a>
 										<h2 class="card-title">Propietarios</h2>
                                     </header>
                                     
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
 												<tr>
+													<th>#</th>
 													<th>Identificacion</th>
 													<th>Nombre</th>
 													<th>Telefono</th>
@@ -42,8 +41,13 @@
 												</tr>
 											</thead>
 											<tbody id="prueba">
-                                                    <?php foreach($owners as $owner){ ?>
+                                                    <?php 
+													$count=0;
+													foreach($owners as $owner){ 
+													$count+=1;	
+													?>
                                                     <tr>
+													<td><?=$count; ?></td>
 													<td><?php echo $owner->ID_PROP; ?></td>
 													<td><?php echo $owner->ST_NOM." ".$owner->ST_APE; ?></td>
 													<td><?php echo $owner->TELEFONO;?></td>
@@ -57,28 +61,30 @@
 									</div>
 								</section>
 							</div>
-						</div>
-						</div>
-					</div>
+						
 									<!-- Modal Form -->
 									<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro</h2>
+												<h2 class="card-title">Registro Propietario</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-														<div class="form-group col-md-6">
-															<label for="idOwner">Identificacion</label>
-															<input type="text" class="form-control" id="idOwner" name="idOwner" placeholder="Identificacion" required>
+														<div class="col-md-6">
+															<label for="idOwner">Identificacion <strong>*</strong></label>
+															<input type="text" class="form-control" id="idOwner" name="idOwner" placeholder="EJ: 159374682" required>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="document">Tipo Documento:</label>
-                                                            <select name="document" id="document" class="form-control" placeholder="tipo Documento" required>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="document">Tipo Documento <strong>*</strong></label>
+                                                            <select name="document" id="document" class="form-control" placeholder="EJ: Cedula de .." required>
                                                                 <option value="CC" Selected>Cedula de Ciudadania</option>
                                                                 <option value="TI">Tarjeta de Identidad</option>
                                                                 <option value="PSPT">Pasaporte</option>
@@ -86,29 +92,29 @@
 														</div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="firstName">Primer Nombre:</label>
-                                                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Primer Nombre" required>
+                                                        <div class="col-md-6">
+                                                            <label for="firstName">Primer Nombre <strong>*</strong></label>
+                                                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Ej: Peter" required>
                                                         </div>
-                                                        <div class="form-group col-md-6 mb-3 mb-lg-0">
-                                                            <label for="secondName">Segundo Nombre</label>
-                                                            <input type="text" class="form-control" id="secondName" placeholder="Segundo Nombre" name="secondName">
+                                                        <div class="col-md-6 mb-3 mb-lg-0">
+                                                            <label for="secondName">Segundo Nombre </label>
+                                                            <input type="text" class="form-control" id="secondName" placeholder="Ej: Jhon" name="secondName">
                                                         </div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-6">
-															<label for="firstLn">Primer Apellido</label>
-															<input type="text" class="form-control" id="firstLn" name="firstLn" required placeholder="Primer Apellido">
+                                                        <div class="col-md-6">
+															<label for="firstLn">Primer Apellido <strong>*</strong></label>
+															<input type="text" class="form-control" id="firstLn" name="firstLn" required placeholder="Ej: Doe">
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
+														<div class="col-md-6 mb-3 mb-lg-0">
 															<label for="secondLn">Segundo Apellido</label>
-															<input type="text" class="form-control" id="secondLn" name="secondLn" placeholder="Segundo Apellido">
+															<input type="text" class="form-control" id="secondLn" name="secondLn" placeholder="Ej: Rings">
 														</div>
 													</div>
                                                     <div class="form-row">
-                                                        <div class="form-group col-md-6">
-															<label for="department">Departamento</label>
-															<select name="department" id="department" class="form-control" placeholder="Departamento" required>
+                                                        <div class="col-md-6">
+															<label for="department">Departamento <strong>*</strong></label>
+															<select name="department" id="department" class="form-control" placeholder="Ej: Tolima" required>
 																<option selected value="seleccione">Seleccione...</option>
                                                                 <?php 
 																	foreach ($departament as $departament) {
@@ -119,31 +125,31 @@
 																?>
                                                             </select>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="city">Ciudad</label>
-															<select name="city" id="city" class="form-control">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="city">Ciudad <strong>*</strong></label>
+															<select name="city" id="city" class="form-control" placeholder="Ej: Ibague">
                                                                 
                                                             </select>
 														</div>
 													</div>
                                                     <div class="form-row">
-                                                    <div class="form-group col-md-6">
-															<label for="addres">Direccion</label>
-															<input type="text" class="form-control" id="addres" name="addres" required placeholder="Direccion">
+                                                    <div class="col-md-6">
+															<label for="addres">Direccion <strong>*</strong></label>
+															<input type="text" class="form-control" id="addres" name="addres" required placeholder="Ej: Calle 98A 32-15">
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="phone">Telefono</label>
-															<input type="text" class="form-control" id="phone" name="phone" required placeholder="Telefono">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="phone">Telefono <strong>*</strong></label>
+															<input type="text" class="form-control" id="phone" name="phone" required placeholder="Ej: 3153286595">
 														</div>
 													</div>
                                                     <div class="form-row">
-                                                    <div class="form-group col-md-6">
+                                                    <div class="col-md-6">
 															<label for="phone2">Telefono Alternativo</label>
-															<input type="text" class="form-control" id="phone2" name="phone2" placeholder="Telefono Alternativo">
+															<input type="text" class="form-control" id="phone2" name="phone2" placeholder="Ej: 3256984561">
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="email">Correo Electronico</label>
-															<input type="text" class="form-control" id="email" name="email" required placeholder="Correo Electronico">
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="email">Correo Electronico <strong>*</strong></label>
+															<input type="text" class="form-control" id="email" name="email" required placeholder="Ej: correo@outlook.com">
 															<input type="hidden" id="confirmer" value="0">
 														</div>
 													</div>
@@ -164,74 +170,6 @@
 					<!-- end: page -->
 				</section>
 			</div>
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close d-md-none">
-							Collapse <i class="fas fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark"></div>
-			
-								<ul>
-									<li>
-										<time datetime="2017-04-19T00:00+00:00">04/19/2017</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>
 
 		</section>	
 

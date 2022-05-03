@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -24,13 +25,9 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right">Agregar</a>
+                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right"><i class="fas fa-plus-circle"></i> Agregar</a>
 										<h2 class="card-title">Vacunas</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
@@ -69,15 +66,19 @@
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
                                                         <div class="col-md-6 mb-3 mb-lg-0">
-															<label for="NOMBRE_VACUNA">Nombre</label>
+															<label for="NOMBRE_VACUNA">Nombre <strong>*</strong></label>
 															<input type="text" id="NOMBRE_VACUNA" name="NOMBRE_VACUNA" class="form-control" required>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRESENTACION">Dosis</label>
+															<label for="PRESENTACION">Dosis <strong>*</strong></label>
 															<select name="PRESENTACION" id="PRESENTACION" class="form-control">
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Ol">Ol</option>
@@ -127,6 +128,10 @@
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>

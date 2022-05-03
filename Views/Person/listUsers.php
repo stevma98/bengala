@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -25,52 +26,56 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Usuario</h2>
+												<h2 class="card-title">Registro de Usuario</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ST_NOM">Primer Nombre</label>
-															<input type="text" id="ST_NOM" class="form-control">
+															<label for="ST_NOM">Primer Nombre <strong>*</strong></label>
+															<input type="text" id="ST_NOM" class="form-control" placeholder="Ej: Peter">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ND_NOM">Segundo Nombre</label>
-															<input type="text" id="ND_NOM" class="form-control">
+															<label for="ND_NOM">Segundo Nombre <strong>*</strong></label>
+															<input type="text" id="ND_NOM" class="form-control" placeholder="Ej: Jhon">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ST_APE">Primer Apellido</label>
-															<input type="text" id="ST_APE" class="form-control">
+															<label for="ST_APE">Primer Apellido <strong>*</strong></label>
+															<input type="text" id="ST_APE" class="form-control" placeholder="Ej: Doe">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ND_APE">Segundo Apellido</label>
-															<input type="text" id="ND_APE" class="form-control">
+															<label for="ND_APE">Segundo Apellido <strong>*</strong></label>
+															<input type="text" id="ND_APE" class="form-control" placeholder="Ej: Necklace">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="TELEFONO">Teléfono</label>
-															<input type="text" id="TELEFONO" class="form-control" maxlength="10">
+															<label for="TELEFONO">Teléfono <strong>*</strong></label>
+															<input type="text" id="TELEFONO" class="form-control" maxlength="10" placeholder="Ej: 31525555555">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="EMAIL">Email</label>
-															<input type="text" id="EMAIL" class="form-control">
+															<label for="EMAIL">Email <strong>*</strong></label>
+															<input type="text" id="EMAIL" class="form-control" placeholder="Ej: correo@outlook.com">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ID">Identificacion</label>
-															<input type="text" id="ID" class="form-control">
+															<label for="ID">Identificacion <strong>*</strong></label>
+															<input type="text" id="ID" class="form-control" placeholder="Ej: 1110458694">
 														</div>													
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PERFIL">Tipo Usuario</label>
+															<label for="PERFIL">Tipo Usuario <strong>*</strong></label>
 															<select id="PERFIL" class="form-control">		
 																<option value="Seleccione...">Seleccione...</option>
 																<option value="Admin">Administrador</option>
@@ -101,47 +106,51 @@
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ST_NOME">Primer Nombre</label>
+															<label for="ST_NOME">Primer Nombre <strong>*</strong></label>
 															<input type="text" id="ST_NOME" class="form-control">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ND_NOME">Segundo Nombre</label>
+															<label for="ND_NOME">Segundo Nombre <strong>*</strong></label>
 															<input type="text" id="ND_NOME" class="form-control">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ST_APEE">Primer Apellido</label>
+															<label for="ST_APEE">Primer Apellido <strong>*</strong></label>
 															<input type="text" id="ST_APEE" class="form-control">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ND_APEE">Segundo Apellido</label>
+															<label for="ND_APEE">Segundo Apellido <strong>*</strong></label>
 															<input type="text" id="ND_APEE" class="form-control">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="TELEFONOE">Teléfono</label>
+															<label for="TELEFONOE">Teléfono <strong>*</strong></label>
 															<input type="text" id="TELEFONOE" class="form-control" maxlength="10">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="EMAILE">Email</label>
+															<label for="EMAILE">Email <strong>*</strong></label>
 															<input type="text" id="EMAILE" class="form-control">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="IDE">Identificacion</label>
+															<label for="IDE">Identificacion <strong>*</strong></label>
 															<input type="text" id="IDE" class="form-control" readonly>
 														</div>													
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PERFILE">Tipo Usuario</label>
+															<label for="PERFILE">Tipo Usuario <strong>*</strong></label>
 															<select id="PERFILE" class="form-control">		
 																<option value="Seleccione...">Seleccione...</option>
 																<option value="Admin">Administrador</option>
@@ -166,7 +175,7 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right">Agregar</a>
+                                        <a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right"><i class="fas fa-plus-circle"></i> Agregar</a>
 										<h2 class="card-title">Usuarios</h2>
                                     </header>
 									

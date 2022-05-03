@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 	<link rel="stylesheet" href="Assets/vendor/summernote/summernote-bs4.css" />
 				<div class="inner-wrapper" style="padding:0px !important">
@@ -24,12 +25,10 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar</a>
 										<h2 class="card-title">Registro Consultas</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
+								
 									<div class="card-body">
                                     					<div id="collapse1One" class="" data-parent="#accordion" style="">
 															<div class="card-body" style="padding:0px !important">
@@ -58,7 +57,7 @@
 																<!--pendientes-->
 																<div id="pending" class="tab-pane">
 																		<div class="adv-table editable-table ">
-																			<table class="table table-striped table-hover table-bordered" id="datatable-tabletools">                                     
+																			<table class="table table-striped table-hover table-bordered" id="datatable-tabletools5">                                     
                                                                                 <thead>
                                                                                     <th>Consecutivo</th>
                                                                                     <th>Paciente</th>
@@ -106,7 +105,7 @@
 																<!--pendientes hoy-->
 																<div id="confirmed" class="tab-pane">
 																	<div class="adv-table editable-table ">
-																		<table class="table table-striped table-hover table-bordered" id="datatable-tabletools1">                                     
+																		<table class="table table-striped table-hover table-bordered" id="datatable-tabletools6">                                     
                                                                                 <thead>
                                                                                     <th>Consecutivo</th>
                                                                                     <th>Paciente</th>
@@ -159,7 +158,7 @@
 																<!--atendidas-->
 																<div id="treated" class="tab-pane">
 																	<div class="adv-table editable-table ">
-																		<table class="table table-striped table-hover table-bordered" id="datatable-tabletools2">                                     
+																		<table class="table table-striped table-hover table-bordered" id="datatable-tabletools7">                                     
                                                                         <thead>
                                                                                     <th>Consecutivo</th>
                                                                                     <th>Paciente</th>
@@ -210,7 +209,7 @@
 																<!--canceladas-->
 																<div id="cancelled" class="tab-pane">
 																	<div class="adv-table editable-table ">
-																		<table class="table table-striped table-hover table-bordered" id="datatable-tabletools3"> 
+																		<table class="table table-striped table-hover table-bordered" id="datatable-tabletools8"> 
                                                                         <thead>
                                                                                     <th>Consecutivo</th>
                                                                                     <th>Paciente</th>
@@ -261,7 +260,7 @@
 																<!--todas-->
 																<div id="all" class="tab-pane active">
 																	<div class="adv-table editable-table ">
-																	<table class="table table-striped table-hover table-bordered" id="datatable-tabletools4">                                     
+																	<table class="table table-striped table-hover table-bordered" id="datatable-tabletools9">                                     
                                                                             <thead>
                                                                                     <th>Consecutivo</th>
                                                                                     <th>Paciente</th>
@@ -313,11 +312,15 @@
                     <div id="modalForm1" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Consulta</h2>
+												<h2 class="card-title">Registro Consulta</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -325,8 +328,8 @@
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<input type="hidden" name="HOURC" id="HOURC" value="<?php echo date('H:s'); ?>">
 													<div class="form-row">
-													<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_PROP">Propietario:</label>
+													<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_PROP">Propietario <strong>*</strong></label>
                                                             <select name="ID_PROP" id="ID_PROP" class="form-control" placeholder="Propietario" required>
                                                                 <option value="Seleccione..." Selected>Seleccione...</option>
 																<?php foreach ($owners as $owner) {?>
@@ -334,15 +337,15 @@
 																<?php } ?>
                                                             </select>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_MASCOTA">Paciente:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_MASCOTA">Paciente <strong>*</strong></label>
                                                             <select name="ID_MASCOTA" id="ID_MASCOTA" class="form-control" placeholder="Paciente" required>
                                                             </select>
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-12">
-															<label for="TIPO_CONSULTA">Tipo Consulta</label>
+															<label for="TIPO_CONSULTA">Tipo Consulta <strong>*</strong></label>
 															<select name="TIPO_CONSULTA" id="TIPO_CONSULTA" class="form-control" required>
 																<option value="Seleccione">Seleccione...</option>
 																<option value="immediately">Inmediata</option>
@@ -355,17 +358,17 @@
 														<form action="index.php" >
 														<div class="form-row" >
 															<div class="col-md-6 mb-3 mb-lg-0">
-																<label for="FECHA_CONSULTA">Fecha Consulta </label>
+																<label for="FECHA_CONSULTA">Fecha Consulta <strong>*</strong></label>
 																<input type="date" id="FECHA_CONSULTA" name="FECHA_CONSULTA" class="form-control" required min=<?php echo date('Y-m-d'); ?>>															
 															</div>												
 															<div class="col-md-6 mb-3 mb-lg-0">
-																<label for="HORA_CONSULTA">Hora Consulta </label>
+																<label for="HORA_CONSULTA">Hora Consulta <strong>*</strong></label>
 																<input type="time" id="HORA_CONSULTA" name="HORA_CONSULTA" class="form-control" required>															
 															</div>												
 														</div>
 														<div class="form-row">
 															<div class="col-md-12 mb-6 mb-lg-0">
-																<label for="OBSERVACIONES1">Observaciones</label>
+																<label for="OBSERVACIONES1">Observaciones </label>
 																<textarea class="form-control" rows="2" id="OBSERVACIONES1" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 															</div>
 														</div>	
@@ -385,28 +388,28 @@
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
 															<input type="hidden" value="<?php echo date("Y-m-d"); ?>" id="FECHA_CONSULTA1" name="FECHA_CONSULTA1">
-															<label for="ANTECEDENTES">Antecedentes</label>
+															<label for="ANTECEDENTES">Antecedentes <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="ANTECEDENTES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="SINTOMAS">Sintomas</label>
+															<label for="SINTOMAS">Sintomas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="SINTOMAS" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DIAGNOSTICO">Diagnostico</label>
+															<label for="DIAGNOSTICO">Diagnostico <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="DIAGNOSTICO" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>	
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
+															<label for="OBSERVACIONES">Observaciones <strong>*</strong></label>
 															<!-- <textarea class="form-control" rows="3" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 120px;">
                                                                     FC:
                                                                     FR:
@@ -447,13 +450,13 @@
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="FORMULA">Redaccion de Formula/Notas</label>
+															<label for="FORMULA">Redaccion de Formula/Notas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="FORMULA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>
 													<div class="form-row">
-														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos</label>
+														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos <strong>*</strong></label>
 														<div class="form-group">
 														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
 														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
@@ -480,7 +483,7 @@
 													</div>
 													<div class="row">
 														<div class="col-lg-4 pull-right">
-															<label for="PRECIO_CONSULTA">Precio</label>
+															<label for="PRECIO_CONSULTA">Precio <strong>*</strong></label>
 															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control">
 														</div>
 													</div>
@@ -501,10 +504,14 @@
 											<div id="modalForm4" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Consulta</h2>
+												<h2 class="card-title">Atender Consulta</h2>
 											</header>
 											<div class="card-body">
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -516,28 +523,28 @@
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
 															<input type="hidden" value="<?php echo date("Y-m-d"); ?>" id="FECHA_CONSULTA1" name="FECHA_CONSULTA1">
-															<label for="ANTECEDENTES">Antecedentes</label>
+															<label for="ANTECEDENTES">Antecedentes <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="ANTECEDENTES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="SINTOMAS">Sintomas</label>
+															<label for="SINTOMAS">Sintomas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="SINTOMAS" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DIAGNOSTICO">Diagnostico</label>
+															<label for="DIAGNOSTICO">Diagnostico <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="DIAGNOSTICO" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>	
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
+															<label for="OBSERVACIONES">Observaciones <strong>*</strong></label>
 												<div class="col-lg-12">
 													<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'>
 														<p>FC: <br>
@@ -562,13 +569,13 @@
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="FORMULA">Redaccion de Formula/Notas</label>
+															<label for="FORMULA">Redaccion de Formula/Notas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="FORMULA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>
 													<div class="form-row">
-														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos</label>
+														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos <strong>*</strong></label>
 														<div class="form-group">
 														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
 														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
@@ -595,7 +602,7 @@
 													</div>
 													<div class="row">
 														<div class="col-lg-4 pull-right">
-															<label for="PRECIO_CONSULTAE">Precio</label>
+															<label for="PRECIO_CONSULTAE">Precio <strong>*</strong></label>
 															<input type="text" id="PRECIO_CONSULTAE" name="PRECIO_CONSULTAE" class="form-control">
 														</div>
 													</div>

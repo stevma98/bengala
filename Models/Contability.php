@@ -281,27 +281,32 @@ class Contability {
             $date=date('Y-m-d H:s:i');
             $data+=['FECHA_PAGO'=>$date,'ID_EMPRESA'=>$this->ide,'USUARIO_ABONO'=>$this->user,'ANO_PAGO'=>date('Y'),'PAGO_COMP'=>$consecutive];
             $query2=$this->pdo->insert('pagos', $data);
-            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
-            $query = $this->pdo->select($strSql);
-            $total=$query[0]->INICIAL+$data['VALOR_PAGO'];
-            $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
-            $query = $this->pdo->select($strSql);
-            $totalt=$query[0]->VALOR-$total;
-            if ($totalt<=0) {
-                $data1=['INICIAL'=>$total,'ESTADO'=>'Cerrado','PAGO'=>1];
+            if ($query2=='') {
+                $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
+                $query = $this->pdo->select($strSql);
+                $total=$query[0]->INICIAL+$data['VALOR_PAGO'];
+                $strSql = "SELECT * FROM ventas WHERE ID_EMPRESA='{$this->ide}' AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
+                $query = $this->pdo->select($strSql);
+                $totalt=$query[0]->VALOR-$total;
+                if ($totalt<=0) {
+                    $data1=['INICIAL'=>$total,'ESTADO'=>'Cerrado','PAGO'=>1];
+                } else {
+                    $data1=['INICIAL'=>$total];
+                }                    
+                $strWhere2 = 'ID_EMPRESA='.$this->ide." AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
+                $query2=$this->pdo->update('ventas', $data1, $strWhere2);     
+                $action="Ha agregado un abono al credito ID= ".$data['ID_VENTA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
             } else {
-                $data1=['INICIAL'=>$total];
-            }                    
-            $strWhere2 = 'ID_EMPRESA='.$this->ide." AND ID_CONSE_VENTA='{$data['ID_VENTA']}'";
-            $query2=$this->pdo->update('ventas', $data1, $strWhere2);     
-            $action="Ha agregado un abono al credito ID= ".$data['ID_VENTA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         } 
@@ -341,20 +346,28 @@ class Contability {
     }
 
     public function editInitialBox($data)
-    {
+    {   
         try {
             $data['VALOR_APERTURA'] = str_replace('.','',$data['VALOR_APERTURA']);
             unset($data['PHPSESSID'],$data['controller'],$data['method']);
             $strWhere2 = "ID_EMPRESA=".$this->ide." AND ID_CAJA={$data['ID_CAJA']}";
             $query2=$this->pdo->update('caja', $data, $strWhere2);
-            $action="Ha cambiado el valor inicial de la caja ID= ".$data['ID_CAJA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            if ($query2=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha cambiado el valor inicial de la caja ID= ".$data['ID_CAJA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
+            
+            
         } catch ( PDOException $e) {
             die($e->getMessage());
         } 
@@ -367,14 +380,19 @@ class Contability {
             unset($data['PHPSESSID'],$data['controller'],$data['method']);
             $strWhere2 = "ID_EMPRESA=".$this->ide." AND ID_CAJA={$data['ID_CAJA']}";
             $query2=$this->pdo->update('caja', $data, $strWhere2);
-            $action="Ha cerrado la caja ID= ".$data['ID_CAJA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            if ($query2=='') {
+                $action="Ha cerrado la caja ID= ".$data['ID_CAJA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         } 
@@ -410,15 +428,19 @@ class Contability {
             $data+=['FECHA_MOVIMIENTO'=>$date,'TIPO_MOVIMIENTO'=>'GASTO','ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user];
             unset($data['PHPSESSID'],$data['controller'],$data['method']);
             $query=$this->pdo->insert('movimientos', $data);
-            $action="Ha insertado un gasto para la caja con fecha ".$date;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $action="Ha insertado un gasto para la caja con fecha ".$date;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         } 
@@ -432,15 +454,19 @@ class Contability {
             $data+=['FECHA_MOVIMIENTO'=>$date,'TIPO_MOVIMIENTO'=>'PRESTAMO','ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user];
             unset($data['PHPSESSID'],$data['controller'],$data['method']);
             $query=$this->pdo->insert('movimientos', $data);
-            $action="Ha insertado un prestamo para la caja con fecha ".$date;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $action="Ha insertado un prestamo para la caja con fecha ".$date;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         } 

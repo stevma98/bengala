@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -24,13 +25,10 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar</a>
 										<h2 class="card-title">Registro Categorias</h2>
                                     </header>
                                     
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
@@ -63,24 +61,28 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Categoria</h2>
+												<h2 class="card-title">Registro Categoria</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
                                                     <div class="form-row">
                                                     <div class="col-md-12 mb-6 mb-lg-0">
-                                                    <label for="NOM_CATEGORIA">Nombre: </label>
+                                                    <label for="NOM_CATEGORIA">Nombre <strong>*</strong></label>
                                                     <input type="text" id="NOM_CATEGORIA" name="NOM_CATEGORIA" class="form-control">
                                                     </div>
                                                     </div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DETALLE_CATEGORIA">Observaciones</label>
+															<label for="DETALLE_CATEGORIA">Observaciones <strong>*</strong></label>
 															<textarea class="form-control" rows="2" id="DETALLE_CATEGORIA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
 																</div>													
@@ -104,25 +106,29 @@
 									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Categoria</h2>
+												<h2 class="card-title">Edición Categoria</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
                                                     <div class="form-row">
                                                     <div class="col-md-12 mb-6 mb-lg-0">
-                                                    <label for="NOM_CATEGORIA">Nombre: </label>
+                                                    <label for="NOM_CATEGORIA">Nombre <strong>*</strong></label>
                                                     <input type="hidden" id="ID_CATEGORIA">
                                                     <input type="text" id="NOM_CATEGORIA" name="NOM_CATEGORIA" class="form-control">
                                                     </div>
                                                     </div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DETALLE_CATEGORIA">Observaciones</label>
+															<label for="DETALLE_CATEGORIA">Observaciones <strong>*</strong></label>
 															<textarea class="form-control" rows="2" id="DETALLE_CATEGORIA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
 																</div>													
@@ -145,74 +151,7 @@
 				</section>
 			</div>
 
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close d-md-none">
-							Collapse <i class="fas fa-chevron-right"></i>
-						</a>
 			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark"></div>
-			
-								<ul>
-									<li>
-										<time datetime="2017-04-19T00:00+00:00">04/19/2017</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>
-
 		</section>	
 
 		<!-- Examples -->
@@ -245,24 +184,24 @@
 							url: '?controller=inventory&method=inactivateCategorie',
 							data: 'ID_CATEGORIA='+id,
 							success:function(response){
-                                console.log(response);
-                                            new PNotify({
+								if (response=='true') {
+									new PNotify({
                                         title: 'Confirmado!',
                                         text: 'Categoria Creada Exitosamente.',
                                         type: 'success'
                                     });
-                                    // setTimeout(() => {
-                                    // location.reload();	
-                                    // }, 2000);
-                                },
-                                error: function(data){
-                                    $.magnificPopup.close();
+                                    setTimeout(() => {
+                                    location.reload();	
+                                    }, 2000);
+								} else {
+									$.magnificPopup.close();
                                     new PNotify({
                                         title: 'Rechazado!',
                                         text: 'Hubo un error al crear la categoria',
                                         type: 'error',
                                         shadow: true
                                     });
+								}
                                 }
 						});
 					});

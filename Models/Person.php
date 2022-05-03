@@ -42,14 +42,19 @@ class Person {
             unset($data['controller'], $data['method'],$data['PHPSESSID'],$data['ST_NOM'],$data['ND_NOM'],$data['ST_APE'],$data['ND_APE'],$data['EMAIL']);
             $data += ['passwordUser'=>$pass,'ID_EMPRESA'=>$this->ide,'ESTADO_USER'=>1,'ST_NOM'=>$stn,'ND_NOM'=>$ndn,'ST_APE'=>$sta,'ND_APE'=>$sta,'EMAIL'=>$email];
             $query=$this->pdo->insert('admin', $data); 
-            $action="Ha creado el usuario ".$data['identyUser'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            if ($query=='') {
+                $action="Ha creado el usuario ".$data['identyUser'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -67,15 +72,20 @@ class Person {
             unset($data['controller'], $data['method'],$data['PHPSESSID'],$data['ST_NOM'],$data['ND_NOM'],$data['ST_APE'],$data['ND_APE'],$data['EMAIL']);
             $data += ['ST_NOM'=>$stn,'ND_NOM'=>$ndn,'ST_APE'=>$sta,'ND_APE'=>$nda,'EMAIL'=>$email];
             $strWhere = 'identyUser='.$data['identyUser'];
-            $this->pdo->update('admin', $data, $strWhere); 
-            $action="Ha editado el usuario ".$data['identyUser'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            $query=$this->pdo->update('admin', $data, $strWhere); 
+            if ($query=='') {
+                $action="Ha editado el usuario ".$data['identyUser'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

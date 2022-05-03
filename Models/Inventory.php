@@ -22,16 +22,21 @@ class Inventory {
         try {
             $data+=['ID_USUARIO'=>$this->user,'ID_EMPRESA'=>$this->ide,'ESTADO_CATEGORIA'=>'Activo'];
 		    unset($data['PHPSESSID']);
-            $this->pdo->insert('categorias', $data);
-            $date=date('Y-m-d H:s:i');
-            $action="Ha creado una categoria Nombre=".$data['NOM_CATEGORIA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            $query=$this->pdo->insert('categorias', $data);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha creado una categoria Nombre=".$data['NOM_CATEGORIA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -437,16 +442,20 @@ class Inventory {
 			unset($data['controller'], $data['method'],$data['ID_CATEGORIA'],$data['PHPSESSID']);
             $strWhere = 'ID_EMPRESA='.$this->ide." AND ID_CATEGORIA=".$id;
             $query=$this->pdo->update('categorias', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $action="Ha editado la categoria id=".$data['ID_CATEGORIA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha editado la categoria id=".$data['ID_CATEGORIA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -463,16 +472,20 @@ class Inventory {
             $data+=['ESTADO_CATEGORIA'=>'Inactivo'];
             $strWhere = 'ID_EMPRESA='.$this->ide." AND ID_CATEGORIA=".$id;
             $query=$this->pdo->update('categorias', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $action="Ha inactivado la categoria id=".$data['ID_CATEGORIA'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha inactivado la categoria id=".$data['ID_CATEGORIA'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -483,16 +496,21 @@ class Inventory {
         try {
             unset($data['PHPSESSID']);
             $data+=['STOCK'=>$data['CANTIDAD']];
-            $this->pdo->insert('productos', $data);
-            $date=date('Y-m-d H:s:i');
-            $action="Ha Creado un Producto Nombre=".$data['NOM_PRO'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            $query=$this->pdo->insert('productos', $data);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha Creado un Producto Nombre=".$data['NOM_PRO'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -515,15 +533,20 @@ class Inventory {
             $id=$data['ID_PRO'];
             $strWhere = 'ID_EMPRESA='.$this->ide." AND ID_PRO=".$id;
             $query=$this->pdo->update('productos', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $action="Ha editado el producto id=".$data['ID_PRO'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha editado el producto id=".$data['ID_PRO'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
             return $query;
         } catch ( PDOException $e) {
             die($e->getMessage());
@@ -536,16 +559,20 @@ class Inventory {
             $id=$data['ID_PRO'];
             $strWhere = 'ID_EMPRESA='.$this->ide." AND ID_PRO=".$id;
             $query=$this->pdo->update('productos', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $action="Ha inactivado el producto id=".$data['ID_PRO'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
-            return $query;
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $action="Ha inactivado el producto id=".$data['ID_PRO'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -581,16 +608,21 @@ class Inventory {
         try {
             unset($data['PHPSESSID']);
             $date=date('Y-m-d H:s:i');
-            $data+=['ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user,'FECHA_CREADO'=>$date];
-            $this->pdo->insert('proveedores', $data);
-            $action="Ha Creado un proveedor Nombre=".$data['NOMBRE'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            $data+=['ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user,'FECHA_CREADO'=>$date,'ESTADO_PROVEEDOR'=>'Activo'];
+            $query=$this->pdo->insert('proveedores', $data);
+            if ($query=='') {
+                $action="Ha Creado un proveedor Nombre=".$data['NOMBRE'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -614,19 +646,23 @@ class Inventory {
             unset($id['controller'],$id['method'],$data['PHPSESSID']);
             $data=['ESTADO_PROVEEDOR'=>'Inactivo'];
             $strWhere = 'ID_PROVEEDOR='.$id['ID_PROVEEDOR'];
-            var_dump($id);
-            $this->pdo->update('proveedores', $data, $strWhere); 
-            $date=date('Y-m-d H:s:i');
-            $user=$_SESSION['user']->identyUser;
-            $action="Ha inactivado el proveedor con id=".$id['ESTADO_PROVEEDOR'];
-            $ide=$_SESSION['user']->ID_EMPRESA;
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $user,
-                ':actioon' => $action,
-                ':ide' => $ide
-            ]);
+            $query=$this->pdo->update('proveedores', $data, $strWhere); 
+            if ($query=='') {
+                $date=date('Y-m-d H:s:i');
+                $user=$_SESSION['user']->identyUser;
+                $action="Ha inactivado el proveedor con id=".$id['ESTADO_PROVEEDOR'];
+                $ide=$_SESSION['user']->ID_EMPRESA;
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $user,
+                    ':actioon' => $action,
+                    ':ide' => $ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }  
@@ -662,22 +698,27 @@ class Inventory {
             unset($data['PHPSESSID']);
             $date=date('Y-m-d H:s:i');
             $data+=['ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user,'FECHA_ENTRADA'=>$date];
-            $this->pdo->insert('entradas', $data);
-            $strSql = "SELECT * from productos WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_PRO='{$data['CODIGO_PRODUCTO']}'";
-            $query = $this->pdo->select($strSql);
-            $input = $query[0]->ENTRADAS_PRO + $data['CANTIDAD_ENTRADA'];
-            $stock = $query[0]->STOCK + $data['CANTIDAD_ENTRADA'];
-            $datos=['ENTRADAS_PRO'=>$input,'STOCK'=>$stock];
-            $strWhere = 'ID_PRO='.$data['CODIGO_PRODUCTO'];
-            $this->pdo->update('productos', $datos, $strWhere); 
-            $action="Ha modificado la entrada del producto=".$data['CODIGO_PRODUCTO'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            $query=$this->pdo->insert('entradas', $data);
+            if ($query=='') {
+                $strSql = "SELECT * from productos WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_PRO='{$data['CODIGO_PRODUCTO']}'";
+                $query = $this->pdo->select($strSql);
+                $input = $query[0]->ENTRADAS_PRO + $data['CANTIDAD_ENTRADA'];
+                $stock = $query[0]->STOCK + $data['CANTIDAD_ENTRADA'];
+                $datos=['ENTRADAS_PRO'=>$input,'STOCK'=>$stock];
+                $strWhere = 'ID_PRO='.$data['CODIGO_PRODUCTO'];
+                $this->pdo->update('productos', $datos, $strWhere); 
+                $action="Ha modificado la entrada del producto=".$data['CODIGO_PRODUCTO'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }
@@ -689,22 +730,27 @@ class Inventory {
             unset($data['PHPSESSID']);
             $date=date('Y-m-d H:s:i');
             $data+=['ID_EMPRESA'=>$this->ide,'ID_USUARIO'=>$this->user,'FECHA_SALIDA'=>$date];
-            $this->pdo->insert('salidas', $data);
-            $strSql = "SELECT * from productos WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_PRO='{$data['CODIGO_PRODUCTO']}'";
-            $query = $this->pdo->select($strSql);
-            $input = $query[0]->SALIDAS_PRO + $data['CANTIDAD_SALIDA'];
-            $stock = $query[0]->STOCK - $data['CANTIDAD_SALIDA'];
-            $datos=['SALIDAS_PRO'=>$input,'STOCK'=>$stock];
-            $strWhere = 'ID_PRO='.$data['CODIGO_PRODUCTO'];
-            $this->pdo->update('productos', $datos, $strWhere); 
-            $action="Ha modificado la salida del producto=".$data['CODIGO_PRODUCTO'];
-            $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
-            $sentencia=$this->pdo->prepare($sql)->execute([
-                ':fecha' => $date ,
-                ':user' => $this->user,
-                ':actioon' => $action,
-                ':ide' => $this->ide
-            ]);
+            $query=$this->pdo->insert('salidas', $data);
+            if ($query=='') {
+                $strSql = "SELECT * from productos WHERE ID_EMPRESA='{$_SESSION['user']->ID_EMPRESA}' AND ID_PRO='{$data['CODIGO_PRODUCTO']}'";
+                $query = $this->pdo->select($strSql);
+                $input = $query[0]->SALIDAS_PRO + $data['CANTIDAD_SALIDA'];
+                $stock = $query[0]->STOCK - $data['CANTIDAD_SALIDA'];
+                $datos=['SALIDAS_PRO'=>$input,'STOCK'=>$stock];
+                $strWhere = 'ID_PRO='.$data['CODIGO_PRODUCTO'];
+                $this->pdo->update('productos', $datos, $strWhere); 
+                $action="Ha modificado la salida del producto=".$data['CODIGO_PRODUCTO'];
+                $sql="INSERT INTO `historial`(`FECHA_HISTORIAL`, `USUARIO_HISTORIAL`, `ACCION_HISTORIAL`,`ID_EMPRESA`) VALUES (:fecha,:user,:actioon,:ide)";
+                $sentencia=$this->pdo->prepare($sql)->execute([
+                    ':fecha' => $date ,
+                    ':user' => $this->user,
+                    ':actioon' => $action,
+                    ':ide' => $this->ide
+                ]);
+                echo "true";
+            } else {
+                echo "false";
+            }
         } catch ( PDOException $e) {
             die($e->getMessage());
         }

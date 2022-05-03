@@ -3,6 +3,7 @@
 		button{margin-left:5px}
 		.dropdown-menu{min-width: 10%}
 		.square{width:15px;font-size:20px}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -213,11 +214,15 @@
 											<div class="card-body">
 												
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 														<div class="form-group col-md-12">
-															<label for="VALOR_APERTURA">Monto</label>
+															<label for="VALOR_APERTURA">Monto <strong>*</strong></label>
 															<input type="text" class="form-control" id="VALOR_APERTURA" name="VALOR_APERTURA" placeholder="Monto Inicial" value="<?php echo $check[0]->VALOR_APERTURA ?>" required min=0>
 															<input type="hidden" id="confirmer" value="0">
 														</div>
@@ -243,16 +248,20 @@
 											<div class="card-body">
 												
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 														<div class="form-group col-md-12">
-															<label for="MONTO_GASTO">Monto</label>
+															<label for="MONTO_GASTO">Monto <strong>*</strong></label>
 															<input type="text" class="form-control" id="MONTO_GASTO" name="MONTO_GASTO" placeholder="Monto Gasto">
 															<input type="hidden" id="confirmer" value="0">
 														</div>
 														<div class="col-md-12">
-															<label for="OBS_MOVIMIENTO">Descripcion de Movimiento</label>
+															<label for="OBS_MOVIMIENTO">Descripcion de Movimiento <strong>*</strong></label>
 															<textarea id="OBS_MOVIMIENTO" cols="30" rows="2" class="form-control" placeholder="Ingrese una descripcion breve"></textarea>
 														</div>
 													</div>
@@ -277,16 +286,20 @@
 											<div class="card-body">
 												
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 														<div class="form-group col-md-12">
-															<label for="MONTO_PRESTAMO">Monto</label>
+															<label for="MONTO_PRESTAMO">Monto <strong>*</strong></label>
 															<input type="text" class="form-control" id="MONTO_PRESTAMO" name="MONTO_PRESTAMO" placeholder="Monto Préstamo">
 															<input type="hidden" id="confirmer" value="0">
 														</div>
 														<div class="col-md-12">
-															<label for="OBS_MOVIMIENTOp">Descripcion de Movimiento</label>
+															<label for="OBS_MOVIMIENTOp">Descripcion de Movimiento <strong>*</strong></label>
 															<textarea id="OBS_MOVIMIENTOp" cols="30" rows="2" class="form-control" placeholder="Ingrese una descripcion breve"></textarea>
 														</div>
 													</div>
@@ -313,11 +326,15 @@
 													<div class="form-row">
 														<?php
 														if ($final>0) {?>
+														<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 															<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 																<strong>Oh que mal!</strong> Aun hay espacios por completar.
 															</div>
 																<div class="form-group col-md-12">
-																	<label for="VALOR_CIERRE">Valor Cierre</label>
+																	<label for="VALOR_CIERRE">Valor Cierre <strong>*</strong></label>
 																	<input type="text" class="form-control" id="VALOR_CIERRE" name="VALOR_CIERRE" placeholder="Monto Cierre" value="<?php echo $final ?>">
 																	<input type="hidden" id="confirmer" value="0">
 																</div>
@@ -372,76 +389,6 @@
 											</footer>
 										</section>
 									</div>
-
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close d-md-none">
-							Collapse <i class="fas fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark"></div>
-			
-								<ul>
-									<li>
-										<time datetime="2017-04-19T00:00+00:00">04/19/2017</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="img/!sample-user.jpg" alt="Joseph Doe" class="rounded-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>
-
 		</section>	
 
 		<!-- Examples -->
@@ -542,24 +489,26 @@
 						url:'?controller=contability&method=editInitialBox',
 						data:'VALOR_APERTURA='+$('#VALOR_APERTURA').val()+'&ID_CAJA='+$('#ID_CAJA').val(),
 						success:function(response){
-							new PNotify({
-								title: 'Confirmado!',
-								text: 'Monto Inicial Modificado.',
-								type: 'success'
-							});
-							$.magnificPopup.close();
-							setTimeout(() => {
-							location.reload();	
-							}, 2000);
-						},
-						error:function(response){
-							$.magnificPopup.close();
-							new PNotify({
-								title: 'Rechazado!',
-								text: 'Hubo un error al modificar el monto inicial',
-								type: 'error',
-								shadow: true
-							});
+							console.log(response);
+							if (response=='true') {
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Monto Inicial Modificado.',
+									type: 'success'
+								});
+								$.magnificPopup.close();
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);
+							} else {
+								$.magnificPopup.close();
+								new PNotify({
+									title: 'Rechazado!',
+									text: 'Hubo un error al modificar el monto inicial',
+									type: 'error',
+									shadow: true
+								});	
+							}
 						}
 					})
 				}
@@ -588,25 +537,26 @@
 						url:'?controller=contability&method=addExpense',
 						data:'MONTO_MOVIMIENTO='+$('#MONTO_GASTO').val()+'&ID_CAJA='+$('#ID_CAJA').val()+'&OBS_MOVIMIENTO='+$('#OBS_MOVIMIENTO').val(),
 						success:function(response){
-							new PNotify({
-								title: 'Confirmado!',
-								text: 'Gasto Añadido con éxito.',
-								type: 'success'
-							});
-							$.magnificPopup.close();
-							setTimeout(() => {
-							location.reload();	
-							}, 2000);
-						},
-						error:function(response){
-							$.magnificPopup.close();
-							new PNotify({
-								title: 'Rechazado!',
-								text: 'Hubo un error al añadir el gasto',
-								type: 'error',
-								shadow: true
-							});
-						}
+							if (response=='true') {
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Gasto Añadido con éxito.',
+									type: 'success'
+								});
+								$.magnificPopup.close();
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);
+							} else {
+								$.magnificPopup.close();
+								new PNotify({
+									title: 'Rechazado!',
+									text: 'Hubo un error al añadir el gasto',
+									type: 'error',
+									shadow: true
+								});	
+							}							
+						}						
 					})
 				}
 			});
@@ -634,25 +584,26 @@
 						url:'?controller=contability&method=addLoan',
 						data:'MONTO_MOVIMIENTO='+$('#MONTO_PRESTAMO').val()+'&ID_CAJA='+$('#ID_CAJA').val()+'&OBS_MOVIMIENTO='+$('#OBS_MOVIMIENTOp').val(),
 						success:function(response){
-							new PNotify({
-								title: 'Confirmado!',
-								text: 'Prestamo Añadido con éxito.',
-								type: 'success'
-							});
-							$.magnificPopup.close();
-							setTimeout(() => {
-							location.reload();	
-							}, 2000);
-						},
-						error:function(response){
-							$.magnificPopup.close();
-							new PNotify({
-								title: 'Rechazado!',
-								text: 'Hubo un error al añadir el prestamo',
-								type: 'error',
-								shadow: true
-							});
-						}
+							if (response=='true') {
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Prestamo Añadido con éxito.',
+									type: 'success'
+								});
+								$.magnificPopup.close();
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);
+							} else {
+								$.magnificPopup.close();
+								new PNotify({
+									title: 'Rechazado!',
+									text: 'Hubo un error al añadir el prestamo',
+									type: 'error',
+									shadow: true
+								});	
+							}							
+						}						
 					})
 				}
 			});
@@ -673,26 +624,26 @@
 						url:'?controller=contability&method=closeBox',
 						data:'VALOR_CIERRE='+$('#VALOR_CIERRE').val()+'&ID_CAJA='+$('#ID_CAJA').val(),
 						success:function(response){
-							console.log(response);
-							new PNotify({
-								title: 'Confirmado!',
-								text: 'Cierre de caja realizado con éxito.',
-								type: 'success'
-							});
-							$.magnificPopup.close();
-							setTimeout(() => {
-							location.reload();	
-							}, 2000);
-						},
-						error:function(response){
-							$.magnificPopup.close();
-							new PNotify({
-								title: 'Rechazado!',
-								text: 'Hubo un error al cerrar caja',
-								type: 'error',
-								shadow: true
-							});
-						}
+							if (response=='true') {
+								new PNotify({
+									title: 'Confirmado!',
+									text: 'Cierre de caja realizado con éxito.',
+									type: 'success'
+								});
+								$.magnificPopup.close();
+								setTimeout(() => {
+								location.reload();	
+								}, 2000);	
+							} else {
+								$.magnificPopup.close();
+								new PNotify({
+									title: 'Rechazado!',
+									text: 'Hubo un error al cerrar caja',
+									type: 'error',
+									shadow: true
+								});	
+							}							
+						}						
 					})
 				}
 			});

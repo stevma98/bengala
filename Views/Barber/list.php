@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -24,13 +25,11 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
-										<h2 class="card-title">Registro Consentimientos</h2>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar</a>
+										<h2 class="card-title">Registro Peluqueria</h2>
                                     </header>
                                     
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
+								
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
@@ -74,16 +73,20 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Peluqueria</h2>
+												<h2 class="card-title">Registro Peluqueria</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_PROP">Propietario:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_PROP">Propietario <strong>*</strong></label>
                                                             <select name="ID_PROP" id="ID_PROP" class="form-control" placeholder="Propietario" required>
                                                                 <option value="Seleccione..." Selected>Seleccione...</option>
 																<?php foreach ($owners as $owner) {?>
@@ -91,19 +94,19 @@
 																<?php } ?>
                                                             </select>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_MASCOTA">Paciente:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_MASCOTA">Paciente <strong>*</strong></label>
                                                             <select name="ID_MASCOTA" id="ID_MASCOTA" class="form-control" placeholder="Paciente" required>
                                                             </select>
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-                                                            <label for="FEC_PELUQUERIA">Fecha Corte </label>
+                                                            <label for="FEC_PELUQUERIA">Fecha Corte <strong>*</strong></label>
 															<input type="date" id="FEC_PELUQUERIA" name="FEC_PELUQUERIA" class="form-control" required>															
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="TIPO_CORTE">Tipo Corte</label>
+															<label for="TIPO_CORTE">Tipo Corte <strong>*</strong></label>
 															<select name="TIPO_CORTE" id="TIPO_CORTE" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Largo">Largo</option>
@@ -114,7 +117,7 @@
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ACCESORIOS">Accesorios</label>
+															<label for="ACCESORIOS">Accesorios <strong>*</strong></label>
 															<select name="ACCESORIOS" id="ACCESORIOS" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Pañoleta">Pañoleta</option>
@@ -124,7 +127,7 @@
                                                             </select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="CORTE_UNAS">Corte de Uñas</label>
+															<label for="CORTE_UNAS">Corte de Uñas <strong>*</strong></label>
 															<select name="CORTE_UNAS" id="CORTE_UNAS" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Si">Si</option>
@@ -134,7 +137,7 @@
 													</div>
                                                     <div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="BANO_MEDICADO">Baño Medicado</label>
+															<label for="BANO_MEDICADO">Baño Medicado <strong>*</strong></label>
 															<select name="BANO_MEDICADO" id="BANO_MEDICADO" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Si">Si</option>
@@ -142,7 +145,7 @@
                                                             </select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIO_PELUQUERIA">Precio</label>
+															<label for="PRECIO_PELUQUERIA">Precio <strong>*</strong></label>
 															<input type="text" name="PRECIO_PELUQUERIA" id="PRECIO_PELUQUERIA" class="form-control" required>
 														</div>														
 													</div>

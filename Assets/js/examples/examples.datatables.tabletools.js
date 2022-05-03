@@ -245,6 +245,34 @@ Theme Version: 	3.0.0
 
 		$('#datatable-tabletools7_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
 	};
+
+	var datatableInit8 = function() {
+		var $table = $('#datatable-tabletools8');
+
+		var table = $table.dataTable({
+			sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+		});
+
+		$('<div />').addClass('dt-buttons mb-2 pb-1 text-right').prependTo('#datatable-tabletools8_wrapper');
+
+		$table.DataTable().buttons().container().prependTo( '#datatable-tabletools8_wrapper .dt-buttons' );
+
+		$('#datatable-tabletools8_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+	};
+
+	var datatableInit9 = function() {
+		var $table = $('#datatable-tabletools9');
+
+		var table = $table.dataTable({
+			sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+		});
+
+		$('<div />').addClass('dt-buttons mb-2 pb-1 text-right').prependTo('#datatable-tabletools9_wrapper');
+
+		$table.DataTable().buttons().container().prependTo( '#datatable-tabletools9_wrapper .dt-buttons' );
+
+		$('#datatable-tabletools9_wrapper').find('.btn-secondary').removeClass('btn-secondary').addClass('btn-default');
+	};
 	
 
 	
@@ -258,6 +286,8 @@ Theme Version: 	3.0.0
 		datatableInit5();
 		datatableInit6();
 		datatableInit7();
+		datatableInit8();
+		datatableInit9();
 	});
 
 }).apply(this, [jQuery]);

@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+        strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -15,7 +16,7 @@
 									</a>
 								</li>
 								<li><span>Inventario</span></li>    
-								<li><span>Listar</span></li>
+								<li><span>Agregar Compra</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
@@ -93,11 +94,15 @@
                                     </header>
                                     <div class="card-body">									
                                         <div class="row">
+                                        <div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
                                         <div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
                                             <div class="col-md-12 col-lg-12">
-                                                <label for="PROVEEDOR">Proveedor</label>
+                                                <label for="PROVEEDOR">Proveedor <strong>*</strong></label>
                                                 <select name="PROVEEDOR" id="PROVEEDOR" class="form-control">
                                                 <option value="Seleccione...">Seleccione...</option>
                                                 <?php foreach ($providers as $provider) {?>
@@ -108,11 +113,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 col-lg-6">
-                                                    <label for="NUM_FAC">No Comprobante</label>
+                                                    <label for="NUM_FAC">No Comprobante <strong>*</strong></label>
                                                     <input type="text" class="form-control" id="NUM_FAC">
                                             </div>
                                             <div class="col-md-6 col-lg-6">
-                                                    <label for="FECHA_COMPROBANTE">Fecha Comprobante</label>
+                                                    <label for="FECHA_COMPROBANTE">Fecha Comprobante <strong>*</strong></label>
                                                     <input type="date" class="form-control" id="FECHA_COMPROBANTE">
                                                     <input type="hidden" value="0" id="confirmer">
                                             </div>

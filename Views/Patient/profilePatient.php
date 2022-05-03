@@ -1,10 +1,11 @@
 <style>
 	#profile_data > li {padding:0px !important}
+	strong{color:red}
 </style>
 <link rel="stylesheet" href="Assets/vendor/summernote/summernote-bs4.css" />
 <section role="main" class="content-body">
 					<header class="page-header">
-						<h2>Perfil del Paciente</h2>
+						<h2>Perfil de Mascota</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -13,7 +14,7 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Pacientes</span></li>
+								<li><span>Mascotas</span></li>
 								<li><span>Perfil</span></li>
 							</ol>
 					
@@ -49,7 +50,7 @@
 												<li class="fa fa-info-circle" style="color:purple"> Peso(Kg):</li> <?php echo $data->PESO?><br>
 												<li class="fa fa-info-circle" style="color:#16decd"> Dieta:</li> <?php echo $data->DIETA?><br>
 												<li class="fa fa-info-circle" style="color:#de16de"> Anormalidades:</li> <?php echo $data->ANORMALIDADES?><br>
-												<li class="fa fa-info-circle" style="color:black"> Anamnesis:</li> <?php echo $data->ANAMNESIS?>
+												<li class="fa fa-info-circle" style="color:black"> Anamnesis:</li> <?php echo $data->ANAMESIS?>
 											</ul>
 										</div>
 								</div>
@@ -199,7 +200,7 @@
 																<!--pendientes-->
 																<div id="pending" class="tab-pane">
 																		<div class="adv-table editable-table ">
-																			<table class="table table-striped table-hover table-bordered" id="">                                     
+																			<table class="table table-striped table-hover table-bordered table-responsive-md" id="">                                     
 																				<tbody>
 																				<?php foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Pendiente') {
@@ -257,7 +258,7 @@
 																<!--pendientes hoy-->
 																<div id="confirmed" class="tab-pane">
 																	<div class="adv-table editable-table ">
-																		<table class="table table-striped table-hover table-bordered" id="">                                     
+																		<table class="table table-striped table-hover table-bordered table-responsive-md" id="">                                     
 																			<tbody>
 																				<?php 
 																				$datec=date('Y-m-d');
@@ -319,7 +320,7 @@
 																<!--atendidas-->
 																<div id="treated" class="tab-pane">
 																	<div class="adv-table editable-table ">
-																		<table class="table table-striped table-hover table-bordered" id="">                                     
+																		<table class="table table-striped table-hover table-bordered table-responsive-md" id="">                                     
 																			<tbody>
 																			<?php foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Realizado') {
@@ -380,7 +381,7 @@
 																<!--canceladas-->
 																<div id="cancelled" class="tab-pane">
 																	<div class="adv-table editable-table ">
-																		<table class="table table-striped table-hover table-bordered" id="">                                     
+																		<table class="table table-striped table-hover table-bordered table-responsive-md" id="">                                     
 																			<tbody>
 																			<?php foreach ($queries as $query) {
 																					if ($query->ESTADO_CONSULTA=='Cancelado') {
@@ -440,7 +441,7 @@
 																<!--todas-->
 																<div id="all" class="tab-pane active">
 																	<div class="adv-table editable-table ">
-																	<table class="table table-striped table-hover table-bordered">                                     
+																	<table class="table table-striped table-hover table-bordered table-responsive-md">                                     
 																			<tbody>
 																				<?php foreach ($queries as $query) {?>																					
 																				<tr id="<?php echo $query->CONSECUTIVO_CONSULTA; ?>" ide="<?php echo $query->ID_EMPRESA; ?>">
@@ -559,12 +560,12 @@
 															<thead>
 																<tr style="font-size:10px">
 																	<th>Vacuna</th>
-																	<th style="width:90px">Fecha Vacuna</th>
+																	<th style="width:90px">Aplicación</th>
 																	<th>Dosis</th>
 																	<th>Lote</th>
-																	<th style="width:90px">Fecha Ult Vacuna</th>
-																	<th style="width: 90px">Fecha Prox Vacuna</th>
-																	<th>Proxima Vacuna</th>
+																	<th style="width:90px">Ult Vacuna</th>
+																	<th style="width: 90px">Prox Vacuna</th>
+																	<th>Próxima Vacuna</th>
 																	<th>Estado</th>
 																	<th>Acciones</th>
 																</tr>
@@ -917,11 +918,15 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Vacuna</h2>
+												<h2 class="card-title">Registrar Vacuna</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+														<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                    	</div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -931,7 +936,7 @@
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ID_VACUNA">Vacuna</label>
+															<label for="ID_VACUNA">Vacuna <strong>*</strong></label>
 															<select name="ID_VACUNA" id="ID_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($vaccinesI as $vaccineI) {?>
@@ -940,41 +945,41 @@
 															</select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="LOTE">Lote</label>
+															<label for="LOTE">Lote <strong>*</strong></label>
 															<input type="text" id="LOTE" name="LOTE" class="form-control" required>															
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRESENTACION">Presentacion</label>
+															<label for="PRESENTACION">Presentacion <strong>*</strong></label>
 															<input type="text" id="PRESENTACION" name="PRESENTACION" class="form-control" value="0" disabled>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="DOSIS">Dosis</label>
+															<label for="DOSIS">Dosis <strong>*</strong></label>
 															<input type="text" id="DOSIS" name="DOSIS" class="form-control" required>
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="VENCIMIENTO">Vencimiento</label>
+															<label for="VENCIMIENTO">Vencimiento <strong>*</strong></label>
 															<input type="date" id="VENCIMIENTO" name="VENCIMIENTO" class="form-control" required>
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="FEC_VACUNA">Fecha Vacuna</label>
+															<label for="FEC_VACUNA">Fecha Vacuna <strong>*</strong></label>
 															<input type="date" id="FEC_VACUNA" name="FEC_VACUNA" class="form-control" required>
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna</label>
+															<label for="FECHA_ULT_VACUNA">Fecha Ultima Vacuna <strong>*</strong></label>
 															<input type="date" id="FECHA_ULT_VACUNA" name="FECHA_ULT_VACUNA" class="form-control" required>
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna</label>
+															<label for="FECHA_SIG_VACUNA">Fecha Proxima Vacuna <strong>*</strong></label>
 															<input type="date" id="FECHA_SIG_VACUNA" name="FECHA_SIG_VACUNA" class="form-control" required min=<?php echo date('Y-m-d'); ?>>															
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="PROXIMA_VACUNA">Proxima Vacuna</label>
+															<label for="PROXIMA_VACUNA">Proxima Vacuna <strong>*</strong></label>
 															<select name="PROXIMA_VACUNA" id="PROXIMA_VACUNA" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($vaccinesI as $vaccineI) {?>
@@ -983,13 +988,13 @@
 															</select>
 														</div>
 														<div class="col-md-4 mb-3 mb-lg-0">
-															<label for="PRECIO_VACUNA">Precio</label>
-															<input type="text" id="PRECIO_VACUNA" name="PRECIO_VACUNA" class="form-control">
+															<label for="PRECIO_VACUNA">Precio <strong>*</strong></label>
+															<input type="text" id="PRECIO_VACUNA" name="PRECIO_VACUNA" class="form-control" placeholder="Ej: 45.000">
 														</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DETALLE">Observaciones</label>
+															<label for="DETALLE">Observaciones </label>
 															<textarea class="form-control" rows="2" id="DETALLE" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
 																</div>	
@@ -999,7 +1004,7 @@
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createVaccineAppointment" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createVaccineAppointment" >Guardar</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -1010,11 +1015,15 @@
 									<div id="modalForm2" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Peluqueria</h2>
+												<h2 class="card-title">Registrar Peluqueria</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+														<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                    	</div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -1024,11 +1033,11 @@
 													<input type="hidden" name="ID_EMPRESA" id="ID_EMPRESA" value="<?php echo $_SESSION['user']->ID_EMPRESA ?>">
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-                                                            <label for="FEC_PELUQUERIA">Fecha Corte </label>
+                                                            <label for="FEC_PELUQUERIA">Fecha Corte <strong>*</strong></label>
 															<input type="date" id="FEC_PELUQUERIA" name="FEC_PELUQUERIA" class="form-control" required>															
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="TIPO_CORTE">Tipo Corte</label>
+															<label for="TIPO_CORTE">Tipo Corte <strong>*</strong></label>
 															<select name="TIPO_CORTE" id="TIPO_CORTE" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Largo">Largo</option>
@@ -1039,7 +1048,7 @@
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ACCESORIOS">Accesorios</label>
+															<label for="ACCESORIOS">Accesorios <strong>*</strong></label>
 															<select name="ACCESORIOS" id="ACCESORIOS" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Pañoleta">Pañoleta</option>
@@ -1049,7 +1058,7 @@
                                                             </select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="CORTE_UNAS">Corte de Uñas</label>
+															<label for="CORTE_UNAS">Corte de Uñas <strong>*</strong></label>
 															<select name="CORTE_UNAS" id="CORTE_UNAS" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Si">Si</option>
@@ -1059,7 +1068,7 @@
 													</div>
                                                     <div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="BANO_MEDICADO">Baño Medicado</label>
+															<label for="BANO_MEDICADO">Baño Medicado <strong>*</strong></label>
 															<select name="BANO_MEDICADO" id="BANO_MEDICADO" class="form-control" required>
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <option value="Si">Si</option>
@@ -1067,13 +1076,13 @@
                                                             </select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIO_PELUQUERIA">Precio</label>
-															<input type="text" name="PRECIO_PELUQUERIA" id="PRECIO_PELUQUERIA" class="form-control" required>
+															<label for="PRECIO_PELUQUERIA">Precio <strong>*</strong></label>
+															<input type="text" name="PRECIO_PELUQUERIA" id="PRECIO_PELUQUERIA" class="form-control" required placeholder="Ej: 45.000">
 														</div>														
 													</div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DETALLE">Observaciones</label>
+															<label for="DETALLE">Observaciones <strong>*</strong></label>
 															<textarea class="form-control" rows="2" id="DETALLE" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 														</div>
 																</div>													
@@ -1083,7 +1092,7 @@
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createBarberAppointment" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createBarberAppointment" >Guardar</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -1094,11 +1103,15 @@
 									<div id="modalForm3" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Consulta</h2>
+												<h2 class="card-title">Registrar Consulta</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -1109,7 +1122,7 @@
 													<input type="hidden" name="HOURC" id="HOURC" value="<?php echo date('H:s'); ?>">
 													<div class="form-row">
 														<div class="col-md-12">
-															<label for="TIPO_CONSULTA">Tipo Consulta</label>
+															<label for="TIPO_CONSULTA">Tipo Consulta <strong>*</strong></label>
 															<select name="TIPO_CONSULTA" id="TIPO_CONSULTA" class="form-control" required>
 																<option value="Seleccione">Seleccione...</option>
 																<option value="immediately">Inmediata</option>
@@ -1122,17 +1135,17 @@
 														<form action="index.php" >
 														<div class="form-row" >
 															<div class="col-md-6 mb-3 mb-lg-0">
-																<label for="FECHA_CONSULTA">Fecha Consulta </label>
+																<label for="FECHA_CONSULTA">Fecha Consulta <strong>*</strong></label>
 																<input type="date" id="FECHA_CONSULTA" name="FECHA_CONSULTA" class="form-control" required min=<?php echo date('Y-m-d'); ?>>															
 															</div>												
 															<div class="col-md-6 mb-3 mb-lg-0">
-																<label for="HORA_CONSULTA">Hora Consulta </label>
+																<label for="HORA_CONSULTA">Hora Consulta <strong>*</strong></label>
 																<input type="time" id="HORA_CONSULTA" name="HORA_CONSULTA" class="form-control" required>															
 															</div>												
 														</div>
 														<div class="form-row">
 															<div class="col-md-12 mb-6 mb-lg-0">
-																<label for="OBSERVACIONES1">Observaciones</label>
+																<label for="OBSERVACIONES1">Observaciones <strong>*</strong></label>
 																<textarea class="form-control" rows="2" id="OBSERVACIONES1" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 60px;"></textarea>
 															</div>
 														</div>	
@@ -1152,28 +1165,28 @@
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
 															<input type="hidden" value="<?php echo date("Y-m-d"); ?>" id="FECHA_CONSULTA1" name="FECHA_CONSULTA1">
-															<label for="ANTECEDENTES">Antecedentes</label>
+															<label for="ANTECEDENTES">Antecedentes <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="ANTECEDENTES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="SINTOMAS">Sintomas</label>
+															<label for="SINTOMAS">Sintomas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="SINTOMAS" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DIAGNOSTICO">Diagnostico</label>
+															<label for="DIAGNOSTICO">Diagnostico <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="DIAGNOSTICO" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>	
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
+															<label for="OBSERVACIONES">Observaciones <strong>*</strong></label>
 															<!-- <textarea class="form-control" rows="3" id="OBSERVACIONES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 120px;">
 FC:
 FR:
@@ -1214,13 +1227,13 @@ Muestras remitidas:</textarea> -->
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="FORMULA">Redaccion de Formula/Notas</label>
+															<label for="FORMULA">Redaccion de Formula/Notas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="FORMULA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>
 													<div class="form-row">
-														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos</label>
+														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos <strong>*</strong></label>
 														<div class="form-group">
 														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
 														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
@@ -1247,8 +1260,8 @@ Muestras remitidas:</textarea> -->
 													</div>
 													<div class="row">
 														<div class="col-lg-4 pull-right">
-															<label for="PRECIO_CONSULTA">Precio</label>
-															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control">
+															<label for="PRECIO_CONSULTA">Precio <strong>*</strong></label>
+															<input type="text" id="PRECIO_CONSULTA" name="PRECIO_CONSULTA" class="form-control" placeholder="Ej: 40.000">
 														</div>
 													</div>
 												<br><br>
@@ -1258,7 +1271,7 @@ Muestras remitidas:</textarea> -->
 												<footer class="card-footer">
 													<div class="row">
 														<div class="col-md-12 text-right">
-															<button class="btn btn-primary modal-confirm" id="createQuery" >Crear</button>
+															<button class="btn btn-primary modal-confirm" id="createQuery" >Guardar</button>
 															<button class="btn btn-default modal-dismiss" >Cancelar</button>
 														</div>
 													</div>
@@ -1271,10 +1284,14 @@ Muestras remitidas:</textarea> -->
 									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide" style="max-width:800px !important">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Consulta</h2>
+												<h2 class="card-title">Atender Consulta</h2>
 											</header>
 											<div class="card-body">
 													<div class="form-row">
+														<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -1288,28 +1305,28 @@ Muestras remitidas:</textarea> -->
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
 															<input type="hidden" value="<?php echo date("Y-m-d"); ?>" id="FECHA_CONSULTA1" name="FECHA_CONSULTA1">
-															<label for="ANTECEDENTES">Antecedentes</label>
+															<label for="ANTECEDENTES">Antecedentes <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="ANTECEDENTES" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="SINTOMAS">Sintomas</label>
+															<label for="SINTOMAS">Sintomas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="SINTOMAS" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>	
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="DIAGNOSTICO">Diagnostico</label>
+															<label for="DIAGNOSTICO">Diagnostico <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="DIAGNOSTICO" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>	
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="OBSERVACIONES">Observaciones</label>
+															<label for="OBSERVACIONES">Observaciones <strong>*</strong></label>
 												<div class="col-lg-12">
 													<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'>
 														<p>FC: <br>
@@ -1334,13 +1351,13 @@ Muestras remitidas:</textarea> -->
 													<br>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-															<label for="FORMULA">Redaccion de Formula/Notas</label>
+															<label for="FORMULA">Redaccion de Formula/Notas <strong>*</strong></label>
 															<textarea class="form-control" rows="3" id="FORMULA" data-plugin-textarea-autosize="" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 80px;"></textarea>
 														</div>
 													</div>
 													<br>
 													<div class="form-row">
-														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos</label>
+														<label class="col-lg-12 control-label pt-2">Receta de Medicamentos <strong>*</strong></label>
 														<div class="form-group">
 														<button type="button" class="btn btn-primary btn-xs mr-2" onclick="agregarFila()">+</button>
 														<button type="button" class="btn btn-danger btn-xs" onclick="eliminarFila()">-</button>
@@ -1367,7 +1384,7 @@ Muestras remitidas:</textarea> -->
 													</div>
 													<div class="row">
 														<div class="col-lg-4 pull-right">
-															<label for="PRECIO_CONSULTAE">Precio</label>
+															<label for="PRECIO_CONSULTAE">Precio <strong>*</strong></label>
 															<input type="text" id="PRECIO_CONSULTAE" name="PRECIO_CONSULTAE" class="form-control">
 														</div>
 													</div>
@@ -1377,7 +1394,7 @@ Muestras remitidas:</textarea> -->
 												<footer class="card-footer">
 													<div class="row">
 														<div class="col-md-12 text-right">
-															<button class="btn btn-primary modal-confirm" id="editQuery" >Crear</button>
+															<button class="btn btn-primary modal-confirm" id="editQuery" >Guardar</button>
 															<button class="btn btn-default modal-dismiss" >Cancelar</button>
 														</div>
 													</div>
@@ -1390,20 +1407,24 @@ Muestras remitidas:</textarea> -->
 									<div id="modalForm6" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de asignacion Consentimiento</h2>
+												<h2 class="card-title">Registrar Consentimiento</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
 													<input type="hidden" id="ID_MASCOTA" value="<?php echo $data->ID_MASCOTA; ?>">
-													<input type="text" id="ID_PROP" value="<?php echo $data->ID_PROP; ?>">
+													<input type="hidden" id="ID_PROP" value="<?php echo $data->ID_PROP; ?>">
                                                     <div class="form-row">
                                                         <div class="col-md-12 mb-6 mb-lg-0">
-                                                            <label for="TIPO_CONSEN">Consentimiento:</label>
+                                                            <label for="TIPO_CONSEN">Consentimiento <strong>*</strong></label>
                                                             <select name="TIPO_CONSEN" id="TIPO_CONSEN" class="form-control">
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <?php foreach ($consents1 as $consent) {?>
@@ -1414,7 +1435,7 @@ Muestras remitidas:</textarea> -->
                                                     </div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento</label>
+                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento <strong>*</strong></label>
 															<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'></div>
 														</div>
 																</div>													
@@ -1424,7 +1445,7 @@ Muestras remitidas:</textarea> -->
 											<footer class="card-footer">
 												<div class="row">
 													<div class="col-md-12 text-right">
-														<button class="btn btn-primary modal-confirm" id="createConsentIndirect" >Crear</button>
+														<button class="btn btn-primary modal-confirm" id="createConsentIndirect" >Guardar</button>
 														<button class="btn btn-default modal-dismiss" >Cancelar</button>
 													</div>
 												</div>
@@ -1506,15 +1527,23 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=barber&method=checkBarber&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
-								console.log(response);
-								new PNotify({
-									title: 'Confirmado!',
-									text: 'Peluqueria Realizada con exito.',
-									type: 'success'
-								});
-								setTimeout(() => {
-								location.reload();	
-								}, 2000);														
+								if (response=='true') {
+									new PNotify({
+										title: 'Confirmado!',
+										text: 'Peluqueria Realizada con exito.',
+										type: 'success'
+									});
+									setTimeout(() => {
+									location.reload();	
+									}, 2000);															
+								} else {
+									new PNotify({
+										title: 'Rechazado!',
+										text: 'Hubo un error al confirmar la peluqueria',
+										type: 'error',
+										shadow: true
+									});	
+								}
 							}
 						});
 					});
@@ -1527,14 +1556,23 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=barber&method=cancelBarber&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
-								new PNotify({
-									title: 'Confirmado!',
-									text: 'Peluqueria Cancelada con exito.',
-									type: 'success'
-								});
-								setTimeout(() => {
-								location.reload();	
-								}, 2000);														
+								if (response=='true') {
+									new PNotify({
+										title: 'Confirmado!',
+										text: 'Peluqueria Cancelada con exito.',
+										type: 'success'
+									});
+									setTimeout(() => {
+									location.reload();	
+									}, 2000);														
+								} else {
+									new PNotify({
+										title: 'Rechazado!',
+										text: 'Hubo un error al cancelar la peluqueria',
+										type: 'error',
+										shadow: true
+									});	
+								}								
 							}
 						});
 					});
@@ -1547,14 +1585,24 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=vaccine&method=cancelVaccine&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
-								new PNotify({
-									title: 'Confirmado!',
-									text: 'Vacuna Cancelada con exito.',
-									type: 'success'
-								});
-								setTimeout(() => {
-								location.reload();	
-								}, 2000);														
+								if (response=='true') {
+									new PNotify({
+										title: 'Confirmado!',
+										text: 'Vacuna Cancelada con exito.',
+										type: 'success'
+									});
+									setTimeout(() => {
+									location.reload();	
+									}, 2000);				
+								} else {
+									new PNotify({
+										title: 'Rechazado!',
+										text: 'Hubo un error al cancelar la vacuna',
+										type: 'error',
+										shadow: true
+									});	
+								}
+																			
 							}
 						});
 					});
@@ -1567,15 +1615,24 @@ Muestras remitidas:</textarea> -->
 							url:'?controller=vaccine&method=checkVaccine&id='+id+'&ide='+ide,
 							type:'GET',
 							success:function(response){
-								console.log(response);
-								new PNotify({
-									title: 'Confirmado!',
-									text: 'Vacuna Realizada con exito.',
-									type: 'success'
-								});
-								setTimeout(() => {
-								location.reload();	
-								}, 2000);														
+								if (response=='true') {
+									new PNotify({
+										title: 'Confirmado!',
+										text: 'Vacuna Realizada con exito.',
+										type: 'success'
+									});
+									setTimeout(() => {
+									location.reload();	
+									}, 2000);															
+								} else {
+									new PNotify({
+										title: 'Rechazado!',
+										text: 'Hubo un error al confirmar la vacuna',
+										type: 'error',
+										shadow: true
+									});	
+								}
+								
 							}
 						});
 					});
@@ -1750,25 +1807,25 @@ Muestras remitidas:</textarea> -->
 					url: '?controller=query&method=editQuery1',
 					data: 'ID_PROP='+$('#ID_PROP').val()+'&ID_MASCOTA='+$('#ID_MASCOTA').val()+'&ID_EMPRESA='+$('#ID_EMPRESA').val()+'&FECHA_CONSULTA='+$('#FECHA_CONSULTA1').val()+'&ANTECEDENTES='+$('#ANTECEDENTES').val()+'&OBSERVACIONES='+$('#OBSERVACIONES').html()+'&SINTOMAS='+$('#SINTOMAS').val()+'&DIAGNOSTICO='+$('#DIAGNOSTICO').val()+'&FORMULA='+$('#FORMULA').val()+'&RECETA='+receta+'&HORA_CONSULTA='+$('#HOURC').val()+'&ESTADO_CONSULTA=Realizado&id='+id+'&PRECIO_CONSULTA='+$('#PRECIO_CONSULTAE').val(),
 					success: function(data){
-						console.log(data);			
-						new PNotify({
-							title: 'Confirmado!',
-							text: 'Consulta Editada Exitosamente.', 
-							type: 'success'
-						});
-						$.magnificPopup.close();
-						setTimeout(() => {
-						location.reload();	
-						}, 2000);
-					},
-					error: function(data){
-						$.magnificPopup.close();	
-						new PNotify({
-							title: 'Rechazado!',
-							text: 'Hubo un error al Editar la consulta',
-							type: 'error',
-							shadow: true
-						});
+						if (data=='true') {
+								new PNotify({
+								title: 'Confirmado!',
+								text: 'Consulta Editada Exitosamente.', 
+								type: 'success'
+							});
+							$.magnificPopup.close();
+							setTimeout(() => {
+							location.reload();	
+							}, 2000);	
+						} else {
+							$.magnificPopup.close();	
+							new PNotify({
+								title: 'Rechazado!',
+								text: 'Hubo un error al Editar la consulta',
+								type: 'error',
+								shadow: true
+							});	
+						}
 					}
 					});	
 				}

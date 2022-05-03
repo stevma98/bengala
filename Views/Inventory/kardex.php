@@ -31,10 +31,6 @@
                                         </div>
 										<h2 class="card-title">Kardex</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>

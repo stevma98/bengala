@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="fixed">
+<html class="fixed sidebar-left-collapsed">
 	<head>
 
 		<!-- Basic -->
@@ -303,7 +303,7 @@
 									<li class="nav-parent">
 				                        <a class="nav-link" href="#">
 				                            <i class="fas fa-paw" aria-hidden="true"></i>
-				                            <span>Pacientes</span>
+				                            <span>Mascotas</span>
 				                        </a>
 				                        <ul class="nav nav-children">
 				                            <li>

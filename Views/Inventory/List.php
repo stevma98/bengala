@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">
 				<section role="main" class="content-body">
@@ -32,10 +33,6 @@
 										<a class="modal-with-form btn btn-primary pull-right" href="#modalForm1" style="margin-right:5px"><i class="fas fa-plus-circle"></i> Registrar</a>									
 										<h2 class="card-title">Registro Articulos</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
@@ -75,24 +72,28 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro Productos</h2>
+												<h2 class="card-title">Registro Productos</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
 													</div>
 													<div class="form-row">
 														<div class="col-md-12 mb-3 mb-lg-0">
-                                                            <label for="NOM_PRO">Nombre Producto </label>
+                                                            <label for="NOM_PRO">Nombre Producto <strong>*</strong></label>
 															<input type="text" id="NOM_PRO" name="NOM_PRO" class="form-control" required>															
 														</div>																												
 													</div>
 													<div class="form-row">
 													<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ID_GRUPO">Categoria</label>
+															<label for="ID_GRUPO">Categoria <strong>*</strong></label>
 															<select name="ID_GRUPO" id="ID_GRUPO" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($groups as $group ) {?>
@@ -101,17 +102,17 @@
 															</select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="CANTIDAD">Cantidad</label>
+															<label for="CANTIDAD">Cantidad <strong>*</strong></label>
 															<input type="number" id="CANTIDAD" class="form-control">
 														</div>																										
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIO_COMPRA">Precio Compra</label>
+															<label for="PRECIO_COMPRA">Precio Compra <strong>*</strong></label>
 															<input type="text" id="PRECIO_COMPRA" class="form-control">
 														</div>												
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIO">Precio Venta</label>
+															<label for="PRECIO">Precio Venta <strong>*</strong></label>
 															<input type="text" id="PRECIO" class="form-control">
 														</div>												
 													</div>
@@ -132,10 +133,15 @@
 									<div id="modalForm2" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Editar Producto</h2>											</header>
+												<h2 class="card-title">Edición Producto</h2>
+											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -143,13 +149,13 @@
 													<div class="form-row">
 														<div class="col-md-12 mb-3 mb-lg-0">
 															<input type="hidden" id="ID_PROE">
-                                                            <label for="NOM_PROE">Nombre Producto </label>
+                                                            <label for="NOM_PROE">Nombre Producto <strong>*</strong></label>
 															<input type="text" id="NOM_PROE" name="NOM_PROE" class="form-control" required>															
 														</div>																												
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="ID_GRUPOE">Categoria</label>
+															<label for="ID_GRUPOE">Categoria <strong>*</strong></label>
 															<select name="ID_GRUPO" id="ID_GRUPOE" class="form-control">
 																<option value="Seleccione...">Seleccione...</option>
 																<?php foreach ($groups as $group ) {?>
@@ -158,17 +164,17 @@
 															</select>
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="CANTIDADE">Cantidad</label>
+															<label for="CANTIDADE">Cantidad <strong>*</strong></label>
 															<input type="number" id="CANTIDADE" class="form-control">
 														</div>																										
 													</div>
 													<div class="form-row">
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIOE_COMPRA">Precio Compra</label>
+															<label for="PRECIOE_COMPRA">Precio Compra <strong>*</strong></label>
 															<input type="text" id="PRECIOE_COMPRA" class="form-control">
 														</div>
 														<div class="col-md-6 mb-3 mb-lg-0">
-															<label for="PRECIOE">Precio Venta</label>
+															<label for="PRECIOE">Precio Venta <strong>*</strong></label>
 															<input type="text" id="PRECIOE" class="form-control">
 														</div>																								
 													</div>
@@ -300,7 +306,8 @@
 							url: '?controller=inventory&method=inactivateArticle',
 							data: 'ID_PRO='+id,
 							success:function(response){
-                                        new PNotify({
+								if (response=='true') {
+									new PNotify({
                                         title: 'Confirmado!',
                                         text: 'Producto Desactivado Exitosamente.',
                                         type: 'success'
@@ -308,16 +315,16 @@
                                     setTimeout(() => {
                                     location.reload();	
                                     }, 2000);
-                                },
-                                error: function(data){
-                                    $.magnificPopup.close();
+								} else {
+									$.magnificPopup.close();
                                     new PNotify({
                                         title: 'Rechazado!',
                                         text: 'Hubo un error al desactivar el producto',
                                         type: 'error',
                                         shadow: true
                                     });
-                                }
+								}
+                            }
 						});
 					});
 		</script>

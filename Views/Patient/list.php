@@ -1,12 +1,12 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
-        .modal-block{text-align:center}
+		strong{color:red}
     </style>
 				<div class="inner-wrapper" style="padding:0px !important">	
 				<section role="main" class="content-body">
 					<header class="page-header">
-					<h2>Lista Pacientes</h2>
+					<h2>Lista Mascotas</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -15,7 +15,7 @@
 										<i class="fas fa-home"></i>
 									</a>
 								</li>
-								<li><span>Pacientes</span></li>
+								<li><span>Mascotas</span></li>
 								<li><span>Listar</span></li>
 							</ol>
 					
@@ -25,12 +25,9 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-                                        <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right">Agregar</a>
-										<h2 class="card-title">Pacientes</h2>
+                                        <a class="modal-with-form btn btn-primary" href="#modalForm" style="float:right"><i class="fas fa-plus-circle"></i> Agregar</a>
+										<h2 class="card-title">Mascotas</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
 									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
@@ -67,26 +64,28 @@
 						</div>
 						</div>
 					</div>
-									<a class="modal-with-form btn btn-default" href="#modalForm">Open Form</a>
-
 									<!-- Modal Form -->
 									<div id="modalForm" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de Registro</h2>
+												<h2 class="card-title">Registrar Mascota</h2>
 											</header>
 											<div class="card-body">
 												<form id="form" enctype="multipart/form-data" method="POST" onsubmit="upload(this);return false">
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-														<div class="form-group col-md-6">
-															<label for="NOMBRE">Nombre:</label>
-															<input type="text" class="form-control" id="NOMBRE" name="NOMBRE" placeholder="Nombre" required>
+														<div class="col-md-6">
+															<label for="NOMBRE">Nombre <strong>*</strong></label>
+															<input type="text" class="form-control" id="NOMBRE" name="NOMBRE" placeholder="Ej: Belle" required>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="SEXO">Sexo:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="SEXO">Sexo <strong>*</strong></label> 
                                                             <select name="SEXO" id="SEXO" class="form-control" placeholder="Sexo" required>
                                                                 <option Selected value="Seleccione...">Seleccione...</option>
                                                                 <option value="Hembra">Hembra</option>
@@ -97,8 +96,8 @@
 														</div>
 													</div>
 													<div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="TIPO">Tipo:</label>
+                                                        <div class="col-md-6">
+                                                            <label for="TIPO">Tipo <strong>*</strong></label>
                                                             <select name="TIPO" id="TIPO" class="form-control" placeholder="Tipo" required>
                                                                 <option Selected value="Seleccione...">Seleccione...</option>
 																<option value="Canino">Canino</option>
@@ -107,25 +106,25 @@
 																<option value="Otros">Otros</option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-6 mb-3 mb-lg-0">
-                                                            <label for="RAZA">Raza:</label>
-															<input type="text" name="RAZA" id="RAZA" class="form-control" placeholder="Raza" required>
+                                                        <div class="col-md-6 mb-3 mb-lg-0">
+                                                            <label for="RAZA">Raza <strong>*</strong></label>
+															<input type="text" name="RAZA" id="RAZA" class="form-control" placeholder="Ej: Bengala" required>
                                                         </div>
 													</div>
 													<div class="form-row">
-														<div class="form-group col-md-6">
-															<label for="COLOR">Color:</label>
-															<input type="text" class="form-control" id="COLOR" name="COLOR" placeholder="Color" required>
+														<div class="col-md-6">
+															<label for="COLOR">Color <strong>*</strong></label>
+															<input type="text" class="form-control" id="COLOR" name="COLOR" placeholder="Ej: Naranja" required>
 														</div>
-                                                        <div class="form-group col-md-6">
-															<label for="FEC_NAC">Fecha Nacimiento:</label>
-															<input type="date" class="form-control" id="FEC_NAC" name="FEC_NAC" placeholder="Fecha Nacimiento" required>
+                                                        <div class="col-md-6">
+															<label for="FEC_NAC">Fecha Nacimiento <strong>*</strong></label>
+															<input type="date" class="form-control" id="FEC_NAC" name="FEC_NAC" placeholder="" required>
 														</div>
 													</div>
 													<input type="hidden" value="<?php echo $_SESSION['user']->ID_EMPRESA; ?>" id="idEmp">
 													<div class="form-row">
-														<div class="form-group col-md-12">
-                                                            <label for="DUENO">Dueño:</label>
+														<div class="col-md-12">
+                                                            <label for="DUENO">Dueño <strong>*</strong></label>
                                                             <select name="DUENO" id="DUENO" class="form-control" placeholder="Dueño" required>
                                                                 <option Selected value="Seleccione...">Seleccione...</option>
                                                                 <?php 
@@ -142,8 +141,8 @@
                                                 <div id="ver" class="center" style="margin:0 auto">
 
                                                 </div>
-                                                    <div class="form-group row">
-												<label class="col-lg-6 center control-label text-lg-right pt-2 ">Cargar Foto Paciente</label>
+                                                    <div class="row">
+												<label class="col-lg-6 center control-label text-lg-right pt-2 ">Cargar Foto Mascota</label>
 												<div class="col-lg-12 center">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<div class="input-append">

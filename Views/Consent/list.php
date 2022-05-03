@@ -1,6 +1,7 @@
 
     <style>
         .dataTables_wrapper .dataTables_filter input{width:80% !important}
+		strong{color:red}
     </style>
     <link rel="stylesheet" href="Assets/vendor/summernote/summernote-bs4.css" />
 				<div class="inner-wrapper" style="padding:0px !important">
@@ -25,13 +26,9 @@
 
 					<!-- start: page -->
                                     <header class="card-header" style="padding:30px !important">
-										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px">Registrar</a>
+										<a class="modal-with-form btn btn-primary" href="#modalForm1" style="float:right;margin-left:5px"><i class="fas fa-plus-circle"></i> Registrar</a>
 										<h2 class="card-title">Registro Consentimiento</h2>
                                     </header>
-                                    
-								<div class="card-body">									
-									<!-- Modal Form -->
-									
 									<div class="card-body">
 										<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 											<thead>
@@ -65,16 +62,20 @@
 									<div id="modalForm1" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de asignacion Consentimiento</h2>
+												<h2 class="card-title">Asignacion Consentimiento</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_PROP">Propietario:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_PROP">Propietario <strong>*</strong></label>
                                                             <select name="ID_PROP" id="ID_PROP" class="form-control" placeholder="Propietario" required>
                                                                 <option value="Seleccione..." Selected>Seleccione...</option>
 																<?php foreach ($owners as $owner) {?>
@@ -82,15 +83,15 @@
 																<?php } ?>
                                                             </select>
 														</div>
-														<div class="form-group col-md-6 mb-3 mb-lg-0">
-															<label for="ID_MASCOTA">Paciente:</label>
+														<div class="col-md-6 mb-3 mb-lg-0">
+															<label for="ID_MASCOTA">Paciente <strong>*</strong></label>
                                                             <select name="ID_MASCOTA" id="ID_MASCOTA" class="form-control" placeholder="Paciente" required>
                                                             </select>
 														</div>
 													</div><br>
                                                     <div class="form-row">
                                                         <div class="col-md-12 mb-6 mb-lg-0">
-                                                            <label for="TIPO_CONSEN">Consentimiento:</label>
+                                                            <label for="TIPO_CONSEN">Consentimiento <strong>*</strong></label>
                                                             <select name="TIPO_CONSEN" id="TIPO_CONSEN" class="form-control">
                                                                 <option value="Seleccione...">Seleccione...</option>
                                                                 <?php foreach ($consents as $consent) {?>
@@ -101,7 +102,7 @@
                                                     </div>
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento</label>
+                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento <strong>*</strong></label>
 															<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'></div>
 														</div>
 																</div>													
@@ -124,11 +125,15 @@
 									<div id="modalForm4" class="modal-block modal-block-primary mfp-hide">
 										<section class="card">
 											<header class="card-header">
-												<h2 class="card-title">Formulario de asignacion Consentimiento</h2>
+												<h2 class="card-title">Edición Consentimiento</h2>
 											</header>
 											<div class="card-body">
 												<form>
 													<div class="form-row">
+													<div class="alert alert-info" style="width:100%;text-align:center">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                            <b>Estimado usuario</b>, los campos marcados con <strong style="color:red">*</strong> son obligatorios.
+                                                        </div>
 													<div class="alert alert-danger" id="alertif" style="display:none;width:100%;text-align:center">
 														<strong>Oh que mal!</strong> Aun hay espacios por completar.
 													</div>
@@ -136,7 +141,7 @@
                                                     <input type="hidden" id="ID_CONSENTIMIENTO">
 													<div class="form-row">
 														<div class="col-md-12 mb-6 mb-lg-0">
-                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento</label>
+                                                            <label for="TEXTO_CONSEN">Detalle Consentimiento <strong>*</strong></label>
 															<div class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180,"codemirror": { "theme": "ambiance" } }'></div>
 														</div>
 																</div>													
@@ -283,25 +288,25 @@
 							url: '?controller=consent&method=inactiveConsentById',
 							data: 'ID_CONSENTIMIENTO='+id,
 							success: function(data){
-						console.log(data);			
-						new PNotify({
-							title: 'Confirmado!',
-							text: 'Consentimiento Desactivado Exitosamente.', 
-							type: 'success'
-						});
-						setTimeout(() => {
-						location.reload();	
-						}, 2000);
-					},
-					error: function(data){
-						$.magnificPopup.close();	
-						new PNotify({
-							title: 'Rechazado!',
-							text: 'Hubo un error al desactivar el consentimiento',
-							type: 'error',
-							shadow: true
-						});
-					}
+								if (data=='true') {
+									new PNotify({
+										title: 'Confirmado!',
+										text: 'Consentimiento Desactivado Exitosamente.', 
+										type: 'success'
+									});
+									setTimeout(() => {
+									location.reload();	
+									}, 2000);	
+								} else {
+									$.magnificPopup.close();	
+									new PNotify({
+										title: 'Rechazado!',
+										text: 'Hubo un error al desactivar el consentimiento',
+										type: 'error',
+										shadow: true
+									});	
+								}
+							}
 						});
 					});
 
@@ -364,25 +369,25 @@
 					url: '?controller=consent&method=editConsent',
 					data: 'TEXTO_CONSEN='+$('#OBSERVACIONES').html()+'&ID_CONSENTIMIENTO='+$('#ID_CONSENTIMIENTO').val(),
 					success: function(data){
-						console.log(data);
-						new PNotify({
-							title: 'Confirmado!',
-							text: 'Consentimiento Editado Exitosamente.',
-							type: 'success'
-						});
-						$.magnificPopup.close();
-						setTimeout(() => {
-						location.reload();	
-						}, 2000);
-					},
-					error: function(data){
-						$.magnificPopup.close();
-						new PNotify({
-							title: 'Rechazado!',
-							text: 'Hubo un error al editar el consentimiento',
-							type: 'error',
-							shadow: true
-						});
+						if (data=='true') {
+							new PNotify({
+								title: 'Confirmado!',
+								text: 'Consentimiento Editado Exitosamente.',
+								type: 'success'
+							});
+							$.magnificPopup.close();
+							setTimeout(() => {
+							location.reload();	
+							}, 2000);	
+						} else {
+							$.magnificPopup.close();
+							new PNotify({
+								title: 'Rechazado!',
+								text: 'Hubo un error al editar el consentimiento',
+								type: 'error',
+								shadow: true
+							});	
+						}
 					}
 					});	
 			}
