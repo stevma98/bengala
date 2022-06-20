@@ -5,7 +5,7 @@
 	define("DB_NAME", "bengala");
 	define("CHARSET", "utf8");
 	define("USER", "root");
-	define("PASSWORD", "steven666");
+	define("PASSWORD", "LuceroMom123");
 
 	// define("DRIVER", "mysql");
 	// define("HOST", "nous-boutique.com");
